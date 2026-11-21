@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>حساب الأسرة | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           FAMILY REGISTER PAGE
+        ========================================= */
+
+        .family-register-page {
+            background: #F7F9F6;
+            padding: 55px 20px 80px;
+        }
+
+        .family-register-page * {
+            box-sizing: border-box;
+        }
+
+        .family-register-page .family-wrapper {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .family-register-page .family-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .family-register-page .family-intro h1 {
+            font-size: 36px;
+            color: #17613D;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .family-register-page .family-intro p {
+            font-size: 18px;
+            color: #68776D;
+            line-height: 2;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .family-register-page .family-form-card {
+            background: #FFFFFF;
+            border: 1px solid #E7EDE7;
+            border-radius: 26px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(23, 97, 61, 0.07);
+        }
+
+        .family-register-page .family-form-section {
+            padding: 30px 0;
+            border-bottom: 1px solid #EAEFEA;
+        }
+
+        .family-register-page .family-form-section:first-child {
+            padding-top: 0;
+        }
+
+        .family-register-page .family-form-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .family-register-page .family-section-heading {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 28px;
+        }
+
+        .family-register-page .family-section-icon {
+            width: 55px;
+            height: 55px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            background: #EDF5EF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+        }
+
+        .family-register-page .family-form-section:nth-child(2) .family-section-icon {
+            background: #FBF3E6;
+        }
+
+        .family-register-page .family-form-section:nth-child(3) .family-section-icon {
+            background: #F0F3EE;
+        }
+
+        .family-register-page .family-form-section:nth-child(4) .family-section-icon {
+            background: #EEF2F7;
+        }
+
+        .family-register-page .family-section-heading h2 {
+            color: #17613D;
+            font-size: 23px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .family-register-page .family-section-heading p {
+            color: #8A958D;
+            font-size: 14px;
+            margin: 7px 0 0;
+        }
+
+        .family-register-page .family-fields-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 23px;
+        }
+
+        .family-register-page .family-field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .family-register-page .family-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .family-register-page .family-field label {
+            font-size: 16px;
+            color: #34483B;
+            font-weight: 700;
+        }
+
+        .family-register-page .family-field label span {
+            font-size: 13px;
+            font-weight: normal;
+            color: #A18A65;
+        }
+
+        .family-register-page input:not([type="checkbox"]),
+        .family-register-page select,
+        .family-register-page textarea {
+            width: 100%;
+            min-height: 55px;
+            padding: 14px 16px;
+            border: 1px solid #DDE6DE;
+            border-radius: 13px;
+            background: #FAFCFA;
+            color: #33463A;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .family-register-page input:focus,
+        .family-register-page select:focus,
+        .family-register-page textarea:focus {
+            border-color: #17613D;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(23, 97, 61, 0.08);
+        }
+
+        .family-register-page input::placeholder,
+        .family-register-page textarea::placeholder {
+            color: #A5AEA7;
+        }
+
+        .family-register-page select {
+            cursor: pointer;
+        }
+
+        .family-register-page textarea {
+            min-height: 125px;
+            resize: vertical;
+            line-height: 1.9;
+        }
+
+        .family-register-page .child-link-section {
+            background: #FBF8F1;
+            border: 1px solid #EFE4D1;
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .family-register-page .child-link-section .family-section-heading {
+            margin-bottom: 20px;
+        }
+
+        .family-register-page .child-link-section .family-section-icon {
+            background: #F1E5D1;
+        }
+
+        .family-register-page .child-link-section .family-section-heading h2 {
+            color: #946C34;
+        }
+
+        .family-register-page .child-link-description {
+            font-size: 15px;
+            color: #81745F;
+            line-height: 1.9;
+            margin-bottom: 22px;
+        }
+
+        .family-register-page #childCode {
+            direction: ltr;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: #FFFFFF;
+            border: 1.5px solid #E5D4B8;
+        }
+
+        .family-register-page #childCode:focus {
+            border-color: #CBA66A;
+            box-shadow: 0 0 0 4px rgba(203, 166, 106, 0.12);
+        }
+
+        .family-register-page .code-hint {
+            color: #A18A65;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-top: 3px;
+        }
+
+        .family-register-page .optional-note {
+            font-size: 14px;
+            color: #8A958D;
+            line-height: 1.9;
+            margin-bottom: 22px;
+        }
+
+        .family-register-page .password-hint {
+            font-size: 13px;
+            color: #8A958D;
+            line-height: 1.8;
+        }
+
+        .family-register-page .family-terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #F5F8F5;
+            border: 1px solid #E6ECE6;
+            border-radius: 14px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .family-register-page .family-terms input[type="checkbox"] {
+            width: 21px;
+            height: 21px;
+            margin-top: 3px;
+            flex-shrink: 0;
+            accent-color: #17613D;
+            cursor: pointer;
+        }
+
+        .family-register-page .family-terms label {
+            font-size: 15px;
+            color: #58665C;
+            line-height: 1.9;
+            cursor: pointer;
+        }
+
+        .family-register-page .family-submit-button {
+            width: 100%;
+            min-height: 60px;
+            border: none;
+            border-radius: 15px;
+            background: #17613D;
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .family-register-page .family-submit-button:hover {
+            background: #124D30;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(23, 97, 61, 0.15);
+        }
+
+        .family-register-page .family-submit-button:focus-visible {
+            outline: 3px solid #CBA66A;
+            outline-offset: 4px;
+        }
+
+        .family-register-page .family-submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .family-register-page .family-login-reminder {
+            text-align: center;
+            margin-top: 28px;
+            color: #778279;
+            font-size: 16px;
+        }
+
+        .family-register-page .family-login-reminder a {
+            color: #17613D;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .family-register-page .family-login-reminder a:hover {
+            text-decoration: underline;
+        }
+
+        .family-register-page input:focus-visible,
+        .family-register-page select:focus-visible,
+        .family-register-page textarea:focus-visible {
+            outline: 2px solid #17613D;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 768px) {
+
+            .family-register-page {
+                padding: 40px 18px 60px;
+            }
+
+            .family-register-page .family-form-card {
+                padding: 30px 24px;
+            }
+
+            .family-register-page .family-intro h1 {
+                font-size: 30px;
+            }
+
+            .family-register-page .family-intro p {
+                font-size: 16px;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .family-register-page .family-fields-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .family-register-page .family-field.full-width {
+                grid-column: auto;
+            }
+
+            .family-register-page .family-form-card {
+                padding: 25px 18px;
+                border-radius: 20px;
+            }
+
+            .family-register-page .family-intro h1 {
+                font-size: 26px;
+            }
+
+            .family-register-page .family-section-heading {
+                gap: 12px;
+            }
+
+            .family-register-page .family-section-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+            }
+
+            .family-register-page .family-section-heading h2 {
+                font-size: 20px;
+            }
+
+            .family-register-page .family-form-section {
+                padding: 25px 0;
+            }
+
+            .family-register-page .child-link-section {
+                padding: 18px;
+            }
+
+            .family-register-page input:not([type="checkbox"]),
+            .family-register-page select,
+            .family-register-page textarea {
+                font-size: 16px;
+            }
+
+            .family-register-page .family-terms {
+                padding: 15px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .family-register-page * {
+                transition: none !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <a href="index.html" class="logo">
+
+            <svg class="logo-icon" viewBox="0 0 100 100">
+
+                <path d="M50 88 C30 72 8 54 10 32 C12 10 37 7 50 28 C63 7 88 10 90 32 C92 54 70 72 50 88Z"
+                    fill="none" stroke="#17613D" stroke-width="5"/>
+
+                <circle cx="35" cy="34" r="7" fill="#17613D"/>
+                <circle cx="64" cy="38" r="7" fill="#CBA66A"/>
+
+                <path d="M22 75 Q50 91 78 75"
+                    fill="none" stroke="#17613D" stroke-width="5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <div class="logo-text">
+                <span>SANAD</span>
+                <strong>سند</strong>
+            </div>
+
+        </a>
+
+
+        <nav class="navbar">
+
+            <a href="index.html">الرئيسية</a>
+
+            <a href="index.html#about">عن سند</a>
+
+            <a href="register.html">رجوع</a>
+
+        </nav>
+
+
+        <div class="header-buttons">
+
+            <a href="login.html" class="login-btn">
+                تسجيل الدخول
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- FAMILY REGISTER -->
+
+    <section class="family-register-page">
+
+        <div class="family-wrapper">
+
+
+            <div class="family-intro">
+
+                <h1>أهلاً بك في ركن الأسرة 💚</h1>
+
+                <p>
+                    مع سند، تقدر تتابع رحلة طفلك وتكون جزءًا من تطوره كل يوم.
+                    <br>
+                    أنشئ حسابك وابدأ رحلة الدعم والتواصل.
+                </p>
+
+            </div>
+
+
+            <div class="family-form-card">
+
+                <form id="familyForm">
+
+
+                    <!-- FAMILY INFO -->
+
+                    <div class="family-form-section">
+
+                        <div class="family-section-heading">
+
+                            <div class="family-section-icon" aria-hidden="true">
+                                👨‍👩‍👧
+                            </div>
+
+                            <div>
+                                <h2>بيانات ولي الأمر</h2>
+                                <p>معلومات التواصل الأساسية</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="family-fields-grid">
+
+
+                            <div class="family-field full-width">
+
+                                <label for="fullName">
+                                    الاسم بالكامل
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    placeholder="اكتب اسمك بالكامل"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="family-field">
+
+                                <label for="gender">
+                                    النوع
+                                </label>
+
+                                <select id="gender" required>
+
+                                    <option value="">اختر النوع</option>
+
+                                    <option value="ذكر">ذكر</option>
+
+                                    <option value="أنثى">أنثى</option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="family-field">
+
+                                <label for="phone">
+                                    رقم الهاتف
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    placeholder="رقم الهاتف"
+                                    autocomplete="tel"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="family-field">
+
+                                <label for="email">
+                                    البريد الإلكتروني
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="example@email.com"
+                                    autocomplete="email"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="family-field">
+
+                                <label for="country">
+                                    الدولة
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="country"
+                                    placeholder="اكتب الدولة"
+                                    autocomplete="country-name"
+                                >
+
+                            </div>
+
+
+                            <div class="family-field">
+
+                                <label for="city">
+                                    المحافظة
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    placeholder="اكتب المحافظة"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CHILD LINK -->
+
+                    <div class="family-form-section">
+
+                        <div class="child-link-section">
+
+
+                            <div class="family-section-heading">
+
+                                <div class="family-section-icon" aria-hidden="true">
+                                    🧩
+                                </div>
+
+                                <div>
+                                    <h2>ربط حساب الطفل</h2>
+                                    <p>خطوة مهمة لبدء متابعة طفلك</p>
+                                </div>
+
+                            </div>
+
+
+                            <p class="child-link-description">
+
+                                أدخل كود الربط الذي حصلت عليه عند إنشاء حساب الطفل،
+                                عشان نقدر نربط حسابك بحسابه وتتابع تقدمه.
+
+                            </p>
+
+
+                            <div class="family-fields-grid">
+
+
+                                <div class="family-field full-width">
+
+                                    <label for="childCode">
+                                        كود حساب الطفل
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="childCode"
+                                        placeholder="مثال: SN-482951"
+                                        required
+                                        autocomplete="off"
+                                    >
+
+                                    <span class="code-hint">
+                                        تأكد من كتابة الكود بشكل صحيح.
+                                    </span>
+
+                                </div>
+
+
+                                <div class="family-field full-width">
+
+                                    <label for="relationship">
+                                        صلة القرابة بالطفل
+                                    </label>
+
+                                    <select id="relationship" required>
+
+                                        <option value="">اختر صلة القرابة</option>
+
+                                        <option value="الأب">الأب</option>
+
+                                        <option value="الأم">الأم</option>
+
+                                        <option value="الأخ">الأخ</option>
+
+                                        <option value="الأخت">الأخت</option>
+
+                                        <option value="الجد">الجد</option>
+
+                                        <option value="الجدة">الجدة</option>
+
+                                        <option value="أخرى">أخرى</option>
+
+                                    </select>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUPPORT -->
+
+                    <div class="family-form-section">
+
+
+                        <div class="family-section-heading">
+
+                            <div class="family-section-icon" aria-hidden="true">
+                                🌿
+                            </div>
+
+                            <div>
+                                <h2>نوع الدعم المطلوب</h2>
+                                <p>اختر الخدمات التي تحتاجها الأسرة</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="family-fields-grid">
+
+
+                            <div class="family-field full-width">
+
+                                <label for="support">
+                                    كيف يمكن لسند مساعدتك؟
+                                </label>
+
+                                <select id="support" required>
+
+                                    <option value="">اختر نوع الدعم</option>
+
+                                    <option value="متابعة تقدم الطفل">
+                                        متابعة تقدم الطفل
+                                    </option>
+
+                                    <option value="أنشطة تعليمية">
+                                        أنشطة تعليمية
+                                    </option>
+
+                                    <option value="إرشادات للأسرة">
+                                        إرشادات للأسرة
+                                    </option>
+
+                                    <option value="الدعم النفسي">
+                                        الدعم النفسي
+                                    </option>
+
+                                    <option value="التواصل مع الأخصائيين">
+                                        التواصل مع الأخصائيين
+                                    </option>
+
+                                    <option value="جميع الخدمات">
+                                        جميع الخدمات
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="family-field full-width">
+
+                                <label for="notes">
+                                    ملاحظات إضافية <span>(اختياري)</span>
+                                </label>
+
+                                <textarea
+                                    id="notes"
+                                    placeholder="هل تريد إخبارنا بأي معلومات إضافية؟"
+                                ></textarea>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGIN INFO -->
+
+                    <div class="family-form-section">
+
+
+                        <div class="family-section-heading">
+
+                            <div class="family-section-icon" aria-hidden="true">
+                                🔐
+                            </div>
+
+                            <div>
+                                <h2>بيانات تسجيل الدخول</h2>
+                                <p>أنشئ كلمة مرور لحماية حسابك</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="family-fields-grid">
+
+
+                            <div class="family-field">
+
+                                <label for="password">
+                                    كلمة المرور
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    placeholder="أنشئ كلمة مرور"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                                <span class="password-hint">
+                                    يجب ألا تقل كلمة المرور عن 6 أحرف.
+                                </span>
+
+                            </div>
+
+
+                            <div class="family-field">
+
+                                <label for="confirmPassword">
+                                    تأكيد كلمة المرور
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    placeholder="أعد كتابة كلمة المرور"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TERMS -->
+
+                    <div class="family-terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                        >
+
+                        <label for="terms">
+                            أوافق على سياسة الخصوصية وشروط الاستخدام،
+                            وأؤكد أن البيانات التي أدخلتها صحيحة.
+                        </label>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button type="submit" class="family-submit-button">
+
+                        إنشاء حساب الأسرة 💚
+
+                    </button>
+
+
+                </form>
+
+
+                <p class="family-login-reminder">
+
+                    لديك حساب بالفعل؟
+
+                    <a href="login.html">
+                        تسجيل الدخول
+                    </a>
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>SANAD | سند</h3>
+
+        <p>معًا نفهم، نتعلم، نتطور.</p>
+
+        <p>Made by Nagat Fergany © 2026</p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script type="module">
+
+        import { registerFamilyAccount } from "./auth.js";
+
+
+        const familyForm = document.getElementById("familyForm");
+
+        const submitButton = familyForm.querySelector(".family-submit-button");
+
+
+        familyForm.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+
+            // ======================================
+            // READ FORM DATA
+            // ======================================
+
+            const fullName = document.getElementById("fullName").value.trim();
+
+            const gender = document.getElementById("gender").value;
+
+            const phone = document.getElementById("phone").value.trim();
+
+            const email = document.getElementById("email").value.trim().toLowerCase();
+
+            const country = document.getElementById("country").value.trim();
+
+            const city = document.getElementById("city").value.trim();
+
+            const childCode = document.getElementById("childCode").value.trim().toUpperCase();
+
+            const relationship = document.getElementById("relationship").value;
+
+            const support = document.getElementById("support").value;
+
+            const notes = document.getElementById("notes").value.trim();
+
+            const password = document.getElementById("password").value;
+
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+
+            // ======================================
+            // VALIDATE PASSWORD
+            // ======================================
+
+            if (password !== confirmPassword) {
+
+                alert("كلمتا المرور غير متطابقتين.");
+
+                return;
+
+            }
+
+
+            if (password.length < 6) {
+
+                alert("كلمة المرور يجب أن تكون 6 أحرف أو أكثر.");
+
+                return;
+
+            }
+
+
+            // ======================================
+            // PREVENT MULTIPLE SUBMISSIONS
+            // ======================================
+
+            submitButton.disabled = true;
+
+            submitButton.textContent = "جاري إنشاء الحساب...";
+
+
+            // ======================================
+            // FAMILY DATA
+            // ======================================
+
+            const familyData = {
+
+                accountType: "family",
+
+                fullName: fullName,
+
+                gender: gender,
+
+                phone: phone,
+
+                email: email,
+
+                country: country,
+
+                city: city,
+
+                childCode: childCode,
+
+                relationship: relationship,
+
+                support: support,
+
+                notes: notes,
+
+                password: password,
+
+                confirmPassword: confirmPassword
+
+            };
+
+
+            // ======================================
+            // REGISTER WITH FIREBASE
+            // ======================================
+
+            try {
+
+                const result = await registerFamilyAccount(familyData);
+
+
+                if (result.success) {
+
+                    alert(
+                        "تم إنشاء حساب الأسرة بنجاح 💚\n\n" +
+                        "تم ربط حسابك بالطفل: " +
+                        result.user.linkedChildName
+                    );
+
+                    window.location.href = "login.html";
+
+                    return;
+
+                }
+
+
+                alert(result.message || "تعذر إنشاء الحساب.");
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("حدث خطأ غير متوقع، برجاء المحاولة مرة أخرى.");
+
+            }
+
+
+            // ======================================
+            // RESTORE BUTTON
+            // ======================================
+
+            submitButton.disabled = false;
+
+            submitButton.textContent = "إنشاء حساب الأسرة 💚";
+
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

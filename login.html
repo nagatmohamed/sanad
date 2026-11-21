@@ -1,0 +1,241 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تسجيل الدخول | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <svg viewBox="0 0 100 100" width="50" height="50">
+                    <path d="M50 83 C35 70 12 54 12 33 C12 18 31 10 43 25
+                    C46 29 48 33 50 36 C52 33 54 29 57 25
+                    C69 10 88 18 88 33 C88 54 65 70 50 83Z"
+                    fill="#56856B"/>
+
+                    <circle cx="38" cy="38" r="7" fill="#F4EBDD"/>
+                    <circle cx="62" cy="38" r="7" fill="#F4EBDD"/>
+
+                    <path d="M25 57 Q38 42 50 57 Q62 42 75 57"
+                    fill="none" stroke="#F4EBDD" stroke-width="5"
+                    stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند لكل خطوة</span>
+            </div>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#about">عن سند</a>
+            <a href="register.html">إنشاء حساب</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Login Section -->
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h1>أهلاً بعودتك إلى سند ❤️</h1>
+
+            <p>
+                سجل دخولك واستكمل رحلتك معنا.
+            </p>
+
+            <form id="loginForm">
+
+                <label for="email">البريد الإلكتروني</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="اكتب بريدك الإلكتروني"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="password">كلمة المرور</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="اكتب كلمة المرور"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <div class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="showPassword"
+                    >
+
+                    <label for="showPassword">
+                        إظهار كلمة المرور
+                    </label>
+
+                </div>
+
+                <button type="submit" class="submit-button">
+                    تسجيل الدخول
+                </button>
+
+            </form>
+
+
+            <div class="login-links">
+
+                <p>
+                    ليس لديك حساب؟
+                    <a href="register.html">إنشاء حساب جديد</a>
+                </p>
+
+                <a href="index.html" class="back-home">
+                    العودة إلى الصفحة الرئيسية
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>SANAD | سند</h3>
+
+        <p>معاً نحو حياة أفضل وفرص متساوية للجميع.</p>
+
+        <p>Made by Nagat Fergany © 2026</p>
+
+    </footer>
+
+
+    <!-- Login JavaScript -->
+    <script type="module">
+
+        import { loginAccount } from "./auth.js";
+
+
+        // إظهار وإخفاء كلمة المرور
+        const passwordInput = document.getElementById("password");
+        const showPassword = document.getElementById("showPassword");
+
+        showPassword.addEventListener("change", function () {
+
+            passwordInput.type = this.checked ? "text" : "password";
+
+        });
+
+
+        // تسجيل الدخول
+        const loginForm = document.getElementById("loginForm");
+        const submitButton = loginForm.querySelector(".submit-button");
+
+        loginForm.addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+            const email = document.getElementById("email").value.trim().toLowerCase();
+            const password = passwordInput.value;
+
+            // منع الضغط المتكرر
+            submitButton.disabled = true;
+            submitButton.textContent = "جاري تسجيل الدخول...";
+
+            try {
+
+                // تسجيل الدخول من Firebase
+                const result = await loginAccount(email, password);
+
+                // في حالة فشل تسجيل الدخول
+                if (!result.success) {
+
+                    alert(result.message || "البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+
+                    return;
+
+                }
+
+                const currentUser = result.user;
+
+                // التحقق من نوع الحساب
+                const accountType = currentUser.accountType;
+
+                // رسالة نجاح
+                alert("تم تسجيل الدخول بنجاح ❤️");
+
+                // الانتقال حسب نوع الحساب
+                if (accountType === "user") {
+
+                    window.location.href = "user-dashboard.html";
+
+                }
+
+                else if (accountType === "family") {
+
+                    window.location.href = "family-dashboard.html";
+
+                }
+
+                else if (accountType === "specialist") {
+
+                    window.location.href = "specialist-dashboard.html";
+
+                }
+
+                else {
+
+                    alert("نوع الحساب غير معروف.");
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error("Login Error:", error);
+
+                alert("حدث خطأ أثناء تسجيل الدخول، حاول مرة أخرى.");
+
+            }
+
+            finally {
+
+                submitButton.disabled = false;
+                submitButton.textContent = "تسجيل الدخول";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+```

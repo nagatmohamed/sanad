@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>الإعدادات والخصوصية | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f6f7f1;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .settings-page {
+            padding: 30px 6%;
+        }
+
+        .settings-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .settings-title h1 {
+            color: #285c45;
+            font-size: 30px;
+        }
+
+        .settings-title p {
+            color: #777;
+            line-height: 1.8;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #e5eee7;
+            color: #285c45;
+            padding: 11px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .settings-container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        .settings-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .settings-card h2 {
+            color: #285c45;
+            font-size: 21px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info h3 {
+            font-size: 16px;
+            margin: 0 0 7px;
+        }
+
+        .setting-info p {
+            font-size: 13px;
+            color: #888;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .setting-button {
+            background: #347354;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .setting-button:hover {
+            background: #285c45;
+        }
+
+        .danger-button {
+            background: #a84b4b;
+        }
+
+        .danger-button:hover {
+            background: #843535;
+        }
+
+        .setting-select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            font-family: inherit;
+            background: white;
+            max-width: 170px;
+        }
+
+        .profile-info {
+            background: #f3f7f2;
+            padding: 17px;
+            border-radius: 12px;
+            line-height: 2;
+        }
+
+        .profile-info strong {
+            color: #285c45;
+        }
+
+        .toggle {
+            width: 48px;
+            height: 25px;
+            accent-color: #347354;
+            cursor: pointer;
+        }
+
+        .privacy-note {
+            background: #fff8e9;
+            border: 1px solid #f0dfb5;
+            padding: 15px;
+            border-radius: 12px;
+            line-height: 1.8;
+            color: #765c28;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .save-message {
+            color: #285c45;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .font-large {
+            font-size: 20px;
+        }
+
+        .high-contrast {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        .high-contrast .settings-card {
+            background: #111;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+
+        .high-contrast h1,
+        .high-contrast h2,
+        .high-contrast h3 {
+            color: #fff !important;
+        }
+
+        .high-contrast p {
+            color: #eee !important;
+        }
+
+        @media(max-width: 650px) {
+
+            .setting-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .settings-page {
+                padding: 20px 4%;
+            }
+
+            .settings-card {
+                padding: 18px;
+            }
+
+        }
+
+        button:focus-visible,
+        select:focus-visible,
+        a:focus-visible,
+        input:focus-visible {
+            outline: 3px solid #d49a36;
+            outline-offset: 3px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="settings-page">
+
+        <a href="#" class="back-button" id="backButton">
+            ← العودة إلى لوحة التحكم
+        </a>
+
+
+        <div class="settings-title">
+
+            <h1>الإعدادات والخصوصية ⚙️</h1>
+
+            <p>
+                تحكم في حسابك وخصص تجربتك داخل مجتمع SANAD
+                بالطريقة المناسبة لك.
+            </p>
+
+        </div>
+
+
+        <div class="settings-container">
+
+
+            <!-- بيانات الحساب -->
+
+            <section class="settings-card">
+
+                <h2>👤 بيانات الحساب</h2>
+
+                <div class="profile-info">
+
+                    <p>
+                        <strong>الاسم:</strong>
+                        <span id="userName"></span>
+                    </p>
+
+                    <p>
+                        <strong>البريد الإلكتروني:</strong>
+                        <span id="userEmail"></span>
+                    </p>
+
+                    <p>
+                        <strong>نوع الحساب:</strong>
+                        <span id="accountType"></span>
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- سهولة الوصول -->
+
+            <section class="settings-card">
+
+                <h2>♿ إعدادات سهولة الوصول</h2>
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>تكبير الخط</h3>
+
+                        <p>زيادة حجم النصوص لتسهيل القراءة.</p>
+
+                    </div>
+
+                    <button class="setting-button" id="increaseFont">
+                        تكبير الخط +
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>تصغير الخط</h3>
+
+                        <p>تقليل حجم النصوص.</p>
+
+                    </div>
+
+                    <button class="setting-button" id="decreaseFont">
+                        تصغير الخط -
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>التباين العالي</h3>
+
+                        <p>تحسين وضوح النصوص والألوان.</p>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        class="toggle"
+                        id="contrastToggle"
+                        aria-label="تفعيل التباين العالي"
+                    >
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>القراءة الصوتية</h3>
+
+                        <p>قراءة التعليمات والنصوص بصوت عربي.</p>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        class="toggle"
+                        id="voiceToggle"
+                        aria-label="تفعيل القراءة الصوتية"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- الخصوصية -->
+
+            <section class="settings-card">
+
+                <h2>🔒 الخصوصية</h2>
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>إظهار البريد الإلكتروني</h3>
+
+                        <p>السماح بعرض بريدك الإلكتروني للآخرين.</p>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        class="toggle"
+                        id="emailPrivacy"
+                    >
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>إظهار رقم الهاتف</h3>
+
+                        <p>السماح بعرض رقم هاتفك للآخرين.</p>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        class="toggle"
+                        id="phonePrivacy"
+                    >
+
+                </div>
+
+
+                <div class="privacy-note">
+
+                    🔐 لا تشاركي بياناتك الشخصية مع أشخاص غير موثوق بهم.
+                    ويجب أن يكون تواصل الأطفال تحت إشراف الأسرة.
+
+                </div>
+
+            </section>
+
+
+            <!-- الإشعارات -->
+
+            <section class="settings-card">
+
+                <h2>🔔 الإشعارات</h2>
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>إشعارات الرسائل</h3>
+
+                        <p>تفعيل أو إيقاف التنبيهات الخاصة بالرسائل.</p>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        class="toggle"
+                        id="messageNotifications"
+                    >
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>إشعارات الأنشطة</h3>
+
+                        <p>التنبيه عند وجود أنشطة أو محتوى جديد.</p>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        class="toggle"
+                        id="activityNotifications"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- الأمان -->
+
+            <section class="settings-card">
+
+                <h2>🛡️ الأمان</h2>
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>تغيير كلمة المرور</h3>
+
+                        <p>تحديث كلمة المرور الخاصة بحسابك.</p>
+
+                    </div>
+
+                    <button class="setting-button" id="changePassword">
+                        تغيير كلمة المرور
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h3>تسجيل الخروج</h3>
+
+                        <p>الخروج من حسابك الحالي.</p>
+
+                    </div>
+
+                    <button class="setting-button danger-button" id="logout">
+                        تسجيل الخروج
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <button class="setting-button"
+                id="saveSettings"
+                style="width:100%;padding:15px;font-size:17px;">
+
+                حفظ الإعدادات
+
+            </button>
+
+            <p class="save-message" id="saveMessage">
+                تم حفظ الإعدادات بنجاح 💚
+            </p>
+
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+
+        if (!currentUser) {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            startSettings();
+
+        }
+
+
+        function startSettings() {
+
+            const backButton = document.getElementById("backButton");
+
+
+            // تحديد لوحة التحكم
+
+            if (currentUser.accountType === "user") {
+
+                backButton.href = "user-dashboard.html";
+
+            } else if (currentUser.accountType === "family") {
+
+                backButton.href = "family-dashboard.html";
+
+            } else {
+
+                backButton.href = "specialist-dashboard.html";
+
+            }
+
+
+            // بيانات المستخدم
+
+            document.getElementById("userName").textContent =
+                currentUser.fullName || "غير محدد";
+
+            document.getElementById("userEmail").textContent =
+                currentUser.email || "غير محدد";
+
+
+            const accountNames = {
+
+                user: "حساب شخصي",
+
+                family: "حساب أسرة",
+
+                specialist: "حساب أخصائي"
+
+            };
+
+
+            document.getElementById("accountType").textContent =
+                accountNames[currentUser.accountType] || "غير محدد";
+
+
+            // إعدادات المستخدم
+
+            const settingsKey = "sanadSettings_" + currentUser.id;
+
+
+            let settings = JSON.parse(
+
+                localStorage.getItem(settingsKey) || "{}"
+
+            );
+
+
+            const contrastToggle =
+                document.getElementById("contrastToggle");
+
+            const voiceToggle =
+                document.getElementById("voiceToggle");
+
+            const emailPrivacy =
+                document.getElementById("emailPrivacy");
+
+            const phonePrivacy =
+                document.getElementById("phonePrivacy");
+
+            const messageNotifications =
+                document.getElementById("messageNotifications");
+
+            const activityNotifications =
+                document.getElementById("activityNotifications");
+
+
+            contrastToggle.checked = !!settings.highContrast;
+
+            voiceToggle.checked = !!settings.voiceEnabled;
+
+            emailPrivacy.checked = !!settings.showEmail;
+
+            phonePrivacy.checked = !!settings.showPhone;
+
+            messageNotifications.checked =
+                settings.messageNotifications !== false;
+
+            activityNotifications.checked =
+                settings.activityNotifications !== false;
+
+
+            let fontSize = settings.fontSize || 16;
+
+
+            function updateFont() {
+
+                document.body.style.fontSize = fontSize + "px";
+
+            }
+
+
+            updateFont();
+
+
+            document.getElementById("increaseFont")
+                .addEventListener("click", function() {
+
+                    fontSize = Math.min(fontSize + 2, 30);
+
+                    updateFont();
+
+                });
+
+
+            document.getElementById("decreaseFont")
+                .addEventListener("click", function() {
+
+                    fontSize = Math.max(fontSize - 2, 12);
+
+                    updateFont();
+
+                });
+
+
+            // التباين العالي
+
+            function applyContrast() {
+
+                document.body.classList.toggle(
+                    "high-contrast",
+                    contrastToggle.checked
+                );
+
+            }
+
+
+            contrastToggle.addEventListener("change", applyContrast);
+
+            applyContrast();
+
+
+            // حفظ الإعدادات
+
+            document.getElementById("saveSettings")
+                .addEventListener("click", function() {
+
+                    settings = {
+
+                        highContrast: contrastToggle.checked,
+
+                        voiceEnabled: voiceToggle.checked,
+
+                        showEmail: emailPrivacy.checked,
+
+                        showPhone: phonePrivacy.checked,
+
+                        messageNotifications:
+                            messageNotifications.checked,
+
+                        activityNotifications:
+                            activityNotifications.checked,
+
+                        fontSize: fontSize
+
+                    };
+
+
+                    localStorage.setItem(
+
+                        settingsKey,
+
+                        JSON.stringify(settings)
+
+                    );
+
+
+                    const message =
+                        document.getElementById("saveMessage");
+
+                    message.style.display = "block";
+
+                    setTimeout(function() {
+
+                        message.style.display = "none";
+
+                    }, 3000);
+
+                });
+
+
+            // تغيير كلمة المرور
+
+            document.getElementById("changePassword")
+                .addEventListener("click", function() {
+
+                    const oldPassword = prompt(
+                        "اكتبي كلمة المرور الحالية:"
+                    );
+
+
+                    if (oldPassword === null) return;
+
+
+                    if (oldPassword !== currentUser.password) {
+
+                        alert("كلمة المرور الحالية غير صحيحة.");
+
+                        return;
+
+                    }
+
+
+                    const newPassword = prompt(
+                        "اكتبي كلمة المرور الجديدة:"
+                    );
+
+
+                    if (!newPassword || newPassword.length < 6) {
+
+                        alert("كلمة المرور الجديدة يجب ألا تقل عن 6 أحرف.");
+
+                        return;
+
+                    }
+
+
+                    const confirmPassword = prompt(
+                        "أعيدي كتابة كلمة المرور الجديدة:"
+                    );
+
+
+                    if (newPassword !== confirmPassword) {
+
+                        alert("كلمتا المرور غير متطابقتين.");
+
+                        return;
+
+                    }
+
+
+                    const users = JSON.parse(
+
+                        localStorage.getItem("sanadUsers") || "[]"
+
+                    );
+
+
+                    const userIndex = users.findIndex(user =>
+
+                        String(user.id) === String(currentUser.id)
+
+                    );
+
+
+                    if (userIndex === -1) {
+
+                        alert("لم يتم العثور على الحساب.");
+
+                        return;
+
+                    }
+
+
+                    users[userIndex].password = newPassword;
+
+                    currentUser.password = newPassword;
+
+
+                    localStorage.setItem(
+
+                        "sanadUsers",
+
+                        JSON.stringify(users)
+
+                    );
+
+
+                    localStorage.setItem(
+
+                        "sanadCurrentUser",
+
+                        JSON.stringify(currentUser)
+
+                    );
+
+
+                    alert("تم تغيير كلمة المرور بنجاح.");
+
+                });
+
+
+            // تسجيل الخروج
+
+            document.getElementById("logout")
+                .addEventListener("click", function() {
+
+                    if (confirm("هل أنت متأكد من تسجيل الخروج؟")) {
+
+                        localStorage.removeItem("sanadCurrentUser");
+
+                        window.location.href = "login.html";
+
+                    }
+
+                });
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SANAD | سند - معًا نصنع الفرق</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+           SANAD HOME PAGE
+        ========================= */
+
+        :root {
+            --green: #547963;
+            --green-dark: #365844;
+            --green-light: #e6eee6;
+            --green-soft: #f0f5ef;
+            --cream: #faf8f2;
+            --beige: #eee5d5;
+            --yellow: #f3d78d;
+            --text: #34483b;
+            --muted: #7b897d;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            width: 100%;
+            padding: 17px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(250, 248, 242, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e9e8df;
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--green-dark);
+        }
+
+        .logo-text strong {
+            font-size: 16px;
+            color: #a88a56;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .navbar a {
+            font-size: 14px;
+            color: #67776a;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--green-dark);
+        }
+
+        .navbar a.active::after {
+            content: "";
+            width: 5px;
+            height: 5px;
+            background: #c5a76e;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .login-btn {
+            color: var(--green-dark);
+            font-size: 14px;
+            padding: 10px 16px;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            color: #a88a56;
+        }
+
+        .register-btn {
+            background: var(--green);
+            color: white;
+            padding: 11px 20px;
+            border-radius: 13px;
+            font-size: 14px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(84, 121, 99, 0.15);
+        }
+
+        .register-btn:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 620px;
+            padding: 65px 8% 75px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: #edf2e8;
+            position: absolute;
+            top: -160px;
+            right: -150px;
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: "";
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: #f2e8d7;
+            position: absolute;
+            bottom: -110px;
+            left: -70px;
+            z-index: -1;
+        }
+
+        .hero-text {
+            order: 1;
+            position: relative;
+            z-index: 2;
+            min-width: 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eaf0e7;
+            color: var(--green);
+            padding: 9px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .hero-badge span {
+            color: #c39c59;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(38px, 5vw, 65px);
+            line-height: 1.55;
+            color: var(--green-dark);
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 .highlight {
+            color: #bd9b60;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 2.2;
+            max-width: 520px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .main-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--green);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            transition: 0.3s;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(84, 121, 99, 0.16);
+        }
+
+        .main-button:hover {
+            background: var(--green-dark);
+            transform: translateY(-3px);
+        }
+
+        .main-button .arrow {
+            font-size: 19px;
+        }
+
+        .secondary-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--green);
+            padding: 14px 18px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .secondary-button:hover {
+            color: #b3935a;
+        }
+
+        /* =========================
+           HERO VISUAL
+        ========================= */
+
+        .hero-image {
+            order: 2;
+            position: relative;
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+        }
+
+        .hero-illustration {
+            width: 100%;
+            max-width: 500px;
+            height: 430px;
+            background: #e9eee5;
+            border-radius: 48% 48% 35% 35%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-illustration::before {
+            content: "";
+            width: 330px;
+            height: 330px;
+            background: #d8e5d7;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            right: 80px;
+        }
+
+        .hero-illustration::after {
+            content: "";
+            width: 110px;
+            height: 110px;
+            background: #f3d78d;
+            border-radius: 50%;
+            position: absolute;
+            top: 35px;
+            left: 50px;
+            opacity: 0.85;
+        }
+
+        .illustration-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        .illustration-emoji {
+            font-size: 150px;
+            display: block;
+            filter: drop-shadow(0 12px 10px rgba(63, 85, 69, 0.1));
+        }
+
+        .illustration-caption {
+            background: white;
+            padding: 15px 24px;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(58, 76, 63, 0.08);
+            display: inline-block;
+            margin-top: -5px;
+        }
+
+        .illustration-caption h3 {
+            color: var(--green-dark);
+            font-size: 18px;
+        }
+
+        .illustration-caption p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 15px 18px;
+            border-radius: 17px;
+            box-shadow: 0 12px 35px rgba(55, 75, 60, 0.1);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-card.card-one {
+            top: 45px;
+            right: -5px;
+        }
+
+        .floating-card.card-two {
+            bottom: 40px;
+            left: -10px;
+            animation-delay: 1.5s;
+        }
+
+        .floating-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            background: #f5eddb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .floating-card h4 {
+            font-size: 13px;
+            color: var(--green-dark);
+        }
+
+        .floating-card p {
+            font-size: 11px;
+            color: #929d92;
+            margin-top: 3px;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-9px);
+            }
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            padding: 0 8%;
+            margin-top: -20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .stats-container {
+            background: white;
+            padding: 28px 35px;
+            border-radius: 25px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            box-shadow: 0 12px 35px rgba(59, 76, 62, 0.06);
+            border: 1px solid #f0eee7;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            border-left: 1px solid #eceee7;
+        }
+
+        .stat-item:last-child {
+            border-left: none;
+        }
+
+        .stat-item h3 {
+            font-size: 24px;
+            color: var(--green);
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* =========================
+           SANAD STORY
+        ========================= */
+
+        .sanad-story {
+            padding: 95px 8%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sanad-story::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #f1e8d8;
+            border-radius: 50%;
+            top: -180px;
+            left: -100px;
+            opacity: 0.6;
+        }
+
+        .story-container {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-text {
+            min-width: 0;
+        }
+
+        .story-label {
+            display: inline-block;
+            color: #b5965d;
+            background: #f3ecdf;
+            padding: 8px 17px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .story-text h2 {
+            color: var(--green-dark);
+            font-size: 38px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .story-text h2 span {
+            color: #bd9b60;
+        }
+
+        .story-text p {
+            color: #778579;
+            font-size: 15px;
+            line-height: 2.4;
+            margin-bottom: 18px;
+        }
+
+        .story-ending {
+            color: var(--green-dark) !important;
+            font-weight: 800;
+            font-size: 17px !important;
+            padding-right: 18px;
+            border-right: 4px solid #c5a76e;
+            margin-top: 25px;
+        }
+
+        .story-visual {
+            min-height: 430px;
+            background: #e9efe5;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-visual::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: #d4e2d2;
+            border-radius: 50%;
+        }
+
+        .story-visual::after {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            background: #f3d78d;
+            border-radius: 50%;
+            top: 35px;
+            left: 35px;
+            opacity: 0.75;
+        }
+
+        .story-art {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .story-art-emoji {
+            display: block;
+            font-size: 145px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 10px rgba(54, 88, 68, 0.08));
+        }
+
+        .story-art-caption {
+            background: white;
+            padding: 16px 24px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(54, 88, 68, 0.08);
+        }
+
+        .story-art-caption h3 {
+            color: var(--green-dark);
+            font-size: 19px;
+        }
+
+        .story-art-caption p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .story-values {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .story-value {
+            background: white;
+            border: 1px solid #efeee7;
+            border-radius: 18px;
+            padding: 18px 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(54, 88, 68, 0.04);
+        }
+
+        .story-value span {
+            display: block;
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .story-value h3 {
+            color: var(--green-dark);
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .story-value p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* =========================
+           ACCOUNT TYPES
+        ========================= */
+
+        .account-types {
+            padding: 100px 8% 80px;
+            width: 100%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-label {
+            color: #b5965d;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-heading h2 {
+            color: var(--green-dark);
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 2;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .account-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: stretch;
+            gap: 28px;
+            width: 100%;
+        }
+
+        .account-card {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 26px;
+            border: 1px solid #efeee7;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-width: 0;
+            box-shadow: 0 5px 18px rgba(60, 85, 66, 0.025);
+        }
+
+        .account-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(60, 85, 66, 0.09);
+        }
+
+        .account-card::after {
+            content: "";
+            width: 145px;
+            height: 145px;
+            background: var(--green-soft);
+            border-radius: 50%;
+            position: absolute;
+            top: -65px;
+            left: -55px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .account-card:nth-child(2)::after {
+            background: #f5eddf;
+        }
+
+        .account-card:nth-child(3)::after {
+            background: #e9eaf2;
+        }
+
+        .account-icon {
+            width: 78px;
+            height: 78px;
+            min-width: 78px;
+            border-radius: 24px;
+            background: var(--green-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .account-card:nth-child(2) .account-icon {
+            background: #f5eddf;
+        }
+
+        .account-card:nth-child(3) .account-icon {
+            background: #e9eaf2;
+        }
+
+        .account-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .account-info h2 {
+            color: var(--green-dark);
+            font-size: 22px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .account-info p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 2.15;
+            margin-bottom: 28px;
+            flex-grow: 1;
+            min-height: 120px;
+        }
+
+        .account-info a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--green);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 13px 18px;
+            border-radius: 13px;
+            background: #f3f7f2;
+            border: 1px solid #e8eee7;
+            width: 100%;
+            margin-top: auto;
+            transition: 0.3s;
+        }
+
+        .account-info a:hover {
+            color: white;
+            background: var(--green);
+            border-color: var(--green);
+            transform: translateY(-2px);
+        }
+
+        .account-info a span {
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .account-info a:hover span {
+            transform: translateX(-4px);
+        }
+
+        /* =========================
+           ABOUT PLATFORM
+        ========================= */
+
+        .about {
+            padding: 80px 8%;
+            background: #edf2e9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .about-visual {
+            min-height: 350px;
+            border-radius: 35px;
+            background: #dce7d9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-visual::before {
+            content: "";
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            background: #c7d8c7;
+            border-radius: 50%;
+        }
+
+        .about-visual .about-emoji {
+            font-size: 125px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-sticker {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            background: white;
+            border-radius: 15px;
+            padding: 12px 18px;
+            color: var(--green);
+            font-weight: 700;
+            font-size: 13px;
+            box-shadow: 0 5px 20px rgba(54, 83, 61, 0.08);
+            z-index: 3;
+        }
+
+        .about-text .section-label {
+            text-align: right;
+        }
+
+        .about-text h2 {
+            color: var(--green-dark);
+            font-size: 36px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #758477;
+            line-height: 2.2;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .about-points {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .about-point {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--green-dark);
+            font-size: 14px;
+        }
+
+        .about-point span {
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b5965d;
+            flex-shrink: 0;
+        }
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services {
+            padding: 90px 8%;
+        }
+
+        .service-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 27px;
+            border-radius: 23px;
+            border: 1px solid #f0eee8;
+            transition: 0.3s;
+            position: relative;
+            min-width: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(58, 80, 63, 0.07);
+        }
+
+        .service-icon {
+            width: 65px;
+            height: 65px;
+            background: #edf3eb;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 29px;
+            margin-bottom: 20px;
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: #f5eddf;
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: #f1e8ed;
+        }
+
+        .service-card:nth-child(4) .service-icon {
+            background: #e9edf5;
+        }
+
+        .service-card:nth-child(5) .service-icon {
+            background: #f6f0dc;
+        }
+
+        .service-card:nth-child(6) .service-icon {
+            background: #e6efeb;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            color: var(--green-dark);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        /* =========================
+           QUOTE
+        ========================= */
+
+        .quote-section {
+            padding: 20px 8% 90px;
+        }
+
+        .quote-box {
+            background: var(--green);
+            border-radius: 30px;
+            padding: 55px 35px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .quote-box::before {
+            content: "♡";
+            position: absolute;
+            font-size: 200px;
+            color: rgba(255, 255, 255, 0.05);
+            top: -60px;
+            right: 20px;
+        }
+
+        .quote-box::after {
+            content: "✦";
+            position: absolute;
+            font-size: 100px;
+            color: rgba(243, 215, 141, 0.18);
+            bottom: -20px;
+            left: 40px;
+        }
+
+        .quote-box h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-box p {
+            color: #e6eee7;
+            font-size: 15px;
+            line-height: 2;
+            max-width: 650px;
+            margin: auto auto 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-box a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f3d78d;
+            color: #435a47;
+            padding: 13px 25px;
+            border-radius: 13px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            transition: 0.3s;
+        }
+
+        .quote-box a:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact {
+            padding: 70px 8%;
+            text-align: center;
+            background: #f1eee5;
+        }
+
+        .contact h2 {
+            color: var(--green-dark);
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+            color: var(--muted);
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: white;
+            color: var(--green);
+            border: 1px solid #dce5da;
+            padding: 13px 24px;
+            border-radius: 13px;
+            transition: 0.3s;
+        }
+
+        .contact-button:hover {
+            background: var(--green);
+            color: white;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #344f3c;
+            color: white;
+            padding: 45px 8% 25px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .footer-logo span {
+            color: #e5c987;
+        }
+
+        .footer-description {
+            color: #d2ded4;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #e0e9e1;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #f3d78d;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #bdcdbf;
+            font-size: 12px;
+            padding-top: 22px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .header {
+                padding: 15px 4%;
+            }
+
+            .navbar {
+                gap: 18px;
+            }
+
+            .hero {
+                padding-right: 5%;
+                padding-left: 5%;
+                gap: 35px;
+            }
+
+            .hero-image {
+                min-height: 380px;
+            }
+
+            .hero-illustration {
+                height: 370px;
+            }
+
+            .illustration-emoji {
+                font-size: 120px;
+            }
+
+            .account-types,
+            .services,
+            .about,
+            .sanad-story {
+                padding-right: 5%;
+                padding-left: 5%;
+            }
+
+            .account-container {
+                gap: 20px;
+            }
+
+            .account-card {
+                padding: 30px 24px;
+            }
+
+            .story-container {
+                gap: 35px;
+            }
+        }
+
+        /* TABLET */
+
+        @media (max-width: 850px) {
+
+            .header {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .navbar {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                padding-top: 10px;
+                border-top: 1px solid #e9e8df;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 45px;
+            }
+
+            .hero-text {
+                order: 2;
+            }
+
+            .hero-image {
+                order: 1;
+                min-height: 350px;
+            }
+
+            .hero-illustration {
+                max-width: 430px;
+                height: 350px;
+            }
+
+            .hero-text p {
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .floating-card.card-one {
+                right: 0;
+            }
+
+            .floating-card.card-two {
+                left: 0;
+            }
+
+            .account-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 22px;
+            }
+
+            .account-card {
+                min-height: 370px;
+            }
+
+            .account-info p {
+                min-height: 110px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .about-visual {
+                min-height: 300px;
+            }
+
+            .service-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .stats {
+                margin-top: 15px;
+            }
+
+            .account-types {
+                padding-top: 75px;
+            }
+
+            .story-container {
+                grid-template-columns: 1fr;
+            }
+
+            .story-visual {
+                min-height: 350px;
+            }
+
+            .story-art-emoji {
+                font-size: 125px;
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 12px 5%;
+            }
+
+            .logo-icon {
+                width: 43px;
+                height: 43px;
+            }
+
+            .logo-text span {
+                font-size: 18px;
+            }
+
+            .navbar {
+                gap: 15px;
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+
+            .navbar a {
+                white-space: nowrap;
+                font-size: 12px;
+            }
+
+            .header-buttons {
+                gap: 4px;
+            }
+
+            .login-btn {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .register-btn {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 35px 5% 55px;
+            }
+
+            .hero-image {
+                min-height: 310px;
+            }
+
+            .hero-illustration {
+                height: 300px;
+                max-width: 330px;
+            }
+
+            .hero-illustration::before {
+                width: 230px;
+                height: 230px;
+                right: 50px;
+            }
+
+            .hero-illustration::after {
+                width: 75px;
+                height: 75px;
+                left: 30px;
+            }
+
+            .illustration-emoji {
+                font-size: 100px;
+            }
+
+            .illustration-caption {
+                padding: 12px 17px;
+            }
+
+            .floating-card {
+                padding: 10px 12px;
+            }
+
+            .floating-card.card-one {
+                top: 10px;
+            }
+
+            .floating-card.card-two {
+                bottom: 5px;
+            }
+
+            .floating-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .hero-text h1 {
+                font-size: 39px;
+            }
+
+            .hero-text p {
+                font-size: 14px;
+            }
+
+            .main-button {
+                padding: 13px 18px;
+                font-size: 13px;
+            }
+
+            .secondary-button {
+                font-size: 13px;
+            }
+
+            .stats-container {
+                padding: 18px 8px;
+            }
+
+            .stat-item {
+                padding: 5px;
+            }
+
+            .stat-item h3 {
+                font-size: 19px;
+            }
+
+            .stat-item p {
+                font-size: 11px;
+            }
+
+            .section-heading h2 {
+                font-size: 27px;
+            }
+
+            .account-types,
+            .services {
+                padding-top: 65px;
+                padding-bottom: 65px;
+            }
+
+            .account-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .account-card {
+                min-height: auto;
+                padding: 27px 24px;
+            }
+
+            .account-icon {
+                width: 70px;
+                height: 70px;
+                min-width: 70px;
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+
+            .account-info h2 {
+                font-size: 21px;
+            }
+
+            .account-info p {
+                min-height: auto;
+                margin-bottom: 22px;
+                font-size: 14px;
+                line-height: 2;
+            }
+
+            .account-info a {
+                width: 100%;
+            }
+
+            .about {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+
+            .about-text h2 {
+                font-size: 28px;
+            }
+
+            .about-visual {
+                min-height: 260px;
+            }
+
+            .about-visual .about-emoji {
+                font-size: 100px;
+            }
+
+            .service-container {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 23px;
+            }
+
+            .quote-section {
+                padding: 10px 5% 65px;
+            }
+
+            .quote-box {
+                padding: 40px 20px;
+            }
+
+            .quote-box h2 {
+                font-size: 25px;
+            }
+
+            .quote-box p {
+                font-size: 13px;
+            }
+
+            .contact {
+                padding: 55px 5%;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                gap: 17px;
+            }
+
+            /* STORY MOBILE */
+
+            .sanad-story {
+                padding-top: 65px;
+                padding-bottom: 65px;
+            }
+
+            .story-text h2 {
+                font-size: 29px;
+            }
+
+            .story-text p {
+                font-size: 14px;
+                line-height: 2.2;
+            }
+
+            .story-visual {
+                min-height: 280px;
+                border-radius: 28px;
+            }
+
+            .story-visual::before {
+                width: 230px;
+                height: 230px;
+            }
+
+            .story-visual::after {
+                width: 75px;
+                height: 75px;
+                top: 20px;
+                left: 20px;
+            }
+
+            .story-art-emoji {
+                font-size: 95px;
+            }
+
+            .story-art-caption {
+                padding: 13px 18px;
+            }
+
+            .story-art-caption h3 {
+                font-size: 16px;
+            }
+
+            .story-values {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .story-value {
+                display: flex;
+                align-items: center;
+                text-align: right;
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .story-value span {
+                margin-bottom: 0;
+                font-size: 30px;
+            }
+
+            .story-value div {
+                flex: 1;
+            }
+
+            .story-value p {
+                margin: 0;
+            }
+        }
+
+        /* =========================
+           ACCESSIBILITY
+        ========================= */
+
+        a:focus-visible {
+            outline: 3px solid #c39c59;
+            outline-offset: 4px;
+            border-radius: 5px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ASSIST TEAM */
+        .assist-button {
+            border: 1px solid #dce7da;
+            background: #f0f5ef;
+            color: var(--green-dark);
+            border-radius: 999px;
+            padding: 8px 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: .25s;
+        }
+        .assist-button:hover, .assist-button:focus-visible {
+            background: var(--green);
+            color: #fff;
+            outline: 3px solid #c5a76e;
+            outline-offset: 3px;
+        }
+        .assist-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(31, 48, 36, .48);
+            backdrop-filter: blur(5px);
+        }
+        .assist-modal.open { display: flex; }
+        .assist-card {
+            width: min(100%, 420px);
+            background: var(--cream);
+            border: 1px solid #e7e3d8;
+            border-radius: 25px;
+            padding: 30px 25px 26px;
+            box-shadow: 0 24px 70px rgba(25, 42, 30, .22);
+            text-align: center;
+            position: relative;
+            animation: assist-pop .22s ease-out;
+        }
+        @keyframes assist-pop { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: none; } }
+        .assist-close {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 36px;
+            height: 36px;
+            border: 0;
+            border-radius: 50%;
+            background: #e8eee6;
+            color: var(--green-dark);
+            font-size: 23px;
+            cursor: pointer;
+        }
+        .assist-mark {
+            width: 62px;
+            height: 62px;
+            margin: 0 auto 14px;
+            border-radius: 20px;
+            background: #e5eee4;
+            color: var(--green);
+            display: grid;
+            place-items: center;
+            font-size: 27px;
+        }
+        .assist-card h2 { color: var(--green-dark); font-size: 24px; margin-bottom: 7px; }
+        .assist-subtitle { color: var(--muted); font-size: 13px; margin-bottom: 22px; }
+        .assist-creator {
+            background: #e9efe6;
+            border: 1px solid #dce7da;
+            border-radius: 16px;
+            padding: 15px 12px;
+            margin-bottom: 16px;
+        }
+        .assist-role { display: block; color: #b3935a; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 6px; }
+        .assist-creator strong { display: block; color: var(--green-dark); font-size: 16px; }
+        .assist-list { display: grid; gap: 10px; }
+        .assist-list div { background: #fff; border: 1px solid #efeee7; border-radius: 13px; padding: 12px; color: #506755; font-size: 14px; font-weight: 700; }
+        @media (max-width: 600px) {
+            .assist-button { padding: 7px 11px; font-size: 12px; }
+            .assist-card { padding: 27px 18px 22px; }
+            .assist-card h2 { font-size: 21px; }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <a href="#home" class="logo" aria-label="SANAD - الصفحة الرئيسية">
+
+            <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+                <path d="M50 88 C30 72 8 54 10 32 C12 10 37 7 50 28 C63 7 88 10 90 32 C92 54 70 72 50 88Z"
+                    fill="none" stroke="#547963" stroke-width="5" />
+
+                <circle cx="35" cy="34" r="7" fill="#547963" />
+                <circle cx="64" cy="38" r="7" fill="#CBA66A" />
+
+                <path d="M35 44 L29 62 L40 62 L45 47"
+                    fill="none" stroke="#547963" stroke-width="5" stroke-linecap="round" />
+
+                <path d="M64 48 L58 65 L73 65 L69 49"
+                    fill="none" stroke="#CBA66A" stroke-width="5" stroke-linecap="round" />
+
+                <path d="M22 75 Q50 91 78 75"
+                    fill="none" stroke="#547963" stroke-width="5" stroke-linecap="round" />
+
+            </svg>
+
+            <div class="logo-text">
+                <span>SANAD</span>
+                <strong>سند</strong>
+            </div>
+
+        </a>
+
+        <nav class="navbar" aria-label="القائمة الرئيسية">
+
+            <a href="#home" class="active">الرئيسية</a>
+            <a href="#about">حكاية سند</a>
+            <a href="#services">خدماتنا</a>
+            <a href="#accounts">حساباتنا</a>
+            <a href="#contact">تواصل معنا</a>
+            <button type="button" class="assist-button" id="assistOpen" aria-haspopup="dialog" aria-controls="assistModal">🤝 ASSIST</button>
+
+        </nav>
+
+        <div class="header-buttons">
+
+            <a href="login.html" class="login-btn">
+                تسجيل الدخول
+            </a>
+
+            <a href="register.html" class="register-btn">
+                إنشاء حساب <span>↗</span>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-text">
+
+            <div class="hero-badge">
+                <span>✦</span>
+                مساحة لكل طفل.. وفرصة لكل حلم
+            </div>
+
+            <h1>
+                لأن كل طفل
+                <br>
+                <span class="highlight">يستحق أن يزدهر</span>
+            </h1>
+
+            <p>
+                في سند، نؤمن أن الاختلاف مش عائق، وأن لكل طفل طريقته الخاصة
+                في التعلم والنمو. بنوفر مساحة آمنة تجمع التعليم والدعم
+                والتواصل، وتساعد كل طفل يكتشف قدراته بطريقته.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="register.html" class="main-button">
+                    ابدأ رحلتك مع سند
+                    <span class="arrow">←</span>
+                </a>
+
+                <a href="#about" class="secondary-button">
+                    اكتشف سند
+                    <span>⌄</span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Hero Illustration -->
+
+        <div class="hero-image">
+
+            <div class="hero-illustration">
+
+                <div class="illustration-content">
+
+                    <span class="illustration-emoji" aria-hidden="true">🧒🏻👧🏽</span>
+
+                    <div class="illustration-caption">
+                        <h3>معًا.. نقدر نحقق الكثير</h3>
+                        <p>نتعلم · نكبر · ننجح</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-card card-one">
+
+                <div class="floating-icon" aria-hidden="true">⭐</div>
+
+                <div>
+                    <h4>كل إنجاز يستحق الاحتفال</h4>
+                    <p>خطوة صغيرة.. فرق كبير</p>
+                </div>
+
+            </div>
+
+
+            <div class="floating-card card-two">
+
+                <div class="floating-icon" aria-hidden="true">💚</div>
+
+                <div>
+                    <h4>أنت مش لوحدك</h4>
+                    <p>إحنا هنا علشانك</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats" aria-label="رسالة سند">
+
+        <div class="stats-container">
+
+            <div class="stat-item">
+                <h3>لكل طفل</h3>
+                <p>فرصة للتعلم والنمو</p>
+            </div>
+
+            <div class="stat-item">
+                <h3>لكل أسرة</h3>
+                <p>دعم وفهم ومساندة</p>
+            </div>
+
+            <div class="stat-item">
+                <h3>لكل متخصص</h3>
+                <p>فرصة لصناعة تأثير</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SANAD STORY ================= -->
+
+    <section class="sanad-story" id="about">
+
+        <div class="story-container">
+
+            <div class="story-text">
+
+                <span class="story-label">حكاية سند 💚</span>
+
+                <h2>
+                    كل حكاية بتبدأ باحتياج...
+                    <br>
+                    <span>وسند بيبدأ بالاهتمام.</span>
+                </h2>
+
+                <p>
+                    كل طفل لديه عالم خاص، وأحلام تستحق أن تُرى،
+                    وقدرات تستحق أن تُكتشف. لكن أحيانًا، يحتاج الطفل
+                    إلى من يفهمه، ومن يسانده، ومن يساعد أسرته
+                    على اكتشاف الطريق المناسب له.
+                </p>
+
+                <p>
+                    من هنا بدأت حكاية سند. لم تكن الفكرة مجرد إنشاء موقع،
+                    بل بناء مساحة تجمع الطفل وأسرته والمتخصصين في مكان واحد،
+                    مساحة تمنحهم المعرفة، وتقرّب إليهم الدعم،
+                    وتساعدهم على اكتشاف قدراتهم وتنمية مهاراتهم.
+                </p>
+
+                <p>
+                    نؤمن أن الاختلاف ليس عائقًا أمام الأحلام،
+                    وأن لكل طفل طريقته الخاصة في التعلم والنمو والنجاح.
+                    في سند، لا نرسم للطفل طريقًا واحدًا،
+                    بل نساعده على اكتشاف طريقه،
+                    ونمشي بجانبه خطوة بخطوة.
+                </p>
+
+                <p class="story-ending">
+                    لأن كل طفل يستحق فرصة، وكل أسرة تستحق الدعم،
+                    وكل حلم يستحق أن يبدأ. 💚
+                </p>
+
+
+                <!-- STORY VALUES -->
+
+                <div class="story-values">
+
+                    <div class="story-value">
+
+                        <span aria-hidden="true">🤍</span>
+
+                        <div>
+                            <h3>نفهم</h3>
+                            <p>نسمع لكل طفل ونحترم اختلافه.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="story-value">
+
+                        <span aria-hidden="true">🤝</span>
+
+                        <div>
+                            <h3>نساند</h3>
+                            <p>نقدم الدعم للطفل وأسرته.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="story-value">
+
+                        <span aria-hidden="true">🌱</span>
+
+                        <div>
+                            <h3>نمكّن</h3>
+                            <p>نساعد كل طفل على اكتشاف قدراته.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STORY VISUAL -->
+
+            <div class="story-visual" aria-hidden="true">
+
+                <div class="story-art">
+
+                    <span class="story-art-emoji">🫶🏻</span>
+
+                    <div class="story-art-caption">
+
+                        <h3>SANAD | سند</h3>
+
+                        <p>معًا نصنع الفرق</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ACCOUNTS ================= -->
+
+    <section class="account-types" id="accounts">
+
+        <div class="section-heading">
+
+            <span class="section-label">ابدأ من هنا</span>
+
+            <h2>سند معمول علشانك</h2>
+
+            <p>
+                مهما كان دورك، ليك مكان معانا.
+                اختار المساحة المناسبة ليك وابدأ رحلتك.
+            </p>
+
+        </div>
+
+
+        <div class="account-container">
+
+
+            <!-- User -->
+
+            <div class="account-card">
+
+                <div class="account-icon" aria-hidden="true">🌈</div>
+
+                <div class="account-info">
+
+                    <h2>مساحتي أنا</h2>
+
+                    <p>
+                        مساحة خاصة تساعدك تتعلم، تكتشف مهاراتك،
+                        تعبر عن مشاعرك، وتحتفل بكل إنجاز بتحققه.
+                    </p>
+
+                    <a href="register.html">
+                        ابدأ كطفل
+                        <span aria-hidden="true">←</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Family -->
+
+            <div class="account-card">
+
+                <div class="account-icon" aria-hidden="true">🏡</div>
+
+                <div class="account-info">
+
+                    <h2>مساحة الأسرة</h2>
+
+                    <p>
+                        أدوات وإرشادات تساعد الأسرة على فهم الطفل،
+                        متابعة تطوره، واكتشاف طرق جديدة لدعمه.
+                    </p>
+
+                    <a href="register.html">
+                        ابدأ كأحد أفراد الأسرة
+                        <span aria-hidden="true">←</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Specialist -->
+
+            <div class="account-card">
+
+                <div class="account-icon" aria-hidden="true">🩺</div>
+
+                <div class="account-info">
+
+                    <h2>مساحة الأخصائي</h2>
+
+                    <p>
+                        مساحة لتنظيم الحالات، متابعة التقدم،
+                        وتقديم الدعم المناسب لكل طفل وفق احتياجاته.
+                    </p>
+
+                    <a href="register.html">
+                        انضم كأخصائي
+                        <span aria-hidden="true">←</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT PLATFORM ================= -->
+
+    <section class="about" id="about-platform">
+
+        <div class="about-container">
+
+
+            <div class="about-visual" aria-hidden="true">
+
+                <span class="about-emoji">🫶🏻</span>
+
+                <div class="about-sticker">
+                    الاختلاف مش حدود.. الاختلاف جزء مننا
+                </div>
+
+            </div>
+
+
+            <div class="about-text">
+
+                <span class="section-label">عن المنصة</span>
+
+                <h2>
+                    مش مجرد موقع،
+                    <br>
+                    دي مساحة بتفهمك.
+                </h2>
+
+                <p>
+                    سند منصة تهدف إلى خلق بيئة رقمية داعمة للأشخاص ذوي الاحتياجات
+                    الخاصة وأسرهم، من خلال خدمات تعليمية وتفاعلية، ومساحات للتواصل،
+                    ودعم الأسرة، ومتابعة النمو والتطور.
+
+                    <br><br>
+
+                    بنؤمن إن كل طفل مختلف، وعشان كده بنسعى إن تجربته مع سند
+                    تكون مناسبة لاحتياجاته، وقدراته، وطريقته في التواصل والتعلم.
+                </p>
+
+
+                <div class="about-points">
+
+                    <div class="about-point">
+                        <span aria-hidden="true">✓</span>
+                        تجربة تراعي اختلاف الاحتياجات
+                    </div>
+
+                    <div class="about-point">
+                        <span aria-hidden="true">✓</span>
+                        تعليم وتطوير بطريقة تفاعلية
+                    </div>
+
+                    <div class="about-point">
+                        <span aria-hidden="true">✓</span>
+                        دعم الطفل والأسرة معًا
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <section class="services" id="services">
+
+        <div class="section-heading">
+
+            <span class="section-label">إيه اللي هتلاقيه عندنا؟</span>
+
+            <h2>مساحات تساعدك في كل خطوة</h2>
+
+            <p>
+                مجموعة من الخدمات المصممة لدعم التعلم،
+                التواصل، وتنمية المهارات بطريقة تناسب الجميع.
+            </p>
+
+        </div>
+
+
+        <div class="service-container">
+
+
+            <div class="service-card">
+
+                <div class="service-icon" aria-hidden="true">📚</div>
+
+                <h3>التعليم والتعلم</h3>
+
+                <p>
+                    أنشطة وتجارب تعليمية تفاعلية
+                    تساعد الطفل على اكتشاف مهاراته والتعلم بطريقته.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon" aria-hidden="true">🏡</div>
+
+                <h3>دعم الأسرة</h3>
+
+                <p>
+                    إرشادات ومعلومات تساعد الأسرة
+                    على فهم احتياجات الطفل ومساندته.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon" aria-hidden="true">💚</div>
+
+                <h3>مساحة المشاعر</h3>
+
+                <p>
+                    مساحة آمنة للتعبير عن المشاعر،
+                    والتعرف عليها، وفهمها بطريقة بسيطة.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon" aria-hidden="true">🧸</div>
+
+                <h3>التواصل والأصدقاء</h3>
+
+                <p>
+                    مساحة تساعد على التواصل،
+                    المشاركة، وبناء علاقات اجتماعية.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon" aria-hidden="true">🌟</div>
+
+                <h3>رحلة التقدم</h3>
+
+                <p>
+                    متابعة المهارات والإنجازات،
+                    والاحتفال بكل خطوة جديدة.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon" aria-hidden="true">🧩</div>
+
+                <h3>دليل الأسرة</h3>
+
+                <p>
+                    معلومات مبسطة عن الإعاقات المختلفة،
+                    وطرق التعامل والدعم.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CALL TO ACTION ================= -->
+
+    <section class="quote-section">
+
+        <div class="quote-box">
+
+            <h2>كل طفل عنده حكاية.. وموهبة.. وحلم</h2>
+
+            <p>
+                يمكن محتاج فرصة مختلفة، أو طريقة جديدة، أو حد يؤمن بيه.
+                في سند، بنبدأ من الطفل، ونساعده يكتشف إن قدراته أكبر مما يتخيل.
+            </p>
+
+            <a href="register.html">
+                ابدأ حكايتك مع سند
+                <span aria-hidden="true">←</span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact" id="contact">
+
+        <h2>إحنا هنا علشانك 💚</h2>
+
+        <p>
+            لو عندك سؤال، أو حابب تعرف أكتر عن سند وخدماتنا،
+            يسعدنا إنك تكون جزء من رحلتنا.
+        </p>
+
+        <a href="register.html" class="contact-button">
+            انضم لعائلة سند
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-top">
+
+            <div>
+
+                <div class="footer-logo">
+                    SANAD <span>| سند</span>
+                </div>
+
+                <p class="footer-description">
+                    معًا نصنع عالمًا أكثر تفهمًا واحتواءً.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#home">الرئيسية</a>
+                <a href="#about">حكاية سند</a>
+                <a href="#services">خدماتنا</a>
+                <a href="#accounts">حساباتنا</a>
+                <a href="#contact">تواصل معنا</a>
+
+            </div>
+
+        </div>
+
+
+        <p class="copyright">
+            Made with 💚 by Nagat Fergany © 2026
+        </p>
+
+    </footer>
+
+
+    <!-- ASSIST TEAM POPUP -->
+    <div class="assist-modal" id="assistModal" role="dialog" aria-modal="true" aria-labelledby="assistTitle">
+        <div class="assist-card">
+            <button type="button" class="assist-close" id="assistClose" aria-label="إغلاق">×</button>
+            <div class="assist-mark" aria-hidden="true">🤝</div>
+            <h2 id="assistTitle">The SANAD Team 💚</h2>
+            <p class="assist-subtitle">Together, we make a difference.</p>
+            <div class="assist-creator">
+                <span class="assist-role">PROGRAM CREATOR</span>
+                <strong>NAGAT MOHAMED FERGANY</strong>
+            </div>
+            <span class="assist-role">ASSIST TEAM</span>
+            <div class="assist-list">
+                <div>JANA MOHAMED</div>
+                <div>HAGER MOHAMED</div>
+                <div>GHADA MAHMOUD</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const modal = document.getElementById('assistModal');
+            const openBtn = document.getElementById('assistOpen');
+            const closeBtn = document.getElementById('assistClose');
+            if (!modal || !openBtn || !closeBtn) return;
+            function openModal() {
+                modal.classList.add('open');
+                closeBtn.focus();
+                document.body.style.overflow = 'hidden';
+            }
+            function closeModal() {
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+                openBtn.focus();
+            }
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', function (event) {
+                if (event.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && modal.classList.contains('open')) closeModal();
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

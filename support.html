@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>الدعم النفسي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .support-container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .support-welcome {
+            background: linear-gradient(135deg, #e6f0e7, #f4eee3);
+            padding: 35px;
+            border-radius: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .support-welcome h1 {
+            color: #416c50;
+            margin-bottom: 15px;
+        }
+
+        .support-welcome p {
+            line-height: 1.9;
+            font-size: 17px;
+        }
+
+        .support-welcome-icon {
+            font-size: 65px;
+        }
+
+        .support-section {
+            margin: 35px 0;
+        }
+
+        .support-section h2 {
+            color: #416c50;
+            margin-bottom: 15px;
+        }
+
+        .support-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .support-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .support-card:hover {
+            border-color: #56856b;
+            transform: translateY(-4px);
+        }
+
+        .support-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .support-card h3 {
+            color: #416c50;
+            margin-bottom: 12px;
+        }
+
+        .support-card p {
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .support-card button {
+            background: #56856b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .support-result {
+            display: none;
+            background: #edf5ef;
+            border-radius: 18px;
+            padding: 25px;
+            margin-top: 25px;
+            line-height: 2;
+        }
+
+        .support-result h3 {
+            color: #416c50;
+            margin-bottom: 12px;
+        }
+
+        .breathing-box {
+            background: #f4eee3;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .breathing-circle {
+            width: 130px;
+            height: 130px;
+            background: #56856b;
+            border-radius: 50%;
+            margin: 25px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            transition: transform 4s ease-in-out;
+        }
+
+        .breathing-circle.grow {
+            transform: scale(1.25);
+        }
+
+        .breathing-instruction {
+            font-size: 20px;
+            color: #416c50;
+            font-weight: bold;
+            min-height: 35px;
+        }
+
+        .support-button {
+            background: #56856b;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 8px;
+        }
+
+        .voice-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .voice-button {
+            background: #416c50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .support-card button:focus-visible,
+        .support-button:focus-visible,
+        .voice-button:focus-visible,
+        a:focus-visible {
+            outline: 4px solid #d99b35;
+            outline-offset: 5px;
+        }
+
+        .confidence-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            line-height: 2;
+        }
+
+        .confidence-box li {
+            margin-bottom: 10px;
+        }
+
+        .support-note {
+            background: #edf5ef;
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 1.9;
+            margin-top: 25px;
+        }
+
+        .support-status {
+            background: #edf5ef;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .support-history {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .support-history h2 {
+            color: #416c50;
+            margin-bottom: 15px;
+        }
+
+        .history-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            line-height: 1.8;
+        }
+
+        .blind-mode .support-card {
+            text-align: right;
+        }
+
+        .blind-mode .support-card button,
+        .blind-mode .support-button,
+        .blind-mode .voice-button {
+            min-height: 55px;
+            font-size: 18px;
+        }
+
+        @media(max-width: 800px) {
+
+            .support-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .support-welcome {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+        @media(max-width: 550px) {
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-welcome {
+                padding: 22px;
+            }
+
+        }
+
+        @media(prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <svg viewBox="0 0 100 100" width="50" height="50"
+                    role="img" aria-label="شعار سند">
+
+                    <path d="M50 83 C35 70 12 54 12 33 C12 18 31 10 43 25
+                    C46 29 48 33 50 36 C52 33 54 29 57 25
+                    C69 10 88 18 88 33 C88 54 65 70 50 83Z"
+                    fill="#56856B"/>
+
+                    <circle cx="38" cy="38" r="7" fill="#F4EBDD"/>
+                    <circle cx="62" cy="38" r="7" fill="#F4EBDD"/>
+
+                    <path d="M25 57 Q38 42 50 57 Q62 42 75 57"
+                    fill="none" stroke="#F4EBDD" stroke-width="5"
+                    stroke-linecap="round"/>
+
+                </svg>
+
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند لكل خطوة</span>
+            </div>
+
+        </div>
+
+
+        <nav class="navbar" aria-label="القائمة الرئيسية">
+
+            <a href="index.html">الرئيسية</a>
+
+            <a href="user-dashboard.html">لوحة التحكم</a>
+
+            <a href="my-profile.html">ملفي الشخصي</a>
+
+        </nav>
+
+    </header>
+
+
+
+    <main class="support-container">
+
+
+        <!-- Welcome -->
+
+        <section class="support-welcome">
+
+            <div>
+
+                <h1 id="welcomeTitle">
+                    إنت مهم ومش لوحدك 💚
+                </h1>
+
+                <p id="welcomeMessage">
+                    هنا تقدر تتعلم إزاي تفهم مشاعرك،
+                    وتهتم بنفسك، وتتعامل مع المواقف الصعبة.
+                    إحنا هنا علشان ندعمك.
+                </p>
+
+            </div>
+
+            <div class="support-welcome-icon" aria-hidden="true">
+                💚
+            </div>
+
+        </section>
+
+
+
+        <!-- Voice -->
+
+        <section>
+
+            <h2>المساعدة الصوتية</h2>
+
+            <div class="voice-controls">
+
+                <button class="voice-button"
+                    id="speakPageButton">
+
+                    🔊 اسمع تعليمات الصفحة
+
+                </button>
+
+                <button class="voice-button"
+                    id="stopVoiceButton">
+
+                    ⏹ إيقاف الصوت
+
+                </button>
+
+            </div>
+
+            <p id="voiceStatus"
+                class="support-status"
+                role="status"
+                aria-live="polite">
+
+                المساعدة الصوتية جاهزة.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- Emotional support -->
+
+        <section class="support-section">
+
+            <h2>خلينا نفهم مشاعرك 💚</h2>
+
+            <p class="support-subtitle">
+                اختار الموضوع اللي تحب تتعلم عنه.
+            </p>
+
+
+            <div class="support-grid">
+
+
+                <article class="support-card">
+
+                    <div class="support-icon" aria-hidden="true">
+                        😢
+                    </div>
+
+                    <h3>لما أكون حزين</h3>
+
+                    <p>
+                        طرق بسيطة تساعدك تتعامل مع الحزن.
+                    </p>
+
+                    <button type="button"
+                        data-topic="sad">
+
+                        اتعلم أكتر
+
+                    </button>
+
+                </article>
+
+
+
+                <article class="support-card">
+
+                    <div class="support-icon" aria-hidden="true">
+                        😠
+                    </div>
+
+                    <h3>لما أكون غضبان</h3>
+
+                    <p>
+                        إزاي تهدي نفسك وتتحكم في غضبك.
+                    </p>
+
+                    <button type="button"
+                        data-topic="angry">
+
+                        اتعلم أكتر
+
+                    </button>
+
+                </article>
+
+
+
+                <article class="support-card">
+
+                    <div class="support-icon" aria-hidden="true">
+                        😨
+                    </div>
+
+                    <h3>لما أكون خايف</h3>
+
+                    <p>
+                        خطوات تساعدك تحس بالأمان.
+                    </p>
+
+                    <button type="button"
+                        data-topic="afraid">
+
+                        اتعلم أكتر
+
+                    </button>
+
+                </article>
+
+
+
+                <article class="support-card">
+
+                    <div class="support-icon" aria-hidden="true">
+                        😟
+                    </div>
+
+                    <h3>لما أكون قلقان</h3>
+
+                    <p>
+                        طرق تساعدك تهدي تفكيرك.
+                    </p>
+
+                    <button type="button"
+                        data-topic="anxious">
+
+                        اتعلم أكتر
+
+                    </button>
+
+                </article>
+
+
+
+                <article class="support-card">
+
+                    <div class="support-icon" aria-hidden="true">
+                        😴
+                    </div>
+
+                    <h3>لما أكون متعب</h3>
+
+                    <p>
+                        إزاي تهتم بنفسك وتاخد وقت للراحة.
+                    </p>
+
+                    <button type="button"
+                        data-topic="tired">
+
+                        اتعلم أكتر
+
+                    </button>
+
+                </article>
+
+
+
+                <article class="support-card">
+
+                    <div class="support-icon" aria-hidden="true">
+                        🌸
+                    </div>
+
+                    <h3>لما أحتاج أشجع نفسي</h3>
+
+                    <p>
+                        افتكر إنك قادر تتعلم وتنجح.
+                    </p>
+
+                    <button type="button"
+                        data-topic="confidence">
+
+                        اتعلم أكتر
+
+                    </button>
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- Topic Result -->
+
+            <div class="support-result"
+                id="topicResult"
+                aria-live="polite"
+                aria-atomic="true">
+
+                <h3 id="topicTitle"></h3>
+
+                <p id="topicMessage"></p>
+
+                <button type="button"
+                    class="voice-button"
+                    id="repeatTopicButton">
+
+                    🔊 اسمع النصيحة مرة تانية
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Breathing exercise -->
+
+        <section class="support-section">
+
+            <h2>تمرين التنفس والهدوء 🌿</h2>
+
+            <p class="support-subtitle">
+
+                لما تكون متضايق أو متوتر،
+                ممكن تجرب تمرين التنفس البسيط ده.
+                ولو حسيت بدوخة أو عدم راحة، وقف التمرين.
+
+            </p>
+
+
+            <div class="breathing-box">
+
+                <h3>خلينا نتنفس مع بعض</h3>
+
+                <div class="breathing-circle"
+                    id="breathingCircle"
+                    aria-hidden="true">
+
+                    تنفس
+
+                </div>
+
+                <p class="breathing-instruction"
+                    id="breathingInstruction"
+                    aria-live="polite">
+
+                    اضغط على ابدأ علشان نبدأ التمرين.
+
+                </p>
+
+                <button type="button"
+                    class="support-button"
+                    id="startBreathing">
+
+                    ابدأ التمرين
+
+                </button>
+
+                <button type="button"
+                    class="support-button"
+                    id="stopBreathing">
+
+                    إيقاف التمرين
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Confidence -->
+
+        <section class="support-section">
+
+            <h2>أنا أقدر وأنجح ⭐</h2>
+
+            <div class="confidence-box">
+
+                <p>
+                    افتكر دايمًا إن كل شخص عنده قدرات مميزة،
+                    وإن كل خطوة صغيرة بتعملها تعتبر نجاح.
+                </p>
+
+                <ul>
+
+                    <li>أنا أقدر أتعلم حاجات جديدة.</li>
+
+                    <li>من حقي أطلب المساعدة لما أحتاجها.</li>
+
+                    <li>الغلط مش فشل، ده فرصة للتعلم.</li>
+
+                    <li>أنا مميز بطريقتي الخاصة.</li>
+
+                    <li>من حقي أعبر عن مشاعري.</li>
+
+                </ul>
+
+                <button type="button"
+                    class="support-button"
+                    id="encouragementButton">
+
+                    شجعني 💚
+
+                </button>
+
+                <p id="encouragementMessage"
+                    role="status"
+                    aria-live="polite">
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Support note -->
+
+        <section class="support-note">
+
+            <h3>افتكر دايمًا 💚</h3>
+
+            <p>
+                لو حاسس بالحزن أو الخوف لفترة طويلة،
+                أو في حاجة مضايقاك ومش قادر تتعامل معاها،
+                اتكلم مع ولي أمرك أو شخص كبير بتثق فيه.
+                وممكن تطلب مساعدة من أخصائي مؤهل.
+            </p>
+
+            <p>
+                ولو إنت في خطر دلوقتي، اطلب مساعدة شخص بالغ موثوق فورًا.
+            </p>
+
+        </section>
+
+
+
+        <!-- Completed activities -->
+
+        <section class="support-history">
+
+            <h2>الأنشطة اللي جربتها ⭐</h2>
+
+            <div id="completedActivities">
+
+                لسه مجربتش أي نشاط.
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Back -->
+
+        <div class="feelings-back">
+
+            <a href="user-dashboard.html">
+                العودة إلى لوحة التحكم
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <h3>SANAD | سند</h3>
+
+        <p>معاً نحو حياة أفضل وفرص متساوية للجميع.</p>
+
+        <p>Made by Nagat Fergany © 2026</p>
+
+    </footer>
+
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+
+        // المستخدم الحالي
+
+        const currentUser = JSON.parse(
+
+            localStorage.getItem("sanadCurrentUser")
+
+        );
+
+
+        if (!currentUser || currentUser.accountType !== "user") {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // نوع الإعاقة
+
+        const disabilityValue =
+
+            currentUser.disabilityType ||
+
+            currentUser.disability ||
+
+            "other";
+
+
+        const disabilityAliases = {
+
+            physical: "mobility",
+
+            motor: "mobility",
+
+            mobility_disability: "mobility",
+
+            learning_disabilities: "learning",
+
+            learning_difficulties: "learning"
+
+        };
+
+
+        const disabilityType =
+
+            disabilityAliases[disabilityValue] || disabilityValue;
+
+
+        const isBlind = [
+
+            "visual",
+
+            "blind",
+
+            "blindness"
+
+        ].includes(disabilityType);
+
+
+        if (isBlind) {
+
+            document.body.classList.add("blind-mode");
+
+        }
+
+
+
+        // مفتاح حفظ الأنشطة
+
+        const supportKey =
+
+            "sanadSupport_" + currentUser.id;
+
+
+        let completedActivities = JSON.parse(
+
+            localStorage.getItem(supportKey) || "[]"
+
+        );
+
+
+
+        // المساعدة الصوتية
+
+        const voiceStatus =
+
+            document.getElementById("voiceStatus");
+
+
+        function speakText(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                voiceStatus.textContent =
+
+                    "المتصفح لا يدعم القراءة الصوتية.";
+
+                return;
+
+            }
+
+
+            window.speechSynthesis.cancel();
+
+
+            const speech =
+
+                new SpeechSynthesisUtterance(text);
+
+
+            speech.lang = "ar-EG";
+
+            speech.rate = 0.85;
+
+            speech.pitch = 1;
+
+            speech.volume = 1;
+
+
+            const voices =
+
+                window.speechSynthesis.getVoices();
+
+
+            const arabicVoice = voices.find(function(voice) {
+
+                return voice.lang.toLowerCase().startsWith("ar");
+
+            });
+
+
+            if (arabicVoice) {
+
+                speech.voice = arabicVoice;
+
+            }
+
+
+            speech.onstart = function() {
+
+                voiceStatus.textContent = "جاري تشغيل الصوت.";
+
+            };
+
+
+            speech.onend = function() {
+
+                voiceStatus.textContent = "انتهى تشغيل الصوت.";
+
+            };
+
+
+            speech.onerror = function() {
+
+                voiceStatus.textContent =
+
+                    "حصلت مشكلة في تشغيل الصوت.";
+
+            };
+
+
+            window.speechSynthesis.speak(speech);
+
+        }
+
+
+
+        // تعليمات الصفحة
+
+        const pageInstructions =
+
+            "أهلاً بيك في صفحة الدعم النفسي من سند. " +
+
+            "هنا هتتعلم طرق بسيطة للتعامل مع مشاعرك. " +
+
+            "تقدر تختار موضوع من موضوعات الدعم النفسي. " +
+
+            "وتقدر تجرب تمرين التنفس والاسترخاء. " +
+
+            "وفيه رسائل تشجيع تساعدك تفتكر قدراتك.";
+
+
+        document.getElementById("speakPageButton")
+
+            .addEventListener("click", function() {
+
+                speakText(pageInstructions);
+
+            });
+
+
+
+        document.getElementById("stopVoiceButton")
+
+            .addEventListener("click", function() {
+
+                window.speechSynthesis.cancel();
+
+                voiceStatus.textContent = "تم إيقاف الصوت.";
+
+            });
+
+
+
+        // محتوى الدعم النفسي
+
+        const topics = {
+
+            sad: {
+
+                title: "لما تكون حزين 💚",
+
+                message:
+
+                    "الحزن شعور طبيعي ومسموح ليك تحس بيه. " +
+
+                    "جرب تتكلم مع شخص بتحبه أو تثق فيه. " +
+
+                    "ممكن كمان تعمل حاجة بتحبها أو تاخد وقت لنفسك. " +
+
+                    "مش لازم تخفي مشاعرك."
+
+            },
+
+
+            angry: {
+
+                title: "لما تكون غضبان 🌿",
+
+                message:
+
+                    "لما تحس بالغضب، حاول توقف شوية قبل ما تتصرف. " +
+
+                    "خد نفس هادي، وابعد عن الموقف لو تقدر. " +
+
+                    "ممكن تقول للشخص اللي ضايقك إنت حاسس بإيه بهدوء."
+
+            },
+
+
+            afraid: {
+
+                title: "لما تكون خايف 💚",
+
+                message:
+
+                    "الخوف شعور طبيعي. حاول تكون في مكان آمن " +
+
+                    "وقريب من شخص بتثق فيه. " +
+
+                    "احكيله إيه اللي مخوفك، ومش لازم تواجه خوفك لوحدك."
+
+            },
+
+
+            anxious: {
+
+                title: "لما تكون قلقان 🌸",
+
+                message:
+
+                    "لو تفكيرك كتير ومش عارف تهدى، " +
+
+                    "جرب تركز في حاجة واحدة قدامك. " +
+
+                    "خد وقتك وفكر في خطوة صغيرة تقدر تعملها دلوقتي. " +
+
+                    "وممكن تتكلم مع حد يساعدك."
+
+            },
+
+
+            tired: {
+
+                title: "لما تكون متعب 🌙",
+
+                message:
+
+                    "من حقك ترتاح. خد استراحة، واشرب مياه، " +
+
+                    "واختار نشاط بسيط يناسب طاقتك. " +
+
+                    "مش مطلوب منك تعمل كل حاجة مرة واحدة."
+
+            },
+
+
+            confidence: {
+
+                title: "إنت مميز وقادر ⭐",
+
+                message:
+
+                    "كل واحد فينا عنده قدرات مختلفة. " +
+
+                    "ممكن تكون شاطر في الرسم أو اللعب أو التفكير أو مساعدة الآخرين. " +
+
+                    "افتكر إنك مش محتاج تكون زي حد تاني علشان تكون مميز."
+
+            }
+
+        };
+
+
+        let lastTopicText = "";
+
+
+
+        // اختيار موضوع
+
+        document.querySelectorAll("[data-topic]")
+
+            .forEach(function(button) {
+
+                button.addEventListener("click", function() {
+
+                    const topic = button.dataset.topic;
+
+                    const result = topics[topic];
+
+
+                    const resultBox =
+
+                        document.getElementById("topicResult");
+
+
+                    const topicTitle =
+
+                        document.getElementById("topicTitle");
+
+
+                    const topicMessage =
+
+                        document.getElementById("topicMessage");
+
+
+                    topicTitle.textContent = result.title;
+
+                    topicMessage.textContent = result.message;
+
+
+                    resultBox.style.display = "block";
+
+
+                    lastTopicText =
+
+                        result.title + ". " + result.message;
+
+
+                    // حفظ النشاط
+
+                    if (!completedActivities.includes(topic)) {
+
+                        completedActivities.push(topic);
+
+                    }
+
+
+                    localStorage.setItem(
+
+                        supportKey,
+
+                        JSON.stringify(completedActivities)
+
+                    );
+
+
+                    displayCompletedActivities();
+
+
+                    // الصوت للكفيف
+
+                    if (isBlind) {
+
+                        speakText(lastTopicText);
+
+                    }
+
+
+                    resultBox.scrollIntoView({
+
+                        behavior: "smooth",
+
+                        block: "center"
+
+                    });
+
+                });
+
+            });
+
+
+
+        // إعادة سماع النصيحة
+
+        document.getElementById("repeatTopicButton")
+
+            .addEventListener("click", function() {
+
+                if (lastTopicText) {
+
+                    speakText(lastTopicText);
+
+                }
+
+            });
+
+
+
+        // تمرين التنفس
+
+        const breathingCircle =
+
+            document.getElementById("breathingCircle");
+
+
+        const breathingInstruction =
+
+            document.getElementById("breathingInstruction");
+
+
+        let breathingInterval = null;
+
+        let breathingStep = 0;
+
+
+        const breathingSteps = [
+
+            {
+
+                text: "خد نفس بهدوء",
+
+                circle: "شهيق",
+
+                grow: true
+
+            },
+
+            {
+
+                text: "اخرج النفس براحة",
+
+                circle: "زفير",
+
+                grow: false
+
+            }
+
+        ];
+
+
+        function runBreathingStep() {
+
+            const step =
+
+                breathingSteps[breathingStep];
+
+
+            breathingInstruction.textContent = step.text;
+
+            breathingCircle.textContent = step.circle;
+
+
+            if (step.grow) {
+
+                breathingCircle.classList.add("grow");
+
+            } else {
+
+                breathingCircle.classList.remove("grow");
+
+            }
+
+
+            if (isBlind) {
+
+                speakText(step.text);
+
+            }
+
+
+            breathingStep = (breathingStep + 1) % 2;
+
+        }
+
+
+
+        document.getElementById("startBreathing")
+
+            .addEventListener("click", function() {
+
+                if (breathingInterval) return;
+
+
+                breathingStep = 0;
+
+                runBreathingStep();
+
+
+                breathingInterval = setInterval(
+
+                    runBreathingStep,
+
+                    4000
+
+                );
+
+            });
+
+
+
+        document.getElementById("stopBreathing")
+
+            .addEventListener("click", function() {
+
+                clearInterval(breathingInterval);
+
+                breathingInterval = null;
+
+
+                window.speechSynthesis.cancel();
+
+
+                breathingCircle.classList.remove("grow");
+
+                breathingCircle.textContent = "تنفس";
+
+
+                breathingInstruction.textContent =
+
+                    "تم إيقاف التمرين. خد وقتك وارتاح.";
+
+            });
+
+
+
+        // رسائل التشجيع
+
+        const encouragementMessages = [
+
+            "إنت تقدر تعمل حاجات جميلة! 💚",
+
+            "كل خطوة صغيرة بتقربك من النجاح.",
+
+            "إنت مميز وليك قدرات خاصة بيك.",
+
+            "الغلط فرصة جديدة علشان تتعلم.",
+
+            "أنا فخور بمحاولتك واستمرارك."
+
+        ];
+
+
+        let encouragementIndex = 0;
+
+
+        document.getElementById("encouragementButton")
+
+            .addEventListener("click", function() {
+
+                const message =
+
+                    encouragementMessages[encouragementIndex];
+
+
+                const messageBox =
+
+                    document.getElementById("encouragementMessage");
+
+
+                messageBox.textContent = message;
+
+
+                if (isBlind) {
+
+                    speakText(message);
+
+                }
+
+
+                encouragementIndex++;
+
+
+                if (
+
+                    encouragementIndex >=
+
+                    encouragementMessages.length
+
+                ) {
+
+                    encouragementIndex = 0;
+
+                }
+
+            });
+
+
+
+        // عرض الأنشطة المكتملة
+
+        function displayCompletedActivities() {
+
+            const container =
+
+                document.getElementById("completedActivities");
+
+
+            container.innerHTML = "";
+
+
+            if (completedActivities.length === 0) {
+
+                container.textContent =
+
+                    "لسه مجربتش أي نشاط.";
+
+                return;
+
+            }
+
+
+            const topicNames = {
+
+                sad: "التعامل مع الحزن",
+
+                angry: "التعامل مع الغضب",
+
+                afraid: "التعامل مع الخوف",
+
+                anxious: "التعامل مع القلق",
+
+                tired: "الاهتمام بالنفس والراحة",
+
+                confidence: "بناء الثقة بالنفس"
+
+            };
+
+
+            completedActivities.forEach(function(activity) {
+
+                const item = document.createElement("div");
+
+                item.className = "history-item";
+
+                item.textContent =
+
+                    "✓ " + topicNames[activity];
+
+
+                container.appendChild(item);
+
+            });
+
+        }
+
+
+        displayCompletedActivities();
+
+
+
+    </script>
+
+</body>
+
+</html>

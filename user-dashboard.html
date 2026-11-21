@@ -1,0 +1,1232 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مساحتي | SANAD</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --green: #56856B;
+    --dark-green: #365B46;
+    --light-green: #EAF3EC;
+    --beige: #F4EBDD;
+    --white: #FFFFFF;
+    --text: #34483B;
+    --muted: #78877D;
+    --border: #E4EBE5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #F7F9F6;
+    font-family: 'Cairo', Arial, sans-serif;
+    color: var(--text);
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* HEADER */
+
+.header {
+    background: white;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    background: var(--light-green);
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text h2 {
+    color: var(--green);
+    margin: 0;
+    font-size: 24px;
+}
+
+.logo-text span {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar a {
+    color: var(--text);
+    font-size: 14px;
+    transition: .3s;
+}
+
+.navbar a:hover {
+    color: var(--green);
+}
+
+.login-btn {
+    border: none;
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-btn:hover {
+    background: var(--green);
+    color: white;
+}
+
+/* PAGE */
+
+.dashboard-container {
+    width: 92%;
+    max-width: 1400px;
+    margin: auto;
+    padding: 30px 0 60px;
+}
+
+/* WELCOME */
+
+.welcome-section {
+    background: linear-gradient(135deg, #56856B, #365B46);
+    border-radius: 28px;
+    padding: 40px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.welcome-section h1 {
+    font-size: 32px;
+    margin: 0 0 15px;
+}
+
+.welcome-section p {
+    color: #E8F1E9;
+    line-height: 2;
+    font-size: 16px;
+    max-width: 600px;
+}
+
+.welcome-icon {
+    background: rgba(255,255,255,.13);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 75px;
+    flex-shrink: 0;
+}
+
+/* PROFILE */
+
+.profile-summary {
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.profile-avatar {
+    width: 85px;
+    height: 85px;
+    background: var(--beige);
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-details h2 {
+    margin: 0 0 8px;
+    color: var(--dark-green);
+}
+
+.profile-details p {
+    margin: 5px 0 12px;
+    color: var(--muted);
+}
+
+.profile-badge {
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.disability-badge {
+    display: inline-block;
+    background: #FFF3DE;
+    color: #94743A;
+    padding: 7px 13px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.profile-button {
+    background: var(--green);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 12px;
+    transition: .3s;
+}
+
+.profile-button:hover {
+    background: var(--dark-green);
+}
+
+/* PERSONALIZED */
+
+.personalized-section {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 28px;
+    margin: 30px 0;
+}
+
+.personalized-section h2 {
+    color: var(--dark-green);
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.personalized-section > p {
+    color: var(--muted);
+    line-height: 1.9;
+}
+
+.help-message {
+    background: var(--light-green);
+    padding: 22px;
+    border-radius: 17px;
+    margin-top: 20px;
+    line-height: 1.9;
+}
+
+.help-message h3 {
+    color: var(--dark-green);
+    margin-top: 0;
+}
+
+.recommendations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.recommendation-card {
+    background: #F8FAF7;
+    padding: 20px;
+    border-radius: 17px;
+    border: 1px solid var(--border);
+}
+
+.recommendation-card h3 {
+    color: var(--green);
+    margin-top: 0;
+}
+
+.recommendation-card p {
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 0;
+}
+
+/* ACCESSIBILITY */
+
+.accessibility-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.accessibility-tools button {
+    border: 1px solid var(--border);
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 13px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.accessibility-tools button:hover {
+    background: var(--green);
+    color: white;
+}
+
+/* SECTION TITLE */
+
+.dashboard-title {
+    margin-bottom: 25px;
+}
+
+.dashboard-title h2 {
+    color: var(--dark-green);
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.dashboard-title p {
+    color: var(--muted);
+}
+
+/* SERVICES */
+
+.dashboard-services {
+    margin-top: 45px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 25px;
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(60,90,70,.08);
+    border-color: #C7DCCB;
+}
+
+.dashboard-card-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 15px;
+    background: var(--light-green);
+}
+
+.education-icon { background: #E7F1E9; }
+.progress-icon { background: #FFF3DE; }
+.feelings-icon { background: #FCE9ED; }
+.support-icon { background: #E8F1F8; }
+.friends-icon { background: #F2EAF8; }
+.guide-icon { background: #F8F0DF; }
+.specialists-icon { background: #E8F1F8; }
+.messages-icon { background: #E8F3EC; }
+
+.dashboard-card h3 {
+    color: var(--dark-green);
+    font-size: 19px;
+    margin: 0 0 10px;
+}
+
+.dashboard-card p {
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 14px;
+    flex: 1;
+}
+
+.dashboard-card span {
+    color: var(--green);
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* PROGRESS */
+
+.progress-section {
+    margin-top: 50px;
+}
+
+.progress-box {
+    background: linear-gradient(135deg, #EAF3EC, #F5F0E5);
+    border: 1px solid #DCE9DF;
+    border-radius: 22px;
+    padding: 30px;
+}
+
+.progress-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--dark-green);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.progress-message span:last-child {
+    font-size: 40px;
+}
+
+.progress-box p {
+    color: #62776A;
+    line-height: 2;
+}
+
+.progress-button {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    padding: 13px 25px;
+    border-radius: 12px;
+    margin-top: 10px;
+    transition: .3s;
+}
+
+.progress-button:hover {
+    background: var(--dark-green);
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    background: white;
+    border-top: 1px solid var(--border);
+}
+
+footer h3 {
+    color: var(--green);
+}
+
+footer p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* ACCESSIBILITY MODES */
+
+.high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+.high-contrast .dashboard-card,
+.high-contrast .personalized-section,
+.high-contrast .help-message,
+.high-contrast .recommendation-card,
+.high-contrast .profile-summary,
+.high-contrast .progress-box,
+.high-contrast footer {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast p,
+.high-contrast span,
+.high-contrast a {
+    color: #fff !important;
+}
+
+.high-contrast button {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+.large-text {
+    font-size: 125% !important;
+}
+
+.large-text p,
+.large-text span,
+.large-text a,
+.large-text button {
+    font-size: 1.15em !important;
+}
+
+.simple-mode .dashboard-card p {
+    font-size: 18px;
+    line-height: 2;
+}
+
+.dashboard-card:focus,
+.accessibility-tools button:focus,
+a:focus,
+button:focus {
+    outline: 3px solid #D49B42;
+    outline-offset: 4px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .navbar {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .welcome-section {
+        padding: 25px;
+    }
+
+    .welcome-section h1 {
+        font-size: 24px;
+    }
+
+    .welcome-icon {
+        width: 90px;
+        height: 90px;
+        font-size: 45px;
+    }
+
+    .profile-summary {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .profile-details {
+        width: 100%;
+        flex: auto;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .personalized-section {
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .welcome-section {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .welcome-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 40px;
+    }
+
+    .accessibility-tools button {
+        width: 100%;
+    }
+
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+
+</style>
+</head>
+
+<body class="dashboard-page">
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <svg viewBox="0 0 100 100" width="50" height="50" aria-hidden="true">
+
+                <path d="M50 83 C35 70 12 54 12 33 C12 18 31 10 43 25
+                C46 29 48 33 50 36 C52 33 54 29 57 25
+                C69 10 88 18 88 33 C88 54 65 70 50 83Z"
+                fill="#56856B"/>
+
+                <circle cx="38" cy="38" r="7" fill="#F4EBDD"/>
+                <circle cx="62" cy="38" r="7" fill="#F4EBDD"/>
+
+                <path d="M25 57 Q38 42 50 57 Q62 42 75 57"
+                fill="none" stroke="#F4EBDD" stroke-width="5"
+                stroke-linecap="round"/>
+
+            </svg>
+
+        </div>
+
+        <div class="logo-text">
+            <h2>SANAD</h2>
+            <span>سند لكل خطوة</span>
+        </div>
+
+    </div>
+
+    <nav class="navbar" aria-label="التنقل الرئيسي">
+        <a href="index.html">الرئيسية</a>
+        <a href="#my-services">خدماتي</a>
+        <a href="#my-progress">إنجازاتي</a>
+    </nav>
+
+    <div class="header-buttons">
+        <button class="login-btn" onclick="logout()">تسجيل الخروج</button>
+    </div>
+
+</header>
+
+
+<main class="dashboard-container">
+
+<!-- WELCOME -->
+
+<section class="welcome-section">
+
+    <div>
+
+        <h1 id="welcomeTitle">أهلاً بيك في سند ❤️</h1>
+
+        <p id="welcomeMessage">
+            هنا مساحتك الخاصة للتعلم والتطور والتعبير عن نفسك.
+        </p>
+
+    </div>
+
+    <div class="welcome-icon" aria-hidden="true">
+        🌱
+    </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section class="profile-summary">
+
+    <div class="profile-avatar" aria-hidden="true">
+        👤
+    </div>
+
+    <div class="profile-details">
+
+        <h2 id="childName">أهلاً بك</h2>
+
+        <p>سعيدين بوجودك معانا في SANAD 💚</p>
+
+        <span class="profile-badge">حساب مستفيد</span>
+
+        <br>
+
+        <span class="disability-badge" id="disabilityBadge">
+            نوع الإعاقة
+        </span>
+
+    </div>
+
+    <a href="my-profile.html" class="profile-button">
+        ملفي الشخصي
+    </a>
+
+</section>
+
+
+<!-- PERSONALIZED -->
+
+<section class="personalized-section">
+
+    <h2>مساحتك الخاصة في سند 💚</h2>
+
+    <p id="personalizedIntro">
+        بنساعدك تختار الأنشطة والخدمات المناسبة ليك.
+    </p>
+
+    <div class="help-message">
+
+        <h3>إزاي سند يقدر يساعدك؟</h3>
+
+        <p id="personalizedMessage">
+            اختار الخدمة اللي تحب تبدأ بيها، وإحنا معاك خطوة بخطوة.
+        </p>
+
+    </div>
+
+    <div class="recommendations" id="recommendations"></div>
+
+</section>
+
+
+<!-- ACCESSIBILITY -->
+
+<section class="personalized-section">
+
+    <h2>أدوات تساعدك تستخدم سند بسهولة ⚙️</h2>
+
+    <p>اختار طريقة العرض اللي تريحك.</p>
+
+    <div class="accessibility-tools">
+
+        <button onclick="increaseText()">تكبير الخط +</button>
+
+        <button onclick="decreaseText()">تصغير الخط -</button>
+
+        <button onclick="toggleContrast()">تباين عالي</button>
+
+        <button onclick="toggleSimpleMode()">عرض مبسط</button>
+
+        <button onclick="resetDisplay()">إعادة ضبط العرض</button>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section class="dashboard-services" id="my-services">
+
+    <div class="dashboard-title">
+
+        <h2>اكتشف خدمات سند 🌿</h2>
+
+        <p>اختار الخدمة اللي حابب تبدأ بيها.</p>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+        <a href="my-education.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon education-icon">📚</div>
+
+            <h3>My Education</h3>
+
+            <p id="educationDescription">
+                اتعلم مهارات جديدة من خلال أنشطة وبرامج تعليمية مناسبة ليك.
+            </p>
+
+            <span>ابدأ التعلم ←</span>
+
+        </a>
+
+
+        <a href="my-progress.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon progress-icon">🏆</div>
+
+            <h3>My Progress</h3>
+
+            <p>
+                تابع إنجازاتك وشوف المهارات اللي اكتسبتها وتطورك.
+            </p>
+
+            <span>شوف إنجازاتك ←</span>
+
+        </a>
+
+
+        <a href="my-feelings.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon feelings-icon">😊</div>
+
+            <h3>My Feelings</h3>
+
+            <p id="feelingsDescription">
+                عبر عن مشاعرك واحكي لنا إنت حاسس بإيه النهارده.
+            </p>
+
+            <span>عبر عن مشاعرك ←</span>
+
+        </a>
+
+
+        <a href="support.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon support-icon">💚</div>
+
+            <h3>Psychological Support</h3>
+
+            <p>
+                محتوى ونصائح تساعدك تفهم نفسك وتتعامل مع مشاعرك.
+            </p>
+
+            <span>اكتشف المزيد ←</span>
+
+        </a>
+
+
+        <a href="friends.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon friends-icon">👫</div>
+
+            <h3>SANAD Friends</h3>
+
+            <p>
+                اكتشف اهتمامات جديدة وشارك إنجازاتك في بيئة آمنة.
+            </p>
+
+            <span>اكتشف الأصدقاء ←</span>
+
+        </a>
+
+
+        <a href="disability-guide.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon guide-icon">📖</div>
+
+            <h3>Disability Guide</h3>
+
+            <p>
+                معلومات مبسطة عن أنواع الإعاقات وطرق الدعم المناسبة.
+            </p>
+
+            <span>اعرف أكثر ←</span>
+
+        </a>
+
+
+        <a href="specialists.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon specialists-icon">👩‍⚕️</div>
+
+            <h3>Specialists</h3>
+
+            <p>
+                تعرف على الأخصائيين ومجالات تخصصهم.
+            </p>
+
+            <span>تصفح الأخصائيين ←</span>
+
+        </a>
+
+
+        <a href="my-appointments.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon">📅</div>
+
+            <h3>My Appointments</h3>
+
+            <p>
+                تابع مواعيدك مع الأخصائيين واعرف حالة طلب الحجز.
+            </p>
+
+            <span>عرض مواعيدي ←</span>
+
+        </a>
+
+
+        <a href="messages.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon messages-icon">💬</div>
+
+            <h3>Messages</h3>
+
+            <p>
+                تابع رسائلك وتواصل مع الأشخاص المصرح لك بالتواصل معهم.
+            </p>
+
+            <span>افتح الرسائل ←</span>
+
+        </a>
+
+
+        <a href="settings.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon">⚙️</div>
+
+            <h3>الإعدادات والخصوصية</h3>
+
+            <p>
+                تحكم في إعدادات حسابك وخصوصيتك وخيارات سهولة الوصول.
+            </p>
+
+            <span>إدارة الإعدادات ←</span>
+
+        </a>
+
+
+        <a href="my-profile.html" class="dashboard-card">
+
+            <div class="dashboard-card-icon">👤</div>
+
+            <h3>ملفي الشخصي</h3>
+
+            <p>
+                عرض بيانات حسابك ومعلوماتك الشخصية.
+            </p>
+
+            <span>عرض الملف الشخصي ←</span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- PROGRESS -->
+
+<section class="progress-section" id="my-progress">
+
+    <div class="dashboard-title">
+
+        <h2>رحلتك مع سند 🌟</h2>
+
+        <p>كل خطوة صغيرة بتقربك من هدفك.</p>
+
+    </div>
+
+    <div class="progress-box">
+
+        <div class="progress-message">
+
+            <span>إنجازاتك هتظهر هنا قريباً</span>
+
+            <span aria-hidden="true">🌱</span>
+
+        </div>
+
+        <p>
+            ابدأ أول نشاط تعليمي عشان تقدر تتابع تقدمك وإنجازاتك.
+        </p>
+
+        <a href="my-education.html" class="progress-button">
+            ابدأ أول نشاط
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>SANAD | سند</h3>
+
+    <p>معاً نحو حياة أفضل وفرص متساوية للجميع.</p>
+
+    <p>Made by Nagat Fergany © 2026</p>
+
+</footer>
+
+
+<script>
+
+/* CURRENT USER */
+
+let currentUser = JSON.parse(localStorage.getItem("sanadCurrentUser"));
+
+if (!currentUser || currentUser.accountType !== "user") {
+
+    alert("برجاء تسجيل الدخول أولاً.");
+
+    window.location.href = "login.html";
+
+}
+
+
+/* DISABILITY DATA */
+
+const disabilityTypes = {
+
+    visual: {
+        name: "الإعاقة البصرية",
+        message: "سند بيساعدك من خلال أدوات تكبير الخط والتباين العالي، ومحتوى يمكن تطويره ليدعم قارئات الشاشة.",
+        education: "أنشطة تعليمية تراعي احتياجاتك البصرية، مع إمكانية استخدام قارئ الشاشة.",
+        feelings: "تقدر تعبّر عن مشاعرك من خلال اختيارات واضحة وأدوات مساعدة.",
+        recommendations: [
+            ["🔎", "تكبير الخط", "استخدم أزرار تكبير وتصغير الخط حسب راحتك."],
+            ["⚫", "التباين العالي", "جرّب التباين العالي لتسهيل قراءة المحتوى."]
+        ]
+    },
+
+    hearing: {
+        name: "الإعاقة السمعية",
+        message: "هتلاقي التعليمات مكتوبة وواضحة، وهنراعي توفير بدائل مرئية للمحتوى الصوتي.",
+        education: "أنشطة تعليمية تعتمد على الصور والكتابة والتعليمات المرئية.",
+        feelings: "تقدر تعبّر عن مشاعرك باستخدام الرموز والصور والاختيارات المكتوبة.",
+        recommendations: [
+            ["📝", "التعليمات المكتوبة", "تقدر تقرأ خطوات كل نشاط بدل الاعتماد على الصوت."],
+            ["🖼️", "التعلم بالصور", "الصور والرسومات هتساعدك تفهم الأنشطة."]
+        ]
+    },
+
+    mobility: {
+        name: "الإعاقة الحركية",
+        message: "هنراعي سهولة استخدام الأزرار والتنقل بين الصفحات، ونقدم أنشطة لا تحتاج إلى حركات دقيقة.",
+        education: "أنشطة تفاعلية يمكن تنفيذها بطرق مختلفة وبأقل مجهود حركي.",
+        feelings: "اختيارات بسيطة تساعدك تعبّر عن مشاعرك بسهولة.",
+        recommendations: [
+            ["👆", "سهولة الضغط", "استخدم الأزرار الواضحة والكبيرة في الموقع."],
+            ["💻", "سهولة التنقل", "تقدر تستخدم لوحة المفاتيح للتنقل بين العناصر."]
+        ]
+    },
+
+    intellectual: {
+        name: "الإعاقة الذهنية",
+        message: "هنقدم لك المعلومات بشكل بسيط، ونقسم كل نشاط لخطوات صغيرة وواضحة.",
+        education: "أنشطة بسيطة ومتدرجة تساعدك تتعلم خطوة بخطوة.",
+        feelings: "اختار الشعور اللي بيمثلك، ومش لازم تكتب كلام طويل.",
+        recommendations: [
+            ["🧩", "خطوة بخطوة", "ابدأ نشاط واحد وكمل كل خطوة براحتك."],
+            ["🔁", "التكرار", "تقدر تكرر النشاط أكتر من مرة للتدريب."]
+        ]
+    },
+
+    autism: {
+        name: "اضطراب طيف التوحد",
+        message: "هنحاول نخلي تجربتك واضحة ومنظمة، مع تعليمات مباشرة وأنشطة بخطوات محددة.",
+        education: "أنشطة منظمة بتعليمات واضحة ووقت كافٍ للتنفيذ.",
+        feelings: "تقدر تستخدم الرموز والاختيارات للتعبير عن شعورك.",
+        recommendations: [
+            ["📋", "خطوات واضحة", "كل نشاط هتتعرف فيه على المطلوب منك قبل ما تبدأ."],
+            ["🌿", "واجهة هادئة", "استخدم العرض المبسط لو حابب تقلل التفاصيل."]
+        ]
+    },
+
+    learning: {
+        name: "صعوبات التعلم",
+        message: "هنساعدك من خلال تقسيم المعلومات وتقديم أنشطة متنوعة للتعلم والتدريب.",
+        education: "أنشطة قصيرة ومتدرجة تساعدك تتعلم بطريقة تناسبك.",
+        feelings: "تقدر تختار رمز يعبر عن شعورك بدل كتابة جمل طويلة.",
+        recommendations: [
+            ["📖", "معلومات مقسمة", "اقرأ كل جزء لوحده وخد وقتك."],
+            ["🎯", "التدريب", "كرر الأنشطة عشان تثبت المعلومات."]
+        ]
+    },
+
+    multiple: {
+        name: "إعاقات متعددة",
+        message: "هنراعي احتياجاتك المختلفة، ونساعدك تختار الأدوات والأنشطة اللي تناسبك.",
+        education: "أنشطة متنوعة يمكن تكييفها حسب احتياجاتك المختلفة.",
+        feelings: "تقدر تستخدم أكثر من طريقة للتعبير عن مشاعرك.",
+        recommendations: [
+            ["⚙️", "أدوات المساعدة", "جرّب أدوات العرض المختلفة واختار الأنسب ليك."],
+            ["💚", "دعم متنوع", "تقدر تستفيد من أكثر من وسيلة مساعدة."]
+        ]
+    },
+
+    other: {
+        name: "احتياجات دعم أخرى",
+        message: "سند موجود عشان يساعدك تختار الخدمات والأنشطة اللي تناسب احتياجاتك.",
+        education: "اكتشف الأنشطة التعليمية واختار اللي يناسبك.",
+        feelings: "عبّر عن مشاعرك بالطريقة اللي تريحك.",
+        recommendations: [
+            ["🌱", "ابدأ براحتك", "اختار الخدمة اللي تحب تجربها."],
+            ["💚", "المساعدة", "تقدر تستعين بالأسرة أو الأخصائي عند الحاجة."]
+        ]
+    }
+
+};
+
+
+/* USER PERSONALIZATION */
+
+if (currentUser && currentUser.accountType === "user") {
+
+    document.getElementById("childName").textContent =
+        "أهلاً، " + currentUser.fullName;
+
+    document.getElementById("welcomeTitle").textContent =
+        "أهلاً بيك يا " + currentUser.fullName + " ❤️";
+
+    const disabilityKey =
+        currentUser.disabilityType ||
+        currentUser.disability ||
+        "other";
+
+    const disability =
+        disabilityTypes[disabilityKey] || disabilityTypes.other;
+
+    document.getElementById("disabilityBadge").textContent =
+        disability.name;
+
+    document.getElementById("personalizedIntro").textContent =
+        "الخدمات دي بتساعدك تتعلم وتتطور بالطريقة اللي تناسب احتياجاتك.";
+
+    document.getElementById("personalizedMessage").textContent =
+        disability.message;
+
+    document.getElementById("educationDescription").textContent =
+        disability.education;
+
+    document.getElementById("feelingsDescription").textContent =
+        disability.feelings;
+
+    const recommendationsContainer =
+        document.getElementById("recommendations");
+
+    recommendationsContainer.innerHTML = "";
+
+    disability.recommendations.forEach(function(item) {
+
+        recommendationsContainer.innerHTML += `
+
+            <div class="recommendation-card">
+
+                <h3>${item[0]} ${item[1]}</h3>
+
+                <p>${item[2]}</p>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ACCESSIBILITY */
+
+let fontSize = 100;
+
+function increaseText() {
+
+    fontSize += 10;
+
+    document.body.style.fontSize = fontSize + "%";
+
+}
+
+function decreaseText() {
+
+    if (fontSize > 80) {
+
+        fontSize -= 10;
+
+        document.body.style.fontSize = fontSize + "%";
+
+    }
+
+}
+
+function toggleContrast() {
+
+    document.body.classList.toggle("high-contrast");
+
+}
+
+function toggleSimpleMode() {
+
+    document.body.classList.toggle("simple-mode");
+
+}
+
+function resetDisplay() {
+
+    fontSize = 100;
+
+    document.body.style.fontSize = "100%";
+
+    document.body.classList.remove("high-contrast");
+
+    document.body.classList.remove("simple-mode");
+
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+    localStorage.removeItem("sanadCurrentUser");
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+</html>

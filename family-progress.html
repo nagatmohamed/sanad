@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>متابعة تقدم الطفل | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #f6f5ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .page-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-heading h1 {
+            color: #285c45;
+            font-size: 30px;
+        }
+
+        .page-heading p {
+            color: #777;
+            line-height: 1.8;
+        }
+
+        .child-card,
+        .progress-card,
+        .activities-card,
+        .remaining-card,
+        .encouragement-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+            margin-bottom: 25px;
+        }
+
+        .child-card h2,
+        .progress-card h2,
+        .activities-card h2,
+        .remaining-card h2 {
+            color: #285c45;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .child-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .info-item {
+            background: #f4f7f2;
+            padding: 15px;
+            border-radius: 12px;
+            line-height: 1.8;
+        }
+
+        .info-item strong {
+            color: #285c45;
+        }
+
+        .progress-number {
+            text-align: center;
+            font-size: 40px;
+            color: #347653;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e6e9e3;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #347653;
+            border-radius: 20px;
+            transition: width .5s;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .stat-box {
+            background: #f4f7f2;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .stat-box span {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .stat-box h3 {
+            color: #347653;
+            margin: 5px 0;
+            font-size: 25px;
+        }
+
+        .stat-box p {
+            color: #666;
+            margin: 0;
+        }
+
+        .activity-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .activity-item {
+            background: #f4f7f2;
+            padding: 17px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .activity-icon {
+            font-size: 28px;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .activity-name {
+            color: #285c45;
+            font-weight: bold;
+            line-height: 1.7;
+        }
+
+        .activity-description {
+            color: #777;
+            font-size: 14px;
+            margin-top: 5px;
+            line-height: 1.7;
+        }
+
+        .completed-badge {
+            background: #dff1e3;
+            color: #267044;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .remaining-badge {
+            background: #fff1d9;
+            color: #986b20;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .encouragement-card {
+            background: #eaf3e9;
+            text-align: center;
+            color: #285c45;
+            line-height: 1.9;
+        }
+
+        .encouragement-card h2 {
+            margin-top: 0;
+        }
+
+        .back-button {
+            display: block;
+            width: fit-content;
+            margin: 25px auto;
+            background: #347653;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+            line-height: 1.8;
+            background: #f4f7f2;
+            border-radius: 12px;
+        }
+
+        .section-subtitle {
+            color: #777;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .refresh-button {
+            display: block;
+            margin: 20px auto;
+            background: #eaf3e9;
+            color: #285c45;
+            border: 2px solid #347653;
+            padding: 13px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .refresh-button:hover {
+            background: #347653;
+            color: white;
+        }
+
+        @media(max-width: 650px) {
+
+            .page-container {
+                padding: 12px;
+            }
+
+            .child-info {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .activity-details {
+                align-items: flex-start;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="page-container">
+
+        <header class="page-heading">
+
+            <h1>متابعة تقدم طفلي 🌱</h1>
+
+            <p>
+                تابعي رحلة طفلك التعليمية واكتشفي الأنشطة التي أنجزها
+                ومدى تقدمه في التعلم.
+            </p>
+
+        </header>
+
+
+        <!-- بيانات الطفل -->
+
+        <section class="child-card">
+
+            <h2>بيانات الطفل 👦</h2>
+
+            <div class="child-info">
+
+                <div class="info-item">
+                    <strong>اسم الطفل:</strong>
+                    <span id="childName">-</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>كود الطفل:</strong>
+                    <span id="childCode">-</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>نوع الإعاقة:</strong>
+                    <span id="childDisability">-</span>
+                </div>
+
+                <div class="info-item">
+                    <strong>المحافظة:</strong>
+                    <span id="childCity">-</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- التقدم التعليمي -->
+
+        <section class="progress-card">
+
+            <h2>التقدم التعليمي 📊</h2>
+
+            <div class="progress-number" id="progressPercentage">
+                0%
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill" id="progressFill"></div>
+
+            </div>
+
+            <p style="text-align:center; color:#777;" id="progressMessage">
+                جاري تحميل تقدم الطفل...
+            </p>
+
+
+            <!-- زر تحديث -->
+
+            <button class="refresh-button" onclick="refreshProgress()">
+                🔄 تحديث تقدم الطفل
+            </button>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+
+                    <span>🏆</span>
+
+                    <h3 id="completedCount">0</h3>
+
+                    <p>أنشطة مكتملة</p>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <span>📚</span>
+
+                    <h3 id="remainingCount">0</h3>
+
+                    <p>أنشطة متبقية</p>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <span>⭐</span>
+
+                    <h3 id="totalCount">0</h3>
+
+                    <p>إجمالي الأنشطة</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- الأنشطة المكتملة -->
+
+        <section class="activities-card">
+
+            <h2>الأنشطة التي أنجزها طفلي 🏆</h2>
+
+            <p class="section-subtitle">
+                هنا هتظهر الأنشطة اللي طفلك أكملها بنجاح.
+            </p>
+
+            <div class="activity-list" id="activitiesList">
+
+                <p class="empty-message">
+                    جاري تحميل الأنشطة...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- الأنشطة المتبقية -->
+
+        <section class="remaining-card">
+
+            <h2>أنشطة لم يتم إنجازها بعد 📚</h2>
+
+            <p class="section-subtitle">
+                الأنشطة دي متاحة لطفلك علشان يكمل رحلته التعليمية.
+            </p>
+
+            <div class="activity-list" id="remainingActivitiesList">
+
+                <p class="empty-message">
+                    جاري تحميل الأنشطة...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- رسالة تشجيع -->
+
+        <section class="encouragement-card">
+
+            <h2>رسالة من سند ❤️</h2>
+
+            <p id="encouragementMessage">
+                كل خطوة صغيرة بيحققها طفلك هي نجاح يستحق التشجيع.
+                استمري في دعمه ومشاركته رحلة التعلم.
+            </p>
+
+        </section>
+
+
+        <a href="family-dashboard.html" class="back-button">
+            العودة إلى لوحة الأسرة ←
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // =====================================
+        // قراءة المستخدم الحالي بأمان
+        // =====================================
+
+        function safeReadJSON(key, fallback) {
+
+            try {
+
+                const data = localStorage.getItem(key);
+
+                if (!data) {
+                    return fallback;
+                }
+
+                return JSON.parse(data);
+
+            } catch (error) {
+
+                console.error("خطأ في قراءة البيانات:", key, error);
+
+                return fallback;
+
+            }
+
+        }
+
+
+        const currentUser = safeReadJSON(
+            "sanadCurrentUser",
+            null
+        );
+
+
+        // =====================================
+        // التحقق من الحساب
+        // =====================================
+
+        if (!currentUser || currentUser.accountType !== "family") {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // =====================================
+        // أسماء الإعاقات
+        // =====================================
+
+        const disabilityNames = {
+
+            visual: "الإعاقة البصرية",
+
+            hearing: "الإعاقة السمعية",
+
+            physical: "الإعاقة الحركية",
+
+            mobility: "الإعاقة الحركية",
+
+            intellectual: "الإعاقة الذهنية",
+
+            autism: "اضطراب طيف التوحد",
+
+            learning: "صعوبات التعلم",
+
+            multiple: "إعاقات متعددة",
+
+            other: "أخرى"
+
+        };
+
+
+        // =====================================
+        // الأنشطة التعليمية
+        // نفس IDs الموجودة في my-education
+        // =====================================
+
+        const allActivities = {
+
+            visual: [
+
+                {
+                    id: "visual1",
+                    icon: "🔊",
+                    title: "أصوات من حولنا",
+                    description: "تعرف على الأصوات الموجودة في حياتنا اليومية."
+                },
+
+                {
+                    id: "visual2",
+                    icon: "🐦",
+                    title: "أصوات الحيوانات",
+                    description: "تعرف على الحيوانات من خلال أصواتها."
+                },
+
+                {
+                    id: "visual3",
+                    icon: "🎵",
+                    title: "تمييز الأصوات",
+                    description: "تدرب على التعرف على الأصوات المختلفة."
+                }
+
+            ],
+
+            hearing: [
+
+                {
+                    id: "hearing1",
+                    icon: "🖼️",
+                    title: "تعرف على الألوان",
+                    description: "تعلم أسماء الألوان بطريقة مرئية."
+                },
+
+                {
+                    id: "hearing2",
+                    icon: "🍎",
+                    title: "الفواكه",
+                    description: "تعرف على أسماء الفواكه."
+                },
+
+                {
+                    id: "hearing3",
+                    icon: "🔢",
+                    title: "تعلم الأرقام",
+                    description: "تعرف على الأرقام بطريقة سهلة."
+                }
+
+            ],
+
+            mobility: [
+
+                {
+                    id: "mobility1",
+                    icon: "🔢",
+                    title: "ترتيب الأرقام",
+                    description: "تعلم الأرقام من خلال اختيارات بسيطة."
+                },
+
+                {
+                    id: "mobility2",
+                    icon: "🍎",
+                    title: "الفاكهة المفيدة",
+                    description: "تعرف على بعض أنواع الفاكهة."
+                },
+
+                {
+                    id: "mobility3",
+                    icon: "📐",
+                    title: "الأشكال",
+                    description: "تعلم الأشكال الهندسية."
+                }
+
+            ],
+
+            physical: [
+
+                {
+                    id: "mobility1",
+                    icon: "🔢",
+                    title: "ترتيب الأرقام",
+                    description: "تعلم الأرقام من خلال اختيارات بسيطة."
+                },
+
+                {
+                    id: "mobility2",
+                    icon: "🍎",
+                    title: "الفاكهة المفيدة",
+                    description: "تعرف على بعض أنواع الفاكهة."
+                },
+
+                {
+                    id: "mobility3",
+                    icon: "📐",
+                    title: "الأشكال",
+                    description: "تعلم الأشكال الهندسية."
+                }
+
+            ],
+
+            intellectual: [
+
+                {
+                    id: "intellectual1",
+                    icon: "🎨",
+                    title: "تعرف على الألوان",
+                    description: "تعلم الألوان الأساسية."
+                },
+
+                {
+                    id: "intellectual2",
+                    icon: "🐱",
+                    title: "الحيوانات",
+                    description: "تعرف على الحيوانات."
+                },
+
+                {
+                    id: "intellectual3",
+                    icon: "🔢",
+                    title: "العد",
+                    description: "تعلم العد بطريقة بسيطة."
+                }
+
+            ],
+
+            autism: [
+
+                {
+                    id: "autism1",
+                    icon: "📅",
+                    title: "ترتيب اليوم",
+                    description: "تعرف على ترتيب بعض الأنشطة اليومية."
+                },
+
+                {
+                    id: "autism2",
+                    icon: "🧼",
+                    title: "النظافة الشخصية",
+                    description: "تعلم خطوات غسل اليدين."
+                },
+
+                {
+                    id: "autism3",
+                    icon: "🚦",
+                    title: "إشارات المرور",
+                    description: "تعلم معنى ألوان إشارات المرور."
+                }
+
+            ],
+
+            learning: [
+
+                {
+                    id: "learning1",
+                    icon: "🔤",
+                    title: "الحروف",
+                    description: "تدرب على التعرف على الحروف العربية."
+                },
+
+                {
+                    id: "learning2",
+                    icon: "🔢",
+                    title: "الأرقام",
+                    description: "تدرب على الأرقام."
+                },
+
+                {
+                    id: "learning3",
+                    icon: "🧩",
+                    title: "الكلمات",
+                    description: "تعرف على كلمات بسيطة."
+                }
+
+            ],
+
+            multiple: [
+
+                {
+                    id: "multiple1",
+                    icon: "🎨",
+                    title: "الألوان",
+                    description: "تعلم الألوان من خلال الرموز والكلمات."
+                },
+
+                {
+                    id: "multiple2",
+                    icon: "🐾",
+                    title: "الحيوانات",
+                    description: "تعرف على الحيوانات."
+                },
+
+                {
+                    id: "multiple3",
+                    icon: "🔢",
+                    title: "الأرقام",
+                    description: "تدرب على الأرقام."
+                }
+
+            ],
+
+            other: [
+
+                {
+                    id: "other1",
+                    icon: "🎨",
+                    title: "الألوان",
+                    description: "تعرف على الألوان الأساسية."
+                },
+
+                {
+                    id: "other2",
+                    icon: "🔢",
+                    title: "الأرقام",
+                    description: "تدرب على الأرقام."
+                },
+
+                {
+                    id: "other3",
+                    icon: "🐶",
+                    title: "الحيوانات",
+                    description: "تعرف على الحيوانات."
+                }
+
+            ]
+
+        };
+
+
+        // =====================================
+        // بيانات الطفل
+        // =====================================
+
+        let linkedChild = null;
+
+        let childActivities = [];
+
+        let savedProgress = [];
+
+
+        // =====================================
+        // تحميل بيانات الأسرة
+        // =====================================
+
+        function loadFamilyProgress() {
+
+            const users = safeReadJSON(
+                "sanadUsers",
+                []
+            );
+
+
+            // البحث عن الطفل المرتبط
+
+            linkedChild = users.find(function(user) {
+
+                return String(user.id) ===
+                    String(currentUser.linkedChildId)
+                    && user.accountType === "user";
+
+            });
+
+
+            // لو الطفل غير موجود
+
+            if (!linkedChild) {
+
+                showNoChild();
+
+                return;
+
+            }
+
+
+            // عرض بيانات الطفل
+
+            document.getElementById("childName").textContent =
+                linkedChild.fullName || "غير متوفر";
+
+            document.getElementById("childCode").textContent =
+                linkedChild.childCode || "غير متوفر";
+
+            const disabilityKey =
+                linkedChild.disabilityType ||
+                linkedChild.disability ||
+                "other";
+
+            document.getElementById("childDisability").textContent =
+                disabilityNames[disabilityKey] ||
+                disabilityKey ||
+                "غير محدد";
+
+            document.getElementById("childCity").textContent =
+                linkedChild.city ||
+                linkedChild.governorate ||
+                "غير متوفرة";
+
+
+            // تحديد أنشطة الطفل
+
+            childActivities =
+                allActivities[disabilityKey] ||
+                allActivities.other;
+
+
+            // قراءة الإنجازات
+
+            const progressKey =
+                "sanadEducationProgress_" + linkedChild.id;
+
+            savedProgress = safeReadJSON(
+                progressKey,
+                []
+            );
+
+
+            // التأكد أن الإنجازات Array
+
+            if (!Array.isArray(savedProgress)) {
+                savedProgress = [];
+            }
+
+
+            // تحديث الصفحة
+
+            updateProgressDisplay();
+
+        }
+
+
+        // =====================================
+        // تحديث بيانات التقدم
+        // =====================================
+
+        function updateProgressDisplay() {
+
+            const completed = childActivities.filter(function(activity) {
+
+                return savedProgress.includes(activity.id);
+
+            });
+
+
+            const remaining = childActivities.filter(function(activity) {
+
+                return !savedProgress.includes(activity.id);
+
+            });
+
+
+            const total = childActivities.length;
+
+            const completedCount = completed.length;
+
+            const remainingCount = remaining.length;
+
+
+            const percentage = total > 0
+                ? Math.round((completedCount / total) * 100)
+                : 0;
+
+
+            // الأرقام
+
+            document.getElementById("completedCount").textContent =
+                completedCount;
+
+            document.getElementById("remainingCount").textContent =
+                remainingCount;
+
+            document.getElementById("totalCount").textContent =
+                total;
+
+
+            // النسبة
+
+            document.getElementById("progressPercentage").textContent =
+                percentage + "%";
+
+            document.getElementById("progressFill").style.width =
+                percentage + "%";
+
+
+            // الرسالة
+
+            let message = "";
+
+            if (completedCount === 0) {
+
+                message =
+                    "طفلك لسه في بداية رحلته التعليمية. شجعيه يبدأ أول نشاط! 🌱";
+
+            } else if (completedCount === 1) {
+
+                message =
+                    "بداية جميلة! طفلك أنجز أول نشاط، شجعيه يكمل. 💚";
+
+            } else if (completedCount === 2) {
+
+                message =
+                    "رائع! طفلك أنجز نشاطين، فاضل خطوة واحدة للوصول للنهاية. ⭐";
+
+            } else if (completedCount === total && total > 0) {
+
+                message =
+                    "إنجاز رائع! طفلك أكمل كل الأنشطة التعليمية المتاحة له. 🏆";
+
+            }
+
+
+            document.getElementById("progressMessage").textContent =
+                message;
+
+
+            // عرض المكتمل
+
+            displayActivities(completed);
+
+
+            // عرض المتبقي
+
+            displayRemainingActivities(remaining);
+
+
+            // رسالة التشجيع
+
+            if (completedCount === total && total > 0) {
+
+                document.getElementById("encouragementMessage").textContent =
+                    "مبروك! طفلك أكمل كل الأنشطة التعليمية المتاحة له. احتفلي معاه بإنجازه الجميل! ❤️";
+
+            } else {
+
+                document.getElementById("encouragementMessage").textContent =
+                    "كل خطوة صغيرة بيحققها طفلك هي نجاح يستحق التشجيع. استمري في دعمه ومشاركته رحلة التعلم. ❤️";
+
+            }
+
+        }
+
+
+        // =====================================
+        // زر تحديث التقدم
+        // =====================================
+
+        function refreshProgress() {
+
+            if (!linkedChild) {
+                loadFamilyProgress();
+                return;
+            }
+
+
+            const progressKey =
+                "sanadEducationProgress_" + linkedChild.id;
+
+
+            // قراءة البيانات من جديد
+
+            savedProgress = safeReadJSON(
+                progressKey,
+                []
+            );
+
+
+            if (!Array.isArray(savedProgress)) {
+                savedProgress = [];
+            }
+
+
+            // تحديث العرض
+
+            updateProgressDisplay();
+
+
+            // رسالة بسيطة
+
+            const button = document.querySelector(".refresh-button");
+
+            button.textContent = "✅ تم تحديث التقدم";
+
+            setTimeout(function() {
+
+                button.textContent = "🔄 تحديث تقدم الطفل";
+
+            }, 2000);
+
+        }
+
+
+        // =====================================
+        // عرض الأنشطة المكتملة
+        // =====================================
+
+        function displayActivities(activities) {
+
+            const activitiesList =
+                document.getElementById("activitiesList");
+
+
+            if (activities.length === 0) {
+
+                activitiesList.innerHTML = `
+                    <p class="empty-message">
+                        لم يتم تسجيل أي أنشطة مكتملة حتى الآن.
+                        شجعي طفلك على بدء الأنشطة التعليمية من صفحة تعليمي. 🌱
+                    </p>
+                `;
+
+                return;
+
+            }
+
+
+            activitiesList.innerHTML = "";
+
+
+            activities.forEach(function(activity) {
+
+                const item = document.createElement("div");
+
+                item.className = "activity-item";
+
+
+                const details = document.createElement("div");
+
+                details.className = "activity-details";
+
+
+                const icon = document.createElement("div");
+
+                icon.className = "activity-icon";
+
+                icon.textContent = activity.icon;
+
+
+                const information = document.createElement("div");
+
+
+                const title = document.createElement("div");
+
+                title.className = "activity-name";
+
+                title.textContent = activity.title;
+
+
+                const description = document.createElement("div");
+
+                description.className = "activity-description";
+
+                description.textContent = activity.description;
+
+
+                information.appendChild(title);
+
+                information.appendChild(description);
+
+
+                details.appendChild(icon);
+
+                details.appendChild(information);
+
+
+                const badge = document.createElement("span");
+
+                badge.className = "completed-badge";
+
+                badge.textContent = "✓ مكتمل";
+
+
+                item.appendChild(details);
+
+                item.appendChild(badge);
+
+
+                activitiesList.appendChild(item);
+
+            });
+
+        }
+
+
+        // =====================================
+        // عرض الأنشطة المتبقية
+        // =====================================
+
+        function displayRemainingActivities(activities) {
+
+            const remainingList =
+                document.getElementById("remainingActivitiesList");
+
+
+            if (activities.length === 0) {
+
+                remainingList.innerHTML = `
+                    <p class="empty-message">
+                        🎉 رائع! طفلك أكمل كل الأنشطة التعليمية المتاحة.
+                    </p>
+                `;
+
+                return;
+
+            }
+
+
+            remainingList.innerHTML = "";
+
+
+            activities.forEach(function(activity) {
+
+                const item = document.createElement("div");
+
+                item.className = "activity-item";
+
+
+                const details = document.createElement("div");
+
+                details.className = "activity-details";
+
+
+                const icon = document.createElement("div");
+
+                icon.className = "activity-icon";
+
+                icon.textContent = activity.icon;
+
+
+                const information = document.createElement("div");
+
+
+                const title = document.createElement("div");
+
+                title.className = "activity-name";
+
+                title.textContent = activity.title;
+
+
+                const description = document.createElement("div");
+
+                description.className = "activity-description";
+
+                description.textContent = activity.description;
+
+
+                information.appendChild(title);
+
+                information.appendChild(description);
+
+
+                details.appendChild(icon);
+
+                details.appendChild(information);
+
+
+                const badge = document.createElement("span");
+
+                badge.className = "remaining-badge";
+
+                badge.textContent = "لم يكتمل بعد";
+
+
+                item.appendChild(details);
+
+                item.appendChild(badge);
+
+
+                remainingList.appendChild(item);
+
+            });
+
+        }
+
+
+        // =====================================
+        // عدم وجود طفل مرتبط
+        // =====================================
+
+        function showNoChild() {
+
+            document.getElementById("childName").textContent =
+                "لم يتم العثور على الطفل";
+
+            document.getElementById("childCode").textContent =
+                "-";
+
+            document.getElementById("childDisability").textContent =
+                "-";
+
+            document.getElementById("childCity").textContent =
+                "-";
+
+
+            document.getElementById("progressPercentage").textContent =
+                "0%";
+
+            document.getElementById("progressFill").style.width =
+                "0%";
+
+
+            document.getElementById("progressMessage").textContent =
+                "لا توجد بيانات طفل مرتبط بالحساب.";
+
+
+            document.getElementById("completedCount").textContent =
+                "0";
+
+            document.getElementById("remainingCount").textContent =
+                "0";
+
+            document.getElementById("totalCount").textContent =
+                "0";
+
+
+            document.getElementById("activitiesList").innerHTML = `
+                <p class="empty-message">
+                    لم نتمكن من العثور على بيانات الطفل المرتبط بالحساب.
+                    تأكدي من ربط حساب الأسرة بحساب الطفل.
+                </p>
+            `;
+
+
+            document.getElementById("remainingActivitiesList").innerHTML = `
+                <p class="empty-message">
+                    لا توجد بيانات متاحة.
+                </p>
+            `;
+
+        }
+
+
+        // =====================================
+        // تشغيل الصفحة
+        // =====================================
+
+        if (currentUser && currentUser.accountType === "family") {
+
+            loadFamilyProgress();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>دليل الإعاقات | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f8f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .guide-container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 40px auto;
+        }
+
+        .guide-welcome {
+            background: linear-gradient(135deg, #e5f1e8, #f5eee1);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .guide-welcome h1 {
+            color: #276044;
+            margin-bottom: 15px;
+            font-size: 30px;
+        }
+
+        .guide-welcome p {
+            color: #555;
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .voice-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .voice-controls button {
+            background: #276044;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .voice-controls button:hover {
+            background: #19452f;
+        }
+
+        .guide-title {
+            text-align: center;
+            color: #276044;
+            margin: 35px 0 25px;
+            font-size: 25px;
+        }
+
+        .disability-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .disability-card {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 18px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .disability-card:hover,
+        .disability-card:focus {
+            border-color: #4c906b;
+            transform: translateY(-5px);
+        }
+
+        .disability-card.selected {
+            border-color: #276044;
+            background: #edf5ef;
+        }
+
+        .disability-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .disability-card h3 {
+            color: #276044;
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .disability-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .details-box {
+            display: none;
+            background: white;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 18px;
+            border-right: 6px solid #4c906b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .details-box.show {
+            display: block;
+        }
+
+        .details-box h2 {
+            color: #276044;
+            margin-bottom: 18px;
+        }
+
+        .details-box h3 {
+            color: #4c906b;
+            margin: 22px 0 10px;
+        }
+
+        .details-box p,
+        .details-box li {
+            color: #555;
+            font-size: 17px;
+            line-height: 2;
+        }
+
+        .details-box ul {
+            padding-right: 25px;
+        }
+
+        .close-details {
+            background: #eee;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 20px;
+        }
+
+        .notice-box {
+            background: #fff8e9;
+            border: 1px solid #ead9ad;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            line-height: 1.9;
+            color: #66552e;
+        }
+
+        .back-button {
+            display: block;
+            width: fit-content;
+            margin: 35px auto;
+            padding: 13px 30px;
+            background: #276044;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        button:focus,
+        a:focus {
+            outline: 3px solid #d49b38;
+            outline-offset: 4px;
+        }
+
+        @media (max-width: 800px) {
+            .disability-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .disability-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-welcome {
+                padding: 22px;
+            }
+
+            .guide-welcome h1 {
+                font-size: 24px;
+            }
+
+            .details-box {
+                padding: 20px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <svg viewBox="0 0 100 100" width="45" height="45">
+
+                    <path
+                        d="M50 85 C20 65 5 45 20 25 C32 10 47 20 50 32 C57 15 77 12 87 30 C99 53 70 75 50 85Z"
+                        fill="#276044" />
+
+                    <circle cx="38" cy="39" r="7" fill="white" />
+
+                    <circle cx="64" cy="39" r="7" fill="white" />
+
+                </svg>
+
+            </div>
+
+            <div class="logo-text">
+
+                <h2>SANAD</h2>
+
+                <span>سند</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="navbar">
+
+            <a href="user-dashboard.html">الرئيسية</a>
+
+            <a href="my-education.html">تعليمي</a>
+
+            <a href="my-feelings.html">مشاعري</a>
+
+            <a href="disability-guide.html">دليل الإعاقات</a>
+
+        </nav>
+
+    </header>
+
+
+
+    <main class="guide-container">
+
+
+        <!-- Welcome Section -->
+
+        <section class="guide-welcome">
+
+            <h1>دليل الإعاقات في SANAD 💚</h1>
+
+            <p>
+
+                كل شخص مختلف ومميز بطريقته.
+
+                هنا هنتعرف على أنواع الإعاقات المختلفة،
+
+                وهنكتشف إزاي نقدر نقدم الدعم والمساعدة المناسبة لكل شخص.
+
+            </p>
+
+
+            <div class="voice-controls">
+
+                <button type="button" onclick="speakPage()">
+
+                    🔊 استمع للصفحة
+
+                </button>
+
+                <button type="button" onclick="stopVoice()">
+
+                    ⏹ إيقاف الصوت
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <h2 class="guide-title">
+
+            اختار نوع الإعاقة للتعرف عليه
+
+        </h2>
+
+
+
+        <!-- Disability Cards -->
+
+        <section class="disability-grid">
+
+
+            <button class="disability-card" type="button" onclick="showDetails('visual')">
+
+                <div class="disability-icon">👁️</div>
+
+                <h3>الإعاقة البصرية</h3>
+
+                <p>التعرف على طرق مساعدة الأشخاص ذوي الإعاقة البصرية.</p>
+
+            </button>
+
+
+
+            <button class="disability-card" type="button" onclick="showDetails('hearing')">
+
+                <div class="disability-icon">🦻</div>
+
+                <h3>الإعاقة السمعية</h3>
+
+                <p>فهم احتياجات الأشخاص ذوي الإعاقة السمعية.</p>
+
+            </button>
+
+
+
+            <button class="disability-card" type="button" onclick="showDetails('mobility')">
+
+                <div class="disability-icon">♿</div>
+
+                <h3>الإعاقة الحركية</h3>
+
+                <p>التعرف على طرق تسهيل الحركة والمشاركة.</p>
+
+            </button>
+
+
+
+            <button class="disability-card" type="button" onclick="showDetails('intellectual')">
+
+                <div class="disability-icon">🧠</div>
+
+                <h3>الإعاقة الذهنية</h3>
+
+                <p>فهم طرق التعلم والتواصل والدعم المناسبة.</p>
+
+            </button>
+
+
+
+            <button class="disability-card" type="button" onclick="showDetails('autism')">
+
+                <div class="disability-icon">🌈</div>
+
+                <h3>اضطراب طيف التوحد</h3>
+
+                <p>التعرف على الاختلافات الحسية وطرق التواصل.</p>
+
+            </button>
+
+
+
+            <button class="disability-card" type="button" onclick="showDetails('learning')">
+
+                <div class="disability-icon">📚</div>
+
+                <h3>صعوبات التعلم</h3>
+
+                <p>فهم صعوبات القراءة والكتابة والحساب.</p>
+
+            </button>
+
+
+
+            <button class="disability-card" type="button" onclick="showDetails('multiple')">
+
+                <div class="disability-icon">🤝</div>
+
+                <h3>الإعاقة المتعددة</h3>
+
+                <p>التعرف على احتياجات الأشخاص ذوي الإعاقات المتعددة.</p>
+
+            </button>
+
+
+        </section>
+
+
+
+        <!-- Details Section -->
+
+        <section class="details-box" id="detailsBox" aria-live="polite">
+
+            <h2 id="detailsTitle"></h2>
+
+            <div id="detailsContent"></div>
+
+
+            <div class="voice-controls">
+
+                <button type="button" onclick="speakDetails()">
+
+                    🔊 استمع للمعلومات
+
+                </button>
+
+                <button type="button" onclick="stopVoice()">
+
+                    ⏹ إيقاف الصوت
+
+                </button>
+
+            </div>
+
+
+            <button class="close-details" type="button" onclick="closeDetails()">
+
+                إغلاق المعلومات
+
+            </button>
+
+        </section>
+
+
+
+        <!-- Notice -->
+
+        <div class="notice-box">
+
+            <strong>💡 معلومة مهمة:</strong>
+
+            <p>
+
+                لكل شخص احتياجات وقدرات مختلفة، حتى لو كان لديه نفس نوع الإعاقة.
+
+                لذلك يجب احترام الفروق الفردية، وعدم افتراض أن جميع الأشخاص يحتاجون
+
+                إلى نفس طريقة المساعدة.
+
+                هذا الدليل للتوعية والتثقيف، ولا يُستخدم لتشخيص الحالات.
+
+            </p>
+
+        </div>
+
+
+
+        <a href="user-dashboard.html" class="back-button">
+
+            العودة إلى لوحة التحكم
+
+        </a>
+
+
+    </main>
+
+
+
+    <script>
+
+        // بيانات المستخدم
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+
+        // التأكد من تسجيل الدخول
+
+        if (!currentUser || currentUser.accountType !== "user") {
+
+            window.location.href = "login.html";
+
+        }
+
+
+
+        // بيانات الإعاقات
+
+        const disabilityInfo = {
+
+            visual: {
+
+                title: "الإعاقة البصرية 👁️",
+
+                description: "الإعاقة البصرية هي حالة تؤثر على قدرة الشخص على الرؤية بدرجات مختلفة، وقد تكون ضعفًا في البصر أو فقدانًا كليًا للرؤية.",
+
+                challenges: [
+                    "صعوبة قراءة النصوص الصغيرة.",
+                    "صعوبة التعرف على الأشياء أو الاتجاهات.",
+                    "الحاجة إلى وسائل مساعدة للوصول إلى المعلومات."
+                ],
+
+                support: [
+                    "استخدام قارئ الشاشة لتحويل النص إلى صوت.",
+                    "توفير وصف نصي للصور.",
+                    "استخدام خطوط واضحة وكبيرة وتباين مناسب.",
+                    "السماح باستخدام لوحة المفاتيح للتنقل داخل الموقع.",
+                    "وصف الأماكن والأشياء عند الحاجة."
+                ],
+
+                tools: [
+                    "قارئات الشاشة.",
+                    "شاشات برايل.",
+                    "الكتب الصوتية.",
+                    "العدسات المكبرة."
+                ]
+
+            },
+
+
+            hearing: {
+
+                title: "الإعاقة السمعية 🦻",
+
+                description: "الإعاقة السمعية تؤثر على قدرة الشخص على سماع الأصوات بدرجات مختلفة، وقد يحتاج إلى وسائل بصرية أو وسائل مساعدة للتواصل.",
+
+                challenges: [
+                    "صعوبة فهم الكلام دون وسائل مساعدة.",
+                    "صعوبة متابعة الفيديوهات التي لا تحتوي على ترجمة.",
+                    "صعوبة التواصل في الأماكن المزدحمة."
+                ],
+
+                support: [
+                    "استخدام لغة واضحة ومباشرة.",
+                    "إضافة ترجمة مكتوبة للفيديوهات.",
+                    "استخدام الصور والرسومات للتوضيح.",
+                    "التحدث أمام الشخص بوضوح.",
+                    "إتاحة التواصل بالكتابة أو لغة الإشارة حسب احتياجه."
+                ],
+
+                tools: [
+                    "السماعات الطبية.",
+                    "أجهزة المساعدة السمعية.",
+                    "برامج تحويل الكلام إلى نص.",
+                    "مقاطع الفيديو المصحوبة بترجمة."
+                ]
+
+            },
+
+
+            mobility: {
+
+                title: "الإعاقة الحركية ♿",
+
+                description: "الإعاقة الحركية قد تؤثر على حركة الجسم أو استخدام اليدين أو المشي، وتختلف احتياجات الأشخاص من حالة لأخرى.",
+
+                challenges: [
+                    "صعوبة الوصول إلى بعض الأماكن.",
+                    "صعوبة استخدام بعض الأدوات.",
+                    "صعوبة التحكم في الفأرة أو لوحة المفاتيح أحيانًا."
+                ],
+
+                support: [
+                    "توفير ممرات ومساحات مناسبة للحركة.",
+                    "تسهيل استخدام الموقع بلوحة المفاتيح.",
+                    "توفير أزرار كبيرة وواضحة.",
+                    "عدم تحريك الكرسي المتحرك دون إذن صاحبه.",
+                    "سؤال الشخص عن نوع المساعدة التي يحتاجها."
+                ],
+
+                tools: [
+                    "الكراسي المتحركة.",
+                    "العكازات وأجهزة المشي.",
+                    "لوحات المفاتيح البديلة.",
+                    "أجهزة التحكم بالصوت."
+                ]
+
+            },
+
+
+            intellectual: {
+
+                title: "الإعاقة الذهنية 🧠",
+
+                description: "الإعاقة الذهنية ترتبط باختلافات في القدرات العقلية والمهارات التكيفية، وقد تؤثر على التعلم وحل المشكلات والتعامل مع بعض المواقف اليومية.",
+
+                challenges: [
+                    "صعوبة فهم التعليمات الطويلة.",
+                    "الحاجة إلى وقت إضافي للتعلم.",
+                    "صعوبة التعامل مع بعض المواقف الجديدة."
+                ],
+
+                support: [
+                    "استخدام جمل قصيرة وواضحة.",
+                    "تقسيم المهام إلى خطوات بسيطة.",
+                    "التكرار والتدريب بطريقة مناسبة.",
+                    "استخدام الصور والأمثلة العملية.",
+                    "تشجيع الاستقلالية."
+                ],
+
+                tools: [
+                    "الصور التعليمية.",
+                    "الجداول المصورة.",
+                    "التطبيقات التعليمية التفاعلية.",
+                    "القصص الاجتماعية."
+                ]
+
+            },
+
+
+            autism: {
+
+                title: "اضطراب طيف التوحد 🌈",
+
+                description: "اضطراب طيف التوحد هو اختلاف نمائي يؤثر على التواصل والتفاعل الاجتماعي، وقد يصاحبه اختلاف في الاهتمامات أو السلوكيات أو الاستجابة للمؤثرات الحسية.",
+
+                challenges: [
+                    "اختلاف طرق التواصل والتفاعل الاجتماعي.",
+                    "الحساسية لبعض الأصوات أو الأضواء أو الملمس.",
+                    "صعوبة التعامل مع التغييرات المفاجئة لدى بعض الأشخاص."
+                ],
+
+                support: [
+                    "استخدام تعليمات واضحة ومحددة.",
+                    "توفير جدول يومي مصور عند الحاجة.",
+                    "احترام الاحتياجات الحسية للفرد.",
+                    "إعطاء وقت كافٍ للاستجابة.",
+                    "تهيئة الشخص للتغييرات قبل حدوثها."
+                ],
+
+                tools: [
+                    "جداول الأنشطة المصورة.",
+                    "بطاقات التواصل.",
+                    "القصص الاجتماعية.",
+                    "وسائل التواصل البديل والمعزز."
+                ]
+
+            },
+
+
+            learning: {
+
+                title: "صعوبات التعلم 📚",
+
+                description: "صعوبات التعلم هي اختلافات تؤثر على اكتساب أو استخدام بعض المهارات الأكاديمية مثل القراءة أو الكتابة أو الحساب، ولا تعني انخفاض الذكاء.",
+
+                challenges: [
+                    "صعوبة القراءة أو التمييز بين الحروف.",
+                    "صعوبة الكتابة أو تنظيم الأفكار.",
+                    "صعوبة فهم العمليات الحسابية."
+                ],
+
+                support: [
+                    "استخدام أنشطة تعليمية متنوعة.",
+                    "تقسيم المعلومات إلى أجزاء صغيرة.",
+                    "تكرار التدريب بطرق مختلفة.",
+                    "إتاحة وقت إضافي عند الحاجة.",
+                    "استخدام الوسائل السمعية والبصرية."
+                ],
+
+                tools: [
+                    "برامج تحويل النص إلى صوت.",
+                    "الكتب الصوتية.",
+                    "التطبيقات التفاعلية.",
+                    "أدوات تنظيم الكتابة والقراءة."
+                ]
+
+            },
+
+
+            multiple: {
+
+                title: "الإعاقة المتعددة 🤝",
+
+                description: "الإعاقة المتعددة تعني وجود أكثر من إعاقة لدى الشخص، وقد تتداخل الاحتياجات الناتجة عنها وتحتاج إلى خطة دعم فردية.",
+
+                challenges: [
+                    "وجود احتياجات متنوعة في نفس الوقت.",
+                    "الحاجة إلى أكثر من وسيلة للتواصل أو التعلم.",
+                    "اختلاف مستوى الاستقلالية من شخص لآخر."
+                ],
+
+                support: [
+                    "تحديد احتياجات الشخص بشكل فردي.",
+                    "التعاون بين الأسرة والمتخصصين.",
+                    "توفير وسائل مساعدة مناسبة.",
+                    "تقديم الأنشطة وفق قدرات الشخص.",
+                    "مراجعة خطة الدعم باستمرار."
+                ],
+
+                tools: [
+                    "وسائل التواصل البديل.",
+                    "الأجهزة المساعدة.",
+                    "الأنشطة الحسية والتعليمية.",
+                    "البرامج التعليمية الفردية."
+                ]
+
+            }
+
+        };
+
+
+
+        // عرض تفاصيل الإعاقة
+
+        function showDetails(type) {
+
+            const info = disabilityInfo[type];
+
+            if (!info) {
+
+                return;
+
+            }
+
+
+            // إزالة التحديد من الكروت
+
+            document.querySelectorAll(".disability-card").forEach(card => {
+
+                card.classList.remove("selected");
+
+            });
+
+
+            // تحديد الكارت المختار
+
+            const selectedCard = document.querySelector(
+                `.disability-card[onclick="showDetails('${type}')"]`
+            );
+
+            if (selectedCard) {
+
+                selectedCard.classList.add("selected");
+
+            }
+
+
+            // تجهيز المحتوى
+
+            const content = `
+
+                <p>${info.description}</p>
+
+                <h3>التحديات التي قد تواجه الشخص</h3>
+
+                <ul>
+
+                    ${info.challenges.map(item => `<li>${item}</li>`).join("")}
+
+                </ul>
+
+
+                <h3>طرق الدعم والمساعدة</h3>
+
+                <ul>
+
+                    ${info.support.map(item => `<li>${item}</li>`).join("")}
+
+                </ul>
+
+
+                <h3>الوسائل والأدوات المساعدة</h3>
+
+                <ul>
+
+                    ${info.tools.map(item => `<li>${item}</li>`).join("")}
+
+                </ul>
+
+            `;
+
+
+            document.getElementById("detailsTitle").textContent = info.title;
+
+            document.getElementById("detailsContent").innerHTML = content;
+
+
+            // إظهار التفاصيل
+
+            const detailsBox = document.getElementById("detailsBox");
+
+            detailsBox.classList.add("show");
+
+
+            // الانتقال للتفاصيل
+
+            detailsBox.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+        }
+
+
+
+        // إغلاق التفاصيل
+
+        function closeDetails() {
+
+            document.getElementById("detailsBox").classList.remove("show");
+
+            document.querySelectorAll(".disability-card").forEach(card => {
+
+                card.classList.remove("selected");
+
+            });
+
+            stopVoice();
+
+        }
+
+
+
+        // قراءة نص معين بالصوت
+
+        function speakText(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم خاصية القراءة الصوتية.");
+
+                return;
+
+            }
+
+            window.speechSynthesis.cancel();
+
+            const message = new SpeechSynthesisUtterance(text);
+
+            message.lang = "ar-EG";
+
+            message.rate = 0.85;
+
+            message.pitch = 1;
+
+            window.speechSynthesis.speak(message);
+
+        }
+
+
+
+        // قراءة مقدمة الصفحة
+
+        function speakPage() {
+
+            const text = document.querySelector(".guide-welcome").innerText;
+
+            speakText(text);
+
+        }
+
+
+
+        // قراءة تفاصيل الإعاقة
+
+        function speakDetails() {
+
+            const details = document.getElementById("detailsBox");
+
+            speakText(details.innerText);
+
+        }
+
+
+
+        // إيقاف القراءة
+
+        function stopVoice() {
+
+            if ("speechSynthesis" in window) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+        }
+
+
+
+        // توحيد أسماء الإعاقات
+
+        function normalizeDisability(value) {
+
+            const aliases = {
+
+                physical: "mobility",
+
+                motor: "mobility",
+
+                mobility_disability: "mobility",
+
+                learning_disabilities: "learning",
+
+                learning_difficulties: "learning"
+
+            };
+
+            return aliases[value] || value;
+
+        }
+
+
+
+        // تمييز نوع الإعاقة المسجل للمستخدم
+
+        if (currentUser && currentUser.accountType === "user") {
+
+            const userDisability = normalizeDisability(
+
+                currentUser.disabilityType ||
+
+                currentUser.disability ||
+
+                "other"
+
+            );
+
+
+            if (userDisability === "visual") {
+
+                document.body.classList.add("visual-friendly");
+
+            }
+
+        }
+
+
+
+        // إيقاف الصوت عند مغادرة الصفحة
+
+        window.addEventListener("beforeunload", stopVoice);
+
+
+    </script>
+
+</body>
+
+</html>

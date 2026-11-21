@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>الحالات | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .cases-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-welcome {
+            background: linear-gradient(135deg, #e5f0e6, #f5eee2);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .page-welcome h1 {
+            color: #315b43;
+            margin-bottom: 12px;
+        }
+
+        .page-welcome p {
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 3px 12px #00000010;
+        }
+
+        .stat-card h2 {
+            color: #3d7652;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            color: #666;
+        }
+
+        .section-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 3px 12px #00000010;
+            margin-bottom: 25px;
+        }
+
+        .section-box h2 {
+            color: #315b43;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .case-card {
+            background: #f8f8f4;
+            border: 1px solid #e4e9df;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .case-card h3 {
+            color: #315b43;
+            margin-bottom: 12px;
+        }
+
+        .case-card p {
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 6px;
+            overflow-wrap: anywhere;
+        }
+
+        .case-badge {
+            display: inline-block;
+            background: #dcefe0;
+            color: #28563a;
+            padding: 7px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .details-button {
+            background: #3d7652;
+            color: white;
+            border: none;
+            padding: 11px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 15px;
+        }
+
+        .details-button:hover {
+            background: #28563a;
+        }
+
+        .case-details {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            line-height: 2;
+        }
+
+        .empty-message {
+            background: #fff4df;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            line-height: 2;
+            color: #66552f;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #3d7652;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        button:focus,
+        a:focus,
+        input:focus {
+            outline: 3px solid #d9a441;
+            outline-offset: 3px;
+        }
+
+        @media(max-width: 600px) {
+            .cases-container {
+                padding: 12px;
+            }
+
+            .section-box {
+                padding: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <svg width="45" height="45" viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+                <path
+                    d="M50 85 C15 60 5 35 25 20 C38 10 50 25 50 25 C50 25 62 10 75 20 C95 35 85 60 50 85Z"
+                    fill="#3d7652"/>
+
+                <circle cx="38" cy="38" r="7" fill="white"/>
+                <circle cx="62" cy="38" r="7" fill="white"/>
+
+                <path
+                    d="M25 65 Q38 45 50 65 Q62 45 75 65"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="6"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <span class="logo-text">SANAD | سند</span>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="specialist-dashboard.html">لوحة التحكم</a>
+            <a href="specialist-requests.html">طلبات الاستشارة</a>
+        </nav>
+
+    </header>
+
+
+    <main class="cases-container">
+
+        <section class="page-welcome">
+
+            <h1>📋 الحالات التي أتابعها</h1>
+
+            <p>
+                من هنا يمكنك متابعة الحالات التي تم قبول طلباتها،
+                والاطلاع على البيانات الأساسية لكل طفل
+                لمساعدتك في تنظيم المتابعة.
+            </p>
+
+            <button class="details-button" onclick="speakPage()">
+                🔊 استمع إلى الصفحة
+            </button>
+
+            <button class="details-button" onclick="stopVoice()">
+                إيقاف الصوت
+            </button>
+
+        </section>
+
+
+        <section class="statistics">
+
+            <div class="stat-card">
+                <h2 id="totalCases">0</h2>
+                <p>إجمالي الحالات</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="userCases">0</h2>
+                <p>حالات مرتبطة مباشرة</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="familyCases">0</h2>
+                <p>حالات عن طريق الأسرة</p>
+            </div>
+
+        </section>
+
+
+        <section class="section-box">
+
+            <h2>👥 قائمة الحالات</h2>
+
+            <input
+                type="search"
+                id="searchInput"
+                class="search-box"
+                placeholder="ابحث باسم الطفل..."
+                aria-label="ابحث باسم الطفل">
+
+            <div id="casesContainer" class="cases-grid" aria-live="polite">
+
+                جاري تحميل الحالات...
+
+            </div>
+
+        </section>
+
+
+        <a href="specialist-dashboard.html" class="back-button">
+            العودة إلى لوحة التحكم
+        </a>
+
+    </main>
+
+
+    <script>
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        const users = JSON.parse(
+            localStorage.getItem("sanadUsers") || "[]"
+        );
+
+
+        if (!currentUser || currentUser.accountType !== "specialist") {
+
+            alert("يجب تسجيل الدخول بحساب أخصائي.");
+
+            window.location.href = "login.html";
+
+        } else {
+
+            loadCases();
+
+        }
+
+
+        let allCases = [];
+
+
+        // توحيد أسماء أنواع الإعاقة
+
+        const disabilityNames = {
+
+            visual: "الإعاقة البصرية",
+            hearing: "الإعاقة السمعية",
+            physical: "الإعاقة الحركية",
+            mobility: "الإعاقة الحركية",
+            intellectual: "الإعاقة الذهنية",
+            autism: "اضطراب طيف التوحد",
+            learning: "صعوبات التعلم",
+            multiple: "الإعاقات المتعددة",
+            other: "احتياجات أخرى"
+
+        };
+
+
+        // حماية النصوص
+
+        function escapeHTML(value) {
+
+            return String(value ?? "").replace(/[&<>"']/g, char => {
+
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+
+                return entities[char];
+
+            });
+
+        }
+
+
+        // تحميل الحالات
+
+        function loadCases() {
+
+            const followRequests = JSON.parse(
+                localStorage.getItem("sanadFollowRequests") || "[]"
+            );
+
+            const consultationRequests = JSON.parse(
+                localStorage.getItem("sanadSpecialistRequests") || "[]"
+            );
+
+
+            // الطلبات المقبولة فقط
+
+            const acceptedRequests = [
+
+                ...followRequests,
+
+                ...consultationRequests
+
+            ].filter(request =>
+
+                String(request.specialistId) === String(currentUser.id) &&
+                request.status === "accepted"
+
+            );
+
+
+            allCases = [];
+
+
+            acceptedRequests.forEach(request => {
+
+                const requester = users.find(user =>
+
+                    String(user.id) === String(request.requesterId)
+
+                );
+
+
+                if (!requester) return;
+
+
+                let child = null;
+
+
+                if (requester.accountType === "user") {
+
+                    child = requester;
+
+                }
+
+                else if (
+                    requester.accountType === "family" &&
+                    requester.linkedChildId
+                ) {
+
+                    child = users.find(user =>
+
+                        String(user.id) === String(requester.linkedChildId) &&
+                        user.accountType === "user"
+
+                    );
+
+                }
+
+
+                if (!child) return;
+
+
+                // منع تكرار نفس الطفل
+
+                const alreadyExists = allCases.some(item =>
+
+                    String(item.child.id) === String(child.id)
+
+                );
+
+
+                if (!alreadyExists) {
+
+                    allCases.push({
+
+                        child: child,
+
+                        requester: requester,
+
+                        requestType: request.requesterType ||
+                            requester.accountType,
+
+                        createdAt: request.createdAt || ""
+
+                    });
+
+                }
+
+            });
+
+
+            updateStatistics();
+
+            displayCases(allCases);
+
+        }
+
+
+        // الإحصائيات
+
+        function updateStatistics() {
+
+            document.getElementById("totalCases").textContent =
+                allCases.length;
+
+
+            const directCases = allCases.filter(item =>
+
+                item.requester.accountType === "user"
+
+            ).length;
+
+
+            const familyCases = allCases.filter(item =>
+
+                item.requester.accountType === "family"
+
+            ).length;
+
+
+            document.getElementById("userCases").textContent =
+                directCases;
+
+
+            document.getElementById("familyCases").textContent =
+                familyCases;
+
+        }
+
+
+        // عرض الحالات
+
+        function displayCases(cases) {
+
+            const container =
+                document.getElementById("casesContainer");
+
+
+            if (cases.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="empty-message">
+
+                        <h3>لا توجد حالات للمتابعة حاليًا</h3>
+
+                        <p>
+                            ستظهر هنا الحالات بعد قبول طلبات المتابعة
+                            أو الاستشارة الخاصة بك.
+                        </p>
+
+                        <p>
+                            يمكنك مراجعة الطلبات من صفحة
+                            طلبات الاستشارة وطلبات المتابعة.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            container.innerHTML = cases.map((item, index) => {
+
+                const child = item.child;
+
+
+                const disability = child.disabilityType ||
+                    child.disability ||
+                    "other";
+
+
+                const disabilityName =
+                    disabilityNames[disability] ||
+                    disabilityNames.other;
+
+
+                return `
+
+                    <article class="case-card">
+
+                        <span class="case-badge">
+                            حالة مقبولة للمتابعة
+                        </span>
+
+                        <h3>
+                            👤 ${escapeHTML(child.fullName || "طفل")}
+                        </h3>
+
+                        <p>
+                            <strong>نوع الإعاقة:</strong>
+                            ${escapeHTML(disabilityName)}
+                        </p>
+
+                        <p>
+                            <strong>كود الطفل:</strong>
+                            ${escapeHTML(child.childCode || "غير متوفر")}
+                        </p>
+
+                        <p>
+                            <strong>المحافظة:</strong>
+                            ${escapeHTML(child.governorate || child.city || "غير محدد")}
+                        </p>
+
+                        <button
+                            class="details-button"
+                            onclick="toggleDetails(${index})">
+
+                            عرض تفاصيل الحالة
+
+                        </button>
+
+
+                        <div class="case-details" id="details-${index}">
+
+                            <h4>البيانات الأساسية</h4>
+
+                            <p>
+                                الاسم:
+                                ${escapeHTML(child.fullName || "غير محدد")}
+                            </p>
+
+                            <p>
+                                السن:
+                                ${escapeHTML(child.birthDate || "غير محدد")}
+                            </p>
+
+                            <p>
+                                النوع:
+                                ${escapeHTML(child.gender || "غير محدد")}
+                            </p>
+
+                            <p>
+                                البريد الإلكتروني:
+                                ${escapeHTML(child.email || "غير متوفر")}
+                            </p>
+
+                            <p>
+                                رقم الهاتف:
+                                ${escapeHTML(child.phone || "غير متوفر")}
+                            </p>
+
+                            <p>
+                                ولي الأمر:
+                                ${escapeHTML(child.guardianName || "غير متوفر")}
+                            </p>
+
+                            <p>
+                                هاتف ولي الأمر:
+                                ${escapeHTML(child.guardianPhone || "غير متوفر")}
+                            </p>
+
+                            <p>
+                                معلومات إضافية:
+                                ${escapeHTML(child.conditions || "لا توجد معلومات إضافية")}
+                            </p>
+
+                            <button
+                                class="details-button"
+                                onclick="speakCase(${index})">
+
+                                🔊 استمع إلى بيانات الحالة
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }).join("");
+
+        }
+
+
+        // فتح التفاصيل
+
+        function toggleDetails(index) {
+
+            const details =
+                document.getElementById("details-" + index);
+
+
+            if (!details) return;
+
+
+            details.style.display =
+                details.style.display === "block" ? "none" : "block";
+
+        }
+
+
+        // البحث
+
+        document.getElementById("searchInput").addEventListener(
+            "input",
+            function() {
+
+                const value = this.value.trim().toLowerCase();
+
+
+                const filteredCases = allCases.filter(item =>
+
+                    String(item.child.fullName || "")
+                        .toLowerCase()
+                        .includes(value)
+
+                );
+
+
+                displayCases(filteredCases);
+
+            }
+
+        );
+
+
+        // قراءة بيانات الحالة
+
+        function speakCase(index) {
+
+            const item = allCases[index];
+
+            if (!item) return;
+
+
+            const child = item.child;
+
+
+            const text = `
+
+                اسم الطفل ${child.fullName || "غير محدد"}.
+
+                نوع الإعاقة ${
+                    disabilityNames[
+                        child.disabilityType || child.disability
+                    ] || "غير محدد"
+                }.
+
+                البريد الإلكتروني ${child.email || "غير متوفر"}.
+
+                رقم الهاتف ${child.phone || "غير متوفر"}.
+
+                اسم ولي الأمر ${child.guardianName || "غير متوفر"}.
+
+            `;
+
+
+            speak(text);
+
+        }
+
+
+        // قراءة الصفحة
+
+        function speakPage() {
+
+            speak(
+                "مرحبًا بك في صفحة الحالات التي أتابعها.\n" +
+                "هنا يمكنك الاطلاع على الحالات التي تم قبول طلباتها."
+            );
+
+        }
+
+
+        function speak(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم القراءة الصوتية.");
+
+                return;
+
+            }
+
+
+            window.speechSynthesis.cancel();
+
+
+            const utterance =
+                new SpeechSynthesisUtterance(text);
+
+
+            utterance.lang = "ar-EG";
+
+            utterance.rate = 0.85;
+
+
+            window.speechSynthesis.speak(utterance);
+
+        }
+
+
+        // إيقاف الصوت
+
+        function stopVoice() {
+
+            if ("speechSynthesis" in window) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

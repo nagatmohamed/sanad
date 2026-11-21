@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>مشاعري | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* تحسينات الوصول */
+
+        .feeling-card:focus-visible,
+        .help-button:focus-visible,
+        .voice-button:focus-visible,
+        .feelings-back a:focus-visible {
+            outline: 4px solid #d99b35;
+            outline-offset: 5px;
+        }
+
+        .voice-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .voice-button {
+            background: #56856b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .voice-button:hover {
+            background: #3e6b52;
+        }
+
+        .voice-status {
+            background: #edf5ef;
+            color: #315b40;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .feeling-history {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .feeling-history h3 {
+            color: #56856b;
+            margin-bottom: 15px;
+        }
+
+        .history-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            line-height: 1.8;
+        }
+
+        .help-button {
+            cursor: pointer;
+        }
+
+        .help-message {
+            margin-top: 15px;
+            line-height: 1.8;
+        }
+
+        .screen-reader-note {
+            background: #f4eee3;
+            padding: 15px;
+            border-radius: 12px;
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        .blind-mode .feeling-card {
+            min-height: 110px;
+            padding: 20px;
+        }
+
+        .blind-mode .feeling-emoji {
+            font-size: 32px;
+        }
+
+        .blind-mode .feeling-card h3 {
+            font-size: 21px;
+        }
+
+        .blind-mode .feeling-card p {
+            font-size: 17px;
+        }
+
+        .blind-mode button {
+            min-height: 55px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body class="dashboard-page">
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <svg viewBox="0 0 100 100" width="50" height="50"
+                    role="img" aria-label="شعار سند">
+
+                    <path d="M50 83 C35 70 12 54 12 33 C12 18 31 10 43 25
+                    C46 29 48 33 50 36 C52 33 54 29 57 25
+                    C69 10 88 18 88 33 C88 54 65 70 50 83Z"
+                    fill="#56856B"/>
+
+                    <circle cx="38" cy="38" r="7" fill="#F4EBDD"/>
+                    <circle cx="62" cy="38" r="7" fill="#F4EBDD"/>
+
+                    <path d="M25 57 Q38 42 50 57 Q62 42 75 57"
+                    fill="none" stroke="#F4EBDD" stroke-width="5"
+                    stroke-linecap="round"/>
+
+                </svg>
+
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند لكل خطوة</span>
+            </div>
+
+        </div>
+
+        <nav class="navbar" aria-label="القائمة الرئيسية">
+
+            <a href="index.html">الرئيسية</a>
+            <a href="user-dashboard.html">لوحة التحكم</a>
+            <a href="my-profile.html">ملفي الشخصي</a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="feelings-container">
+
+        <!-- Welcome -->
+
+        <section class="feelings-welcome">
+
+            <div>
+
+                <h1>مساحتك للتعبير عن مشاعرك 💚</h1>
+
+                <p>
+                    كل المشاعر مهمة، ومسموح ليك تحس بأي شعور.
+                    اختار الشعور اللي بيعبر عن إحساسك دلوقتي.
+                </p>
+
+            </div>
+
+            <div class="feelings-welcome-icon" aria-hidden="true">
+                🌈
+            </div>
+
+        </section>
+
+
+        <!-- Voice controls -->
+
+        <section class="voice-section" aria-label="التحكم الصوتي">
+
+            <h2>المساعدة الصوتية</h2>
+
+            <p>
+                تقدر تسمع تعليمات الصفحة والرسائل الصوتية.
+            </p>
+
+            <div class="voice-controls">
+
+                <button type="button"
+                    class="voice-button"
+                    id="speakPageButton">
+
+                    🔊 اسمع تعليمات الصفحة
+
+                </button>
+
+                <button type="button"
+                    class="voice-button"
+                    id="stopVoiceButton">
+
+                    ⏹ إيقاف الصوت
+
+                </button>
+
+            </div>
+
+            <p id="voiceStatus"
+                class="voice-status"
+                role="status"
+                aria-live="polite">
+
+                المساعدة الصوتية جاهزة.
+
+            </p>
+
+        </section>
+
+
+        <!-- Feelings -->
+
+        <section class="feelings-section">
+
+            <h2>إنت حاسس بإيه النهارده؟</h2>
+
+            <p class="feelings-subtitle">
+                اختار الشعور الأقرب لإحساسك.
+            </p>
+
+
+            <div class="feelings-grid">
+
+                <button type="button"
+                    class="feeling-card"
+                    data-feeling="happy"
+                    aria-label="سعيد: حاسس بالفرحة والراحة">
+
+                    <span class="feeling-emoji" aria-hidden="true">😊</span>
+
+                    <h3>سعيد</h3>
+
+                    <p>حاسس بالفرحة والراحة</p>
+
+                </button>
+
+
+                <button type="button"
+                    class="feeling-card"
+                    data-feeling="sad"
+                    aria-label="حزين: حاسس بالزعل أو الضيق">
+
+                    <span class="feeling-emoji" aria-hidden="true">😢</span>
+
+                    <h3>حزين</h3>
+
+                    <p>حاسس بالزعل أو الضيق</p>
+
+                </button>
+
+
+                <button type="button"
+                    class="feeling-card"
+                    data-feeling="angry"
+                    aria-label="غاضب: حاسس بالعصبية أو الغضب">
+
+                    <span class="feeling-emoji" aria-hidden="true">😠</span>
+
+                    <h3>غاضب</h3>
+
+                    <p>حاسس بالعصبية أو الغضب</p>
+
+                </button>
+
+
+                <button type="button"
+                    class="feeling-card"
+                    data-feeling="afraid"
+                    aria-label="خائف: حاسس بالخوف أو القلق">
+
+                    <span class="feeling-emoji" aria-hidden="true">😨</span>
+
+                    <h3>خائف</h3>
+
+                    <p>حاسس بالخوف أو القلق</p>
+
+                </button>
+
+
+                <button type="button"
+                    class="feeling-card"
+                    data-feeling="tired"
+                    aria-label="متعب: حاسس بالتعب ومحتاج أرتاح">
+
+                    <span class="feeling-emoji" aria-hidden="true">😴</span>
+
+                    <h3>متعب</h3>
+
+                    <p>حاسس بالتعب ومحتاج أرتاح</p>
+
+                </button>
+
+
+                <button type="button"
+                    class="feeling-card"
+                    data-feeling="calm"
+                    aria-label="هادئ: حاسس بالراحة والهدوء">
+
+                    <span class="feeling-emoji" aria-hidden="true">😌</span>
+
+                    <h3>هادئ</h3>
+
+                    <p>حاسس بالراحة والهدوء</p>
+
+                </button>
+
+            </div>
+
+
+            <!-- Result -->
+
+            <div class="feeling-result"
+                id="feelingResult"
+                aria-live="polite"
+                aria-atomic="true">
+
+                <div class="result-emoji"
+                    id="resultEmoji"
+                    aria-hidden="true">
+
+                    💚
+
+                </div>
+
+                <h3 id="resultTitle">
+                    مشاعرك مهمة بالنسبة لنا
+                </h3>
+
+                <p id="resultMessage">
+                    اختار الشعور اللي بيعبر عنك عشان نقدر نساعدك.
+                </p>
+
+                <button type="button"
+                    id="repeatResultButton"
+                    class="voice-button"
+                    hidden>
+
+                    🔊 اسمع الرسالة مرة تانية
+
+                </button>
+
+            </div>
+
+
+            <!-- Help -->
+
+            <div class="feeling-help">
+
+                <h3>محتاج حد يساعدك؟ 💚</h3>
+
+                <p>
+                    لو حاسس إنك محتاج تتكلم مع حد أو تطلب مساعدة،
+                    تقدر تضغط على الزرار ده.
+                </p>
+
+                <button type="button"
+                    id="helpButton"
+                    class="help-button">
+
+                    محتاج مساعدة
+
+                </button>
+
+                <p id="helpMessage"
+                    class="help-message"
+                    role="status"
+                    aria-live="polite">
+
+                </p>
+
+            </div>
+
+
+            <!-- History -->
+
+            <section class="feeling-history">
+
+                <h3>مشاعري السابقة</h3>
+
+                <p>
+                    هنا تقدر تشوف المشاعر اللي اخترتها قبل كده.
+                </p>
+
+                <div id="feelingHistory"
+                    aria-live="polite">
+
+                    لم تسجل أي مشاعر حتى الآن.
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- Back -->
+
+        <div class="feelings-back">
+
+            <a href="user-dashboard.html">
+                العودة إلى لوحة التحكم
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <h3>SANAD | سند</h3>
+
+        <p>معاً نحو حياة أفضل وفرص متساوية للجميع.</p>
+
+        <p>Made by Nagat Fergany © 2026</p>
+
+    </footer>
+
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // التأكد من وجود مستخدم مسجل الدخول
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        if (!currentUser || currentUser.accountType !== "user") {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // تحديد نوع الإعاقة
+
+        const disabilityValue =
+            currentUser.disabilityType ||
+            currentUser.disability ||
+            "other";
+
+        const disabilityAliases = {
+
+            physical: "mobility",
+            motor: "mobility",
+            mobility_disability: "mobility",
+
+            learning_disabilities: "learning",
+            learning_difficulties: "learning"
+
+        };
+
+        const disabilityType =
+            disabilityAliases[disabilityValue] || disabilityValue;
+
+
+        // تحديد إذا كان المستخدم كفيفاً
+
+        const blindDisabilities = [
+            "visual",
+            "blind",
+            "blindness"
+        ];
+
+        const isBlind =
+            blindDisabilities.includes(disabilityType);
+
+
+        // تشغيل الوضع المناسب
+
+        if (isBlind) {
+
+            document.body.classList.add("blind-mode");
+
+        }
+
+
+        // بيانات المشاعر
+
+        const feelings = {
+
+            happy: {
+
+                name: "سعيد",
+
+                emoji: "😊",
+
+                title: "سعيد! 💚",
+
+                message:
+                    "جميل إنك حاسس بالسعادة! حاول تشارك فرحتك مع الناس اللي بتحبهم."
+
+            },
+
+            sad: {
+
+                name: "حزين",
+
+                emoji: "🤗",
+
+                title: "مش لوحدك",
+
+                message:
+                    "عادي تحس بالحزن أوقات. خد وقتك، وممكن تتكلم مع شخص بتثق فيه."
+
+            },
+
+            angry: {
+
+                name: "غاضب",
+
+                emoji: "🌿",
+
+                title: "خد نفس واهدأ",
+
+                message:
+                    "الغضب شعور طبيعي. جرب تاخد نفس عميق وتبعد شوية عن الحاجة اللي ضايقتك."
+
+            },
+
+            afraid: {
+
+                name: "خائف",
+
+                emoji: "💚",
+
+                title: "إنت مش لوحدك",
+
+                message:
+                    "الخوف شعور طبيعي. حاول تتكلم مع شخص بتحس معاه بالأمان."
+
+            },
+
+            tired: {
+
+                name: "متعب",
+
+                emoji: "🌙",
+
+                title: "وقت الراحة",
+
+                message:
+                    "جسمك محتاج راحة. خد استراحة واشرب مياه واهتم بنفسك."
+
+            },
+
+            calm: {
+
+                name: "هادئ",
+
+                emoji: "🌸",
+
+                title: "حالة جميلة!",
+
+                message:
+                    "استمتع بالهدوء والراحة، وحاول تحافظ على اللحظات الجميلة دي."
+
+            }
+
+        };
+
+
+        // عناصر الصفحة
+
+        const feelingCards =
+            document.querySelectorAll(".feeling-card");
+
+        const resultEmoji =
+            document.getElementById("resultEmoji");
+
+        const resultTitle =
+            document.getElementById("resultTitle");
+
+        const resultMessage =
+            document.getElementById("resultMessage");
+
+        const repeatResultButton =
+            document.getElementById("repeatResultButton");
+
+        const voiceStatus =
+            document.getElementById("voiceStatus");
+
+
+        // مفتاح حفظ المشاعر لكل مستخدم
+
+        const historyKey =
+            "sanadFeelings_" + currentUser.id;
+
+
+        // قراءة سجل المشاعر
+
+        let feelingHistory = JSON.parse(
+            localStorage.getItem(historyKey) || "[]"
+        );
+
+
+        // وظيفة تحويل النص إلى صوت
+
+        function speakText(textToSpeak) {
+
+            if (!("speechSynthesis" in window)) {
+
+                voiceStatus.textContent =
+                    "المتصفح لا يدعم خاصية القراءة الصوتية.";
+
+                return;
+
+            }
+
+            window.speechSynthesis.cancel();
+
+            const speech =
+                new SpeechSynthesisUtterance(textToSpeak);
+
+            speech.lang = "ar-EG";
+
+            speech.rate = 0.85;
+
+            speech.pitch = 1;
+
+            speech.volume = 1;
+
+
+            // اختيار صوت عربي إن توفر
+
+            const voices =
+                window.speechSynthesis.getVoices();
+
+            const arabicVoice = voices.find(function(voice) {
+
+                return voice.lang.toLowerCase().startsWith("ar");
+
+            });
+
+            if (arabicVoice) {
+
+                speech.voice = arabicVoice;
+
+            }
+
+
+            speech.onstart = function() {
+
+                voiceStatus.textContent = "جاري تشغيل الصوت.";
+
+            };
+
+            speech.onend = function() {
+
+                voiceStatus.textContent = "انتهى تشغيل الرسالة.";
+
+            };
+
+            speech.onerror = function() {
+
+                voiceStatus.textContent =
+                    "حصلت مشكلة أثناء تشغيل الصوت. حاول مرة تانية.";
+
+            };
+
+
+            window.speechSynthesis.speak(speech);
+
+        }
+
+
+        // إيقاف الصوت
+
+        document.getElementById("stopVoiceButton")
+            .addEventListener("click", function() {
+
+                window.speechSynthesis.cancel();
+
+                voiceStatus.textContent = "تم إيقاف الصوت.";
+
+            });
+
+
+        // تعليمات الصفحة
+
+        const pageInstructions =
+
+            "أهلاً بيك في صفحة مشاعري من سند. " +
+            "الصفحة دي بتساعدك تعبر عن إحساسك. " +
+            "قدامك ستة اختيارات: سعيد، حزين، غاضب، خائف، متعب، وهادئ. " +
+            "اختار الشعور اللي مناسب ليك، وهتسمع رسالة تساعدك. " +
+            "ولو محتاج مساعدة، اضغط على زر محتاج مساعدة.";
+
+
+        document.getElementById("speakPageButton")
+            .addEventListener("click", function() {
+
+                speakText(pageInstructions);
+
+            });
+
+
+        // اختيار الشعور
+
+        let lastSelectedFeeling = null;
+
+
+        feelingCards.forEach(function(card) {
+
+            card.addEventListener("click", function() {
+
+                feelingCards.forEach(function(item) {
+
+                    item.classList.remove("selected");
+
+                    item.setAttribute("aria-pressed", "false");
+
+                });
+
+
+                card.classList.add("selected");
+
+                card.setAttribute("aria-pressed", "true");
+
+
+                const feeling = card.dataset.feeling;
+
+                const result = feelings[feeling];
+
+                lastSelectedFeeling = feeling;
+
+
+                // عرض النتيجة
+
+                resultEmoji.textContent = result.emoji;
+
+                resultTitle.textContent = result.title;
+
+                resultMessage.textContent = result.message;
+
+
+                repeatResultButton.hidden = false;
+
+
+                // حفظ الشعور
+
+                const newEntry = {
+
+                    feeling: feeling,
+
+                    feelingName: result.name,
+
+                    date: new Date().toLocaleString("ar-EG"),
+
+                    timestamp: Date.now()
+
+                };
+
+
+                feelingHistory.unshift(newEntry);
+
+
+                // الاحتفاظ بآخر 20 اختياراً
+
+                feelingHistory = feelingHistory.slice(0, 20);
+
+
+                localStorage.setItem(
+
+                    historyKey,
+
+                    JSON.stringify(feelingHistory)
+
+                );
+
+
+                displayFeelingHistory();
+
+
+                // تشغيل الصوت تلقائياً للكفيف
+
+                if (isBlind) {
+
+                    speakText(
+
+                        "اخترت شعور " +
+                        result.name +
+                        ". " +
+                        result.title +
+                        ". " +
+                        result.message
+
+                    );
+
+                }
+
+            });
+
+        });
+
+
+        // إعادة سماع نتيجة الشعور
+
+        repeatResultButton.addEventListener("click", function() {
+
+            if (!lastSelectedFeeling) return;
+
+            const result = feelings[lastSelectedFeeling];
+
+            speakText(
+
+                result.name +
+                ". " +
+                result.title +
+                ". " +
+                result.message
+
+            );
+
+        });
+
+
+        // عرض سجل المشاعر
+
+        function displayFeelingHistory() {
+
+            const historyContainer =
+                document.getElementById("feelingHistory");
+
+            historyContainer.innerHTML = "";
+
+
+            if (feelingHistory.length === 0) {
+
+                historyContainer.textContent =
+                    "لم تسجل أي مشاعر حتى الآن.";
+
+                return;
+
+            }
+
+
+            feelingHistory.forEach(function(item) {
+
+                const historyItem =
+                    document.createElement("div");
+
+                historyItem.className = "history-item";
+
+
+                const historyText =
+                    document.createElement("p");
+
+                historyText.textContent =
+                    "الشعور: " +
+                    item.feelingName +
+                    " - " +
+                    item.date;
+
+
+                historyItem.appendChild(historyText);
+
+                historyContainer.appendChild(historyItem);
+
+            });
+
+        }
+
+
+        displayFeelingHistory();
+
+
+        // طلب المساعدة
+
+        const helpButton =
+            document.getElementById("helpButton");
+
+        const helpMessage =
+            document.getElementById("helpMessage");
+
+
+        helpButton.addEventListener("click", function() {
+
+
+            const helpRequests = JSON.parse(
+
+                localStorage.getItem("sanadHelpRequests") || "[]"
+
+            );
+
+
+            const newRequest = {
+
+                userId: currentUser.id,
+
+                userName: currentUser.fullName,
+
+                requestType: "emotional_support",
+
+                selectedFeeling: lastSelectedFeeling || null,
+
+                date: new Date().toLocaleString("ar-EG"),
+
+                timestamp: Date.now()
+
+            };
+
+
+            helpRequests.push(newRequest);
+
+
+            localStorage.setItem(
+
+                "sanadHelpRequests",
+
+                JSON.stringify(helpRequests)
+
+            );
+
+
+            const message =
+
+                "تم تسجيل طلب المساعدة على هذا الجهاز. " +
+                "من فضلك تواصل مع ولي أمرك أو شخص موثوق قريب منك. " +
+                "الطلب لم يتم إرساله إلى أي شخص بعد.";
+
+
+            helpMessage.textContent = message;
+
+
+            if (isBlind) {
+
+                speakText(message);
+
+            }
+
+        });
+
+
+        // بدء المساعدة الصوتية للكفيف
+
+        if (isBlind) {
+
+            voiceStatus.textContent =
+                "تم تفعيل وضع المساعدة الصوتية. اضغط على زر سماع التعليمات للبدء.";
+
+            // ملاحظة: المتصفح قد يمنع التشغيل الصوتي التلقائي
+            // قبل أول تفاعل من المستخدم.
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

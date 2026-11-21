@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>دليل الأخصائي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .guide-container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .guide-header {
+            background: linear-gradient(135deg, #245b49, #43856b);
+            color: white;
+            padding: 35px;
+            border-radius: 22px;
+            margin-bottom: 30px;
+        }
+
+        .guide-header h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .guide-header p {
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .guide-tools {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .guide-tools input,
+        .guide-tools select {
+            flex: 1;
+            min-width: 220px;
+            padding: 14px;
+            border: 1px solid #d8dfd9;
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+        }
+
+        .guide-section-title {
+            color: #285c49;
+            margin: 30px 0 18px;
+            font-size: 24px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .guide-card {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid #edf0eb;
+            transition: 0.3s;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+        }
+
+        .guide-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .guide-card h3 {
+            color: #285c49;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .guide-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .guide-card button {
+            margin-top: 15px;
+            background: #285c49;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .guide-card button:hover {
+            background: #1c4436;
+        }
+
+        .guide-details {
+            display: none;
+            margin-top: 18px;
+            padding: 16px;
+            background: #f4f7f1;
+            border-radius: 12px;
+            line-height: 2;
+            color: #444;
+        }
+
+        .guide-details h4 {
+            color: #285c49;
+            margin: 12px 0 5px;
+        }
+
+        .guide-details ul {
+            padding-right: 20px;
+        }
+
+        .guide-details li {
+            margin-bottom: 7px;
+        }
+
+        .read-button {
+            background: #b68c52 !important;
+        }
+
+        .general-tips {
+            background: #f5f0e6;
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 35px;
+            line-height: 2;
+        }
+
+        .general-tips h2 {
+            color: #285c49;
+            margin-bottom: 15px;
+        }
+
+        .general-tips li {
+            margin-bottom: 8px;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 25px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            background: #285c49;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 12px;
+        }
+
+        @media(max-width: 600px) {
+            .guide-header h1 {
+                font-size: 24px;
+            }
+
+            .guide-container {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-page">
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="logo">
+            <div class="logo-icon">س</div>
+            <div class="logo-text">SANAD</div>
+        </div>
+
+        <nav class="navbar">
+            <a href="index.html">الرئيسية</a>
+            <a href="specialist-dashboard.html">لوحة التحكم</a>
+        </nav>
+
+        <div class="header-buttons">
+            <a href="login.html" class="login-btn" onclick="logout()">تسجيل الخروج</a>
+        </div>
+
+    </header>
+
+
+    <main class="guide-container">
+
+        <!-- Welcome -->
+
+        <section class="guide-header">
+
+            <h1>📚 دليل الأخصائي</h1>
+
+            <p>
+                مرحبًا بك في دليل SANAD المهني.
+                هنا هتلاقي مجموعة من الإرشادات والأفكار
+                اللي تساعدك في التعامل مع الأطفال والأشخاص
+                ذوي الإعاقة وتقديم دعم مناسب لاحتياجاتهم.
+            </p>
+
+            <button class="read-button" onclick="readText(document.querySelector('.guide-header').innerText)">
+                🔊 استمع إلى المقدمة
+            </button>
+
+        </section>
+
+
+        <!-- Search -->
+
+        <div class="guide-tools">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="ابحث عن نوع إعاقة أو إرشاد..."
+                aria-label="البحث في دليل الأخصائي"
+                oninput="filterGuides()">
+
+            <select id="categoryFilter" onchange="filterGuides()">
+                <option value="all">كل أنواع الإعاقة</option>
+                <option value="visual">الإعاقة البصرية</option>
+                <option value="hearing">الإعاقة السمعية</option>
+                <option value="physical">الإعاقة الحركية</option>
+                <option value="intellectual">الإعاقة الفكرية</option>
+                <option value="autism">اضطراب طيف التوحد</option>
+                <option value="learning">صعوبات التعلم</option>
+            </select>
+
+        </div>
+
+
+        <h2 class="guide-section-title">دليل التعامل مع أنواع الإعاقة</h2>
+
+
+        <div class="guide-grid" id="guideGrid">
+
+
+            <!-- Visual -->
+
+            <article class="guide-card" data-category="visual">
+
+                <div class="guide-icon">👁️</div>
+
+                <h3>الإعاقة البصرية</h3>
+
+                <p>
+                    إرشادات تساعد الأخصائي على التواصل
+                    مع الأشخاص ذوي الإعاقة البصرية.
+                </p>
+
+                <button onclick="toggleDetails(this)">عرض الإرشادات</button>
+
+                <div class="guide-details">
+
+                    <h4>طرق التواصل</h4>
+
+                    <ul>
+                        <li>استخدم وصفًا لفظيًا واضحًا للأشياء والأماكن.</li>
+                        <li>عرّف بنفسك عند بدء الحديث.</li>
+                        <li>اسأل الشخص عن الطريقة التي يفضلها للمساعدة.</li>
+                        <li>لا تعتمد على الإشارات البصرية وحدها.</li>
+                    </ul>
+
+                    <h4>أنشطة مقترحة</h4>
+
+                    <ul>
+                        <li>أنشطة تعتمد على اللمس والتعرف على الخامات.</li>
+                        <li>استخدام المواد الصوتية والتعليمات المنطوقة.</li>
+                        <li>أنشطة التمييز بين الأصوات.</li>
+                    </ul>
+
+                    <h4>مراعاة السلامة</h4>
+
+                    <ul>
+                        <li>الحفاظ على ترتيب المكان وعدم تغيير مواضع الأشياء دون إخبار الشخص.</li>
+                        <li>توفير مساحة آمنة للحركة.</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- Hearing -->
+
+            <article class="guide-card" data-category="hearing">
+
+                <div class="guide-icon">👂</div>
+
+                <h3>الإعاقة السمعية</h3>
+
+                <p>
+                    طرق تساعد على تحسين التواصل
+                    وتقديم المعلومات بشكل واضح.
+                </p>
+
+                <button onclick="toggleDetails(this)">عرض الإرشادات</button>
+
+                <div class="guide-details">
+
+                    <h4>طرق التواصل</h4>
+
+                    <ul>
+                        <li>استخدم لغة الإشارة إذا كان الشخص يعرفها.</li>
+                        <li>حافظ على وضوح الوجه أثناء الحديث.</li>
+                        <li>استخدم الجمل المكتوبة والصور التوضيحية.</li>
+                        <li>تأكد من فهم التعليمات دون الاعتماد على الصوت فقط.</li>
+                    </ul>
+
+                    <h4>أنشطة مقترحة</h4>
+
+                    <ul>
+                        <li>أنشطة المطابقة بين الصور والكلمات.</li>
+                        <li>استخدام الفيديوهات المصحوبة بترجمة مكتوبة.</li>
+                        <li>أنشطة التعبير باستخدام الصور والإشارات.</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- Physical -->
+
+            <article class="guide-card" data-category="physical">
+
+                <div class="guide-icon">♿</div>
+
+                <h3>الإعاقة الحركية</h3>
+
+                <p>
+                    إرشادات لتوفير بيئة مناسبة
+                    وتسهيل المشاركة في الأنشطة.
+                </p>
+
+                <button onclick="toggleDetails(this)">عرض الإرشادات</button>
+
+                <div class="guide-details">
+
+                    <h4>طرق التعامل</h4>
+
+                    <ul>
+                        <li>تأكد من سهولة الوصول إلى مكان النشاط.</li>
+                        <li>لا تحرك الكرسي المتحرك دون إذن صاحبه.</li>
+                        <li>امنح الشخص الوقت الكافي لأداء المهام.</li>
+                        <li>اسأل عن نوع المساعدة التي يحتاجها.</li>
+                    </ul>
+
+                    <h4>أنشطة مقترحة</h4>
+
+                    <ul>
+                        <li>أنشطة الرسم باستخدام أدوات مناسبة.</li>
+                        <li>أنشطة الحاسب التي تعتمد على التفاعل الرقمي.</li>
+                        <li>أنشطة الاختيار والسحب والإفلات مع مراعاة سهولة التحكم.</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- Intellectual -->
+
+            <article class="guide-card" data-category="intellectual">
+
+                <div class="guide-icon">🧠</div>
+
+                <h3>الإعاقة الفكرية</h3>
+
+                <p>
+                    طرق تبسيط المعلومات وتقديمها
+                    بصورة تدريجية ومناسبة.
+                </p>
+
+                <button onclick="toggleDetails(this)">عرض الإرشادات</button>
+
+                <div class="guide-details">
+
+                    <h4>طرق التعامل</h4>
+
+                    <ul>
+                        <li>استخدم كلمات بسيطة وجمل قصيرة.</li>
+                        <li>قسّم المهمة إلى خطوات صغيرة.</li>
+                        <li>كرر التعليمات عند الحاجة.</li>
+                        <li>استخدم التشجيع والتعزيز الإيجابي.</li>
+                    </ul>
+
+                    <h4>أنشطة مقترحة</h4>
+
+                    <ul>
+                        <li>أنشطة تصنيف الأشياء والألوان.</li>
+                        <li>أنشطة المطابقة والتذكر.</li>
+                        <li>التدريب على المهارات اليومية.</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- Autism -->
+
+            <article class="guide-card" data-category="autism">
+
+                <div class="guide-icon">🧩</div>
+
+                <h3>اضطراب طيف التوحد</h3>
+
+                <p>
+                    إرشادات لمراعاة الفروق الفردية
+                    واحتياجات التواصل والحساسية الحسية.
+                </p>
+
+                <button onclick="toggleDetails(this)">عرض الإرشادات</button>
+
+                <div class="guide-details">
+
+                    <h4>طرق التعامل</h4>
+
+                    <ul>
+                        <li>استخدم جدولًا بصريًا واضحًا للأنشطة.</li>
+                        <li>حافظ على روتين منظم مع التهيئة للتغييرات.</li>
+                        <li>استخدم تعليمات مباشرة وواضحة.</li>
+                        <li>راعِ الاختلافات الحسية من شخص لآخر.</li>
+                    </ul>
+
+                    <h4>أنشطة مقترحة</h4>
+
+                    <ul>
+                        <li>أنشطة المطابقة والتصنيف.</li>
+                        <li>أنشطة التواصل وتبادل الأدوار.</li>
+                        <li>أنشطة الاهتمامات المفضلة للشخص.</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- Learning -->
+
+            <article class="guide-card" data-category="learning">
+
+                <div class="guide-icon">📖</div>
+
+                <h3>صعوبات التعلم</h3>
+
+                <p>
+                    طرق تساعد على تقديم المعلومات
+                    بأكثر من أسلوب تعليمي.
+                </p>
+
+                <button onclick="toggleDetails(this)">عرض الإرشادات</button>
+
+                <div class="guide-details">
+
+                    <h4>طرق التعامل</h4>
+
+                    <ul>
+                        <li>استخدم الشرح السمعي والبصري معًا.</li>
+                        <li>قسّم المحتوى إلى أجزاء صغيرة.</li>
+                        <li>امنح وقتًا إضافيًا عند الحاجة.</li>
+                        <li>استخدم أمثلة عملية من الحياة اليومية.</li>
+                    </ul>
+
+                    <h4>أنشطة مقترحة</h4>
+
+                    <ul>
+                        <li>ألعاب الحروف والكلمات.</li>
+                        <li>أنشطة القراءة التدريجية.</li>
+                        <li>التدريب على الذاكرة والانتباه.</li>
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <p class="no-results" id="noResults">
+            لم يتم العثور على نتائج مطابقة لبحثك.
+        </p>
+
+
+        <!-- General tips -->
+
+        <section class="general-tips">
+
+            <h2>⭐ إرشادات عامة للأخصائي</h2>
+
+            <ul>
+                <li>احترام كرامة الشخص وخصوصيته واستقلاليته.</li>
+
+                <li>عدم افتراض احتياجات الشخص دون سؤاله.</li>
+
+                <li>مراعاة الفروق الفردية بين الأشخاص حتى لو كان لديهم نفس نوع الإعاقة.</li>
+
+                <li>التعاون مع الأسرة عند الحاجة وبموافقة الشخص أو ولي أمره حسب الحالة.</li>
+
+                <li>استخدام أساليب تعليمية متنوعة تناسب قدرات الشخص.</li>
+
+                <li>متابعة التطور وتوثيق الملاحظات المهنية.</li>
+
+                <li>الرجوع إلى المتخصصين عند وجود احتياجات تتطلب تدخلًا طبيًا أو علاجيًا.</li>
+            </ul>
+
+            <button class="read-button" onclick="readText(document.querySelector('.general-tips').innerText)">
+                🔊 استمع إلى الإرشادات العامة
+            </button>
+
+        </section>
+
+
+        <a href="specialist-dashboard.html" class="back-button">
+            العودة إلى لوحة التحكم
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // التأكد من تسجيل دخول الأخصائي
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        if (!currentUser || currentUser.accountType !== "specialist") {
+
+            alert("من فضلك سجّل الدخول بحساب الأخصائي أولًا.");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // إظهار وإخفاء تفاصيل الإرشادات
+
+        function toggleDetails(button) {
+
+            const details = button.nextElementSibling;
+
+            if (details.style.display === "block") {
+
+                details.style.display = "none";
+
+                button.innerText = "عرض الإرشادات";
+
+            } else {
+
+                details.style.display = "block";
+
+                button.innerText = "إخفاء الإرشادات";
+
+            }
+
+        }
+
+
+        // البحث والتصفية
+
+        function filterGuides() {
+
+            const searchValue = document
+                .getElementById("searchInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+            const categoryValue = document
+                .getElementById("categoryFilter")
+                .value;
+
+            const cards = document.querySelectorAll(".guide-card");
+
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+
+                const category = card.dataset.category;
+
+                const text = card.innerText.toLowerCase();
+
+                const matchesSearch = text.includes(searchValue);
+
+                const matchesCategory =
+                    categoryValue === "all" ||
+                    category === categoryValue;
+
+                if (matchesSearch && matchesCategory) {
+
+                    card.style.display = "block";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+            document.getElementById("noResults").style.display =
+                visibleCount === 0 ? "block" : "none";
+
+        }
+
+
+        // قراءة النصوص صوتيًا
+
+        function readText(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم القراءة الصوتية.");
+
+                return;
+
+            }
+
+            window.speechSynthesis.cancel();
+
+            const speech = new SpeechSynthesisUtterance(text);
+
+            speech.lang = "ar-EG";
+
+            speech.rate = 0.9;
+
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
+
+        }
+
+
+        // إيقاف القراءة عند مغادرة الصفحة
+
+        window.addEventListener("beforeunload", function () {
+
+            if ("speechSynthesis" in window) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+        });
+
+
+        // تسجيل الخروج
+
+        function logout() {
+
+            localStorage.removeItem("sanadCurrentUser");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

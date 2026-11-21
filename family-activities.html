@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>الأنشطة المنزلية | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #f6f5ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .activities-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-heading h1 {
+            color: #285c45;
+            font-size: 30px;
+        }
+
+        .page-heading p {
+            color: #777;
+            line-height: 1.9;
+        }
+
+        .child-info {
+            background: #eaf3e9;
+            color: #285c45;
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            line-height: 1.9;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .category-button {
+            border: 1px solid #347653;
+            background: white;
+            color: #285c45;
+            padding: 12px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .category-button.active,
+        .category-button:hover {
+            background: #347653;
+            color: white;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 23px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .activity-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .activity-card h3 {
+            color: #285c45;
+            margin: 8px 0;
+        }
+
+        .activity-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .activity-details {
+            background: #f4f7f2;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            line-height: 1.9;
+            color: #444;
+        }
+
+        .activity-details strong {
+            color: #285c45;
+        }
+
+        .activity-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-button {
+            border: none;
+            padding: 11px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .speak-button {
+            background: #e6efe6;
+            color: #285c45;
+        }
+
+        .complete-button {
+            background: #347653;
+            color: white;
+        }
+
+        .complete-button.done {
+            background: #dcefe0;
+            color: #267044;
+            cursor: default;
+        }
+
+        .summary-box {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .summary-box h2 {
+            color: #285c45;
+        }
+
+        .summary-number {
+            font-size: 35px;
+            color: #347653;
+            font-weight: bold;
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: #777;
+            line-height: 1.8;
+        }
+
+        .back-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            background: #347653;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid #bd8b36;
+            outline-offset: 3px;
+        }
+
+        @media(max-width: 650px) {
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="activities-container">
+
+        <header class="page-heading">
+
+            <h1>الأنشطة المنزلية 🏡</h1>
+
+            <p>
+                لحظات بسيطة من اللعب والتعلم مع طفلك
+                ممكن تصنع فرق كبير في مهاراته وثقته بنفسه.
+            </p>
+
+        </header>
+
+
+        <!-- بيانات الطفل -->
+
+        <section class="child-info" aria-live="polite">
+
+            <strong>الطفل:</strong>
+            <span id="childName">جاري التحميل...</span>
+
+            <br>
+
+            <strong>نوع الإعاقة:</strong>
+            <span id="childDisability">جاري التحميل...</span>
+
+        </section>
+
+
+        <!-- تصنيفات الأنشطة -->
+
+        <section>
+
+            <h2 style="color:#285c45; text-align:center;">
+                اختاري نوع النشاط
+            </h2>
+
+            <div class="category-buttons">
+
+                <button class="category-button active"
+                    data-category="all">
+                    كل الأنشطة
+                </button>
+
+                <button class="category-button"
+                    data-category="art">
+                    🎨 الفن والإبداع
+                </button>
+
+                <button class="category-button"
+                    data-category="focus">
+                    🧩 التركيز والانتباه
+                </button>
+
+                <button class="category-button"
+                    data-category="communication">
+                    🗣️ التواصل واللغة
+                </button>
+
+                <button class="category-button"
+                    data-category="movement">
+                    🏃 الحركة والمهارات
+                </button>
+
+                <button class="category-button"
+                    data-category="family">
+                    ❤️ التفاعل الأسري
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- مكان ظهور الأنشطة -->
+
+        <section class="activities-grid"
+            id="activitiesGrid"
+            aria-live="polite">
+
+            <p class="empty-message">
+                جاري تحميل الأنشطة...
+            </p>
+
+        </section>
+
+
+        <!-- الإنجازات -->
+
+        <section class="summary-box">
+
+            <h2>إنجازات الأسرة ⭐</h2>
+
+            <div class="summary-number" id="completedNumber">
+                0
+            </div>
+
+            <p id="summaryMessage">
+                لم يتم تسجيل أي نشاط حتى الآن.
+            </p>
+
+        </section>
+
+
+        <!-- الصوت -->
+
+        <button class="action-button speak-button"
+            onclick="speakPage()"
+            style="display:block; margin:25px auto; padding:13px 20px;">
+
+            🔊 قراءة الصفحة صوتيًا
+
+        </button>
+
+        <button class="action-button speak-button"
+            onclick="stopSpeaking()"
+            style="display:block; margin:-10px auto 20px; padding:13px 20px;">
+
+            إيقاف الصوت
+
+        </button>
+
+
+        <a href="family-dashboard.html" class="back-button">
+            العودة إلى لوحة الأسرة ←
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // =====================================
+        // 1- بيانات الحساب
+        // =====================================
+
+        let currentUser = null;
+
+        try {
+
+            currentUser = JSON.parse(
+                localStorage.getItem("sanadCurrentUser")
+            );
+
+        } catch (error) {
+
+            currentUser = null;
+
+        }
+
+
+        let child = null;
+
+        let activities = [];
+
+        let completedActivities = [];
+
+        let currentCategory = "all";
+
+
+        // =====================================
+        // 2- أسماء الإعاقات
+        // =====================================
+
+        const disabilityNames = {
+
+            visual: "الإعاقة البصرية",
+
+            hearing: "الإعاقة السمعية",
+
+            physical: "الإعاقة الحركية",
+
+            mobility: "الإعاقة الحركية",
+
+            motor: "الإعاقة الحركية",
+
+            intellectual: "الإعاقة الذهنية",
+
+            autism: "اضطراب طيف التوحد",
+
+            learning: "صعوبات التعلم",
+
+            learning_disabilities: "صعوبات التعلم",
+
+            learning_difficulties: "صعوبات التعلم",
+
+            multiple: "إعاقات متعددة",
+
+            other: "أخرى"
+
+        };
+
+
+        // =====================================
+        // 3- مكتبة الأنشطة
+        // =====================================
+
+        const activityLibrary = {
+
+            // الإعاقة البصرية
+
+            visual: [
+
+                {
+                    id: "visual_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "الرسم بالصلصال",
+                    description: "تكوين أشكال بسيطة باستخدام الصلصال.",
+                    steps: "قدمي للطفل صلصالًا آمنًا بألوان مختلفة. ساعديه على تشكيل كرة أو دائرة أو حيوان بسيط باستخدام يديه.",
+                    benefit: "تنمية الإدراك الحسي والمهارات الحركية الدقيقة.",
+                    materials: "صلصال آمن."
+                },
+
+                {
+                    id: "visual_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "التعرف على الأصوات",
+                    description: "تمييز أصوات الأشياء الموجودة في المنزل.",
+                    steps: "شغلي صوت جرس أو ماء أو طرق على الباب، واطلبي من الطفل تخمين مصدر الصوت.",
+                    benefit: "تنمية الانتباه السمعي والتمييز بين الأصوات.",
+                    materials: "أشياء منزلية تصدر أصواتًا."
+                },
+
+                {
+                    id: "visual_family",
+                    category: "family",
+                    icon: "❤️",
+                    title: "احكيلي عن يومك",
+                    description: "مشاركة الطفل في حوار عائلي.",
+                    steps: "اجلسي مع الطفل واسأليه عن الأشياء التي أحبها اليوم، واتركي له وقتًا كافيًا للإجابة.",
+                    benefit: "تنمية التواصل والثقة بالنفس.",
+                    materials: "لا يحتاج أدوات."
+                },
+
+                {
+                    id: "visual_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "اكتشف المكان",
+                    description: "التعرف على الأشياء المحيطة بطريقة آمنة.",
+                    steps: "ساعدي الطفل على التعرف على مكانه والأشياء القريبة منه باللمس، مع إرشاده لفظيًا أثناء الحركة.",
+                    benefit: "دعم التوجه المكاني والإدراك الحسي.",
+                    materials: "أشياء آمنة ومألوفة."
+                }
+
+            ],
+
+
+            // الإعاقة السمعية
+
+            hearing: [
+
+                {
+                    id: "hearing_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "لوحة الألوان",
+                    description: "تصميم لوحة باستخدام الألوان والأشكال.",
+                    steps: "قدمي للطفل ورقة وألوانًا، واطلبي منه اختيار ألوانه المفضلة وتكوين لوحة.",
+                    benefit: "تنمية الإبداع والتعبير البصري.",
+                    materials: "ورق وألوان."
+                },
+
+                {
+                    id: "hearing_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "ترتيب الصور",
+                    description: "ترتيب صور تمثل خطوات نشاط يومي.",
+                    steps: "اعرضي صور غسل اليدين أو ارتداء الملابس، واطلبي من الطفل ترتيبها بالترتيب الصحيح.",
+                    benefit: "تنمية التسلسل والانتباه.",
+                    materials: "صور لأنشطة يومية."
+                },
+
+                {
+                    id: "hearing_communication",
+                    category: "communication",
+                    icon: "🗣️",
+                    title: "لعبة التعبير بالصور",
+                    description: "اختيار صورة تعبر عن احتياج الطفل.",
+                    steps: "اعرضي صورًا للماء والطعام والراحة واللعب، وشجعي الطفل على اختيار الصورة المناسبة.",
+                    benefit: "دعم التواصل والتعبير عن الاحتياجات.",
+                    materials: "صور أو بطاقات مصورة."
+                },
+
+                {
+                    id: "hearing_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "قلد الحركة",
+                    description: "تقليد حركات بسيطة باستخدام المشاهدة.",
+                    steps: "قفي أمام الطفل ونفذي حركات بسيطة باليدين أو الجسم، ثم شجعيه على تقليدها بصريًا.",
+                    benefit: "تنمية الانتباه البصري والتناسق الحركي.",
+                    materials: "مكان آمن للحركة."
+                }
+
+            ],
+
+
+            // الإعاقة الحركية
+
+            physical: [
+
+                {
+                    id: "physical_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "التلوين المريح",
+                    description: "تلوين أشكال كبيرة بأدوات سهلة الإمساك.",
+                    steps: "اختاري ورقة بها أشكال كبيرة وأقلامًا مناسبة لقدرة الطفل على الإمساك بها، وساعديه عند الحاجة.",
+                    benefit: "تنمية المهارات الحركية الدقيقة.",
+                    materials: "ورق وأقلام مناسبة."
+                },
+
+                {
+                    id: "physical_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "اختيار الشكل المناسب",
+                    description: "مطابقة الأشكال المتشابهة.",
+                    steps: "ضعي أمام الطفل مجموعة أشكال كبيرة، واطلبي منه اختيار شكل يشبه الشكل الذي تعرضينه.",
+                    benefit: "تنمية التركيز والإدراك البصري.",
+                    materials: "بطاقات أشكال."
+                },
+
+                {
+                    id: "physical_family",
+                    category: "family",
+                    icon: "❤️",
+                    title: "لعبة الاختيار",
+                    description: "إعطاء الطفل فرصة اختيار نشاطه.",
+                    steps: "اعرضي عليه نشاطين مناسبين لقدراته، واتركيه يختار النشاط الذي يفضله.",
+                    benefit: "دعم الاستقلالية واتخاذ القرار.",
+                    materials: "اختيارات من أنشطة آمنة."
+                },
+
+                {
+                    id: "physical_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "حركة مناسبة لقدراتي",
+                    description: "ممارسة حركة بسيطة تناسب قدرة الطفل.",
+                    steps: "اختاري حركة بسيطة وآمنة يمكن للطفل تنفيذها حسب قدرته، مثل تحريك الذراعين أو مد اليد لالتقاط كرة خفيفة. لا تجبري الطفل على أي حركة تسبب له ألمًا.",
+                    benefit: "دعم التناسق الحركي والمشاركة.",
+                    materials: "كرة خفيفة عند الحاجة."
+                }
+
+            ],
+
+
+            // الإعاقة الذهنية
+
+            intellectual: [
+
+                {
+                    id: "intellectual_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "تصنيف الألوان",
+                    description: "جمع الأشياء المتشابهة في اللون.",
+                    steps: "استخدمي أشياء آمنة بألوان مختلفة، واطلبي من الطفل وضع كل لون مع الأشياء المشابهة له.",
+                    benefit: "تنمية التصنيف والإدراك.",
+                    materials: "أشياء منزلية آمنة."
+                },
+
+                {
+                    id: "intellectual_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "عد الأشياء",
+                    description: "تعلم العد باستخدام أدوات بسيطة.",
+                    steps: "ضعي أمام الطفل ثلاث مكعبات، واطلبي منه عدها بمساعدتك.",
+                    benefit: "تنمية المهارات الحسابية الأولية.",
+                    materials: "مكعبات كبيرة."
+                },
+
+                {
+                    id: "intellectual_communication",
+                    category: "communication",
+                    icon: "🗣️",
+                    title: "تسمية الأشياء",
+                    description: "التعرف على الأشياء اليومية.",
+                    steps: "أشيري إلى أشياء مألوفة مثل كوب أو كتاب أو كرة، واطلبي من الطفل تسميتها أو الإشارة إليها.",
+                    benefit: "تنمية المفردات والتواصل.",
+                    materials: "أشياء مألوفة."
+                },
+
+                {
+                    id: "intellectual_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "اتبع التعليمات",
+                    description: "تنفيذ تعليمات حركية بسيطة.",
+                    steps: "اطلبي من الطفل تنفيذ حركة واحدة بسيطة في كل مرة، مثل رفع اليد أو التصفيق أو لمس الرأس، مع تقديم المساعدة عند الحاجة.",
+                    benefit: "تنمية الانتباه والتناسق الحركي.",
+                    materials: "لا يحتاج أدوات."
+                }
+
+            ],
+
+
+            // اضطراب طيف التوحد
+
+            autism: [
+
+                {
+                    id: "autism_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "التلوين الهادئ",
+                    description: "نشاط فني بسيط في مكان هادئ.",
+                    steps: "اختاري مكانًا قليل المشتتات، وقدمي ورقة وألوانًا، واتركي للطفل حرية اختيار ما يرسمه.",
+                    benefit: "دعم التعبير والإبداع.",
+                    materials: "ورقة وألوان."
+                },
+
+                {
+                    id: "autism_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "جدول يومي مصور",
+                    description: "ترتيب الأنشطة اليومية بالصور.",
+                    steps: "استخدمي صور الاستيقاظ وتناول الطعام واللعب والنوم، وساعدي الطفل على ترتيبها.",
+                    benefit: "دعم فهم الروتين والتوقعات.",
+                    materials: "بطاقات مصورة."
+                },
+
+                {
+                    id: "autism_communication",
+                    category: "communication",
+                    icon: "🗣️",
+                    title: "اختيار ما أحب",
+                    description: "التعبير عن التفضيلات.",
+                    steps: "اعرضي اختيارين واضحين لنشاطين أو لعبتين، وامنحي الطفل وقتًا للتعبير عن اختياره بالكلام أو الإشارة أو وسيلة التواصل التي يستخدمها.",
+                    benefit: "دعم التواصل واتخاذ القرار.",
+                    materials: "ألعاب أو صور مألوفة."
+                },
+
+                {
+                    id: "autism_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "حركاتي المفضلة",
+                    description: "اختيار حركة مفضلة وتنفيذها.",
+                    steps: "اعرضي على الطفل حركات بسيطة ومألوفة، واتركيه يختار الحركة التي يفضلها وينفذها حسب قدرته وراحته.",
+                    benefit: "دعم المشاركة والتناسق الحركي.",
+                    materials: "مكان آمن وهادئ."
+                }
+
+            ],
+
+
+            // صعوبات التعلم
+
+            learning: [
+
+                {
+                    id: "learning_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "ارسم الحرف",
+                    description: "التعرف على الحروف من خلال الرسم.",
+                    steps: "اختاري حرفًا واحدًا، واطلبي من الطفل رسمه بطريقة بسيطة باستخدام الألوان.",
+                    benefit: "دعم التعرف على الحروف والذاكرة.",
+                    materials: "ورقة وألوان."
+                },
+
+                {
+                    id: "learning_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "لعبة الذاكرة",
+                    description: "تذكر أماكن الصور المتشابهة.",
+                    steps: "ضعي صورتين متشابهتين بين عدة صور مقلوبة، وساعدي الطفل على اكتشاف الصورتين المتطابقتين.",
+                    benefit: "تنمية الذاكرة والانتباه.",
+                    materials: "بطاقات صور."
+                },
+
+                {
+                    id: "learning_communication",
+                    category: "communication",
+                    icon: "🗣️",
+                    title: "كون كلمة",
+                    description: "تكوين كلمات بسيطة من الحروف.",
+                    steps: "اختاري كلمة قصيرة مألوفة، وقدمي حروفها بشكل منفصل، ثم ساعدي الطفل على ترتيبها.",
+                    benefit: "دعم مهارات القراءة واللغة.",
+                    materials: "بطاقات حروف."
+                },
+
+                {
+                    id: "learning_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "لعبة الحركة والترتيب",
+                    description: "ربط الحركة بالتعليمات.",
+                    steps: "استخدمي بطاقات عليها تعليمات بسيطة مثل صفق مرة أو ارفع يدك، واطلبي من الطفل تنفيذها بالترتيب.",
+                    benefit: "دعم الانتباه وفهم التعليمات.",
+                    materials: "بطاقات تعليمات."
+                }
+
+            ],
+
+
+            // إعاقات متعددة
+
+            multiple: [
+
+                {
+                    id: "multiple_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "نشاط فني بسيط",
+                    description: "التعبير عن النفس باستخدام أدوات مناسبة.",
+                    steps: "اختاري أداة فنية آمنة ومناسبة لقدرات الطفل الحسية والحركية، واتركي له حرية التعبير.",
+                    benefit: "تنمية التعبير والإبداع.",
+                    materials: "أدوات فنية مناسبة للطفل."
+                },
+
+                {
+                    id: "multiple_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "التعرف على الأشياء",
+                    description: "استكشاف الأشياء المألوفة بطرق مناسبة.",
+                    steps: "قدمي شيئًا مألوفًا للطفل، واستخدمي الحواس أو وسائل التواصل المتاحة له للتعرف عليه.",
+                    benefit: "تنمية الإدراك والانتباه.",
+                    materials: "أشياء آمنة ومألوفة."
+                },
+
+                {
+                    id: "multiple_family",
+                    category: "family",
+                    icon: "❤️",
+                    title: "وقت عائلي",
+                    description: "مشاركة الطفل في نشاط يحبه.",
+                    steps: "اختاري نشاطًا يفضله الطفل، وشاركيه فيه مع احترام قدراته ووقت راحته.",
+                    benefit: "تعزيز المشاركة والشعور بالانتماء.",
+                    materials: "حسب النشاط المختار."
+                },
+
+                {
+                    id: "multiple_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "نشاط حركي مناسب",
+                    description: "المشاركة في حركة بسيطة حسب قدرات الطفل.",
+                    steps: "اختاري حركة آمنة تناسب قدرات الطفل، ويمكن أن تكون تحريك اليد أو لمس شيء قريب أو تحريك الرأس بمساعدة مناسبة.",
+                    benefit: "تشجيع المشاركة الحركية والحسية.",
+                    materials: "أدوات آمنة حسب النشاط."
+                }
+
+            ],
+
+
+            // أنواع أخرى
+
+            other: [
+
+                {
+                    id: "other_art",
+                    category: "art",
+                    icon: "🎨",
+                    title: "الرسم والتلوين",
+                    description: "نشاط فني حر.",
+                    steps: "قدمي للطفل ورقة وألوانًا، وشجعيه على رسم شيء يحبه.",
+                    benefit: "تنمية الإبداع والتعبير.",
+                    materials: "ورقة وألوان."
+                },
+
+                {
+                    id: "other_focus",
+                    category: "focus",
+                    icon: "🧩",
+                    title: "مطابقة الصور",
+                    description: "العثور على الصور المتشابهة.",
+                    steps: "اعرضي صورًا مألوفة واطلبي من الطفل اختيار الصور المتطابقة.",
+                    benefit: "تنمية التركيز والانتباه.",
+                    materials: "بطاقات صور."
+                },
+
+                {
+                    id: "other_family",
+                    category: "family",
+                    icon: "❤️",
+                    title: "قصة مع الأسرة",
+                    description: "قراءة قصة قصيرة ومناقشتها.",
+                    steps: "اختاري قصة بسيطة، واقرئيها مع الطفل، واسأليه عن الشخصية التي أحبها.",
+                    benefit: "تنمية التواصل والخيال.",
+                    materials: "قصة مصورة."
+                },
+
+                {
+                    id: "other_movement",
+                    category: "movement",
+                    icon: "🏃",
+                    title: "حركة ولعب",
+                    description: "تنفيذ حركة بسيطة وممتعة.",
+                    steps: "اختاري حركة آمنة ومناسبة لعمر الطفل وقدراته، وشاركيه في تنفيذها.",
+                    benefit: "تشجيع النشاط والمشاركة.",
+                    materials: "مكان آمن للحركة."
+                }
+
+            ]
+
+        };
+
+
+        // =====================================
+        // 4- توحيد أسماء الإعاقات
+        // =====================================
+
+        function normalizeDisability(type) {
+
+            const aliases = {
+
+                mobility: "physical",
+
+                motor: "physical",
+
+                learning_disabilities: "learning",
+
+                learning_difficulties: "learning"
+
+            };
+
+            return aliases[type] || type || "other";
+
+        }
+
+
+        // =====================================
+        // 5- تحميل بيانات الطفل والأنشطة
+        // =====================================
+
+        function initializePage() {
+
+            const users = JSON.parse(
+                localStorage.getItem("sanadUsers") || "[]"
+            );
+
+            child = users.find(user =>
+
+                String(user.id) === String(currentUser.linkedChildId)
+                &&
+                user.accountType === "user"
+
+            );
+
+
+            if (!child) {
+
+                document.getElementById("childName").textContent =
+                    "لم يتم العثور على الطفل";
+
+                document.getElementById("childDisability").textContent =
+                    "غير متوفر";
+
+                document.getElementById("activitiesGrid").innerHTML = `
+
+                    <p class="empty-message">
+
+                        لا يوجد طفل مرتبط بحسابك حتى الآن.
+
+                        تأكدي من ربط حساب الأسرة بالحساب الشخصي.
+
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            // عرض اسم الطفل
+
+            document.getElementById("childName").textContent =
+                child.fullName || "غير متوفر";
+
+
+            // تحديد نوع الإعاقة
+
+            const disabilityType = normalizeDisability(
+                child.disabilityType || child.disability
+            );
+
+
+            document.getElementById("childDisability").textContent =
+                disabilityNames[child.disabilityType] ||
+                disabilityNames[disabilityType] ||
+                "أخرى";
+
+
+            // تحميل الأنشطة المناسبة
+
+            activities = activityLibrary[disabilityType] ||
+                activityLibrary.other;
+
+
+            // تحميل الأنشطة المكتملة
+
+            const storageKey =
+                "sanadFamilyActivities_" + child.id;
+
+            completedActivities = JSON.parse(
+                localStorage.getItem(storageKey) || "[]"
+            );
+
+
+            displayActivities();
+
+            updateSummary();
+
+        }
+
+
+        // =====================================
+        // 6- عرض الأنشطة
+        // =====================================
+
+        function displayActivities(category = "all") {
+
+            currentCategory = category;
+
+            const grid = document.getElementById("activitiesGrid");
+
+            grid.innerHTML = "";
+
+
+            const filteredActivities = activities.filter(activity => {
+
+                return category === "all" ||
+                    activity.category === category;
+
+            });
+
+
+            // لو مفيش أنشطة في التصنيف
+
+            if (filteredActivities.length === 0) {
+
+                grid.innerHTML = `
+
+                    <p class="empty-message">
+
+                        لا توجد أنشطة في هذا التصنيف حاليًا.
+
+                        جربي اختيار تصنيف آخر.
+
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            filteredActivities.forEach(activity => {
+
+                const isDone =
+                    completedActivities.includes(activity.id);
+
+
+                const card = document.createElement("article");
+
+                card.className = "activity-card";
+
+
+                const icon = document.createElement("div");
+
+                icon.className = "activity-icon";
+
+                icon.textContent = activity.icon;
+
+
+                const title = document.createElement("h3");
+
+                title.textContent = activity.title;
+
+
+                const description = document.createElement("p");
+
+                description.textContent = activity.description;
+
+
+                const details = document.createElement("div");
+
+                details.className = "activity-details";
+
+                details.innerHTML = `
+
+                    <strong>طريقة التنفيذ:</strong>
+
+                    <br>
+
+                    ${escapeHTML(activity.steps)}
+
+                    <br><br>
+
+                    <strong>الفائدة:</strong>
+
+                    <br>
+
+                    ${escapeHTML(activity.benefit)}
+
+                    <br><br>
+
+                    <strong>الأدوات:</strong>
+
+                    <br>
+
+                    ${escapeHTML(activity.materials)}
+
+                `;
+
+
+                const actions = document.createElement("div");
+
+                actions.className = "activity-actions";
+
+
+                // زر القراءة الصوتية
+
+                const speakButton = document.createElement("button");
+
+                speakButton.className =
+                    "action-button speak-button";
+
+                speakButton.textContent = "🔊 اسمعي التعليمات";
+
+                speakButton.addEventListener("click", function() {
+
+                    speakText(
+
+                        activity.title + ". " +
+
+                        activity.description + ". " +
+
+                        "طريقة التنفيذ: " +
+
+                        activity.steps + ". " +
+
+                        "الفائدة: " +
+
+                        activity.benefit
+
+                    );
+
+                });
+
+
+                // زر تسجيل النشاط
+
+                const completeButton = document.createElement("button");
+
+                completeButton.className =
+                    "action-button complete-button";
+
+                completeButton.textContent = isDone ?
+
+                    "✓ تم تنفيذ النشاط" :
+
+                    "تسجيل تنفيذ النشاط";
+
+
+                if (isDone) {
+
+                    completeButton.classList.add("done");
+
+                    completeButton.disabled = true;
+
+                } else {
+
+                    completeButton.addEventListener("click", function() {
+
+                        completeActivity(activity.id);
+
+                    });
+
+                }
+
+
+                actions.appendChild(speakButton);
+
+                actions.appendChild(completeButton);
+
+
+                card.appendChild(icon);
+
+                card.appendChild(title);
+
+                card.appendChild(description);
+
+                card.appendChild(details);
+
+                card.appendChild(actions);
+
+
+                grid.appendChild(card);
+
+            });
+
+        }
+
+
+        // =====================================
+        // 7- تسجيل النشاط كمكتمل
+        // =====================================
+
+        function completeActivity(activityId) {
+
+            if (completedActivities.includes(activityId)) {
+
+                return;
+
+            }
+
+
+            completedActivities.push(activityId);
+
+
+            const storageKey =
+                "sanadFamilyActivities_" + child.id;
+
+
+            localStorage.setItem(
+
+                storageKey,
+
+                JSON.stringify(completedActivities)
+
+            );
+
+
+            displayActivities(currentCategory);
+
+            updateSummary();
+
+
+            alert("رائع! تم تسجيل النشاط بنجاح ❤️");
+
+        }
+
+
+        // =====================================
+        // 8- تحديث الإنجازات
+        // =====================================
+
+        function updateSummary() {
+
+            document.getElementById("completedNumber").textContent =
+                completedActivities.length;
+
+
+            if (completedActivities.length === 0) {
+
+                document.getElementById("summaryMessage").textContent =
+
+                    "ابدئي أول نشاط مع طفلك واستمتعا بالتعلم معًا.";
+
+            }
+
+            else if (completedActivities.length === activities.length) {
+
+                document.getElementById("summaryMessage").textContent =
+
+                    "أحسنتم! أكملتم كل الأنشطة المتاحة في هذه الصفحة.";
+
+            }
+
+            else {
+
+                document.getElementById("summaryMessage").textContent =
+
+                    "أحسنتم! استمروا في المشاركة والتعلم معًا.";
+
+            }
+
+        }
+
+
+        // =====================================
+        // 9- تصفية الأنشطة حسب النوع
+        // =====================================
+
+        document.querySelectorAll(".category-button").forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                document.querySelectorAll(".category-button")
+                    .forEach(item => {
+
+                        item.classList.remove("active");
+
+                    });
+
+
+                this.classList.add("active");
+
+
+                displayActivities(this.dataset.category);
+
+            });
+
+        });
+
+
+        // =====================================
+        // 10- القراءة الصوتية
+        // =====================================
+
+        function speakText(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم خاصية القراءة الصوتية.");
+
+                return;
+
+            }
+
+
+            speechSynthesis.cancel();
+
+
+            const speech = new SpeechSynthesisUtterance(text);
+
+            speech.lang = "ar-EG";
+
+            speech.rate = 0.85;
+
+            speechSynthesis.speak(speech);
+
+        }
+
+
+        function speakPage() {
+
+            speakText(
+
+                "مرحبًا بك في الأنشطة المنزلية من سند. " +
+
+                "اختاري النشاط المناسب لطفلك، " +
+
+                "واقرئي التعليمات أو استمعي إليها، " +
+
+                "ثم سجلي النشاط بعد تنفيذه."
+
+            );
+
+        }
+
+
+        function stopSpeaking() {
+
+            if ("speechSynthesis" in window) {
+
+                speechSynthesis.cancel();
+
+            }
+
+        }
+
+
+        // =====================================
+        // 11- حماية النصوص
+        // =====================================
+
+        function escapeHTML(value) {
+
+            return String(value).replace(/[&<>"']/g, function(character) {
+
+                const characters = {
+
+                    "&": "&amp;",
+
+                    "<": "&lt;",
+
+                    ">": "&gt;",
+
+                    '"': "&quot;",
+
+                    "'": "&#039;"
+
+                };
+
+                return characters[character];
+
+            });
+
+        }
+
+
+        // =====================================
+        // 12- التحقق من الحساب وبدء الصفحة
+        // =====================================
+
+        if (!currentUser || currentUser.accountType !== "family") {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            initializePage();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

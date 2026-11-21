@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>حجز موعد | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f8f3;
+            color: #30483b;
+        }
+
+        .booking-container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .booking-header {
+            background: linear-gradient(135deg, #315d4c, #658a72);
+            color: white;
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 25px;
+        }
+
+        .booking-header h1 {
+            margin: 0 0 12px;
+        }
+
+        .booking-header p {
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .booking-card {
+            background: white;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 5px 20px #00000008;
+        }
+
+        .specialist-box {
+            background: #f0f5ef;
+            border: 1px solid #dbe8dc;
+            padding: 18px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+        }
+
+        .specialist-box h3 {
+            margin-top: 0;
+            color: #315d4c;
+        }
+
+        .specialist-box p {
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 9px;
+            font-weight: bold;
+            color: #315d4c;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dce5dc;
+            border-radius: 12px;
+            background: #fafbf8;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: 2px solid #7da58a;
+            border-color: #7da58a;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 13px;
+            background: #315d4c;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #244638;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #315d4c;
+            font-weight: bold;
+        }
+
+        .message {
+            display: none;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .success {
+            display: block;
+            background: #e8f6eb;
+            color: #267342;
+        }
+
+        .error {
+            display: block;
+            background: #fff0f0;
+            color: #a43e3e;
+        }
+
+        @media (max-width: 600px) {
+
+            .booking-container {
+                margin: 15px auto;
+                padding: 12px;
+            }
+
+            .booking-card {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="booking-container">
+
+        <header class="booking-header">
+
+            <h1>📅 حجز موعد مع أخصائي</h1>
+
+            <p>
+                احجزي موعدك بسهولة، وحددي الوقت المناسب لك،
+                واكتبي تفاصيل طلبك حتى يستطيع الأخصائي مساعدتك.
+            </p>
+
+        </header>
+
+
+        <section class="booking-card">
+
+            <div id="specialistBox" class="specialist-box">
+                جاري تحميل بيانات الأخصائي...
+            </div>
+
+            <div id="message" class="message" role="status" aria-live="polite"></div>
+
+
+            <form id="bookingForm">
+
+                <div class="form-group">
+
+                    <label for="requesterName">
+                        اسم صاحب الطلب
+                    </label>
+
+                    <input type="text" id="requesterName" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        رقم الهاتف
+                    </label>
+
+                    <input type="tel" id="phone" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="childName">
+                        اسم المستفيد من الجلسة
+                    </label>
+
+                    <input type="text" id="childName" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="disability">
+                        نوع الإعاقة أو الحالة
+                    </label>
+
+                    <input type="text" id="disability" placeholder="اكتبي نوع الإعاقة" required>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            تاريخ الموعد
+                        </label>
+
+                        <input type="date" id="date" required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="time">
+                            الوقت المناسب
+                        </label>
+
+                        <input type="time" id="time" required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="sessionType">
+                        نوع الجلسة
+                    </label>
+
+                    <select id="sessionType" required>
+
+                        <option value="">اختاري نوع الجلسة</option>
+
+                        <option value="online">جلسة أونلاين</option>
+
+                        <option value="in-person">جلسة حضورية</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="notes">
+                        تفاصيل الطلب
+                    </label>
+
+                    <textarea id="notes"
+                        placeholder="اكتبي هنا سبب طلب الموعد أو أي معلومات تساعد الأخصائي على فهم احتياجك."
+                    ></textarea>
+
+                </div>
+
+
+                <button type="submit" class="submit-btn">
+                    إرسال طلب الموعد
+                </button>
+
+            </form>
+
+
+            <a href="specialists.html" class="back-btn">
+                ← العودة إلى الأخصائيين
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        // المستخدم الحالي
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser") || "null"
+        );
+
+
+        if (!currentUser) {
+
+            alert("سجلي الدخول أولاً");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // الأخصائي المطلوب حجز موعد معه
+
+        const selectedSpecialist = JSON.parse(
+            localStorage.getItem("sanadSelectedSpecialist") || "null"
+        );
+
+
+        const specialistBox = document.getElementById("specialistBox");
+
+
+        if (selectedSpecialist) {
+
+            specialistBox.innerHTML = `
+                <h3>👨‍⚕️ ${escapeHTML(selectedSpecialist.fullName)}</h3>
+
+                <p>
+                    <strong>التخصص:</strong>
+                    ${escapeHTML(selectedSpecialist.specialty || "غير محدد")}
+                </p>
+            `;
+
+        } else {
+
+            specialistBox.innerHTML = `
+                <h3>لم يتم تحديد أخصائي</h3>
+
+                <p>
+                    ارجعي إلى صفحة الأخصائيين واختاري الأخصائي
+                    الذي تريدين حجز موعد معه.
+                </p>
+            `;
+
+        }
+
+
+        // تحديد أقل تاريخ مسموح
+
+        const dateInput = document.getElementById("date");
+
+        const today = new Date();
+
+        const localToday = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().split("T")[0];
+
+        dateInput.min = localToday;
+
+
+        // بيانات المستخدم تلقائيًا
+
+        if (currentUser) {
+
+            document.getElementById("requesterName").value =
+                currentUser.fullName || "";
+
+            document.getElementById("phone").value =
+                currentUser.phone || "";
+
+            if (currentUser.accountType === "user") {
+
+                document.getElementById("childName").value =
+                    currentUser.fullName || "";
+
+            }
+
+            if (currentUser.accountType === "family") {
+
+                document.getElementById("childName").value =
+                    currentUser.linkedChildName || "";
+
+            }
+
+        }
+
+
+        // إرسال طلب الموعد
+
+        document.getElementById("bookingForm").addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+
+            if (!currentUser || !selectedSpecialist) {
+
+                showMessage("يجب اختيار أخصائي أولاً.", "error");
+
+                return;
+
+            }
+
+
+            const date = document.getElementById("date").value;
+
+            if (date < localToday) {
+
+                showMessage("لا يمكن اختيار تاريخ سابق.", "error");
+
+                return;
+
+            }
+
+
+            const appointments = JSON.parse(
+                localStorage.getItem("sanadAppointments") || "[]"
+            );
+
+
+            const specialistId = selectedSpecialist.id;
+
+
+            // منع تكرار الموعد لنفس الأخصائي في نفس الوقت
+
+            const duplicate = appointments.some(app =>
+                String(app.specialistId) === String(specialistId) &&
+                app.date === date &&
+                app.time === document.getElementById("time").value &&
+                ["pending", "accepted"].includes(app.status)
+            );
+
+
+            if (duplicate) {
+
+                showMessage(
+                    "الوقت ده محجوز بالفعل مع الأخصائي، اختاري وقتًا آخر.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const appointment = {
+
+                id: "APT-" + Date.now(),
+
+                specialistId: selectedSpecialist.id,
+
+                specialistName: selectedSpecialist.fullName,
+
+                requesterId: currentUser.id,
+
+                requesterAccountType: currentUser.accountType,
+
+                requesterName: document.getElementById("requesterName").value.trim(),
+
+                phone: document.getElementById("phone").value.trim(),
+
+                childName: document.getElementById("childName").value.trim(),
+
+                disability: document.getElementById("disability").value.trim(),
+
+                date: date,
+
+                time: document.getElementById("time").value,
+
+                sessionType: document.getElementById("sessionType").value,
+
+                notes: document.getElementById("notes").value.trim(),
+
+                status: "pending",
+
+                createdAt: new Date().toISOString()
+
+            };
+
+
+            appointments.push(appointment);
+
+
+            localStorage.setItem(
+                "sanadAppointments",
+                JSON.stringify(appointments)
+            );
+
+
+            showMessage(
+                "تم إرسال طلب الموعد بنجاح! يمكنك متابعة حالة طلبك من صفحة مواعيدي.",
+                "success"
+            );
+
+
+            this.reset();
+
+
+            // إعادة البيانات الأساسية
+
+            document.getElementById("requesterName").value =
+                currentUser.fullName || "";
+
+            document.getElementById("phone").value =
+                currentUser.phone || "";
+
+            if (currentUser.accountType === "user") {
+
+                document.getElementById("childName").value =
+                    currentUser.fullName || "";
+
+            }
+
+            if (currentUser.accountType === "family") {
+
+                document.getElementById("childName").value =
+                    currentUser.linkedChildName || "";
+
+            }
+
+        });
+
+
+        // الرسائل
+
+        function showMessage(text, type) {
+
+            const message = document.getElementById("message");
+
+            message.className = "message " + type;
+
+            message.textContent = text;
+
+            message.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+        // حماية النصوص
+
+        function escapeHTML(value) {
+
+            return String(value || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

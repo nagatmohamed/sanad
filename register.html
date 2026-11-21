@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إنشاء حساب | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           REGISTER PAGE
+        ========================= */
+
+        .register-section {
+            min-height: 80vh;
+            padding: 75px 7% 65px;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(203,166,106,0.10), transparent 28%),
+                radial-gradient(circle at 90% 90%, rgba(23,97,61,0.08), transparent 30%);
+        }
+
+        .register-section > h1 {
+            text-align: center;
+            font-size: 38px;
+            color: #17613D;
+            margin-bottom: 18px;
+            font-weight: 800;
+        }
+
+        .register-description {
+            text-align: center;
+            font-size: 18px;
+            color: #68776D;
+            line-height: 1.9;
+            max-width: 650px;
+            margin: 0 auto 55px;
+        }
+
+        /* Cards Container */
+
+        .account-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 30px;
+            max-width: 1250px;
+            margin: auto;
+            align-items: stretch;
+        }
+
+        /* Account Card */
+
+        .register-section .account-card {
+            position: relative;
+            background: #ffffff;
+            border-radius: 26px;
+            padding: 38px 30px 32px;
+            min-height: 390px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #E8EDE8;
+            box-shadow: 0 8px 30px rgba(23, 97, 61, 0.06);
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .register-section .account-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: #17613D;
+        }
+
+        .register-section .account-card:nth-child(2)::before {
+            background: #CBA66A;
+        }
+
+        .register-section .account-card:nth-child(3)::before {
+            background: #7C9D88;
+        }
+
+        .register-section .account-card:hover {
+            transform: translateY(-9px);
+            box-shadow: 0 18px 40px rgba(23, 97, 61, 0.13);
+            border-color: #C8DCCF;
+        }
+
+        /* Icon */
+
+        .register-section .account-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 28px;
+            background: #EEF5EF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .register-section .account-card:nth-child(2) .account-icon {
+            background: #FBF4E8;
+        }
+
+        .register-section .account-card:nth-child(3) .account-icon {
+            background: #EDF1EF;
+        }
+
+        .register-section .account-card:hover .account-icon {
+            transform: scale(1.07) rotate(-3deg);
+        }
+
+        /* Titles */
+
+        .register-section .account-card h2 {
+            font-size: 25px;
+            color: #17613D;
+            margin-bottom: 17px;
+            font-weight: 800;
+        }
+
+        .register-section .account-card:nth-child(2) h2 {
+            color: #A77B39;
+        }
+
+        .register-section .account-card:nth-child(3) h2 {
+            color: #527762;
+        }
+
+        /* Descriptions */
+
+        .register-section .account-card p {
+            font-size: 16px;
+            color: #68776D;
+            line-height: 2;
+            margin-bottom: 30px;
+            max-width: 300px;
+        }
+
+        /* Buttons */
+
+        .register-section .account-button {
+            margin-top: auto;
+            width: 100%;
+            max-width: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 55px;
+            padding: 13px 20px;
+            border-radius: 14px;
+            background: #17613D;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .register-section .account-card:nth-child(2) .account-button {
+            background: #CBA66A;
+            color: #ffffff;
+        }
+
+        .register-section .account-card:nth-child(3) .account-button {
+            background: #668B74;
+        }
+
+        .register-section .account-button:hover {
+            filter: brightness(0.93);
+            transform: translateY(-2px);
+        }
+
+        /* Login */
+
+        .register-section .back-home {
+            text-align: center;
+            margin-top: 55px;
+            color: #68776D;
+            font-size: 17px;
+        }
+
+        .register-section .back-home a {
+            color: #17613D;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 5px;
+            transition: 0.3s;
+        }
+
+        .register-section .back-home a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+
+        .register-section + footer {
+            text-align: center;
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .register-section {
+                padding: 60px 5%;
+            }
+
+            .account-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 25px;
+            }
+
+            .register-section .account-card {
+                min-height: 380px;
+            }
+
+            .register-section .account-card:nth-child(3) {
+                grid-column: 1 / -1;
+                max-width: 500px;
+                width: 100%;
+                justify-self: center;
+            }
+
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .register-section {
+                padding: 45px 20px;
+            }
+
+            .register-section > h1 {
+                font-size: 29px;
+                line-height: 1.6;
+            }
+
+            .register-description {
+                font-size: 16px;
+                margin-bottom: 35px;
+            }
+
+            .account-container {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .register-section .account-card,
+            .register-section .account-card:nth-child(3) {
+                grid-column: auto;
+                max-width: 100%;
+                min-height: auto;
+                padding: 32px 23px;
+            }
+
+            .register-section .account-icon {
+                width: 85px;
+                height: 85px;
+                font-size: 42px;
+                border-radius: 24px;
+                margin-bottom: 20px;
+            }
+
+            .register-section .account-card h2 {
+                font-size: 23px;
+            }
+
+            .register-section .account-card p {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+
+            .register-section .account-button {
+                max-width: 100%;
+            }
+
+            .register-section .back-home {
+                margin-top: 40px;
+                font-size: 16px;
+            }
+
+        }
+
+        /* Small Phones */
+
+        @media (max-width: 380px) {
+
+            .register-section > h1 {
+                font-size: 25px;
+            }
+
+            .register-section .account-card {
+                padding: 27px 18px;
+            }
+
+        }
+
+        /* Accessibility */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .register-section .account-card,
+            .register-section .account-icon,
+            .register-section .account-button {
+                transition: none;
+            }
+
+            .register-section .account-card:hover,
+            .register-section .account-button:hover {
+                transform: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <!-- Logo -->
+
+        <a href="index.html" class="logo">
+
+            <svg class="logo-icon" viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg">
+
+                <path d="M50 88 C30 72 8 54 10 32 C12 10 37 7 50 28 C63 7 88 10 90 32 C92 54 70 72 50 88Z"
+                    fill="none"
+                    stroke="#17613D"
+                    stroke-width="5" />
+
+                <circle cx="35" cy="34" r="7" fill="#17613D" />
+
+                <circle cx="64" cy="38" r="7" fill="#CBA66A" />
+
+                <path d="M35 44 L29 62 L40 62 L45 47"
+                    fill="none"
+                    stroke="#17613D"
+                    stroke-width="5"
+                    stroke-linecap="round" />
+
+                <path d="M64 48 L58 65 L73 65 L69 49"
+                    fill="none"
+                    stroke="#CBA66A"
+                    stroke-width="5"
+                    stroke-linecap="round" />
+
+                <path d="M22 75 Q50 91 78 75"
+                    fill="none"
+                    stroke="#17613D"
+                    stroke-width="5"
+                    stroke-linecap="round" />
+
+            </svg>
+
+            <div class="logo-text">
+
+                <span>SANAD</span>
+
+                <strong>سند</strong>
+
+            </div>
+
+        </a>
+
+
+        <!-- Navigation -->
+
+        <nav class="navbar">
+
+            <a href="index.html">الرئيسية</a>
+
+            <a href="index.html#about">عن سند</a>
+
+            <a href="index.html#services">خدماتنا</a>
+
+            <a href="index.html#contact">تواصل معنا</a>
+
+        </nav>
+
+
+        <!-- Header Button -->
+
+        <div class="header-buttons">
+
+            <a href="login.html" class="login-btn">
+                تسجيل الدخول
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= REGISTER SECTION ================= -->
+
+    <section class="register-section">
+
+        <h1>مرحبًا بك في سند 💚</h1>
+
+        <p class="register-description">
+
+            اختار نوع الحساب المناسب ليك عشان نقدر نقدم لك
+            الدعم والخدمات المناسبة.
+
+        </p>
+
+
+        <div class="account-container">
+
+
+            <!-- Personal Account -->
+
+            <div class="account-card">
+
+                <div class="account-icon" aria-hidden="true">
+                    🧩
+                </div>
+
+                <h2>حساب شخصي</h2>
+
+                <p>
+
+                    أنا شخص من ذوي الاحتياجات الخاصة،
+                    وعايز أتعلم وأتواصل وأطور من مهاراتي.
+
+                </p>
+
+                <a href="user-register.html" class="account-button">
+
+                    إنشاء حساب
+
+                </a>
+
+            </div>
+
+
+            <!-- Family Account -->
+
+            <div class="account-card">
+
+                <div class="account-icon" aria-hidden="true">
+                    👨‍👩‍👧
+                </div>
+
+                <h2>حساب الأسرة</h2>
+
+                <p>
+
+                    أنا ولي أمر، وعايز أتابع ابني
+                    وأتعلم إزاي أساعده وأدعمه.
+
+                </p>
+
+                <a href="family-register.html" class="account-button">
+
+                    إنشاء حساب
+
+                </a>
+
+            </div>
+
+
+            <!-- Specialist Account -->
+
+            <div class="account-card">
+
+                <div class="account-icon" aria-hidden="true">
+                    🩺
+                </div>
+
+                <h2>حساب أخصائي</h2>
+
+                <p>
+
+                    أنا أخصائي وعايز أقدم الدعم
+                    والإرشاد للأشخاص وأسرهم.
+
+                </p>
+
+                <a href="specialist-register.html" class="account-button">
+
+                    إنشاء حساب
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Login Link -->
+
+        <p class="back-home">
+
+            لديك حساب بالفعل؟
+
+            <a href="login.html">
+                تسجيل الدخول
+            </a>
+
+        </p>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            SANAD | سند
+        </div>
+
+        <p>
+            معًا نفهم، نتعلم، نتطور.
+        </p>
+
+        <p class="copyright">
+            Made by Nagat Fergany © 2026
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

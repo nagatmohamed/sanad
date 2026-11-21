@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>مواعيدي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f8f3;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #263b32;
+        }
+
+        .appointments-container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #315d4c, #56816b);
+            color: white;
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 12px;
+        }
+
+        .page-header p {
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: white;
+            color: #315d4c;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px #00000008;
+        }
+
+        .stat-card h3 {
+            color: #658372;
+            margin: 0 0 12px;
+            font-size: 15px;
+        }
+
+        .stat-card span {
+            font-size: 28px;
+            font-weight: bold;
+            color: #315d4c;
+        }
+
+        .appointments-section {
+            background: white;
+            padding: 25px;
+            border-radius: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px #00000008;
+        }
+
+        .section-title {
+            margin: 0 0 20px;
+            color: #315d4c;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            padding: 10px 18px;
+            border: 1px solid #d9e4dc;
+            background: #f7f8f3;
+            color: #315d4c;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .filter-btn.active {
+            background: #315d4c;
+            color: white;
+        }
+
+        .appointments-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .appointment-card {
+            border: 1px solid #e7eee8;
+            border-radius: 18px;
+            padding: 20px;
+            transition: 0.2s;
+        }
+
+        .appointment-card:hover {
+            box-shadow: 0 5px 15px #00000008;
+        }
+
+        .appointment-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .appointment-name {
+            font-size: 19px;
+            font-weight: bold;
+            color: #315d4c;
+        }
+
+        .appointment-status {
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fff3d7;
+            color: #9a6a12;
+        }
+
+        .accepted {
+            background: #e2f5e8;
+            color: #247343;
+        }
+
+        .rejected {
+            background: #fde7e7;
+            color: #a43e3e;
+        }
+
+        .completed {
+            background: #e8e8f9;
+            color: #56569a;
+        }
+
+        .appointment-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .detail {
+            background: #f7f8f3;
+            padding: 12px;
+            border-radius: 12px;
+            line-height: 1.7;
+        }
+
+        .detail strong {
+            color: #315d4c;
+        }
+
+        .appointment-description {
+            color: #68766d;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .appointment-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .action-btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .accept-btn {
+            background: #315d4c;
+            color: white;
+        }
+
+        .reject-btn {
+            background: #fff0f0;
+            color: #a43e3e;
+        }
+
+        .complete-btn {
+            background: #e8e8f9;
+            color: #56569a;
+        }
+
+        .delete-btn {
+            background: #f2f2f2;
+            color: #555;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 45px 20px;
+            color: #87958b;
+        }
+
+        .empty-state .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .empty-state h3 {
+            color: #315d4c;
+        }
+
+        .empty-state p {
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .appointment-details {
+                grid-template-columns: 1fr;
+            }
+
+            .appointments-section {
+                padding: 18px;
+            }
+
+            .page-header {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="appointments-container">
+
+        <!-- Header -->
+
+        <header class="page-header">
+
+            <h1>📅 مواعيد الأخصائي</h1>
+
+            <p>
+                إدارة طلبات المواعيد، ومتابعة الجلسات، وتنظيم مواعيد المستفيدين.
+            </p>
+
+            <a href="specialist-dashboard.html" class="back-btn">
+                ← العودة للوحة التحكم
+            </a>
+
+        </header>
+
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h3>إجمالي المواعيد</h3>
+                <span id="totalAppointments">0</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>طلبات معلقة</h3>
+                <span id="pendingAppointments">0</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>مواعيد مقبولة</h3>
+                <span id="acceptedAppointments">0</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>مواعيد مكتملة</h3>
+                <span id="completedAppointments">0</span>
+            </div>
+
+        </section>
+
+
+        <!-- Appointments -->
+
+        <section class="appointments-section">
+
+            <h2 class="section-title">طلبات المواعيد</h2>
+
+            <div class="filters">
+
+                <button class="filter-btn active" data-filter="all">
+                    الكل
+                </button>
+
+                <button class="filter-btn" data-filter="pending">
+                    معلقة
+                </button>
+
+                <button class="filter-btn" data-filter="accepted">
+                    مقبولة
+                </button>
+
+                <button class="filter-btn" data-filter="completed">
+                    مكتملة
+                </button>
+
+                <button class="filter-btn" data-filter="rejected">
+                    مرفوضة
+                </button>
+
+            </div>
+
+            <div id="appointmentsList" class="appointments-list"></div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        // =====================================
+        // بيانات المستخدم الحالي
+        // =====================================
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser") || "null"
+        );
+
+        if (!currentUser || currentUser.accountType !== "specialist") {
+            alert("يجب تسجيل الدخول بحساب أخصائي");
+            window.location.href = "login.html";
+        }
+
+
+        // =====================================
+        // قراءة المواعيد
+        // =====================================
+
+        let appointments = JSON.parse(
+            localStorage.getItem("sanadAppointments") || "[]"
+        );
+
+
+        // =====================================
+        // حفظ المواعيد
+        // =====================================
+
+        function saveAppointments() {
+
+            localStorage.setItem(
+                "sanadAppointments",
+                JSON.stringify(appointments)
+            );
+
+        }
+
+
+        // =====================================
+        // اسم الحالة
+        // =====================================
+
+        function getStatusName(status) {
+
+            const statuses = {
+
+                pending: "قيد الانتظار",
+
+                accepted: "تم قبول الموعد",
+
+                rejected: "تم رفض الموعد",
+
+                completed: "تمت الجلسة"
+
+            };
+
+            return statuses[status] || "غير محدد";
+
+        }
+
+
+        // =====================================
+        // تحديث الإحصائيات
+        // =====================================
+
+        function updateStats() {
+
+            const myAppointments = appointments.filter(app =>
+                String(app.specialistId) === String(currentUser.id)
+            );
+
+            document.getElementById("totalAppointments").textContent =
+                myAppointments.length;
+
+            document.getElementById("pendingAppointments").textContent =
+                myAppointments.filter(app => app.status === "pending").length;
+
+            document.getElementById("acceptedAppointments").textContent =
+                myAppointments.filter(app => app.status === "accepted").length;
+
+            document.getElementById("completedAppointments").textContent =
+                myAppointments.filter(app => app.status === "completed").length;
+
+        }
+
+
+        // =====================================
+        // عرض المواعيد
+        // =====================================
+
+        function displayAppointments(filter = "all") {
+
+            const container = document.getElementById("appointmentsList");
+
+            const myAppointments = appointments.filter(app =>
+                String(app.specialistId) === String(currentUser.id)
+            );
+
+            const filteredAppointments = filter === "all"
+                ? myAppointments
+                : myAppointments.filter(app => app.status === filter);
+
+
+            if (filteredAppointments.length === 0) {
+
+                container.innerHTML = `
+                    <div class="empty-state">
+
+                        <div class="icon">📅</div>
+
+                        <h3>لا توجد مواعيد حاليًا</h3>
+
+                        <p>
+                            ${filter === "all"
+                                ? "طلبات المواعيد التي تصلك ستظهر هنا."
+                                : "لا توجد مواعيد في هذه الحالة حاليًا."}
+                        </p>
+
+                    </div>
+                `;
+
+                updateStats();
+
+                return;
+
+            }
+
+
+            container.innerHTML = filteredAppointments
+                .sort((a, b) => {
+
+                    const dateA = new Date(a.date + " " + (a.time || "00:00"));
+
+                    const dateB = new Date(b.date + " " + (b.time || "00:00"));
+
+                    return dateA - dateB;
+
+                })
+                .map(app => {
+
+                    const statusClass = app.status || "pending";
+
+                    return `
+
+                    <div class="appointment-card">
+
+                        <div class="appointment-top">
+
+                            <div class="appointment-name">
+                                👤 ${escapeHTML(app.childName || app.patientName || app.userName || "مستفيد")}
+                            </div>
+
+                            <span class="appointment-status ${statusClass}">
+                                ${getStatusName(app.status)}
+                            </span>
+
+                        </div>
+
+
+                        <div class="appointment-details">
+
+                            <div class="detail">
+                                <strong>📅 التاريخ:</strong>
+                                ${escapeHTML(app.date || "غير محدد")}
+                            </div>
+
+                            <div class="detail">
+                                <strong>🕐 الوقت:</strong>
+                                ${escapeHTML(app.time || "غير محدد")}
+                            </div>
+
+                            <div class="detail">
+                                <strong>👥 صاحب الطلب:</strong>
+                                ${escapeHTML(app.requesterName || app.familyName || app.userName || "غير محدد")}
+                            </div>
+
+                            <div class="detail">
+                                <strong>📞 رقم التواصل:</strong>
+                                ${escapeHTML(app.phone || app.requesterPhone || "غير مسجل")}
+                            </div>
+
+                            <div class="detail">
+                                <strong>💻 نوع الجلسة:</strong>
+                                ${escapeHTML(app.sessionType || app.serviceType || "غير محدد")}
+                            </div>
+
+                            <div class="detail">
+                                <strong>🧩 نوع الإعاقة:</strong>
+                                ${escapeHTML(app.disability || app.disabilityType || "غير محدد")}
+                            </div>
+
+                        </div>
+
+
+                        ${app.notes || app.reason ? `
+
+                            <div class="appointment-description">
+
+                                <strong>📝 تفاصيل الطلب:</strong><br>
+
+                                ${escapeHTML(app.notes || app.reason)}
+
+                            </div>
+
+                        ` : ""}
+
+
+                        <div class="appointment-actions">
+
+                            ${app.status === "pending" ? `
+
+                                <button class="action-btn accept-btn"
+                                    onclick="changeAppointmentStatus('${app.id}', 'accepted')">
+
+                                    ✔ قبول الموعد
+
+                                </button>
+
+                                <button class="action-btn reject-btn"
+                                    onclick="changeAppointmentStatus('${app.id}', 'rejected')">
+
+                                    ✖ رفض الموعد
+
+                                </button>
+
+                            ` : ""}
+
+
+                            ${app.status === "accepted" ? `
+
+                                <button class="action-btn complete-btn"
+                                    onclick="changeAppointmentStatus('${app.id}', 'completed')">
+
+                                    ✔ تسجيل الجلسة كمكتملة
+
+                                </button>
+
+                            ` : ""}
+
+
+                            <button class="action-btn delete-btn"
+                                onclick="deleteAppointment('${app.id}')">
+
+                                🗑 حذف
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                })
+                .join("");
+
+            updateStats();
+
+        }
+
+
+        // =====================================
+        // تغيير حالة الموعد
+        // =====================================
+
+        function changeAppointmentStatus(id, newStatus) {
+
+            const appointment = appointments.find(app =>
+                String(app.id) === String(id) &&
+                String(app.specialistId) === String(currentUser.id)
+            );
+
+            if (!appointment) return;
+
+
+            if (newStatus === "accepted") {
+
+                const confirmAccept = confirm("هل تريد قبول هذا الموعد؟");
+
+                if (!confirmAccept) return;
+
+            }
+
+
+            if (newStatus === "rejected") {
+
+                const confirmReject = confirm("هل تريد رفض هذا الموعد؟");
+
+                if (!confirmReject) return;
+
+            }
+
+
+            if (newStatus === "completed") {
+
+                const confirmComplete = confirm("هل انتهت الجلسة بالفعل؟");
+
+                if (!confirmComplete) return;
+
+            }
+
+
+            appointment.status = newStatus;
+
+            appointment.updatedAt = new Date().toISOString();
+
+            saveAppointments();
+
+            displayAppointments(currentFilter);
+
+        }
+
+
+        // =====================================
+        // حذف موعد
+        // =====================================
+
+        function deleteAppointment(id) {
+
+            const confirmDelete = confirm("هل تريد حذف هذا الموعد؟");
+
+            if (!confirmDelete) return;
+
+
+            appointments = appointments.filter(app =>
+                !(String(app.id) === String(id) &&
+                  String(app.specialistId) === String(currentUser.id))
+            );
+
+            saveAppointments();
+
+            displayAppointments(currentFilter);
+
+        }
+
+
+        // =====================================
+        // الفلاتر
+        // =====================================
+
+        let currentFilter = "all";
+
+        document.querySelectorAll(".filter-btn").forEach(button => {
+
+            button.addEventListener("click", function () {
+
+                document.querySelectorAll(".filter-btn").forEach(btn =>
+                    btn.classList.remove("active")
+                );
+
+                this.classList.add("active");
+
+                currentFilter = this.dataset.filter;
+
+                displayAppointments(currentFilter);
+
+            });
+
+        });
+
+
+        // =====================================
+        // منع إدخال HTML داخل النصوص
+        // =====================================
+
+        function escapeHTML(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        // =====================================
+        // تشغيل الصفحة
+        // =====================================
+
+        if (currentUser && currentUser.accountType === "specialist") {
+
+            displayAppointments();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

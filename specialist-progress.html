@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>متابعة تقدم الأطفال | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .progress-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .welcome-box {
+            background: linear-gradient(135deg, #e5f0e6, #f5eee2);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .welcome-box h1 {
+            color: #315b43;
+            margin-bottom: 12px;
+        }
+
+        .welcome-box p {
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .section-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #00000010;
+        }
+
+        .section-box h2 {
+            color: #315b43;
+            margin-bottom: 18px;
+        }
+
+        .child-select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+        }
+
+        .empty-message {
+            background: #fff4df;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 2;
+        }
+
+        .child-profile {
+            background: #f5f8f2;
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #f8f8f4;
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 30px;
+            color: #3d7652;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            color: #555;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e6e6e0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3d7652;
+            border-radius: 20px;
+            transition: width .4s;
+        }
+
+        .activity-item {
+            background: #f8f8f4;
+            border: 1px solid #e4e9df;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .completed {
+            color: #287344;
+            font-weight: bold;
+        }
+
+        .not-completed {
+            color: #a36a22;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .main-button {
+            background: #3d7652;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .main-button:hover {
+            background: #28563a;
+        }
+
+        .note-card {
+            background: #f8f8f4;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            line-height: 1.8;
+            border-right: 4px solid #3d7652;
+        }
+
+        .note-type {
+            display: inline-block;
+            background: #e5f0e6;
+            color: #315b43;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #3d7652;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        button:focus,
+        select:focus,
+        textarea:focus,
+        a:focus {
+            outline: 3px solid #d9a441;
+            outline-offset: 3px;
+        }
+
+        @media(max-width: 600px) {
+            .progress-container {
+                padding: 12px;
+            }
+
+            .section-box {
+                padding: 17px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <svg width="45" height="45" viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+                <path
+                    d="M50 85 C15 60 5 35 25 20 C38 10 50 25 50 25 C50 25 62 10 75 20 C95 35 85 60 50 85Z"
+                    fill="#3d7652"/>
+
+                <circle cx="38" cy="38" r="7" fill="white"/>
+                <circle cx="62" cy="38" r="7" fill="white"/>
+
+                <path
+                    d="M25 65 Q38 45 50 65 Q62 45 75 65"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="6"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <span class="logo-text">SANAD | سند</span>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="specialist-dashboard.html">لوحة التحكم</a>
+            <a href="specialist-cases.html">الحالات</a>
+        </nav>
+
+    </header>
+
+
+    <main class="progress-container">
+
+        <section class="welcome-box">
+
+            <h1>📊 متابعة تقدم الأطفال</h1>
+
+            <p>
+                تابع تطور كل طفل، واطلع على الأنشطة التعليمية
+                التي أنجزها، وسجل ملاحظاتك وتوصياتك لمساعدته
+                على تحقيق تقدم مستمر.
+            </p>
+
+            <button class="main-button" onclick="speakPage()">
+                🔊 استمع إلى الصفحة
+            </button>
+
+            <button class="main-button" onclick="stopVoice()">
+                إيقاف الصوت
+            </button>
+
+        </section>
+
+
+        <section class="section-box">
+
+            <h2>👧 اختر الطفل</h2>
+
+            <select
+                id="childSelect"
+                class="child-select"
+                aria-label="اختر الطفل لمتابعة تقدمه">
+
+                <option value="">اختر طفلًا من الحالات المتاحة</option>
+
+            </select>
+
+            <div id="noCases" class="empty-message" style="display:none;">
+                لا توجد حالات مقبولة لمتابعتها حاليًا.
+            </div>
+
+        </section>
+
+
+        <div id="progressContent" style="display:none;">
+
+            <section class="section-box">
+
+                <h2>👤 بيانات الطفل</h2>
+
+                <div id="childProfile" class="child-profile"></div>
+
+            </section>
+
+
+            <section class="section-box">
+
+                <h2>📈 مستوى التقدم التعليمي</h2>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <h3 id="completedCount">0</h3>
+                        <p>الأنشطة المكتملة</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 id="remainingCount">0</h3>
+                        <p>الأنشطة المتبقية</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 id="percentage">0%</h3>
+                        <p>نسبة الإنجاز</p>
+                    </div>
+
+                </div>
+
+                <p id="progressMessage" aria-live="polite"></p>
+
+                <div
+                    class="progress-bar"
+                    role="progressbar"
+                    aria-label="نسبة تقدم الطفل"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    id="progressBar">
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill"
+                        style="width:0%;">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="section-box">
+
+                <h2>📚 الأنشطة التعليمية</h2>
+
+                <div id="activitiesList"></div>
+
+            </section>
+
+
+            <section class="section-box">
+
+                <h2>📝 إضافة ملاحظة وتوصية</h2>
+
+                <textarea
+                    id="specialistNote"
+                    placeholder="اكتب ملاحظاتك حول مستوى الطفل والتوصيات المناسبة له..."
+                    aria-label="ملاحظات الأخصائي">
+
+                </textarea>
+
+                <button class="main-button" onclick="saveNote()">
+                    حفظ الملاحظة
+                </button>
+
+            </section>
+
+
+            <section class="section-box">
+
+                <h2>📋 سجل المتابعة</h2>
+
+                <div id="notesList"></div>
+
+            </section>
+
+        </div>
+
+
+        <a href="specialist-dashboard.html" class="back-button">
+            العودة إلى لوحة التحكم
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // =====================================
+        // 1. بيانات المستخدم
+        // =====================================
+
+        function getStorageArray(key) {
+
+            try {
+
+                const data = JSON.parse(
+                    localStorage.getItem(key) || "[]"
+                );
+
+                return Array.isArray(data) ? data : [];
+
+            } catch (error) {
+
+                return [];
+
+            }
+
+        }
+
+
+        function getCurrentUser() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem("sanadCurrentUser")
+                );
+
+            } catch (error) {
+
+                return null;
+
+            }
+
+        }
+
+
+        const currentUser = getCurrentUser();
+
+        const users = getStorageArray("sanadUsers");
+
+
+        if (!currentUser || currentUser.accountType !== "specialist") {
+
+            alert("يجب تسجيل الدخول بحساب أخصائي.");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        let cases = [];
+
+        let selectedChild = null;
+
+
+        // =====================================
+        // 2. الأنشطة الفعلية الموجودة في my-education
+        // =====================================
+
+        const disabilityActivities = {
+
+            visual: {
+
+                name: "الإعاقة البصرية",
+
+                activities: [
+
+                    {
+                        id: "visual1",
+                        title: "أصوات من حولنا",
+                        icon: "🔊"
+                    },
+
+                    {
+                        id: "visual2",
+                        title: "أصوات الحيوانات",
+                        icon: "🐦"
+                    },
+
+                    {
+                        id: "visual3",
+                        title: "تمييز الأصوات",
+                        icon: "🎵"
+                    }
+
+                ]
+
+            },
+
+
+            hearing: {
+
+                name: "الإعاقة السمعية",
+
+                activities: [
+
+                    {
+                        id: "hearing1",
+                        title: "تعرف على الألوان",
+                        icon: "🖼️"
+                    },
+
+                    {
+                        id: "hearing2",
+                        title: "الفواكه",
+                        icon: "🍎"
+                    },
+
+                    {
+                        id: "hearing3",
+                        title: "تعلم الأرقام",
+                        icon: "🔢"
+                    }
+
+                ]
+
+            },
+
+
+            mobility: {
+
+                name: "الإعاقة الحركية",
+
+                activities: [
+
+                    {
+                        id: "mobility1",
+                        title: "ترتيب الأرقام",
+                        icon: "🔢"
+                    },
+
+                    {
+                        id: "mobility2",
+                        title: "الفاكهة المفيدة",
+                        icon: "🍎"
+                    },
+
+                    {
+                        id: "mobility3",
+                        title: "الأشكال",
+                        icon: "📐"
+                    }
+
+                ]
+
+            },
+
+
+            intellectual: {
+
+                name: "الإعاقة الذهنية",
+
+                activities: [
+
+                    {
+                        id: "intellectual1",
+                        title: "تعرف على الألوان",
+                        icon: "🎨"
+                    },
+
+                    {
+                        id: "intellectual2",
+                        title: "الحيوانات",
+                        icon: "🐱"
+                    },
+
+                    {
+                        id: "intellectual3",
+                        title: "العد",
+                        icon: "🔢"
+                    }
+
+                ]
+
+            },
+
+
+            autism: {
+
+                name: "اضطراب طيف التوحد",
+
+                activities: [
+
+                    {
+                        id: "autism1",
+                        title: "ترتيب اليوم",
+                        icon: "📅"
+                    },
+
+                    {
+                        id: "autism2",
+                        title: "النظافة الشخصية",
+                        icon: "🧼"
+                    },
+
+                    {
+                        id: "autism3",
+                        title: "إشارات المرور",
+                        icon: "🚦"
+                    }
+
+                ]
+
+            },
+
+
+            learning: {
+
+                name: "صعوبات التعلم",
+
+                activities: [
+
+                    {
+                        id: "learning1",
+                        title: "الحروف",
+                        icon: "🔤"
+                    },
+
+                    {
+                        id: "learning2",
+                        title: "الأرقام",
+                        icon: "🔢"
+                    },
+
+                    {
+                        id: "learning3",
+                        title: "الكلمات",
+                        icon: "🧩"
+                    }
+
+                ]
+
+            },
+
+
+            multiple: {
+
+                name: "إعاقات متعددة",
+
+                activities: [
+
+                    {
+                        id: "multiple1",
+                        title: "الألوان",
+                        icon: "🎨"
+                    },
+
+                    {
+                        id: "multiple2",
+                        title: "الحيوانات",
+                        icon: "🐾"
+                    },
+
+                    {
+                        id: "multiple3",
+                        title: "الأرقام",
+                        icon: "🔢"
+                    }
+
+                ]
+
+            },
+
+
+            other: {
+
+                name: "احتياجات دعم أخرى",
+
+                activities: [
+
+                    {
+                        id: "other1",
+                        title: "الألوان",
+                        icon: "🎨"
+                    },
+
+                    {
+                        id: "other2",
+                        title: "الأرقام",
+                        icon: "🔢"
+                    },
+
+                    {
+                        id: "other3",
+                        title: "الحيوانات",
+                        icon: "🐶"
+                    }
+
+                ]
+
+            }
+
+        };
+
+
+        // =====================================
+        // 3. توحيد نوع الإعاقة
+        // =====================================
+
+        function normalizeDisability(type) {
+
+            const aliases = {
+
+                physical: "mobility",
+
+                motor: "mobility",
+
+                learning_disabilities: "learning",
+
+                learning_difficulties: "learning"
+
+            };
+
+            return aliases[type] || type || "other";
+
+        }
+
+
+        // =====================================
+        // 4. حماية النصوص
+        // =====================================
+
+        function escapeHTML(value) {
+
+            return String(value ?? "").replace(/[&<>"']/g, char => {
+
+                const entities = {
+
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+
+                };
+
+                return entities[char];
+
+            });
+
+        }
+
+
+        // =====================================
+        // 5. تحميل الحالات المقبولة
+        // =====================================
+
+        function loadCases() {
+
+            const followRequests = getStorageArray(
+                "sanadFollowRequests"
+            );
+
+            const consultationRequests = getStorageArray(
+                "sanadSpecialistRequests"
+            );
+
+
+            const acceptedRequests = [
+
+                ...followRequests,
+
+                ...consultationRequests
+
+            ].filter(request =>
+
+                String(request.specialistId) === String(currentUser.id) &&
+                request.status === "accepted"
+
+            );
+
+
+            const select = document.getElementById("childSelect");
+
+
+            acceptedRequests.forEach(request => {
+
+                const requester = users.find(user =>
+
+                    String(user.id) === String(request.requesterId)
+
+                );
+
+
+                if (!requester) return;
+
+
+                let child = null;
+
+
+                if (requester.accountType === "user") {
+
+                    child = requester;
+
+                }
+
+                else if (
+                    requester.accountType === "family" &&
+                    requester.linkedChildId
+                ) {
+
+                    child = users.find(user =>
+
+                        String(user.id) === String(requester.linkedChildId) &&
+                        user.accountType === "user"
+
+                    );
+
+                }
+
+
+                if (!child) return;
+
+
+                // منع تكرار الطفل
+
+                if (cases.some(item =>
+
+                    String(item.id) === String(child.id)
+
+                )) {
+
+                    return;
+
+                }
+
+
+                cases.push(child);
+
+
+                const option = document.createElement("option");
+
+                option.value = child.id;
+
+                option.textContent = child.fullName || "طفل";
+
+                select.appendChild(option);
+
+            });
+
+
+            if (cases.length === 0) {
+
+                document.getElementById("noCases").style.display = "block";
+
+            }
+
+
+            select.addEventListener("change", function() {
+
+                showChild(this.value);
+
+            });
+
+        }
+
+
+        // =====================================
+        // 6. عرض بيانات الطفل
+        // =====================================
+
+        function showChild(childId) {
+
+            selectedChild = cases.find(child =>
+
+                String(child.id) === String(childId)
+
+            );
+
+
+            if (!selectedChild) {
+
+                document.getElementById("progressContent").style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            document.getElementById("progressContent").style.display =
+                "block";
+
+
+            const disability = normalizeDisability(
+
+                selectedChild.disabilityType ||
+                selectedChild.disability
+
+            );
+
+
+            const disabilityData =
+                disabilityActivities[disability] ||
+                disabilityActivities.other;
+
+
+            document.getElementById("childProfile").innerHTML = `
+
+                <p>
+                    <strong>الاسم:</strong>
+                    ${escapeHTML(selectedChild.fullName || "غير محدد")}
+                </p>
+
+                <p>
+                    <strong>نوع الإعاقة:</strong>
+                    ${escapeHTML(disabilityData.name)}
+                </p>
+
+                <p>
+                    <strong>كود الطفل:</strong>
+                    ${escapeHTML(selectedChild.childCode || "غير متوفر")}
+                </p>
+
+                <p>
+                    <strong>المحافظة:</strong>
+                    ${escapeHTML(
+                        selectedChild.governorate ||
+                        selectedChild.city ||
+                        "غير محدد"
+                    )}
+                </p>
+
+            `;
+
+
+            loadProgress(disability);
+
+            loadNotes();
+
+        }
+
+
+        // =====================================
+        // 7. تحميل التقدم الفعلي للطفل
+        // =====================================
+
+        function loadProgress(disability) {
+
+            const disabilityData =
+                disabilityActivities[disability] ||
+                disabilityActivities.other;
+
+
+            const activities = disabilityData.activities;
+
+
+            // نفس مفتاح التخزين الموجود في my-education.html
+
+            const progressKey =
+                "sanadEducationProgress_" + selectedChild.id;
+
+
+            const completedActivities = getStorageArray(progressKey);
+
+
+            // المعرّفات الفعلية للأنشطة
+
+            const completed = activities.filter(activity =>
+
+                completedActivities.includes(activity.id)
+
+            );
+
+
+            const completedCount = completed.length;
+
+            const total = activities.length;
+
+            const remaining = total - completedCount;
+
+
+            const percent = total > 0
+
+                ? Math.round((completedCount / total) * 100)
+
+                : 0;
+
+
+            document.getElementById("completedCount").textContent =
+                completedCount;
+
+
+            document.getElementById("remainingCount").textContent =
+                remaining;
+
+
+            document.getElementById("percentage").textContent =
+                percent + "%";
+
+
+            document.getElementById("progressFill").style.width =
+                percent + "%";
+
+
+            document.getElementById("progressBar").setAttribute(
+                "aria-valuenow",
+                percent
+            );
+
+
+            document.getElementById("progressMessage").textContent =
+
+                percent === 100
+
+                    ? "ممتاز! الطفل أكمل جميع الأنشطة المتاحة. 🌟"
+
+                    : percent > 0
+
+                        ? "الطفل بدأ يتقدم، استمر في تشجيعه. 💚"
+
+                        : "لم يتم تسجيل أنشطة مكتملة حتى الآن.";
+
+
+            // عرض الأنشطة
+
+            const activitiesContainer =
+                document.getElementById("activitiesList");
+
+
+            activitiesContainer.innerHTML = activities.map(activity => {
+
+                const isCompleted =
+                    completedActivities.includes(activity.id);
+
+
+                return `
+
+                    <div class="activity-item">
+
+                        <strong>
+                            ${activity.icon}
+                            ${escapeHTML(activity.title)}
+                        </strong>
+
+                        <p class="${
+                            isCompleted
+                                ? "completed"
+                                : "not-completed"
+                        }">
+
+                            ${
+                                isCompleted
+                                    ? "✓ تم إنجاز النشاط"
+                                    : "○ لم يتم إنجاز النشاط بعد"
+                            }
+
+                        </p>
+
+                    </div>
+
+                `;
+
+            }).join("");
+
+        }
+
+
+        // =====================================
+        // 8. حفظ ملاحظة الأخصائي
+        // =====================================
+
+        function saveNote() {
+
+            if (!selectedChild) {
+
+                alert("اختار طفلًا أولًا.");
+
+                return;
+
+            }
+
+
+            const noteInput =
+                document.getElementById("specialistNote");
+
+
+            const noteText = noteInput.value.trim();
+
+
+            if (!noteText) {
+
+                alert("اكتب الملاحظة قبل الحفظ.");
+
+                return;
+
+            }
+
+
+            const key =
+                "sanadSpecialistNotes_" + selectedChild.id;
+
+
+            const notes = getStorageArray(key);
+
+
+            // نفس شكل البيانات المستخدم في specialist-notes.html
+
+            const newNote = {
+
+                id: Date.now(),
+
+                specialistId: currentUser.id,
+
+                specialistName:
+                    currentUser.fullName ||
+                    currentUser.name ||
+                    "الأخصائي",
+
+                type: "progress",
+
+                title: "متابعة التقدم التعليمي",
+
+                text: noteText,
+
+                date: new Date().toLocaleString("ar-EG")
+
+            };
+
+
+            notes.unshift(newNote);
+
+
+            localStorage.setItem(
+                key,
+                JSON.stringify(notes)
+            );
+
+
+            noteInput.value = "";
+
+
+            loadNotes();
+
+
+            alert("تم حفظ الملاحظة بنجاح. 💚");
+
+        }
+
+
+        // =====================================
+        // 9. عرض سجل الملاحظات
+        // =====================================
+
+        function loadNotes() {
+
+            if (!selectedChild) return;
+
+
+            const key =
+                "sanadSpecialistNotes_" + selectedChild.id;
+
+
+            const notes = getStorageArray(key);
+
+
+            const container =
+                document.getElementById("notesList");
+
+
+            if (notes.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="empty-message">
+
+                        لا توجد ملاحظات مسجلة لهذه الحالة حتى الآن.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            container.innerHTML = notes.map(item => {
+
+                // قراءة الملاحظات القديمة والجديدة
+
+                const noteText =
+                    item.text ||
+                    item.note ||
+                    "";
+
+
+                const noteTitle =
+                    item.title ||
+                    "ملاحظة متابعة";
+
+
+                const specialistName =
+                    item.specialistName ||
+                    "الأخصائي";
+
+
+                return `
+
+                    <div class="note-card">
+
+                        <span class="note-type">
+                            ${escapeHTML(noteTitle)}
+                        </span>
+
+                        <strong>
+                            الأخصائي: ${escapeHTML(specialistName)}
+                        </strong>
+
+                        <p>
+                            ${escapeHTML(noteText)}
+                        </p>
+
+                        <small>
+                            ${escapeHTML(item.date || "تاريخ غير محدد")}
+                        </small>
+
+                    </div>
+
+                `;
+
+            }).join("");
+
+        }
+
+
+        // =====================================
+        // 10. القراءة الصوتية
+        // =====================================
+
+        function speak(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم القراءة الصوتية.");
+
+                return;
+
+            }
+
+
+            window.speechSynthesis.cancel();
+
+
+            const utterance =
+                new SpeechSynthesisUtterance(text);
+
+
+            utterance.lang = "ar-EG";
+
+            utterance.rate = 0.85;
+
+
+            window.speechSynthesis.speak(utterance);
+
+        }
+
+
+        function speakPage() {
+
+            speak(
+
+                "مرحبًا بك في صفحة متابعة تقدم الأطفال. " +
+
+                "يمكنك اختيار طفل والاطلاع على الأنشطة التعليمية " +
+
+                "ونسبة الإنجاز وإضافة ملاحظات وتوصيات."
+
+            );
+
+        }
+
+
+        function stopVoice() {
+
+            if ("speechSynthesis" in window) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+        }
+
+
+        // إيقاف الصوت عند مغادرة الصفحة
+
+        window.addEventListener("beforeunload", stopVoice);
+
+
+        // =====================================
+        // 11. تشغيل الصفحة
+        // =====================================
+
+        if (
+            currentUser &&
+            currentUser.accountType === "specialist"
+        ) {
+
+            loadCases();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

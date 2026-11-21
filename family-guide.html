@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>دليل الأسرة | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .guide-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .guide-welcome {
+            background: linear-gradient(135deg, #e5f0e6, #f5eee2);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .guide-welcome h1 {
+            color: #315b43;
+            margin-bottom: 12px;
+        }
+
+        .guide-welcome p {
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .child-info {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #00000010;
+        }
+
+        .child-info h2 {
+            color: #315b43;
+            margin-bottom: 12px;
+        }
+
+        .guide-section {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #00000010;
+        }
+
+        .guide-section h2 {
+            color: #315b43;
+            margin-bottom: 18px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+        }
+
+        .guide-card {
+            background: #f8f8f4;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e4e9df;
+        }
+
+        .guide-card h3 {
+            color: #315b43;
+            margin-bottom: 10px;
+        }
+
+        .guide-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .guide-card button,
+        .voice-button {
+            background: #3d7652;
+            color: white;
+            border: none;
+            padding: 11px 17px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        .guide-card button:hover,
+        .voice-button:hover {
+            background: #28563a;
+        }
+
+        .guide-details {
+            display: none;
+            background: #edf5ed;
+            padding: 20px;
+            border-radius: 14px;
+            margin-top: 15px;
+            line-height: 2;
+        }
+
+        .guide-details h4 {
+            color: #315b43;
+            margin-top: 10px;
+        }
+
+        .guide-details ul {
+            padding-right: 22px;
+        }
+
+        .important-box {
+            background: #fff4df;
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 1.9;
+            border-right: 5px solid #d9a441;
+        }
+
+        .no-child {
+            background: #fff4df;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            line-height: 2;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #3d7652;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        button:focus,
+        a:focus {
+            outline: 3px solid #d9a441;
+            outline-offset: 3px;
+        }
+
+        @media(max-width: 600px) {
+            .guide-container {
+                padding: 12px;
+            }
+
+            .guide-section {
+                padding: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            <svg width="45" height="45" viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M50 85 C15 60 5 35 25 20 C38 10 50 25 50 25 C50 25 62 10 75 20 C95 35 85 60 50 85Z"
+                    fill="#3d7652"/>
+                <circle cx="38" cy="38" r="7" fill="white"/>
+                <circle cx="62" cy="38" r="7" fill="white"/>
+                <path d="M25 65 Q38 45 50 65 Q62 45 75 65"
+                    fill="none" stroke="white" stroke-width="6"
+                    stroke-linecap="round"/>
+            </svg>
+
+            <span class="logo-text">SANAD | سند</span>
+        </div>
+
+        <nav class="navbar">
+            <a href="family-dashboard.html">لوحة التحكم</a>
+            <a href="my-profile.html">ملفي الشخصي</a>
+        </nav>
+
+    </header>
+
+
+    <main class="guide-container">
+
+        <section class="guide-welcome">
+
+            <h1>💚 دليل الأسرة</h1>
+
+            <p>
+                لأن دعم الطفل يبدأ من البيت، وفرنا لك دليلًا يساعدك
+                على فهم احتياجات طفلك والتعامل معه بطريقة إيجابية،
+                وتقديم الدعم المناسب له في حياته اليومية.
+            </p>
+
+            <button class="voice-button" onclick="speakPage()">
+                🔊 استمع إلى محتوى الصفحة
+            </button>
+
+            <button class="voice-button" onclick="stopVoice()">
+                إيقاف الصوت
+            </button>
+
+        </section>
+
+
+        <div id="childInfo" class="child-info" aria-live="polite">
+            جاري تحميل بيانات الطفل...
+        </div>
+
+
+        <div id="guideContent">
+
+            <section class="guide-section">
+
+                <h2>🌷 إرشادات مهمة للأسرة</h2>
+
+                <div class="guide-grid">
+
+                    <div class="guide-card">
+                        <h3>💚 الحب والاحتواء</h3>
+                        <p>
+                            احرص على إظهار حبك لطفلك، واستمع إليه،
+                            وشجعه دائمًا دون مقارنته بالآخرين.
+                        </p>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>⭐ التشجيع المستمر</h3>
+                        <p>
+                            احتفل بالإنجازات الصغيرة، وامدح محاولاته،
+                            وساعده على اكتساب الثقة بنفسه.
+                        </p>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>🕒 الروتين اليومي</h3>
+                        <p>
+                            حاول تنظيم مواعيد النوم والطعام والتعلم
+                            واللعب، مع مراعاة احتياجات الطفل.
+                        </p>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>🤝 التعاون مع المتخصصين</h3>
+                        <p>
+                            تابع تطور طفلك مع المتخصصين،
+                            واسألهم عن أفضل الطرق لدعمه.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="guide-section">
+
+                <h2>📚 إرشادات حسب نوع الإعاقة</h2>
+
+                <p style="line-height:2; margin-bottom:20px;">
+                    اختار المجال المناسب لطفلك لعرض مجموعة من الإرشادات
+                    والأنشطة التي يمكن تطبيقها داخل المنزل.
+                </p>
+
+                <div id="disabilityGuides" class="guide-grid"></div>
+
+            </section>
+
+
+            <section class="guide-section">
+
+                <h2>🏡 أنشطة بسيطة داخل المنزل</h2>
+
+                <div class="guide-grid">
+
+                    <div class="guide-card">
+                        <h3>🎨 نشاط الرسم</h3>
+                        <p>
+                            شارك طفلك في الرسم والتلوين باستخدام
+                            الأدوات المناسبة لقدراته.
+                        </p>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>🧩 الألعاب التعليمية</h3>
+                        <p>
+                            استخدم الألعاب البسيطة التي تساعد على
+                            تنمية الانتباه والتفكير وحل المشكلات.
+                        </p>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>📖 قراءة القصص</h3>
+                        <p>
+                            احكِ لطفلك قصة قصيرة، واستخدم الصور
+                            أو الأصوات أو الوسائل المناسبة له.
+                        </p>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3>🌱 المشاركة اليومية</h3>
+                        <p>
+                            شجع طفلك على المشاركة في أنشطة المنزل
+                            البسيطة بما يتناسب مع قدراته.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="guide-section">
+
+                <h2>💡 تذكّر دائمًا</h2>
+
+                <div class="important-box">
+                    كل طفل له قدراته واحتياجاته الخاصة.
+                    لا تقارن طفلك بغيره، ولا تضغط عليه لإنجاز شيء
+                    قبل أن يكون مستعدًا له.
+
+                    <br>
+
+                    هذه الإرشادات للتوعية والدعم الأسري، ولا تغني
+                    عن استشارة الطبيب أو الأخصائي عند الحاجة.
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <a href="family-dashboard.html" class="back-button">
+            العودة إلى لوحة تحكم الأسرة
+        </a>
+
+    </main>
+
+
+    <script>
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        const users = JSON.parse(
+            localStorage.getItem("sanadUsers") || "[]"
+        );
+
+
+        // التحقق من الحساب
+
+        if (!currentUser || currentUser.accountType !== "family") {
+
+            alert("يجب تسجيل الدخول بحساب الأسرة أولاً");
+
+            window.location.href = "login.html";
+
+        } else {
+
+            initializePage();
+
+        }
+
+
+        // أسماء أنواع الإعاقة
+
+        const disabilityNames = {
+
+            visual: "الإعاقة البصرية",
+
+            hearing: "الإعاقة السمعية",
+
+            physical: "الإعاقة الحركية",
+
+            mobility: "الإعاقة الحركية",
+
+            intellectual: "الإعاقة الذهنية",
+
+            autism: "اضطراب طيف التوحد",
+
+            learning: "صعوبات التعلم",
+
+            multiple: "الإعاقات المتعددة",
+
+            other: "احتياجات خاصة أخرى"
+
+        };
+
+
+        // محتوى الدليل
+
+        const disabilityGuides = {
+
+            visual: {
+
+                title: "الإعاقة البصرية",
+
+                description:
+                    "يحتاج الطفل ذو الإعاقة البصرية إلى بيئة آمنة ووسائل تساعده على التعرف على الأشياء من حوله.",
+
+                tips: [
+                    "تحدث مع الطفل بوضوح، وعرّف نفسك عند الدخول إلى المكان.",
+                    "حافظ على ترتيب الأثاث وتجنب ترك الأشياء في طريق الحركة.",
+                    "استخدم الوصف اللفظي لشرح الأشياء والأحداث.",
+                    "شجع الطفل على استخدام حواسه المختلفة في التعلم.",
+                    "استخدم الكتب الصوتية والتقنيات المساعدة المناسبة."
+                ],
+
+                activities: [
+                    "التعرف على الأشياء عن طريق اللمس.",
+                    "الاستماع إلى القصص والأصوات.",
+                    "التعرف على أصوات البيئة المحيطة."
+                ]
+
+            },
+
+
+            hearing: {
+
+                title: "الإعاقة السمعية",
+
+                description:
+                    "يحتاج الطفل ذو الإعاقة السمعية إلى طرق تواصل واضحة تناسب قدراته السمعية واللغوية.",
+
+                tips: [
+                    "اجعل وجهك ظاهرًا للطفل أثناء الحديث.",
+                    "استخدم الجمل الواضحة والبسيطة.",
+                    "استخدم الصور والإشارات عند الحاجة.",
+                    "لا تصرخ أثناء الحديث معه.",
+                    "تعلم بعض الإشارات المناسبة للتواصل معه."
+                ],
+
+                activities: [
+                    "مطابقة الصور بالكلمات.",
+                    "ترتيب الصور لتكوين قصة.",
+                    "ألعاب التعبير عن المشاعر بالوجه."
+                ]
+
+            },
+
+
+            physical: {
+
+                title: "الإعاقة الحركية",
+
+                description:
+                    "يحتاج الطفل ذو الإعاقة الحركية إلى بيئة مناسبة تساعده على الحركة والمشاركة باستقلالية قدر الإمكان.",
+
+                tips: [
+                    "وفر مساحة آمنة للحركة.",
+                    "ضع الأدوات التي يحتاجها الطفل في مكان يسهل الوصول إليه.",
+                    "شجعه على أداء المهام بنفسه دون استعجاله.",
+                    "احترم قدراته الجسدية ولا تقارنه بغيره.",
+                    "استشر المتخصص بشأن التمارين والأنشطة المناسبة."
+                ],
+
+                activities: [
+                    "ألعاب التركيب المناسبة لقدراته.",
+                    "أنشطة الرسم باستخدام أدوات مناسبة.",
+                    "ألعاب الاختيار والتصنيف."
+                ]
+
+            },
+
+
+            intellectual: {
+
+                title: "الإعاقة الذهنية",
+
+                description:
+                    "يحتاج الطفل إلى تبسيط المعلومات وتكرارها وتقسيم المهام إلى خطوات صغيرة.",
+
+                tips: [
+                    "استخدم تعليمات قصيرة وواضحة.",
+                    "كرر المعلومة عند الحاجة دون إظهار الضيق.",
+                    "قسم المهام الكبيرة إلى خطوات صغيرة.",
+                    "استخدم الصور والأمثلة العملية.",
+                    "شجع الطفل عند كل تقدم يحققه."
+                ],
+
+                activities: [
+                    "مطابقة الألوان والأشكال.",
+                    "تصنيف الحيوانات والأشياء.",
+                    "عد الأشياء المحيطة به."
+                ]
+
+            },
+
+
+            autism: {
+
+                title: "اضطراب طيف التوحد",
+
+                description:
+                    "قد يحتاج الطفل إلى روتين واضح وبيئة هادئة وطرق تواصل تناسب احتياجاته الفردية.",
+
+                tips: [
+                    "استخدم جدولًا مصورًا للأنشطة اليومية.",
+                    "حاول تقليل المشتتات والأصوات المزعجة.",
+                    "احترم احتياجات الطفل الحسية.",
+                    "استخدم تعليمات مباشرة وبسيطة.",
+                    "لا تجبر الطفل على التواصل بطريقة لا تناسبه."
+                ],
+
+                activities: [
+                    "ترتيب صور الروتين اليومي.",
+                    "مطابقة الأشكال والألوان.",
+                    "أنشطة التصنيف والترتيب."
+                ]
+
+            },
+
+
+            learning: {
+
+                title: "صعوبات التعلم",
+
+                description:
+                    "يحتاج الطفل إلى طرق تعليم متنوعة تناسب أسلوب تعلمه، مع إعطائه وقتًا كافيًا للتدريب.",
+
+                tips: [
+                    "استخدم أكثر من طريقة لشرح المعلومة.",
+                    "قسم الواجبات إلى أجزاء صغيرة.",
+                    "وفر مكانًا هادئًا للتعلم.",
+                    "تجنب توبيخ الطفل بسبب الأخطاء.",
+                    "تواصل مع المعلم لمعرفة نقاط القوة والاحتياج."
+                ],
+
+                activities: [
+                    "ألعاب الحروف والكلمات.",
+                    "تكوين الكلمات باستخدام البطاقات.",
+                    "ألعاب الأرقام والتسلسل."
+                ]
+
+            },
+
+
+            multiple: {
+
+                title: "الإعاقات المتعددة",
+
+                description:
+                    "تختلف احتياجات كل طفل حسب طبيعة الإعاقات المصاحبة له، ولذلك يجب اختيار الدعم المناسب لحالته.",
+
+                tips: [
+                    "تعرف على احتياجات الطفل الفردية.",
+                    "وفر بيئة آمنة ومناسبة لقدراته.",
+                    "استخدم وسائل التواصل المناسبة له.",
+                    "تعاون مع فريق المتخصصين والأسرة.",
+                    "ضع أهدافًا بسيطة وقابلة للتحقيق."
+                ],
+
+                activities: [
+                    "أنشطة حسية مناسبة لقدرات الطفل.",
+                    "ألعاب الاختيار والمطابقة.",
+                    "أنشطة المشاركة الأسرية."
+                ]
+
+            },
+
+
+            other: {
+
+                title: "احتياجات خاصة أخرى",
+
+                description:
+                    "يجب التعرف على احتياجات الطفل وقدراته أولًا، ثم اختيار طرق الدعم المناسبة له.",
+
+                tips: [
+                    "استمع إلى الطفل واحتياجاته.",
+                    "استخدم أساليب تواصل واضحة.",
+                    "وفر بيئة آمنة ومريحة.",
+                    "شجع الطفل على الاستقلالية.",
+                    "استعن بالمتخصصين عند الحاجة."
+                ],
+
+                activities: [
+                    "الرسم والتلوين.",
+                    "الألعاب التعليمية البسيطة.",
+                    "قراءة القصص والمشاركة الأسرية."
+                ]
+
+            }
+
+        };
+
+
+        // توحيد أسماء أنواع الإعاقة
+
+        function normalizeDisability(type) {
+
+            const aliases = {
+
+                mobility: "physical",
+
+                motor: "physical",
+
+                learning_disabilities: "learning",
+
+                learning_difficulties: "learning"
+
+            };
+
+            return aliases[type] || type || "other";
+
+        }
+
+
+        // تشغيل الصفحة
+
+        function initializePage() {
+
+            const child = users.find(user =>
+                user.id == currentUser.linkedChildId &&
+                user.accountType === "user"
+            );
+
+
+            const childInfo = document.getElementById("childInfo");
+
+            const guideContent = document.getElementById("guideContent");
+
+
+            if (!child) {
+
+                childInfo.innerHTML = `
+                    <div class="no-child">
+                        <h2>لم يتم العثور على بيانات الطفل</h2>
+                        <p>
+                            تأكد من ربط حساب الأسرة بحساب الطفل
+                            باستخدام كود الطفل الصحيح.
+                        </p>
+                    </div>
+                `;
+
+                guideContent.style.display = "none";
+
+                return;
+
+            }
+
+
+            const disability = normalizeDisability(
+                child.disabilityType || child.disability
+            );
+
+
+            const disabilityName =
+                disabilityNames[disability] || disabilityNames.other;
+
+
+            childInfo.innerHTML = `
+                <h2>👧 بيانات الطفل</h2>
+
+                <p><strong>اسم الطفل:</strong>
+                    ${escapeHTML(child.fullName || "غير محدد")}
+                </p>
+
+                <p><strong>نوع الإعاقة:</strong>
+                    ${disabilityName}
+                </p>
+
+                <p><strong>كود الطفل:</strong>
+                    ${escapeHTML(child.childCode || "غير متوفر")}
+                </p>
+            `;
+
+
+            displayGuide(disability);
+
+        }
+
+
+        // حماية النصوص المعروضة
+
+        function escapeHTML(value) {
+
+            return String(value).replace(/[&<>"']/g, function(char) {
+
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+
+                return entities[char];
+
+            });
+
+        }
+
+
+        // عرض الدليل المناسب
+
+        function displayGuide(disability) {
+
+            const guide =
+                disabilityGuides[disability] ||
+                disabilityGuides.other;
+
+
+            const container =
+                document.getElementById("disabilityGuides");
+
+
+            container.innerHTML = `
+
+                <div class="guide-card">
+
+                    <h3>📌 ${guide.title}</h3>
+
+                    <p>${guide.description}</p>
+
+                    <button onclick="toggleDetails('tips')">
+                        إرشادات التعامل
+                    </button>
+
+                    <div id="tips" class="guide-details">
+
+                        <h4>نصائح للأسرة:</h4>
+
+                        <ul>
+                            ${guide.tips.map(tip =>
+                                `<li>${tip}</li>`
+                            ).join("")}
+                        </ul>
+
+                        <button onclick="speakText('tips')">
+                            🔊 استمع للإرشادات
+                        </button>
+
+                    </div>
+
+
+                    <button onclick="toggleDetails('activities')">
+                        أنشطة منزلية مناسبة
+                    </button>
+
+                    <div id="activities" class="guide-details">
+
+                        <h4>أنشطة مقترحة:</h4>
+
+                        <ul>
+                            ${guide.activities.map(activity =>
+                                `<li>${activity}</li>`
+                            ).join("")}
+                        </ul>
+
+                        <button onclick="speakText('activities')">
+                            🔊 استمع للأنشطة
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        // فتح وإغلاق التفاصيل
+
+        function toggleDetails(id) {
+
+            const element = document.getElementById(id);
+
+            if (!element) return;
+
+            element.style.display =
+                element.style.display === "block" ? "none" : "block";
+
+        }
+
+
+        // قراءة التفاصيل صوتيًا
+
+        function speakText(id) {
+
+            const element = document.getElementById(id);
+
+            if (!element) return;
+
+            const text = element.innerText;
+
+            speak(text);
+
+        }
+
+
+        // قراءة الصفحة
+
+        function speakPage() {
+
+            const text = document.querySelector(".guide-welcome").innerText;
+
+            speak(text);
+
+        }
+
+
+        function speak(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم القراءة الصوتية.");
+
+                return;
+
+            }
+
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+
+            utterance.lang = "ar-EG";
+
+            utterance.rate = 0.85;
+
+            window.speechSynthesis.speak(utterance);
+
+        }
+
+
+        // إيقاف الصوت
+
+        function stopVoice() {
+
+            if ("speechSynthesis" in window) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

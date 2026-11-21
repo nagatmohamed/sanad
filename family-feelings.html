@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>متابعة مشاعر الطفل | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #f6f5ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .feelings-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-heading h1 {
+            color: #285c45;
+            font-size: 30px;
+        }
+
+        .page-heading p {
+            color: #777;
+            line-height: 1.9;
+        }
+
+        .child-info {
+            background: #eaf3e9;
+            color: #285c45;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            line-height: 2;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .stat-card h3 {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .stat-number {
+            color: #347653;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .section-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .section-box h2 {
+            color: #285c45;
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .filter-button {
+            background: white;
+            color: #285c45;
+            border: 1px solid #347653;
+            border-radius: 25px;
+            padding: 11px 18px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .filter-button.active,
+        .filter-button:hover {
+            background: #347653;
+            color: white;
+        }
+
+        .feelings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .feeling-card {
+            background: #f8faf6;
+            border: 1px solid #e5eee3;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feeling-icon {
+            font-size: 38px;
+        }
+
+        .feeling-card h3 {
+            color: #285c45;
+            margin: 5px 0;
+        }
+
+        .feeling-card p {
+            color: #777;
+            line-height: 1.7;
+            margin: 5px 0;
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: #f8faf6;
+            padding: 30px;
+            border-radius: 15px;
+            color: #777;
+            line-height: 2;
+        }
+
+        .most-common {
+            background: #f4f7f2;
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 2;
+            color: #285c45;
+        }
+
+        .notice {
+            background: #fff7e8;
+            border-right: 5px solid #d8a44c;
+            padding: 18px;
+            border-radius: 10px;
+            color: #725522;
+            line-height: 1.9;
+            margin-top: 25px;
+        }
+
+        .action-button {
+            display: block;
+            margin: 20px auto;
+            background: #e6efe6;
+            color: #285c45;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .back-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            background: #347653;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid #bd8b36;
+            outline-offset: 3px;
+        }
+
+        @media(max-width: 700px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feelings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="feelings-container">
+
+        <header class="page-heading">
+
+            <h1>❤️ متابعة مشاعر طفلي</h1>
+
+            <p>
+                مشاعر طفلك مهمة، وفهمها خطوة أساسية لدعمه.
+                تابعي المشاعر التي يشاركها معك من خلال منصة سند.
+            </p>
+
+        </header>
+
+
+        <!-- بيانات الطفل -->
+
+        <section class="child-info" aria-live="polite">
+
+            <strong>اسم الطفل:</strong>
+            <span id="childName">جاري التحميل...</span>
+
+            <br>
+
+            <strong>نوع الإعاقة:</strong>
+            <span id="childDisability">جاري التحميل...</span>
+
+        </section>
+
+
+        <!-- الإحصائيات -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>إجمالي المشاعر المسجلة</h3>
+
+                <div class="stat-number" id="totalFeelings">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>آخر شعور سجله الطفل</h3>
+
+                <div class="stat-number" id="lastFeeling">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>أكثر شعور تكرر</h3>
+
+                <div class="stat-number" id="commonFeeling">
+                    —
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- المشاعر الأكثر تكرارًا -->
+
+        <section class="section-box">
+
+            <h2>🌷 نظرة على مشاعر طفلك</h2>
+
+            <div class="most-common" id="feelingSummary">
+
+                سيتم عرض ملخص المشاعر هنا بعد تسجيل الطفل لمشاعره.
+
+            </div>
+
+        </section>
+
+
+        <!-- سجل المشاعر -->
+
+        <section class="section-box">
+
+            <h2>📋 سجل مشاعر الطفل</h2>
+
+            <p style="color:#777; line-height:1.8; margin-bottom:20px;">
+
+                اختاري نوع الشعور لعرض السجلات المرتبطة به.
+
+            </p>
+
+
+            <div class="filter-buttons">
+
+                <button class="filter-button active"
+                    data-feeling="all">
+
+                    كل المشاعر
+
+                </button>
+
+                <button class="filter-button"
+                    data-feeling="happy">
+
+                    😊 سعيد
+
+                </button>
+
+                <button class="filter-button"
+                    data-feeling="sad">
+
+                    😢 حزين
+
+                </button>
+
+                <button class="filter-button"
+                    data-feeling="angry">
+
+                    😠 غاضب
+
+                </button>
+
+                <button class="filter-button"
+                    data-feeling="afraid">
+
+                    😨 خائف
+
+                </button>
+
+                <button class="filter-button"
+                    data-feeling="tired">
+
+                    😴 متعب
+
+                </button>
+
+                <button class="filter-button"
+                    data-feeling="calm">
+
+                    😌 هادئ
+
+                </button>
+
+            </div>
+
+
+            <div class="feelings-grid" id="feelingsGrid">
+
+                <p class="empty-message">
+
+                    جاري تحميل سجل المشاعر...
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- نصائح للأسرة -->
+
+        <section class="section-box">
+
+            <h2>💚 كيف أساند طفلي؟</h2>
+
+            <div class="most-common">
+
+                <p>
+                    ❤️ استمعي لطفلك دون مقاطعة أو لوم.
+                </p>
+
+                <p>
+                    🌷 ساعديه على التعبير عن مشاعره بالطريقة المناسبة له.
+                </p>
+
+                <p>
+                    🤝 احترمي مشاعره ولا تقللي من أهمية ما يشعر به.
+                </p>
+
+                <p>
+                    💚 خصصي وقتًا يوميًا للحديث واللعب معه.
+                </p>
+
+                <p>
+                    🌟 شجعيه عندما يشاركك ما يشعر به.
+                </p>
+
+            </div>
+
+            <div class="notice">
+
+                <strong>تنبيه مهم:</strong>
+
+                <br>
+
+                تسجيل المشاعر يساعد الأسرة على فهم الطفل ومتابعته،
+                لكنه لا يُعد تشخيصًا نفسيًا أو طبيًا.
+                وإذا لاحظتِ استمرار الضيق أو وجود مشكلة تؤثر
+                على حياة الطفل، فمن الأفضل الاستعانة بمتخصص.
+
+            </div>
+
+        </section>
+
+
+        <!-- الصوت -->
+
+        <button class="action-button" onclick="speakPage()">
+
+            🔊 قراءة الصفحة صوتيًا
+
+        </button>
+
+        <button class="action-button" onclick="stopSpeaking()">
+
+            إيقاف الصوت
+
+        </button>
+
+
+        <a href="family-dashboard.html" class="back-button">
+
+            العودة إلى لوحة الأسرة ←
+
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // ==================================
+        // 1- الحساب الحالي
+        // ==================================
+
+        let currentUser = null;
+
+        try {
+
+            currentUser = JSON.parse(
+                localStorage.getItem("sanadCurrentUser")
+            );
+
+        } catch (error) {
+
+            currentUser = null;
+
+        }
+
+
+        let child = null;
+
+        let feelingsHistory = [];
+
+        let currentFilter = "all";
+
+
+        // ==================================
+        // 2- أنواع المشاعر
+        // ==================================
+
+        const feelingsInfo = {
+
+            happy: {
+                name: "سعيد",
+                icon: "😊",
+                message: "الطفل سجل أنه يشعر بالسعادة."
+            },
+
+            sad: {
+                name: "حزين",
+                icon: "😢",
+                message: "الطفل سجل أنه يشعر بالحزن."
+            },
+
+            angry: {
+                name: "غاضب",
+                icon: "😠",
+                message: "الطفل سجل أنه يشعر بالغضب."
+            },
+
+            afraid: {
+                name: "خائف",
+                icon: "😨",
+                message: "الطفل سجل أنه يشعر بالخوف."
+            },
+
+            tired: {
+                name: "متعب",
+                icon: "😴",
+                message: "الطفل سجل أنه يشعر بالتعب."
+            },
+
+            calm: {
+                name: "هادئ",
+                icon: "😌",
+                message: "الطفل سجل أنه يشعر بالهدوء."
+            }
+
+        };
+
+
+        // ==================================
+        // 3- توحيد أسماء المشاعر
+        // ==================================
+
+        function getFeelingKey(record) {
+
+            const possibleValues = [
+
+                record.feeling,
+                record.type,
+                record.emotion,
+                record.id,
+                record.value
+
+            ];
+
+            for (let value of possibleValues) {
+
+                if (!value) continue;
+
+                value = String(value).toLowerCase().trim();
+
+                if (feelingsInfo[value]) {
+
+                    return value;
+
+                }
+
+            }
+
+            return "other";
+
+        }
+
+
+        // ==================================
+        // 4- وقت تسجيل الشعور
+        // ==================================
+
+        function getFeelingDate(record) {
+
+            const possibleDates = [
+
+                record.date,
+                record.createdAt,
+                record.timestamp,
+                record.time
+
+            ];
+
+            for (let date of possibleDates) {
+
+                if (!date) continue;
+
+                const parsedDate = new Date(date);
+
+                if (!isNaN(parsedDate.getTime())) {
+
+                    return parsedDate.toLocaleString("ar-EG");
+
+                }
+
+            }
+
+            return "وقت التسجيل غير متوفر";
+
+        }
+
+
+        // ==================================
+        // 5- تحميل بيانات الطفل
+        // ==================================
+
+        function initializePage() {
+
+            const users = JSON.parse(
+                localStorage.getItem("sanadUsers") || "[]"
+            );
+
+
+            child = users.find(user =>
+
+                String(user.id) === String(currentUser.linkedChildId)
+                &&
+                user.accountType === "user"
+
+            );
+
+
+            if (!child) {
+
+                document.getElementById("childName").textContent =
+                    "لم يتم العثور على الطفل";
+
+                document.getElementById("childDisability").textContent =
+                    "غير متوفر";
+
+                document.getElementById("feelingsGrid").innerHTML = `
+
+                    <p class="empty-message">
+
+                        لا يوجد طفل مرتبط بحسابك حتى الآن.
+
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            document.getElementById("childName").textContent =
+                child.fullName || "غير متوفر";
+
+
+            document.getElementById("childDisability").textContent =
+                child.disabilityType || "غير محدد";
+
+
+            // قراءة سجل مشاعر الطفل
+
+            const storageKey = "sanadFeelings_" + child.id;
+
+            feelingsHistory = JSON.parse(
+                localStorage.getItem(storageKey) || "[]"
+            );
+
+
+            if (!Array.isArray(feelingsHistory)) {
+
+                feelingsHistory = [];
+
+            }
+
+
+            displayFeelings();
+
+            updateStatistics();
+
+        }
+
+
+        // ==================================
+        // 6- عرض المشاعر
+        // ==================================
+
+        function displayFeelings(filter = "all") {
+
+            currentFilter = filter;
+
+            const grid = document.getElementById("feelingsGrid");
+
+            grid.innerHTML = "";
+
+
+            const filteredFeelings = feelingsHistory.filter(record => {
+
+                if (filter === "all") return true;
+
+                return getFeelingKey(record) === filter;
+
+            });
+
+
+            if (filteredFeelings.length === 0) {
+
+                grid.innerHTML = `
+
+                    <p class="empty-message">
+
+                        لا توجد مشاعر مسجلة في هذا التصنيف حتى الآن.
+
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            filteredFeelings.forEach(record => {
+
+                const key = getFeelingKey(record);
+
+                const info = feelingsInfo[key] || {
+
+                    name: record.name || record.label || "شعور آخر",
+
+                    icon: record.icon || "💚",
+
+                    message: "تم تسجيل شعور الطفل."
+
+                };
+
+
+                const card = document.createElement("article");
+
+                card.className = "feeling-card";
+
+
+                const icon = document.createElement("div");
+
+                icon.className = "feeling-icon";
+
+                icon.textContent = info.icon;
+
+
+                const content = document.createElement("div");
+
+
+                const title = document.createElement("h3");
+
+                title.textContent = info.name;
+
+
+                const description = document.createElement("p");
+
+                description.textContent = info.message;
+
+
+                const date = document.createElement("p");
+
+                date.textContent = "📅 " + getFeelingDate(record);
+
+
+                content.appendChild(title);
+
+                content.appendChild(description);
+
+                content.appendChild(date);
+
+
+                card.appendChild(icon);
+
+                card.appendChild(content);
+
+
+                grid.appendChild(card);
+
+            });
+
+        }
+
+
+        // ==================================
+        // 7- تحديث الإحصائيات
+        // ==================================
+
+        function updateStatistics() {
+
+            document.getElementById("totalFeelings").textContent =
+                feelingsHistory.length;
+
+
+            if (feelingsHistory.length === 0) {
+
+                document.getElementById("lastFeeling").textContent = "—";
+
+                document.getElementById("commonFeeling").textContent = "—";
+
+                document.getElementById("feelingSummary").textContent =
+
+                    "لم يسجل الطفل أي مشاعر حتى الآن. شجعيه على مشاركة ما يشعر به.";
+
+                return;
+
+            }
+
+
+            // آخر شعور
+
+            const lastRecord = feelingsHistory[feelingsHistory.length - 1];
+
+            const lastKey = getFeelingKey(lastRecord);
+
+            const lastInfo = feelingsInfo[lastKey];
+
+
+            document.getElementById("lastFeeling").textContent =
+
+                lastInfo ? lastInfo.icon : "💚";
+
+
+            // حساب تكرار المشاعر
+
+            const counts = {};
+
+            feelingsHistory.forEach(record => {
+
+                const key = getFeelingKey(record);
+
+                counts[key] = (counts[key] || 0) + 1;
+
+            });
+
+
+            let mostCommon = "";
+
+            let highestCount = 0;
+
+
+            for (const key in counts) {
+
+                if (counts[key] > highestCount) {
+
+                    highestCount = counts[key];
+
+                    mostCommon = key;
+
+                }
+
+            }
+
+
+            const commonInfo = feelingsInfo[mostCommon];
+
+
+            document.getElementById("commonFeeling").textContent =
+
+                commonInfo ? commonInfo.icon : "💚";
+
+
+            document.getElementById("feelingSummary").textContent =
+
+                commonInfo ?
+
+                "الشعور الأكثر تسجيلًا هو: " +
+
+                commonInfo.name +
+
+                "، وقد تم تسجيله " +
+
+                highestCount +
+
+                " مرة. هذا ملخص للتسجيلات وليس تقييمًا لحالة الطفل." :
+
+                "تم تسجيل مشاعر مختلفة للطفل.";
+
+        }
+
+
+        // ==================================
+        // 8- تصفية المشاعر
+        // ==================================
+
+        document.querySelectorAll(".filter-button").forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                document.querySelectorAll(".filter-button")
+                    .forEach(item => {
+
+                        item.classList.remove("active");
+
+                    });
+
+
+                this.classList.add("active");
+
+
+                displayFeelings(this.dataset.feeling);
+
+            });
+
+        });
+
+
+        // ==================================
+        // 9- القراءة الصوتية
+        // ==================================
+
+        function speakText(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم القراءة الصوتية.");
+
+                return;
+
+            }
+
+
+            speechSynthesis.cancel();
+
+
+            const speech = new SpeechSynthesisUtterance(text);
+
+            speech.lang = "ar-EG";
+
+            speech.rate = 0.85;
+
+            speechSynthesis.speak(speech);
+
+        }
+
+
+        function speakPage() {
+
+            const total = feelingsHistory.length;
+
+            speakText(
+
+                "مرحبًا بك في صفحة متابعة مشاعر الطفل في سند. " +
+
+                "اسم الطفل: " +
+
+                (child ? child.fullName : "غير متوفر") +
+
+                ". عدد المشاعر المسجلة: " +
+
+                total +
+
+                ". يمكنك اختيار نوع الشعور لمراجعة السجل."
+
+            );
+
+        }
+
+
+        function stopSpeaking() {
+
+            if ("speechSynthesis" in window) {
+
+                speechSynthesis.cancel();
+
+            }
+
+        }
+
+
+        // ==================================
+        // 10- التحقق من الحساب
+        // ==================================
+
+        if (!currentUser || currentUser.accountType !== "family") {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            initializePage();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

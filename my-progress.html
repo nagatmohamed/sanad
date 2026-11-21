@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إنجازاتي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .progress-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .progress-welcome {
+            background: #eaf2eb;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        .progress-welcome h1 {
+            color: #56856b;
+            margin-bottom: 12px;
+        }
+
+        .progress-welcome p {
+            line-height: 1.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .stat-icon {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h2 {
+            color: #56856b;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            color: #666;
+        }
+
+        .progress-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .progress-panel h2 {
+            color: #56856b;
+            margin-bottom: 15px;
+        }
+
+        .progress-track {
+            background: #e7e7e7;
+            height: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: #56856b;
+            height: 100%;
+            width: 0%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-percentage {
+            color: #56856b;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .achievement-card {
+            background: #f4f8f4;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #dce9df;
+        }
+
+        .achievement-card.locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        .achievement-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .achievement-card h3 {
+            color: #56856b;
+            margin-bottom: 8px;
+        }
+
+        .activities-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .activity-item {
+            background: #f4f8f4;
+            padding: 18px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .activity-item h3 {
+            color: #416b50;
+            margin-bottom: 5px;
+        }
+
+        .activity-item p {
+            color: #666;
+        }
+
+        .completed-label {
+            background: #dff2e2;
+            color: #416b50;
+            padding: 8px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .empty-state {
+            background: #fff8e9;
+            padding: 22px;
+            border-radius: 15px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .progress-button {
+            display: inline-block;
+            background: #56856b;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .progress-button:hover {
+            background: #416b50;
+        }
+
+        @media(max-width: 600px) {
+
+            .progress-container {
+                padding: 12px;
+            }
+
+            .activity-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body class="dashboard-page">
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <svg viewBox="0 0 100 100" width="50" height="50">
+
+                    <path d="M50 83 C35 70 12 54 12 33 C12 18 31 10 43 25
+                    C46 29 48 33 50 36 C52 33 54 29 57 25
+                    C69 10 88 18 88 33 C88 54 65 70 50 83Z"
+                    fill="#56856B"/>
+
+                    <circle cx="38" cy="38" r="7" fill="#F4EBDD"/>
+                    <circle cx="62" cy="38" r="7" fill="#F4EBDD"/>
+
+                    <path d="M25 57 Q38 42 50 57 Q62 42 75 57"
+                    fill="none" stroke="#F4EBDD" stroke-width="5"
+                    stroke-linecap="round"/>
+
+                </svg>
+
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند لكل خطوة</span>
+            </div>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="user-dashboard.html">لوحة التحكم</a>
+            <a href="my-education.html">تعليمي</a>
+        </nav>
+
+        <div class="header-buttons">
+            <a href="user-dashboard.html" class="login-btn">
+                رجوع
+            </a>
+        </div>
+
+    </header>
+
+
+    <!-- Progress Page -->
+    <main class="progress-container">
+
+        <section class="progress-welcome">
+
+            <h1 id="studentName">إنجازاتي 🌟</h1>
+
+            <p>
+                كل نشاط بتخلصه هو خطوة جديدة في رحلتك.
+                إحنا فخورين بكل تقدم بتعمله!
+            </p>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📚</div>
+
+                <h2 id="completedCount">0</h2>
+
+                <p>أنشطة أنجزتها</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🏆</div>
+
+                <h2 id="achievementCount">0</h2>
+
+                <p>شارات حصلت عليها</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🎯</div>
+
+                <h2 id="remainingCount">3</h2>
+
+                <p>أنشطة متبقية</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Overall Progress -->
+        <section class="progress-panel">
+
+            <h2>رحلة تقدمك 💚</h2>
+
+            <p>
+                دي نسبة الأنشطة التعليمية اللي خلصتها من إجمالي الأنشطة المتاحة.
+            </p>
+
+            <div class="progress-track">
+
+                <div class="progress-fill" id="progressFill"></div>
+
+            </div>
+
+            <p class="progress-percentage" id="progressPercentage">
+                0%
+            </p>
+
+            <p id="progressMessage">
+                لسه رحلتك بتبدأ، جرب أول نشاط!
+            </p>
+
+            <a href="my-education.html" class="progress-button">
+                ابدأ نشاط جديد 📚
+            </a>
+
+        </section>
+
+
+        <!-- Achievements -->
+        <section class="progress-panel">
+
+            <h2>الشارات اللي حصلت عليها 🏅</h2>
+
+            <p>
+                كل ما تنجز أنشطة جديدة هتحصل على شارات تشجعك تكمل.
+            </p>
+
+            <div class="achievements-grid" id="achievementsGrid">
+
+            </div>
+
+        </section>
+
+
+        <!-- Completed Activities -->
+        <section class="progress-panel">
+
+            <h2>الأنشطة اللي أنجزتها ✅</h2>
+
+            <div class="activities-list" id="completedActivities">
+
+            </div>
+
+        </section>
+
+
+        <!-- Next Activities -->
+        <section class="progress-panel">
+
+            <h2>لسه قدامك إيه؟ 🌱</h2>
+
+            <div class="activities-list" id="remainingActivities">
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>SANAD | سند</h3>
+
+        <p>معاً نحو حياة أفضل وفرص متساوية للجميع.</p>
+
+        <p>Made by Nagat Fergany © 2026</p>
+
+    </footer>
+
+
+    <script>
+
+        // Get Current User
+
+        let currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        if (!currentUser || currentUser.accountType !== "user") {
+
+            alert("برجاء تسجيل الدخول أولاً.");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // Available Activities
+
+        const allActivities = {
+
+            visual: [
+                { id: "visual1", title: "أصوات من حولنا", icon: "🔊" },
+                { id: "visual2", title: "أصوات الحيوانات", icon: "🐦" },
+                { id: "visual3", title: "تمييز الأصوات", icon: "🎵" }
+            ],
+
+            hearing: [
+                { id: "hearing1", title: "تعرف على الألوان", icon: "🖼️" },
+                { id: "hearing2", title: "الفواكه", icon: "🍎" },
+                { id: "hearing3", title: "تعلم الأرقام", icon: "🔢" }
+            ],
+
+            mobility: [
+                { id: "mobility1", title: "ترتيب الأرقام", icon: "🔢" },
+                { id: "mobility2", title: "الفاكهة المفيدة", icon: "🍎" },
+                { id: "mobility3", title: "الأشكال", icon: "📐" }
+            ],
+
+            intellectual: [
+                { id: "intellectual1", title: "تعرف على الألوان", icon: "🎨" },
+                { id: "intellectual2", title: "الحيوانات", icon: "🐱" },
+                { id: "intellectual3", title: "العد", icon: "🔢" }
+            ],
+
+            autism: [
+                { id: "autism1", title: "ترتيب اليوم", icon: "📅" },
+                { id: "autism2", title: "النظافة الشخصية", icon: "🧼" },
+                { id: "autism3", title: "إشارات المرور", icon: "🚦" }
+            ],
+
+            learning: [
+                { id: "learning1", title: "الحروف", icon: "🔤" },
+                { id: "learning2", title: "الأرقام", icon: "🔢" },
+                { id: "learning3", title: "الكلمات", icon: "🧩" }
+            ],
+
+            multiple: [
+                { id: "multiple1", title: "الألوان", icon: "🎨" },
+                { id: "multiple2", title: "الحيوانات", icon: "🐾" },
+                { id: "multiple3", title: "الأرقام", icon: "🔢" }
+            ],
+
+            other: [
+                { id: "other1", title: "الألوان", icon: "🎨" },
+                { id: "other2", title: "الأرقام", icon: "🔢" },
+                { id: "other3", title: "الحيوانات", icon: "🐶" }
+            ]
+
+        };
+
+
+        // Get Disability Type
+
+        const disabilityKey =
+            currentUser.disabilityType ||
+            currentUser.disability ||
+            "other";
+
+        const activities =
+            allActivities[disabilityKey] || allActivities.other;
+
+
+        // Get Progress
+
+        const progressKey = "sanadEducationProgress_" + currentUser.id;
+
+        let completedActivities = JSON.parse(
+            localStorage.getItem(progressKey)
+        ) || [];
+
+
+        // Filter Activities
+
+        const completed = activities.filter(function(activity) {
+
+            return completedActivities.includes(activity.id);
+
+        });
+
+
+        const remaining = activities.filter(function(activity) {
+
+            return !completedActivities.includes(activity.id);
+
+        });
+
+
+        // Calculate Statistics
+
+        const totalActivities = activities.length;
+
+        const completedTotal = completed.length;
+
+        const remainingTotal = remaining.length;
+
+        const percentage = totalActivities === 0
+            ? 0
+            : Math.round((completedTotal / totalActivities) * 100);
+
+
+        // Calculate Achievements
+
+        const achievements = [
+
+            {
+                title: "أول خطوة",
+                icon: "🌱",
+                description: "أنجزت أول نشاط.",
+                condition: completedTotal >= 1
+            },
+
+            {
+                title: "متعلم نشيط",
+                icon: "📚",
+                description: "أنجزت نشاطين.",
+                condition: completedTotal >= 2
+            },
+
+            {
+                title: "بطل التعلم",
+                icon: "🏆",
+                description: "أنجزت كل الأنشطة المتاحة.",
+                condition: completedTotal === totalActivities
+            }
+
+        ];
+
+
+        const earnedAchievements = achievements.filter(function(item) {
+
+            return item.condition;
+
+        });
+
+
+        // Display User Name
+
+        document.getElementById("studentName").textContent =
+            "إنجازاتك يا " + currentUser.fullName + " 🌟";
+
+
+        // Display Statistics
+
+        document.getElementById("completedCount").textContent =
+            completedTotal;
+
+        document.getElementById("remainingCount").textContent =
+            remainingTotal;
+
+        document.getElementById("achievementCount").textContent =
+            earnedAchievements.length;
+
+
+        // Display Progress
+
+        document.getElementById("progressFill").style.width =
+            percentage + "%";
+
+        document.getElementById("progressPercentage").textContent =
+            percentage + "%";
+
+
+        if (percentage === 0) {
+
+            document.getElementById("progressMessage").textContent =
+                "لسه رحلتك بتبدأ، جرب أول نشاط! 💚";
+
+        } else if (percentage < 100) {
+
+            document.getElementById("progressMessage").textContent =
+                "أحسنت! أنت بتتقدم خطوة بخطوة، كمل! 🌱";
+
+        } else {
+
+            document.getElementById("progressMessage").textContent =
+                "رائع! أنجزت كل الأنشطة المتاحة. أنت بطل! 🏆";
+
+        }
+
+
+        // Display Achievements
+
+        const achievementsGrid =
+            document.getElementById("achievementsGrid");
+
+        achievements.forEach(function(item) {
+
+            achievementsGrid.innerHTML += `
+
+                <div class="achievement-card ${item.condition ? "" : "locked"}">
+
+                    <div class="achievement-icon">
+                        ${item.icon}
+                    </div>
+
+                    <h3>${item.title}</h3>
+
+                    <p>${item.description}</p>
+
+                    <strong>
+                        ${item.condition ? "حصلت عليها ✓" : "لسه مقفولة 🔒"}
+                    </strong>
+
+                </div>
+
+            `;
+
+        });
+
+
+        // Display Completed Activities
+
+        const completedContainer =
+            document.getElementById("completedActivities");
+
+        if (completed.length === 0) {
+
+            completedContainer.innerHTML = `
+
+                <div class="empty-state">
+
+                    <h3>لسه مفيش أنشطة مكتملة 🌱</h3>
+
+                    <p>
+                        متقلقش، اختار أول نشاط من صفحة تعليمي وابدأ رحلتك.
+                    </p>
+
+                    <a href="my-education.html" class="progress-button">
+                        ابدأ أول نشاط
+                    </a>
+
+                </div>
+
+            `;
+
+        } else {
+
+            completed.forEach(function(activity) {
+
+                completedContainer.innerHTML += `
+
+                    <div class="activity-item">
+
+                        <div>
+                            <h3>${activity.icon} ${activity.title}</h3>
+                            <p>تم إنجاز النشاط بنجاح.</p>
+                        </div>
+
+                        <span class="completed-label">
+                            مكتمل ✓
+                        </span>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        // Display Remaining Activities
+
+        const remainingContainer =
+            document.getElementById("remainingActivities");
+
+        if (remaining.length === 0) {
+
+            remainingContainer.innerHTML = `
+
+                <div class="empty-state">
+
+                    <h3>مبروك! 🎉</h3>
+
+                    <p>
+                        خلصت كل الأنشطة المتاحة ليك. استمر في التعلم والتطور!
+                    </p>
+
+                </div>
+
+            `;
+
+        } else {
+
+            remaining.forEach(function(activity) {
+
+                remainingContainer.innerHTML += `
+
+                    <div class="activity-item">
+
+                        <div>
+                            <h3>${activity.icon} ${activity.title}</h3>
+                            <p>نشاط متاح للتجربة.</p>
+                        </div>
+
+                        <a href="my-education.html" class="progress-button">
+                            ابدأ النشاط
+                        </a>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

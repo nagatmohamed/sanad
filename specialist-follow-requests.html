@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>طلبات المتابعة | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f8f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .requests-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #e5f1e8, #f5eee1);
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h1 {
+            color: #276044;
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .welcome-section p {
+            color: #555;
+            line-height: 1.9;
+            font-size: 17px;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h2 {
+            color: #276044;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            color: #666;
+        }
+
+        .requests-section {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .requests-section h2 {
+            color: #276044;
+            margin-bottom: 20px;
+        }
+
+        .request-card {
+            border: 1px solid #e8e8e8;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 18px;
+            background: #fff;
+        }
+
+        .request-card h3 {
+            color: #276044;
+            margin-bottom: 12px;
+        }
+
+        .request-card p {
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 7px;
+            overflow-wrap: anywhere;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 12px 0;
+        }
+
+        .pending {
+            background: #fff3d9;
+            color: #8b641b;
+        }
+
+        .accepted {
+            background: #e2f2e6;
+            color: #276044;
+        }
+
+        .rejected {
+            background: #f9e5e5;
+            color: #a33b3b;
+        }
+
+        .request-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .request-actions button {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .accept-button {
+            background: #276044;
+            color: white;
+        }
+
+        .reject-button {
+            background: #f6e5e5;
+            color: #a33b3b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 35px 15px;
+            color: #777;
+            line-height: 2;
+        }
+
+        .back-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            padding: 14px 30px;
+            background: #276044;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        button:focus,
+        a:focus {
+            outline: 3px solid #d49b38;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 650px) {
+            .statistics {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-section h1 {
+                font-size: 23px;
+            }
+
+            .request-actions {
+                flex-direction: column;
+            }
+
+            .request-actions button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <svg viewBox="0 0 100 100" width="45" height="45">
+                    <path
+                        d="M50 85 C20 65 5 45 20 25 C32 10 47 20 50 32 C57 15 77 12 87 30 C99 53 70 75 50 85Z"
+                        fill="#276044" />
+                    <circle cx="38" cy="39" r="7" fill="white" />
+                    <circle cx="64" cy="39" r="7" fill="white" />
+                </svg>
+
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند</span>
+            </div>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="specialist-dashboard.html">لوحة التحكم</a>
+            <a href="specialist-requests.html">طلبات الاستشارة</a>
+        </nav>
+
+    </header>
+
+
+    <main class="requests-container">
+
+        <section class="welcome-section">
+
+            <h1>💚 طلبات المتابعة</h1>
+
+            <p>
+                هنا يمكنك الاطلاع على طلبات المتابعة التي وصلتك،
+                ومراجعة بيانات أصحابها، ثم قبول الطلب أو رفضه.
+            </p>
+
+        </section>
+
+
+        <section class="statistics">
+
+            <div class="stat-card">
+                <h2 id="pendingCount">0</h2>
+                <p>طلبات معلقة</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="acceptedCount">0</h2>
+                <p>طلبات مقبولة</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="rejectedCount">0</h2>
+                <p>طلبات مرفوضة</p>
+            </div>
+
+        </section>
+
+
+        <section class="requests-section">
+            <h2>📩 الطلبات الجديدة</h2>
+            <div id="pendingRequests"></div>
+        </section>
+
+        <section class="requests-section">
+            <h2>✓ المتابعات المقبولة</h2>
+            <div id="acceptedRequests"></div>
+        </section>
+
+        <section class="requests-section">
+            <h2>الطلبات المرفوضة</h2>
+            <div id="rejectedRequests"></div>
+        </section>
+
+        <a href="specialist-dashboard.html" class="back-button">
+            العودة إلى لوحة التحكم
+        </a>
+
+    </main>
+
+
+    <script>
+
+        function readStorage(key, fallback = []) {
+
+            try {
+
+                const data = JSON.parse(
+                    localStorage.getItem(key) || JSON.stringify(fallback)
+                );
+
+                return Array.isArray(data) ? data : fallback;
+
+            } catch (error) {
+
+                return fallback;
+
+            }
+
+        }
+
+
+        function getCurrentUser() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem("sanadCurrentUser")
+                );
+
+            } catch (error) {
+
+                return null;
+
+            }
+
+        }
+
+
+        const currentUser = getCurrentUser();
+
+
+        if (!currentUser || currentUser.accountType !== "specialist") {
+
+            alert("يجب تسجيل الدخول بحساب أخصائي.");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        function getRequests() {
+
+            return readStorage("sanadFollowRequests");
+
+        }
+
+
+        function saveRequests(requests) {
+
+            localStorage.setItem(
+                "sanadFollowRequests",
+                JSON.stringify(requests)
+            );
+
+        }
+
+
+        function normalizeId(id) {
+
+            return String(id ?? "").trim();
+
+        }
+
+
+        function getRequester(request) {
+
+            const users = readStorage("sanadUsers");
+
+            return users.find(user =>
+                normalizeId(user.id) === normalizeId(request.requesterId)
+            );
+
+        }
+
+
+        function getLinkedChild(user) {
+
+            if (!user || user.accountType !== "family") {
+                return null;
+            }
+
+            const users = readStorage("sanadUsers");
+
+            return users.find(child =>
+                normalizeId(child.id) === normalizeId(user.linkedChildId)
+            );
+
+        }
+
+
+        function updateRequest(requestId, newStatus) {
+
+            const requests = getRequests();
+
+            const request = requests.find(item =>
+                normalizeId(item.id) === normalizeId(requestId)
+            );
+
+
+            if (!request) {
+
+                alert("لم يتم العثور على الطلب.");
+
+                return;
+
+            }
+
+
+            if (
+                normalizeId(request.specialistId) !==
+                normalizeId(currentUser.id)
+            ) {
+
+                alert("هذا الطلب غير تابع لحسابك.");
+
+                return;
+
+            }
+
+
+            if (request.status !== "pending") {
+
+                alert("تم التعامل مع هذا الطلب من قبل.");
+
+                return;
+
+            }
+
+
+            request.status = newStatus;
+
+            request.updatedAt = new Date().toISOString();
+
+
+            saveRequests(requests);
+
+
+            alert(
+                newStatus === "accepted"
+                    ? "تم قبول طلب المتابعة بنجاح 💚"
+                    : "تم رفض طلب المتابعة."
+            );
+
+
+            displayRequests();
+
+        }
+
+
+        function createRequestCard(request, showActions) {
+
+            const card = document.createElement("div");
+
+            card.className = "request-card";
+
+
+            const requester = getRequester(request);
+
+
+            const name = document.createElement("h3");
+
+            name.textContent =
+                request.requesterName ||
+                requester?.fullName ||
+                requester?.name ||
+                "مستخدم SANAD";
+
+
+            const type = document.createElement("p");
+
+            type.textContent =
+                "نوع الحساب: " +
+                (
+                    request.requesterType === "family" ||
+                    requester?.accountType === "family"
+                        ? "ولي أمر"
+                        : "حساب شخصي"
+                );
+
+
+            card.appendChild(name);
+
+            card.appendChild(type);
+
+
+            if (requester) {
+
+                const phone = document.createElement("p");
+
+                phone.textContent =
+                    "رقم الهاتف: " + (requester.phone || "غير متاح");
+
+                card.appendChild(phone);
+
+
+                const email = document.createElement("p");
+
+                email.textContent =
+                    "البريد الإلكتروني: " + (requester.email || "غير متاح");
+
+                card.appendChild(email);
+
+
+                const child = getLinkedChild(requester);
+
+                if (child) {
+
+                    const childInfo = document.createElement("p");
+
+                    childInfo.textContent =
+                        "الطفل المرتبط بالحساب: " +
+                        (child.fullName || child.name || "غير محدد");
+
+                    card.appendChild(childInfo);
+
+                }
+
+            }
+
+
+            const date = document.createElement("p");
+
+            const requestDate = new Date(request.createdAt);
+
+            date.textContent =
+                "تاريخ الطلب: " +
+                (
+                    Number.isNaN(requestDate.getTime())
+                        ? "غير محدد"
+                        : requestDate.toLocaleDateString("ar-EG")
+                );
+
+
+            const status = document.createElement("span");
+
+            status.className = "status " + request.status;
+
+
+            const statusNames = {
+
+                pending: "في انتظار المراجعة",
+
+                accepted: "تم قبول الطلب",
+
+                rejected: "تم رفض الطلب"
+
+            };
+
+
+            status.textContent =
+                statusNames[request.status] || "حالة غير معروفة";
+
+
+            card.appendChild(date);
+
+            card.appendChild(status);
+
+
+            if (showActions) {
+
+                const actions = document.createElement("div");
+
+                actions.className = "request-actions";
+
+
+                const acceptButton = document.createElement("button");
+
+                acceptButton.className = "accept-button";
+
+                acceptButton.textContent = "قبول الطلب";
+
+                acceptButton.type = "button";
+
+                acceptButton.addEventListener("click", function() {
+
+                    updateRequest(request.id, "accepted");
+
+                });
+
+
+                const rejectButton = document.createElement("button");
+
+                rejectButton.className = "reject-button";
+
+                rejectButton.textContent = "رفض الطلب";
+
+                rejectButton.type = "button";
+
+                rejectButton.addEventListener("click", function() {
+
+                    if (confirm("هل أنت متأكد من رفض طلب المتابعة؟")) {
+
+                        updateRequest(request.id, "rejected");
+
+                    }
+
+                });
+
+
+                actions.appendChild(acceptButton);
+
+                actions.appendChild(rejectButton);
+
+                card.appendChild(actions);
+
+            }
+
+
+            return card;
+
+        }
+
+
+        function displayGroup(containerId, requests, showActions, emptyMessage) {
+
+            const container = document.getElementById(containerId);
+
+            container.innerHTML = "";
+
+
+            if (requests.length === 0) {
+
+                const empty = document.createElement("div");
+
+                empty.className = "empty-state";
+
+                empty.textContent = emptyMessage;
+
+                container.appendChild(empty);
+
+                return;
+
+            }
+
+
+            requests.forEach(request => {
+
+                container.appendChild(
+                    createRequestCard(request, showActions)
+                );
+
+            });
+
+        }
+
+
+        function displayRequests() {
+
+            if (!currentUser) return;
+
+
+            const allRequests = getRequests();
+
+
+            const myRequests = allRequests.filter(request =>
+
+                normalizeId(request.specialistId) ===
+                normalizeId(currentUser.id)
+
+            );
+
+
+            const pending = myRequests.filter(request =>
+                request.status === "pending"
+            );
+
+
+            const accepted = myRequests.filter(request =>
+                request.status === "accepted"
+            );
+
+
+            const rejected = myRequests.filter(request =>
+                request.status === "rejected"
+            );
+
+
+            document.getElementById("pendingCount").textContent =
+                pending.length;
+
+            document.getElementById("acceptedCount").textContent =
+                accepted.length;
+
+            document.getElementById("rejectedCount").textContent =
+                rejected.length;
+
+
+            displayGroup(
+                "pendingRequests",
+                pending,
+                true,
+                "لا توجد طلبات متابعة جديدة حاليًا."
+            );
+
+
+            displayGroup(
+                "acceptedRequests",
+                accepted,
+                false,
+                "لا توجد طلبات متابعة مقبولة حتى الآن."
+            );
+
+
+            displayGroup(
+                "rejectedRequests",
+                rejected,
+                false,
+                "لا توجد طلبات متابعة مرفوضة."
+            );
+
+        }
+
+
+        if (currentUser && currentUser.accountType === "specialist") {
+
+            displayRequests();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تعليمي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .education-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .education-welcome {
+            background: #eaf2eb;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        .education-welcome h1 {
+            color: #56856b;
+            margin-bottom: 12px;
+        }
+
+        .education-welcome p {
+            line-height: 1.9;
+        }
+
+        .education-info {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-right: 5px solid #56856b;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .education-title {
+            margin-bottom: 20px;
+        }
+
+        .education-title h2 {
+            color: #56856b;
+            margin-bottom: 10px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .activity-card h3 {
+            color: #56856b;
+            margin-bottom: 12px;
+        }
+
+        .activity-card p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .activity-card button {
+            width: 100%;
+            background: #56856b;
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .activity-card button:hover {
+            background: #416b50;
+        }
+
+        .activity-status {
+            display: inline-block;
+            background: #e5f1e7;
+            color: #416b50;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .activity-area {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .activity-area h2 {
+            color: #56856b;
+            margin-bottom: 15px;
+        }
+
+        .activity-instruction {
+            background: #f4f8f4;
+            padding: 18px;
+            border-radius: 12px;
+            line-height: 1.9;
+            margin: 20px 0;
+        }
+
+        .question-box {
+            margin-top: 25px;
+        }
+
+        .question-box h3 {
+            margin-bottom: 18px;
+            line-height: 1.8;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .answer-option {
+            background: #f4f8f4;
+            border: 2px solid #dce9df;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            text-align: right;
+            font-size: 17px;
+        }
+
+        .answer-option:hover {
+            border-color: #56856b;
+        }
+
+        .answer-option:focus {
+            outline: 3px solid #d49b42;
+            outline-offset: 2px;
+        }
+
+        .answer-option.correct {
+            background: #dff2e2;
+            border-color: #4b9a5c;
+        }
+
+        .answer-option.wrong {
+            background: #fce8e8;
+            border-color: #d66b6b;
+        }
+
+        .result-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            display: none;
+            line-height: 1.8;
+        }
+
+        .complete-button {
+            display: none;
+            background: #56856b;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .back-button {
+            background: #777;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .read-button {
+            background: #dce9df;
+            color: #315d40;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+
+        .empty-message {
+            background: #fff8e9;
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+
+            .education-container {
+                padding: 12px;
+            }
+
+            .education-welcome {
+                padding: 20px;
+            }
+
+            .activity-area {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body class="dashboard-page">
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <svg viewBox="0 0 100 100" width="50" height="50">
+
+                    <path d="M50 83 C35 70 12 54 12 33 C12 18 31 10 43 25
+                    C46 29 48 33 50 36 C52 33 54 29 57 25
+                    C69 10 88 18 88 33 C88 54 65 70 50 83Z"
+                    fill="#56856B"/>
+
+                    <circle cx="38" cy="38" r="7" fill="#F4EBDD"/>
+                    <circle cx="62" cy="38" r="7" fill="#F4EBDD"/>
+
+                    <path d="M25 57 Q38 42 50 57 Q62 42 75 57"
+                    fill="none" stroke="#F4EBDD" stroke-width="5"
+                    stroke-linecap="round"/>
+
+                </svg>
+
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند لكل خطوة</span>
+            </div>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="user-dashboard.html">لوحة التحكم</a>
+            <a href="user-dashboard.html#my-services">خدماتي</a>
+        </nav>
+
+        <div class="header-buttons">
+            <a href="user-dashboard.html" class="login-btn">
+                رجوع
+            </a>
+        </div>
+
+    </header>
+
+
+    <!-- Education Page -->
+    <main class="education-container">
+
+        <section class="education-welcome">
+
+            <h1 id="studentWelcome">أهلاً بيك في تعليمي 📚</h1>
+
+            <p>
+                هنا هنتعلم ونلعب ونكتشف حاجات جديدة.
+                اختار النشاط اللي يعجبك وابدأ رحلتك!
+            </p>
+
+        </section>
+
+
+        <section class="education-info">
+
+            <h3>🎯 الأنشطة المناسبة ليك</h3>
+
+            <p id="disabilityMessage">
+                بنختار لك أنشطة تراعي احتياجاتك وطريقة التعلم المناسبة ليك.
+            </p>
+
+            <strong id="disabilityName"></strong>
+
+        </section>
+
+
+        <section>
+
+            <div class="education-title">
+
+                <h2>أنشطتي التعليمية 🌟</h2>
+
+                <p>
+                    اختار نشاط وابدأ التعلم.
+                </p>
+
+            </div>
+
+            <div class="activities-grid" id="activitiesGrid">
+
+            </div>
+
+        </section>
+
+
+        <!-- Activity Details -->
+        <section class="activity-area" id="activityArea">
+
+            <h2 id="activityTitle"></h2>
+
+            <p id="activityDescription"></p>
+
+            <div class="activity-instruction">
+
+                <h3>📌 المطلوب منك</h3>
+
+                <p id="activityInstruction"></p>
+
+                <button class="read-button" onclick="readInstruction()">
+                    🔊 استمع للتعليمات
+                </button>
+
+            </div>
+
+
+            <div class="question-box">
+
+                <h3 id="questionText"></h3>
+
+                <div class="answer-options" id="answerOptions">
+
+                </div>
+
+            </div>
+
+
+            <div class="result-message" id="resultMessage"></div>
+
+            <button class="complete-button" id="completeButton"
+                onclick="completeActivity()">
+
+                إنهاء النشاط وحفظ الإنجاز 🌟
+
+            </button>
+
+            <br>
+
+            <button class="back-button" onclick="closeActivity()">
+                الرجوع للأنشطة
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>SANAD | سند</h3>
+
+        <p>معاً نحو حياة أفضل وفرص متساوية للجميع.</p>
+
+        <p>Made by Nagat Fergany © 2026</p>
+
+    </footer>
+
+
+    <script>
+
+        // Get Current User
+
+        let currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        if (!currentUser || currentUser.accountType !== "user") {
+
+            alert("برجاء تسجيل الدخول أولاً.");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // Get Disability Type
+
+        const disabilityKey =
+            currentUser.disabilityType ||
+            currentUser.disability ||
+            "other";
+
+
+        const disabilityActivities = {
+
+            visual: {
+
+                name: "الإعاقة البصرية",
+
+                message: "أنشطة تعتمد على الاستماع والتفاعل مع التعليمات الصوتية.",
+
+                activities: [
+
+                    {
+                        id: "visual1",
+                        icon: "🔊",
+                        title: "أصوات من حولنا",
+                        description: "تعرف على الأصوات الموجودة في حياتنا اليومية.",
+                        instruction: "تخيل أنك سمعت صوت جرس الباب. ما الشيء الذي أصدر هذا الصوت؟",
+                        question: "ما الشيء الذي يصدر صوت الجرس؟",
+                        options: ["الجرس", "الكتاب", "الكرسي"],
+                        correct: 0,
+                        success: "ممتاز! الجرس هو الذي يصدر صوت الجرس. 👏"
+                    },
+
+                    {
+                        id: "visual2",
+                        icon: "🐦",
+                        title: "أصوات الحيوانات",
+                        description: "تعرف على الحيوانات من خلال أصواتها.",
+                        instruction: "فكر في الحيوان الذي يصدر صوت مواء.",
+                        question: "أي حيوان يصدر صوت مواء؟",
+                        options: ["القطة", "الأسد", "الحصان"],
+                        correct: 0,
+                        success: "رائع! القطة تصدر صوت المواء. 🐱"
+                    },
+
+                    {
+                        id: "visual3",
+                        icon: "🎵",
+                        title: "تمييز الأصوات",
+                        description: "تدرب على التعرف على الأصوات المختلفة.",
+                        instruction: "فكر في الصوت الذي نسمعه عند سقوط المطر.",
+                        question: "ماذا نسمع عندما يسقط المطر؟",
+                        options: ["صوت قطرات الماء", "صوت سيارة", "صوت جرس"],
+                        correct: 0,
+                        success: "أحسنت! المطر يصدر صوت قطرات الماء. 🌧️"
+                    }
+
+                ]
+
+            },
+
+
+            hearing: {
+
+                name: "الإعاقة السمعية",
+
+                message: "أنشطة تعتمد على الصور والكلمات والتعليمات المكتوبة.",
+
+                activities: [
+
+                    {
+                        id: "hearing1",
+                        icon: "🖼️",
+                        title: "تعرف على الألوان",
+                        description: "تعلم أسماء الألوان بطريقة مرئية.",
+                        instruction: "اختر اللون الذي يشبه لون العشب.",
+                        question: "ما لون العشب غالباً؟",
+                        options: ["🟢 الأخضر", "🔴 الأحمر", "🔵 الأزرق"],
+                        correct: 0,
+                        success: "ممتاز! العشب لونه أخضر. 🌱"
+                    },
+
+                    {
+                        id: "hearing2",
+                        icon: "🍎",
+                        title: "الفواكه",
+                        description: "تعرف على أسماء الفواكه.",
+                        instruction: "اختر الفاكهة التي نأكلها وتكون حمراء غالباً.",
+                        question: "أي اختيار يمثل التفاح؟",
+                        options: ["🍎 تفاح", "🥕 جزر", "🥒 خيار"],
+                        correct: 0,
+                        success: "أحسنت! هذا تفاح. 🍎"
+                    },
+
+                    {
+                        id: "hearing3",
+                        icon: "🔢",
+                        title: "تعلم الأرقام",
+                        description: "تعرف على الأرقام بطريقة سهلة.",
+                        instruction: "اختر الرقم الذي يأتي بعد الرقم 2.",
+                        question: "ما الرقم الذي يأتي بعد 2؟",
+                        options: ["1", "3", "5"],
+                        correct: 1,
+                        success: "رائع! الرقم 3 يأتي بعد الرقم 2. ⭐"
+                    }
+
+                ]
+
+            },
+
+
+            mobility: {
+
+                name: "الإعاقة الحركية",
+
+                message: "أنشطة يمكن تنفيذها بالضغط على اختيارات واضحة وسهلة.",
+
+                activities: [
+
+                    {
+                        id: "mobility1",
+                        icon: "🔢",
+                        title: "ترتيب الأرقام",
+                        description: "تعلم الأرقام من خلال اختيارات بسيطة.",
+                        instruction: "اختر الرقم الذي يأتي بعد الرقم 4.",
+                        question: "ما الرقم الذي يأتي بعد 4؟",
+                        options: ["3", "5", "7"],
+                        correct: 1,
+                        success: "ممتاز! الرقم 5 يأتي بعد 4. 👏"
+                    },
+
+                    {
+                        id: "mobility2",
+                        icon: "🍎",
+                        title: "الفاكهة المفيدة",
+                        description: "تعرف على بعض أنواع الفاكهة.",
+                        instruction: "اختر الفاكهة من بين الاختيارات.",
+                        question: "أي من الآتي فاكهة؟",
+                        options: ["🍎 التفاح", "🪑 الكرسي", "🚗 السيارة"],
+                        correct: 0,
+                        success: "أحسنت! التفاح من الفواكه. 🍎"
+                    },
+
+                    {
+                        id: "mobility3",
+                        icon: "📐",
+                        title: "الأشكال",
+                        description: "تعلم الأشكال الهندسية.",
+                        instruction: "اختر الشكل الذي له ثلاثة أضلاع.",
+                        question: "ما الشكل الذي له ثلاثة أضلاع؟",
+                        options: ["الدائرة", "المثلث", "المربع"],
+                        correct: 1,
+                        success: "رائع! المثلث له ثلاثة أضلاع. 🔺"
+                    }
+
+                ]
+
+            },
+
+
+            intellectual: {
+
+                name: "الإعاقة الذهنية",
+
+                message: "أنشطة بسيطة بتعليمات قصيرة وخطوات واضحة.",
+
+                activities: [
+
+                    {
+                        id: "intellectual1",
+                        icon: "🎨",
+                        title: "تعرف على الألوان",
+                        description: "تعلم الألوان الأساسية.",
+                        instruction: "انظر إلى الاختيارات واختر اللون الأحمر.",
+                        question: "أين اللون الأحمر؟",
+                        options: ["🔴 أحمر", "🟢 أخضر", "🔵 أزرق"],
+                        correct: 0,
+                        success: "شاطر جداً! ده اللون الأحمر. ❤️"
+                    },
+
+                    {
+                        id: "intellectual2",
+                        icon: "🐱",
+                        title: "الحيوانات",
+                        description: "تعرف على الحيوانات.",
+                        instruction: "اختر الحيوان الذي يقول مياو.",
+                        question: "مين بيقول مياو؟",
+                        options: ["🐱 القطة", "🐶 الكلب", "🐮 البقرة"],
+                        correct: 0,
+                        success: "برافو عليك! القطة بتقول مياو. 👏"
+                    },
+
+                    {
+                        id: "intellectual3",
+                        icon: "🔢",
+                        title: "العد",
+                        description: "تعلم العد بطريقة بسيطة.",
+                        instruction: "عد الأرقام واختار الإجابة.",
+                        question: "واحد زائد واحد يساوي كام؟",
+                        options: ["1", "2", "3"],
+                        correct: 1,
+                        success: "ممتاز! واحد زائد واحد يساوي اتنين. ⭐"
+                    }
+
+                ]
+
+            },
+
+
+            autism: {
+
+                name: "اضطراب طيف التوحد",
+
+                message: "أنشطة منظمة بتعليمات مباشرة وخطوات متوقعة.",
+
+                activities: [
+
+                    {
+                        id: "autism1",
+                        icon: "📅",
+                        title: "ترتيب اليوم",
+                        description: "تعرف على ترتيب بعض الأنشطة اليومية.",
+                        instruction: "فكر: ماذا نفعل أولاً عندما نستيقظ؟",
+                        question: "ماذا نفعل بعد الاستيقاظ من النوم؟",
+                        options: ["🪥 نغسل أسناننا", "🌙 ننام", "🍽️ نغسل الأطباق"],
+                        correct: 0,
+                        success: "إجابة رائعة! نبدأ يومنا بالاستعداد والنظافة الشخصية. 🌞"
+                    },
+
+                    {
+                        id: "autism2",
+                        icon: "🧼",
+                        title: "النظافة الشخصية",
+                        description: "تعلم خطوات غسل اليدين.",
+                        instruction: "اختر الشيء الذي نستخدمه مع الماء لغسل اليدين.",
+                        question: "ماذا نستخدم لغسل اليدين؟",
+                        options: ["الصابون", "الكتاب", "القلم"],
+                        correct: 0,
+                        success: "ممتاز! نستخدم الصابون لغسل اليدين. 🧼"
+                    },
+
+                    {
+                        id: "autism3",
+                        icon: "🚦",
+                        title: "إشارات المرور",
+                        description: "تعلم معنى ألوان إشارات المرور.",
+                        instruction: "تذكر أن اللون الأحمر يعني التوقف.",
+                        question: "ماذا يعني اللون الأحمر في إشارة المرور؟",
+                        options: ["قف", "انطلق", "العب"],
+                        correct: 0,
+                        success: "أحسنت! اللون الأحمر يعني قف. 🚦"
+                    }
+
+                ]
+
+            },
+
+
+            learning: {
+
+                name: "صعوبات التعلم",
+
+                message: "أنشطة قصيرة ومتدرجة تساعدك تتعلم وتراجع المعلومات.",
+
+                activities: [
+
+                    {
+                        id: "learning1",
+                        icon: "🔤",
+                        title: "الحروف",
+                        description: "تدرب على التعرف على الحروف العربية.",
+                        instruction: "ابحث عن حرف الألف.",
+                        question: "أين حرف الألف؟",
+                        options: ["ب", "أ", "ت"],
+                        correct: 1,
+                        success: "ممتاز! ده حرف الألف. 👏"
+                    },
+
+                    {
+                        id: "learning2",
+                        icon: "🔢",
+                        title: "الأرقام",
+                        description: "تدرب على الأرقام.",
+                        instruction: "اختر الرقم الصحيح.",
+                        question: "ما الرقم الذي يأتي بعد 6؟",
+                        options: ["5", "7", "9"],
+                        correct: 1,
+                        success: "رائع! الرقم 7 يأتي بعد 6. ⭐"
+                    },
+
+                    {
+                        id: "learning3",
+                        icon: "🧩",
+                        title: "الكلمات",
+                        description: "تعرف على كلمات بسيطة.",
+                        instruction: "اختر الكلمة التي تمثل صورة القطة.",
+                        question: "🐱 ماذا نسمي هذا الحيوان؟",
+                        options: ["قطة", "كلب", "عصفور"],
+                        correct: 0,
+                        success: "أحسنت! هذه قطة. 🐱"
+                    }
+
+                ]
+
+            },
+
+
+            multiple: {
+
+                name: "إعاقات متعددة",
+
+                message: "أنشطة متنوعة يمكن تكييفها حسب احتياجاتك المختلفة.",
+
+                activities: [
+
+                    {
+                        id: "multiple1",
+                        icon: "🎨",
+                        title: "الألوان",
+                        description: "تعلم الألوان من خلال الرموز والكلمات.",
+                        instruction: "اختر اللون الأخضر.",
+                        question: "أين اللون الأخضر؟",
+                        options: ["🟢 أخضر", "🔴 أحمر", "🔵 أزرق"],
+                        correct: 0,
+                        success: "ممتاز! هذا هو اللون الأخضر. 🌱"
+                    },
+
+                    {
+                        id: "multiple2",
+                        icon: "🐾",
+                        title: "الحيوانات",
+                        description: "تعرف على الحيوانات.",
+                        instruction: "اختر الحيوان الذي يعيش في الماء.",
+                        question: "أي حيوان يعيش في الماء؟",
+                        options: ["🐟 السمكة", "🐱 القطة", "🐴 الحصان"],
+                        correct: 0,
+                        success: "رائع! السمكة تعيش في الماء. 🐟"
+                    },
+
+                    {
+                        id: "multiple3",
+                        icon: "🔢",
+                        title: "الأرقام",
+                        description: "تدرب على الأرقام.",
+                        instruction: "اختر الرقم الصحيح.",
+                        question: "كم يساوي 2 + 1؟",
+                        options: ["2", "3", "4"],
+                        correct: 1,
+                        success: "أحسنت! الإجابة الصحيحة هي 3. ⭐"
+                    }
+
+                ]
+
+            },
+
+
+            other: {
+
+                name: "احتياجات دعم أخرى",
+
+                message: "اختار النشاط اللي تحب تبدأ بيه، وخد وقتك في التعلم.",
+
+                activities: [
+
+                    {
+                        id: "other1",
+                        icon: "🎨",
+                        title: "الألوان",
+                        description: "تعرف على الألوان الأساسية.",
+                        instruction: "اختر اللون الأحمر.",
+                        question: "أين اللون الأحمر؟",
+                        options: ["🔴 أحمر", "🟢 أخضر", "🔵 أزرق"],
+                        correct: 0,
+                        success: "ممتاز! هذا هو اللون الأحمر. ❤️"
+                    },
+
+                    {
+                        id: "other2",
+                        icon: "🔢",
+                        title: "الأرقام",
+                        description: "تدرب على الأرقام.",
+                        instruction: "اختر الرقم الذي يأتي بعد 3.",
+                        question: "ما الرقم الذي يأتي بعد 3؟",
+                        options: ["2", "4", "6"],
+                        correct: 1,
+                        success: "رائع! الرقم 4 يأتي بعد 3. 👏"
+                    },
+
+                    {
+                        id: "other3",
+                        icon: "🐶",
+                        title: "الحيوانات",
+                        description: "تعرف على الحيوانات.",
+                        instruction: "اختر الحيوان الذي يقول هوهو.",
+                        question: "مين بيقول هوهو؟",
+                        options: ["🐶 الكلب", "🐱 القطة", "🐰 الأرنب"],
+                        correct: 0,
+                        success: "برافو! الكلب بيقول هوهو. 🐶"
+                    }
+
+                ]
+
+            }
+
+        };
+
+
+        // Select Activities
+
+        const disability = disabilityActivities[disabilityKey]
+            || disabilityActivities.other;
+
+
+        document.getElementById("studentWelcome").textContent =
+            "أهلاً بيك يا " + currentUser.fullName + " 📚";
+
+
+        document.getElementById("disabilityName").textContent =
+            "نوع الإعاقة: " + disability.name;
+
+
+        document.getElementById("disabilityMessage").textContent =
+            disability.message;
+
+
+        // Get Saved Progress
+
+        const progressKey = "sanadEducationProgress_" + currentUser.id;
+
+        let completedActivities = JSON.parse(
+            localStorage.getItem(progressKey)
+        ) || [];
+
+
+        // Display Activities
+
+        function displayActivities() {
+
+            const grid = document.getElementById("activitiesGrid");
+
+            grid.innerHTML = "";
+
+            disability.activities.forEach(function(activity) {
+
+                const completed = completedActivities.includes(activity.id);
+
+                grid.innerHTML += `
+
+                    <div class="activity-card">
+
+                        <div class="activity-icon">
+                            ${activity.icon}
+                        </div>
+
+                        <span class="activity-status">
+                            ${completed ? "تم الإنجاز ✓" : "نشاط جديد"}
+                        </span>
+
+                        <h3>${activity.title}</h3>
+
+                        <p>${activity.description}</p>
+
+                        <button onclick="openActivity('${activity.id}')">
+                            ${completed ? "إعادة النشاط" : "ابدأ النشاط"}
+                        </button>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        // Open Activity
+
+        let selectedActivity = null;
+
+        let answerIsCorrect = false;
+
+        function openActivity(activityId) {
+
+            selectedActivity = disability.activities.find(function(activity) {
+
+                return activity.id === activityId;
+
+            });
+
+
+            answerIsCorrect = false;
+
+
+            document.getElementById("activityArea").style.display = "block";
+
+
+            document.getElementById("activityTitle").textContent =
+                selectedActivity.icon + " " + selectedActivity.title;
+
+
+            document.getElementById("activityDescription").textContent =
+                selectedActivity.description;
+
+
+            document.getElementById("activityInstruction").textContent =
+                selectedActivity.instruction;
+
+
+            document.getElementById("questionText").textContent =
+                selectedActivity.question;
+
+
+            document.getElementById("resultMessage").style.display = "none";
+
+
+            document.getElementById("completeButton").style.display = "none";
+
+
+            const optionsContainer = document.getElementById("answerOptions");
+
+            optionsContainer.innerHTML = "";
+
+
+            selectedActivity.options.forEach(function(option, index) {
+
+                const button = document.createElement("button");
+
+                button.className = "answer-option";
+
+                button.textContent = option;
+
+                button.onclick = function() {
+
+                    checkAnswer(index, button);
+
+                };
+
+                optionsContainer.appendChild(button);
+
+            });
+
+
+            document.getElementById("activityArea").scrollIntoView({
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+        // Check Answer
+
+        function checkAnswer(index, selectedButton) {
+
+            if (answerIsCorrect) {
+                return;
+            }
+
+            const result = document.getElementById("resultMessage");
+
+            const options = document.querySelectorAll(".answer-option");
+
+
+            if (index === selectedActivity.correct) {
+
+                answerIsCorrect = true;
+
+                selectedButton.classList.add("correct");
+
+                result.style.display = "block";
+
+                result.style.background = "#e1f3e5";
+
+                result.textContent = selectedActivity.success;
+
+
+                document.getElementById("completeButton").style.display =
+                    "inline-block";
+
+
+                options.forEach(function(button) {
+
+                    button.disabled = true;
+
+                });
+
+            } else {
+
+                selectedButton.classList.add("wrong");
+
+                result.style.display = "block";
+
+                result.style.background = "#fce8e8";
+
+                result.textContent =
+                    "مش مشكلة، حاول مرة تانية. إنت تقدر! 💚";
+
+            }
+
+        }
+
+
+        // Read Instructions
+
+        function readInstruction() {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("خاصية القراءة الصوتية غير متاحة في هذا المتصفح.");
+
+                return;
+
+            }
+
+            const text = document.getElementById("activityInstruction").textContent;
+
+            window.speechSynthesis.cancel();
+
+            const speech = new SpeechSynthesisUtterance(text);
+
+            speech.lang = "ar-EG";
+
+            speech.rate = 0.85;
+
+            window.speechSynthesis.speak(speech);
+
+        }
+
+
+        // Complete Activity
+
+        function completeActivity() {
+
+            if (!answerIsCorrect || !selectedActivity) {
+                return;
+            }
+
+
+            if (!completedActivities.includes(selectedActivity.id)) {
+
+                completedActivities.push(selectedActivity.id);
+
+                localStorage.setItem(
+                    progressKey,
+                    JSON.stringify(completedActivities)
+                );
+
+            }
+
+
+            alert("برافو عليك! تم حفظ إنجازك بنجاح. 🏆");
+
+
+            displayActivities();
+
+            closeActivity();
+
+        }
+
+
+        // Close Activity
+
+        function closeActivity() {
+
+            document.getElementById("activityArea").style.display = "none";
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+        // Start Page
+
+        displayActivities();
+
+
+    </script>
+
+</body>
+
+</html>

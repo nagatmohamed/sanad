@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ملفي الشخصي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #f6f5ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-container {
+            max-width: 850px;
+            margin: 45px auto;
+            padding: 25px;
+        }
+
+        .profile-title {
+            text-align: center;
+            color: #285c45;
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
+        .profile-description {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .profile-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 25px;
+        }
+
+        .profile-box h2 {
+            color: #285c45;
+            font-size: 21px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e8eee9;
+            padding-bottom: 12px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #444;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #3c805e;
+            box-shadow: 0 0 0 2px rgba(60, 128, 94, 0.12);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .readonly-box {
+            background: #f2f5f1;
+            padding: 18px;
+            border-radius: 12px;
+            line-height: 2;
+            color: #555;
+        }
+
+        .save-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: #347653;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+        }
+
+        .save-button:hover {
+            background: #285c45;
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #347653;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .account-badge {
+            display: inline-block;
+            background: #e5f0e7;
+            color: #285c45;
+            padding: 9px 20px;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media(max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-container {
+                padding: 15px;
+            }
+
+            .profile-box {
+                padding: 20px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <svg width="45" height="45" viewBox="0 0 100 100"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <path d="M50 85 C20 65 5 45 20 25 C32 10 48 22 50 32 C55 20 72 10 85 27 C100 48 75 70 50 85Z"
+                        fill="#347653" />
+
+                    <circle cx="36" cy="40" r="8" fill="white" />
+                    <circle cx="65" cy="40" r="8" fill="white" />
+
+                    <path d="M25 67 Q36 48 48 67"
+                        stroke="white" stroke-width="6" fill="none"
+                        stroke-linecap="round" />
+
+                    <path d="M52 67 Q65 48 77 67"
+                        stroke="white" stroke-width="6" fill="none"
+                        stroke-linecap="round" />
+
+                </svg>
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Profile -->
+
+    <main class="profile-container">
+
+        <h1 class="profile-title">ملفي الشخصي</h1>
+
+        <p class="profile-description">
+            هنا تقدري تشوفي بيانات حسابك وتعدلي المعلومات الخاصة بيكي.
+        </p>
+
+        <div style="text-align:center;">
+            <span class="account-badge" id="accountTypeBadge"></span>
+        </div>
+
+
+        <form id="profileForm">
+
+            <!-- البيانات الشخصية -->
+
+            <section class="profile-box">
+
+                <h2>البيانات الشخصية</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="fullName">الاسم بالكامل</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">النوع</label>
+                        <select id="gender">
+                            <option value="">اختاري النوع</option>
+                            <option value="أنثى">أنثى</option>
+                            <option value="ذكر">ذكر</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">الدولة</label>
+                        <input type="text" id="country">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">المحافظة أو المدينة</label>
+                        <input type="text" id="city">
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- بيانات المستخدم -->
+
+            <section class="profile-box hidden" id="userSection">
+
+                <h2>بيانات الحساب الشخصي</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label for="disabilityType">نوع الإعاقة</label>
+
+                        <select id="disabilityType">
+
+                            <option value="">اختاري نوع الإعاقة</option>
+
+                            <option value="visual">الإعاقة البصرية</option>
+
+                            <option value="hearing">الإعاقة السمعية</option>
+
+                            <option value="physical">الإعاقة الحركية</option>
+
+                            <option value="intellectual">الإعاقة الذهنية</option>
+
+                            <option value="autism">اضطراب طيف التوحد</option>
+
+                            <option value="learning">صعوبات التعلم</option>
+
+                            <option value="multiple">إعاقات متعددة</option>
+
+                            <option value="other">أخرى</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height">الطول (سم)</label>
+                        <input type="number" id="height">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weight">الوزن (كجم)</label>
+                        <input type="number" id="weight">
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="conditions">حالات أو معلومات إضافية</label>
+                        <textarea id="conditions"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guardianName">اسم ولي الأمر</label>
+                        <input type="text" id="guardianName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guardianPhone">رقم ولي الأمر</label>
+                        <input type="tel" id="guardianPhone">
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- بيانات الأسرة -->
+
+            <section class="profile-box hidden" id="familySection">
+
+                <h2>بيانات الأسرة</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="relationship">صلة القرابة</label>
+
+                        <select id="relationship">
+                            <option value="">اختاري صلة القرابة</option>
+                            <option value="الأب">الأب</option>
+                            <option value="الأم">الأم</option>
+                            <option value="الأخ">الأخ</option>
+                            <option value="الأخت">الأخت</option>
+                            <option value="أحد الأقارب">أحد الأقارب</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="support">نوع الدعم المطلوب</label>
+
+                        <textarea id="support"></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>الطفل المرتبط بالحساب</label>
+                        <div class="readonly-box" id="linkedChildInfo">
+                            جاري تحميل بيانات الطفل...
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- بيانات الأخصائي -->
+
+            <section class="profile-box hidden" id="specialistSection">
+
+                <h2>البيانات المهنية</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="specialty">التخصص</label>
+
+                        <select id="specialty">
+
+                            <option value="">اختاري التخصص</option>
+
+                            <option value="psychology">علم النفس</option>
+
+                            <option value="special-education">التربية الخاصة</option>
+
+                            <option value="speech">التخاطب</option>
+
+                            <option value="occupational">العلاج الوظيفي</option>
+
+                            <option value="behavior">تعديل السلوك</option>
+
+                            <option value="learning">صعوبات التعلم</option>
+
+                            <option value="visual">الإعاقة البصرية</option>
+
+                            <option value="hearing">الإعاقة السمعية</option>
+
+                            <option value="mobility">الإعاقة الحركية</option>
+
+                            <option value="other">أخرى</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qualification">المؤهل العلمي</label>
+                        <input type="text" id="qualification">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">سنوات الخبرة</label>
+                        <input type="number" id="experience" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serviceType">طريقة تقديم الخدمة</label>
+
+                        <select id="serviceType">
+
+                            <option value="">اختاري طريقة تقديم الخدمة</option>
+
+                            <option value="online">أونلاين</option>
+
+                            <option value="clinic">داخل المركز أو العيادة</option>
+
+                            <option value="both">أونلاين وداخل المركز</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="bio">نبذة تعريفية عنك وخدماتك</label>
+                        <textarea id="bio"></textarea>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <button type="submit" class="save-button">
+                حفظ التعديلات
+            </button>
+
+        </form>
+
+
+        <a href="#" class="back-button" id="backButton">
+            العودة إلى لوحة التحكم ←
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // الحصول على بيانات الحساب الحالي
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        if (!currentUser) {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            initializeProfile();
+
+        }
+
+
+        // تحديد عناصر الصفحة
+
+        const profileForm = document.getElementById("profileForm");
+
+        const userSection = document.getElementById("userSection");
+
+        const familySection = document.getElementById("familySection");
+
+        const specialistSection = document.getElementById("specialistSection");
+
+
+        // أسماء التخصصات
+
+        const specialtyNames = {
+
+            "علم النفس": "psychology",
+            "التربية الخاصة": "special-education",
+            "التخاطب": "speech",
+            "العلاج الوظيفي": "occupational",
+            "تعديل السلوك": "behavior",
+            "صعوبات التعلم": "learning",
+            "الإعاقة البصرية": "visual",
+            "الإعاقة السمعية": "hearing",
+            "الإعاقة الحركية": "mobility"
+
+        };
+
+
+        // أسماء أنواع الإعاقات
+
+        const disabilityNames = {
+
+            visual: "الإعاقة البصرية",
+            hearing: "الإعاقة السمعية",
+            physical: "الإعاقة الحركية",
+            intellectual: "الإعاقة الذهنية",
+            autism: "اضطراب طيف التوحد",
+            learning: "صعوبات التعلم",
+            multiple: "إعاقات متعددة",
+            other: "أخرى"
+
+        };
+
+
+        // تحويل نوع الحساب إلى اسم عربي
+
+        function getAccountName(type) {
+
+            if (type === "user") {
+                return "حساب شخصي";
+            }
+
+            if (type === "family") {
+                return "حساب أسرة";
+            }
+
+            if (type === "specialist") {
+                return "حساب أخصائي";
+            }
+
+            return "حساب SANAD";
+
+        }
+
+
+        // تحميل البيانات
+
+        function initializeProfile() {
+
+            document.getElementById("accountTypeBadge").textContent =
+                getAccountName(currentUser.accountType);
+
+
+            // البيانات الشخصية
+
+            document.getElementById("fullName").value =
+                currentUser.fullName || "";
+
+            document.getElementById("gender").value =
+                currentUser.gender || "";
+
+            document.getElementById("phone").value =
+                currentUser.phone || "";
+
+            document.getElementById("email").value =
+                currentUser.email || "";
+
+            document.getElementById("country").value =
+                currentUser.country || "";
+
+            document.getElementById("city").value =
+                currentUser.city || "";
+
+
+            // الحساب الشخصي
+
+            if (currentUser.accountType === "user") {
+
+                userSection.classList.remove("hidden");
+
+                document.getElementById("disabilityType").value =
+                    currentUser.disabilityType || "";
+
+                document.getElementById("height").value =
+                    currentUser.height || "";
+
+                document.getElementById("weight").value =
+                    currentUser.weight || "";
+
+                document.getElementById("conditions").value =
+                    currentUser.conditions || currentUser.medicalConditions || "";
+
+                document.getElementById("guardianName").value =
+                    currentUser.guardianName || "";
+
+                document.getElementById("guardianPhone").value =
+                    currentUser.guardianPhone || "";
+
+            }
+
+
+            // حساب الأسرة
+
+            if (currentUser.accountType === "family") {
+
+                familySection.classList.remove("hidden");
+
+                document.getElementById("relationship").value =
+                    currentUser.relationship || "";
+
+                document.getElementById("support").value =
+                    currentUser.support || "";
+
+
+                loadChildInfo();
+
+            }
+
+
+            // حساب الأخصائي
+
+            if (currentUser.accountType === "specialist") {
+
+                specialistSection.classList.remove("hidden");
+
+                let specialtyCode = currentUser.specialtyCode ||
+                    specialtyNames[currentUser.specialty] || "";
+
+                document.getElementById("specialty").value =
+                    specialtyCode;
+
+                document.getElementById("qualification").value =
+                    currentUser.qualification || "";
+
+                document.getElementById("experience").value =
+                    currentUser.experience || "";
+
+                document.getElementById("serviceType").value =
+                    currentUser.serviceTypeCode || "";
+
+                document.getElementById("bio").value =
+                    currentUser.bio || "";
+
+            }
+
+
+            // تحديد زر العودة
+
+            if (currentUser.accountType === "user") {
+
+                document.getElementById("backButton").href =
+                    "user-dashboard.html";
+
+            } else if (currentUser.accountType === "family") {
+
+                document.getElementById("backButton").href =
+                    "family-dashboard.html";
+
+            } else if (currentUser.accountType === "specialist") {
+
+                document.getElementById("backButton").href =
+                    "specialist-dashboard.html";
+
+            }
+
+        }
+
+
+        // تحميل بيانات الطفل المرتبط بحساب الأسرة
+
+        function loadChildInfo() {
+
+            const users = JSON.parse(
+                localStorage.getItem("sanadUsers") || "[]"
+            );
+
+            const child = users.find(user =>
+                String(user.id) === String(currentUser.linkedChildId)
+            );
+
+            const childInfo = document.getElementById("linkedChildInfo");
+
+            if (child) {
+
+                childInfo.innerHTML = `
+                    <strong>اسم الطفل:</strong> ${escapeHTML(child.fullName || "غير متوفر")}<br>
+                    <strong>نوع الإعاقة:</strong>
+                    ${escapeHTML(disabilityNames[child.disabilityType] || "غير محدد")}<br>
+                    <strong>المحافظة:</strong> ${escapeHTML(child.city || "غير متوفرة")}<br>
+                    <strong>كود الطفل:</strong> ${escapeHTML(child.childCode || "غير متوفر")}
+                `;
+
+            } else {
+
+                childInfo.textContent =
+                    "لم يتم العثور على بيانات الطفل المرتبط بالحساب.";
+
+            }
+
+        }
+
+
+        // حماية النصوص المعروضة من تفسيرها كـ HTML
+
+        function escapeHTML(value) {
+
+            return String(value).replace(/[&<>"']/g, function(character) {
+
+                const characters = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                };
+
+                return characters[character];
+
+            });
+
+        }
+
+
+        // حفظ التعديلات
+
+        profileForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const users = JSON.parse(
+                localStorage.getItem("sanadUsers") || "[]"
+            );
+
+
+            // البحث عن الحساب داخل قائمة المستخدمين
+
+            const userIndex = users.findIndex(user =>
+                String(user.id) === String(currentUser.id)
+            );
+
+
+            if (userIndex === -1) {
+
+                alert("لم يتم العثور على الحساب. سجلي الدخول مرة أخرى.");
+
+                return;
+
+            }
+
+
+            // البيانات المشتركة
+
+            const updatedUser = {
+
+                ...users[userIndex],
+
+                fullName: document.getElementById("fullName").value.trim(),
+
+                gender: document.getElementById("gender").value,
+
+                phone: document.getElementById("phone").value.trim(),
+
+                country: document.getElementById("country").value.trim(),
+
+                city: document.getElementById("city").value.trim()
+
+            };
+
+
+            if (!updatedUser.fullName) {
+
+                alert("من فضلك اكتبي الاسم بالكامل.");
+
+                return;
+
+            }
+
+
+            // بيانات الحساب الشخصي
+
+            if (currentUser.accountType === "user") {
+
+                updatedUser.disabilityType =
+                    document.getElementById("disabilityType").value;
+
+                updatedUser.height =
+                    document.getElementById("height").value;
+
+                updatedUser.weight =
+                    document.getElementById("weight").value;
+
+                updatedUser.conditions =
+                    document.getElementById("conditions").value.trim();
+
+                updatedUser.guardianName =
+                    document.getElementById("guardianName").value.trim();
+
+                updatedUser.guardianPhone =
+                    document.getElementById("guardianPhone").value.trim();
+
+            }
+
+
+            // بيانات الأسرة
+
+            if (currentUser.accountType === "family") {
+
+                updatedUser.relationship =
+                    document.getElementById("relationship").value;
+
+                updatedUser.support =
+                    document.getElementById("support").value.trim();
+
+            }
+
+
+            // بيانات الأخصائي
+
+            if (currentUser.accountType === "specialist") {
+
+                const specialtySelect =
+                    document.getElementById("specialty");
+
+                const serviceSelect =
+                    document.getElementById("serviceType");
+
+                updatedUser.specialtyCode = specialtySelect.value;
+
+                updatedUser.specialty =
+                    specialtySelect.options[specialtySelect.selectedIndex].text;
+
+                updatedUser.qualification =
+                    document.getElementById("qualification").value.trim();
+
+                updatedUser.experience =
+                    document.getElementById("experience").value;
+
+                updatedUser.serviceTypeCode = serviceSelect.value;
+
+                updatedUser.serviceType =
+                    serviceSelect.options[serviceSelect.selectedIndex].text;
+
+                updatedUser.bio =
+                    document.getElementById("bio").value.trim();
+
+            }
+
+
+            // تحديث الحساب في قائمة المستخدمين
+
+            users[userIndex] = updatedUser;
+
+            localStorage.setItem(
+                "sanadUsers",
+                JSON.stringify(users)
+            );
+
+
+            // تحديث الحساب الحالي
+
+            localStorage.setItem(
+                "sanadCurrentUser",
+                JSON.stringify(updatedUser)
+            );
+
+
+            alert("تم حفظ بياناتك وتحديث ملفك الشخصي بنجاح ❤️");
+
+            location.reload();
+
+        });
+
+    </script>
+
+</body>
+
+</html>

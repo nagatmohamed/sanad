@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>لوحة تحكم الأسرة | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ===== FAMILY DASHBOARD ===== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .family-dashboard {
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .family-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Welcome */
+
+        .family-welcome {
+            background: linear-gradient(135deg, #17613D, #32835B);
+            color: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .family-welcome h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .family-welcome p {
+            font-size: 17px;
+            line-height: 1.9;
+            max-width: 700px;
+        }
+
+        .welcome-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 18px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.16);
+            color: white;
+        }
+
+        /* Quick Stats */
+
+        .family-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .family-stat {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            border: 1px solid #e8eee9;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        .family-stat-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .family-stat h3 {
+            margin: 0 0 10px;
+            color: #17613D;
+            font-size: 18px;
+        }
+
+        .family-stat p {
+            margin: 0;
+            color: #777;
+            line-height: 1.7;
+        }
+
+        /* Child Profile */
+
+        .family-child-box {
+            background: white;
+            padding: 30px;
+            border-radius: 22px;
+            margin-bottom: 35px;
+            border: 1px solid #e8eee9;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        .family-section-heading {
+            color: #17613D;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .child-profile-content {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .child-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #eaf4ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            flex-shrink: 0;
+        }
+
+        .child-info {
+            flex: 1;
+            min-width: 230px;
+        }
+
+        .child-info h3 {
+            color: #17613D;
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .child-info p {
+            line-height: 1.9;
+            color: #555;
+            margin: 8px 0;
+        }
+
+        .child-details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .child-detail {
+            background: #f7faf7;
+            border: 1px solid #e7eee8;
+            padding: 18px;
+            border-radius: 14px;
+        }
+
+        .child-detail span {
+            display: block;
+            color: #777;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .child-detail strong {
+            color: #17613D;
+            font-size: 16px;
+            overflow-wrap: anywhere;
+        }
+
+        /* Services */
+
+        .family-services {
+            margin-bottom: 40px;
+        }
+
+        .family-services h2 {
+            color: #17613D;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .family-services-intro {
+            color: #777;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .family-services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .family-service-card {
+            text-decoration: none;
+            color: inherit;
+            background: white;
+            border: 1px solid #e8eee9;
+            border-radius: 20px;
+            padding: 25px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            min-height: 225px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.03);
+        }
+
+        .family-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(23, 97, 61, 0.10);
+            border-color: #b8d6c2;
+        }
+
+        .family-service-icon {
+            width: 60px;
+            height: 60px;
+            background: #edf6ef;
+            border-radius: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .family-service-card h3 {
+            color: #17613D;
+            font-size: 19px;
+            margin: 0 0 12px;
+        }
+
+        .family-service-card p {
+            color: #777;
+            line-height: 1.8;
+            font-size: 14px;
+            margin: 0 0 18px;
+        }
+
+        .family-service-link {
+            margin-top: auto;
+            color: #17613D;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Reminder */
+
+        .family-reminder {
+            background: #f1f7f1;
+            border: 1px solid #dfebdf;
+            border-radius: 22px;
+            padding: 30px;
+            margin: 35px 0;
+        }
+
+        .family-reminder h2 {
+            color: #17613D;
+            margin-top: 0;
+        }
+
+        .family-reminder p {
+            line-height: 2;
+            color: #526356;
+            font-size: 16px;
+        }
+
+        .family-reminder-quote {
+            font-size: 26px;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+
+        .family-footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: #777;
+            border-top: 1px solid #e7eee8;
+            margin-top: 40px;
+        }
+
+        .family-footer h3 {
+            color: #17613D;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+
+            .family-services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .family-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .family-dashboard {
+                padding: 25px 12px;
+            }
+
+            .family-welcome {
+                padding: 25px;
+            }
+
+            .family-welcome h1 {
+                font-size: 24px;
+            }
+
+            .family-welcome p {
+                font-size: 15px;
+            }
+
+            .family-services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .family-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .child-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .family-child-box {
+                padding: 20px;
+            }
+
+            .family-service-card {
+                min-height: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+
+        <a href="index.html" class="logo">
+
+            <svg class="logo-icon" viewBox="0 0 100 100">
+
+                <path d="M50 88 C30 72 8 54 10 32 C12 10 37 7 50 28 C63 7 88 10 90 32 C92 54 70 72 50 88Z"
+                    fill="none" stroke="#17613D" stroke-width="5"/>
+
+                <circle cx="35" cy="34" r="7" fill="#17613D"/>
+                <circle cx="64" cy="38" r="7" fill="#CBA66A"/>
+
+                <path d="M22 75 Q50 91 78 75"
+                    fill="none" stroke="#17613D" stroke-width="5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <div class="logo-text">
+                <span>SANAD</span>
+                <strong>سند</strong>
+            </div>
+
+        </a>
+
+        <nav class="navbar">
+
+            <a href="index.html">الرئيسية</a>
+            <a href="#child">ملف الطفل</a>
+            <a href="#services">الخدمات</a>
+
+        </nav>
+
+        <div class="header-buttons">
+            <button class="login-btn" onclick="logout()">تسجيل الخروج</button>
+        </div>
+
+    </header>
+
+
+    <!-- Family Dashboard -->
+
+    <main class="family-dashboard">
+
+        <div class="family-container">
+
+            <!-- Welcome -->
+
+            <section class="family-welcome">
+
+                <h1 id="welcomeMessage">أهلاً بك في ركن الأسرة 💚</h1>
+
+                <p>
+                    هنا تقدر تتابع رحلة طفلك التعليمية وتكون جزءًا من كل خطوة في تطوره.
+                    مع سند، كل إنجاز صغير يستحق الاحتفال.
+                </p>
+
+                <span class="welcome-badge">
+                    💚 معًا نفهم، نتعلم، نتطور
+                </span>
+
+            </section>
+
+
+            <!-- Quick Stats -->
+
+            <section class="family-stats">
+
+                <div class="family-stat">
+
+                    <div class="family-stat-icon">👨‍👩‍👧</div>
+
+                    <h3>ركن الأسرة</h3>
+
+                    <p>مساحة خاصة لمتابعة رحلة طفلك.</p>
+
+                </div>
+
+
+                <div class="family-stat">
+
+                    <div class="family-stat-icon">🌱</div>
+
+                    <h3>خطوات صغيرة</h3>
+
+                    <p>كل خطوة في رحلة طفلك هي إنجاز.</p>
+
+                </div>
+
+
+                <div class="family-stat">
+
+                    <div class="family-stat-icon">💚</div>
+
+                    <h3>دعم مستمر</h3>
+
+                    <p>سند معك في رحلة التعلم والتطور.</p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Child Profile -->
+
+            <section class="family-child-box" id="child">
+
+                <h2 class="family-section-heading">ملف الطفل 👧</h2>
+
+                <div id="childInformation">
+
+                    <p>جاري تحميل بيانات الطفل...</p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Services -->
+
+            <section class="family-services" id="services">
+
+                <h2>خدمات الأسرة 💚</h2>
+
+                <p class="family-services-intro">
+                    كل ما تحتاجه لمتابعة طفلك والتعرف على الخدمات المتاحة له،
+                    في مكان واحد.
+                </p>
+
+
+                <div class="family-services-grid">
+
+
+                    <!-- Progress -->
+
+                    <a href="family-progress.html" class="family-service-card">
+
+                        <div class="family-service-icon">📊</div>
+
+                        <h3>متابعة التقدم</h3>
+
+                        <p>
+                            تابع مهارات طفلك والأنشطة التي أنجزها
+                            وخطوات تطوره.
+                        </p>
+
+                        <span class="family-service-link">متابعة التقدم ←</span>
+
+                    </a>
+
+
+                    <!-- Activities -->
+
+                    <a href="family-activities.html" class="family-service-card">
+
+                        <div class="family-service-icon">🎨</div>
+
+                        <h3>الأنشطة التعليمية</h3>
+
+                        <p>
+                            اكتشف أنشطة وألعاب تساعد طفلك
+                            على التعلم بطريقة ممتعة.
+                        </p>
+
+                        <span class="family-service-link">اكتشف الأنشطة ←</span>
+
+                    </a>
+
+
+                    <!-- Feelings -->
+
+                    <a href="family-feelings.html" class="family-service-card">
+
+                        <div class="family-service-icon">💚</div>
+
+                        <h3>مشاعر طفلي</h3>
+
+                        <p>
+                            تعرف على مشاعر طفلك وتابع
+                            حالته اليومية وسجل مشاعره.
+                        </p>
+
+                        <span class="family-service-link">متابعة المشاعر ←</span>
+
+                    </a>
+
+
+                    <!-- Specialists -->
+
+                    <a href="specialists.html" class="family-service-card">
+
+                        <div class="family-service-icon">👩‍⚕️</div>
+
+                        <h3>الأخصائيون</h3>
+
+                        <p>
+                            تعرف على الأخصائيين ومجالات الدعم
+                            المختلفة التي قد يحتاجها طفلك.
+                        </p>
+
+                        <span class="family-service-link">تعرف على الأخصائيين ←</span>
+
+                    </a>
+
+
+                    <!-- Family Guide -->
+
+                    <a href="family-guide.html" class="family-service-card">
+
+                        <div class="family-service-icon">📚</div>
+
+                        <h3>دليل الأسرة</h3>
+
+                        <p>
+                            نصائح وإرشادات تساعدك
+                            في فهم طفلك والتعامل معه.
+                        </p>
+
+                        <span class="family-service-link">قراءة الدليل ←</span>
+
+                    </a>
+
+
+                    <!-- Messages -->
+
+                    <a href="messages.html" class="family-service-card">
+
+                        <div class="family-service-icon">💬</div>
+
+                        <h3>الرسائل</h3>
+
+                        <p>
+                            تابع رسائلك وتواصل
+                            مع فريق سند.
+                        </p>
+
+                        <span class="family-service-link">عرض الرسائل ←</span>
+
+                    </a>
+
+
+                    <!-- Settings -->
+
+                    <a href="settings.html" class="family-service-card">
+
+                        <div class="family-service-icon">⚙️</div>
+
+                        <h3>الإعدادات والخصوصية</h3>
+
+                        <p>
+                            تحكم في إعدادات حسابك
+                            وخصوصيتك وخيارات سهولة الوصول.
+                        </p>
+
+                        <span class="family-service-link">إدارة الإعدادات ←</span>
+
+                    </a>
+
+
+                    <!-- Profile -->
+
+                    <a href="my-profile.html" class="family-service-card">
+
+                        <div class="family-service-icon">👤</div>
+
+                        <h3>ملفي الشخصي</h3>
+
+                        <p>
+                            عرض وتعديل بيانات حسابك
+                            ومعلوماتك الشخصية.
+                        </p>
+
+                        <span class="family-service-link">عرض الملف الشخصي ←</span>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- Reminder -->
+
+            <section class="family-reminder">
+
+                <h2>رسالة من سند 💚</h2>
+
+                <p>
+                    كل طفل لديه طريقته الخاصة في التعلم والتطور.
+                    امنح طفلك الوقت والتشجيع، واحتفل معه بكل إنجاز مهما كان صغيرًا.
+                    وجودك بجانبه هو جزء مهم من رحلته.
+                </p>
+
+                <div class="family-reminder-quote">
+                    ✨ كل إنجاز صغير هو بداية لحاجة كبيرة.
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="family-footer">
+
+        <h3>SANAD | سند</h3>
+
+        <p>معًا نفهم، نتعلم، نتطور.</p>
+
+        <p>Made by Nagat Fergany © 2026</p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // ==========================
+        // Login Check
+        // ==========================
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser") || "null"
+        );
+
+        if (!currentUser || currentUser.accountType !== "family") {
+
+            alert("من فضلك سجّل الدخول بحساب الأسرة أولاً.");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // ==========================
+        // Welcome Message
+        // ==========================
+
+        if (currentUser) {
+
+            document.getElementById("welcomeMessage").textContent =
+                "أهلاً بك يا " + (currentUser.fullName || "عضو الأسرة") + " 💚";
+
+        }
+
+
+        // ==========================
+        // Find Linked Child
+        // ==========================
+
+        const users = JSON.parse(
+            localStorage.getItem("sanadUsers") || "[]"
+        );
+
+        const child = Array.isArray(users)
+            ? users.find(function(user) {
+
+                return user.id === currentUser?.linkedChildId &&
+                       user.accountType === "user";
+
+            })
+            : null;
+
+
+        // ==========================
+        // Child Information
+        // ==========================
+
+        const childInformation = document.getElementById("childInformation");
+
+
+        if (child) {
+
+            childInformation.innerHTML = `
+
+                <div class="child-profile-content">
+
+                    <div class="child-avatar">
+                        👧
+                    </div>
+
+                    <div class="child-info">
+
+                        <h3>${child.fullName || "اسم الطفل"}</h3>
+
+                        <p>
+                            💚 يسعدنا متابعة رحلة طفلك
+                            ومشاركته خطوات التعلم والتطور.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="child-details-grid">
+
+                    <div class="child-detail">
+
+                        <span>🎂 تاريخ الميلاد</span>
+
+                        <strong>${child.birthDate || "غير مسجل"}</strong>
+
+                    </div>
+
+
+                    <div class="child-detail">
+
+                        <span>🧩 نوع الإعاقة</span>
+
+                        <strong>${child.disability || "غير مسجل"}</strong>
+
+                    </div>
+
+
+                    <div class="child-detail">
+
+                        <span>📍 المحافظة</span>
+
+                        <strong>${child.city || "غير مسجلة"}</strong>
+
+                    </div>
+
+
+                    <div class="child-detail">
+
+                        <span>👨‍👩‍👧 صلة القرابة</span>
+
+                        <strong>${currentUser.relationship || "غير مسجلة"}</strong>
+
+                    </div>
+
+
+                    <div class="child-detail">
+
+                        <span>🔑 كود الطفل</span>
+
+                        <strong>${child.childCode || "غير متوفر"}</strong>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+        } else {
+
+            childInformation.innerHTML = `
+
+                <div style="text-align:center; padding:25px;">
+
+                    <div style="font-size:45px;">👨‍👩‍👧</div>
+
+                    <h3 style="color:#17613D;">لم يتم العثور على حساب الطفل المرتبط</h3>
+
+                    <p style="color:#777; line-height:1.9;">
+                        تأكد من صحة بيانات الربط بين حساب الأسرة وحساب الطفل.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        // ==========================
+        // Logout
+        // ==========================
+
+        function logout() {
+
+            localStorage.removeItem("sanadCurrentUser");
+
+            window.location.href = "login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

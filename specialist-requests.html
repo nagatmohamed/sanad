@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>طلبات الاستشارات | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f8f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .requests-container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 40px auto;
+        }
+
+        .welcome-box {
+            background: linear-gradient(135deg, #e5f1e8, #f5eee1);
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-box h1 {
+            color: #276044;
+            margin-bottom: 15px;
+        }
+
+        .welcome-box p {
+            color: #555;
+            line-height: 1.9;
+            font-size: 17px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.05);
+        }
+
+        .stat-card h2 {
+            color: #276044;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            color: #666;
+        }
+
+        .section-title {
+            color: #276044;
+            margin: 30px 0 18px;
+            font-size: 23px;
+        }
+
+        .requests-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .request-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+            border-right: 5px solid #8eb69a;
+        }
+
+        .request-card h3 {
+            color: #276044;
+            margin-bottom: 15px;
+        }
+
+        .request-card p {
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .pending {
+            background: #fff2d6;
+            color: #886000;
+        }
+
+        .accepted {
+            background: #e2f3e7;
+            color: #276044;
+        }
+
+        .rejected {
+            background: #fbe5e5;
+            color: #a33131;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .accept-btn {
+            background: #276044;
+            color: white;
+        }
+
+        .reject-btn {
+            background: #f5e5e5;
+            color: #a33131;
+        }
+
+        .empty-state {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 18px;
+            color: #666;
+            line-height: 2;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state span {
+            display: block;
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .back-button {
+            display: block;
+            width: fit-content;
+            margin: 35px auto;
+            padding: 14px 30px;
+            background: #276044;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        button:focus,
+        a:focus {
+            outline: 3px solid #d49b38;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 700px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .requests-list {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                <svg viewBox="0 0 100 100" width="45" height="45">
+
+                    <path
+                        d="M50 85 C20 65 5 45 20 25 C32 10 47 20 50 32 C57 15 77 12 87 30 C99 53 70 75 50 85Z"
+                        fill="#276044" />
+
+                    <circle cx="38" cy="39" r="7" fill="white" />
+
+                    <circle cx="64" cy="39" r="7" fill="white" />
+
+                </svg>
+
+            </div>
+
+            <div class="logo-text">
+                <h2>SANAD</h2>
+                <span>سند</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="requests-container">
+
+        <section class="welcome-box">
+
+            <h1>📩 طلبات الاستشارات</h1>
+
+            <p>
+                من هنا يمكنك متابعة طلبات الاستشارة التي أرسلها
+                المستخدمون وأولياء الأمور إليك، ومراجعة كل طلب
+                وقبوله أو رفضه.
+            </p>
+
+        </section>
+
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h2 id="totalCount">0</h2>
+                <p>إجمالي الطلبات</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="pendingCount">0</h2>
+                <p>طلبات قيد الانتظار</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 id="acceptedCount">0</h2>
+                <p>طلبات مقبولة</p>
+            </div>
+
+        </section>
+
+
+        <h2 class="section-title">⏳ الطلبات الجديدة</h2>
+
+        <section class="requests-list" id="pendingRequests"></section>
+
+
+        <h2 class="section-title">✓ الطلبات المقبولة</h2>
+
+        <section class="requests-list" id="acceptedRequests"></section>
+
+
+        <h2 class="section-title">✕ الطلبات المرفوضة</h2>
+
+        <section class="requests-list" id="rejectedRequests"></section>
+
+
+        <a href="specialist-dashboard.html" class="back-button">
+            العودة إلى لوحة تحكم الأخصائي
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // قراءة حساب الأخصائي الحالي
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+
+        // التأكد من أن الحساب أخصائي
+        if (!currentUser || currentUser.accountType !== "specialist") {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            displayRequests();
+
+        }
+
+
+        // قراءة طلبات الاستشارات
+        function getRequests() {
+
+            return JSON.parse(
+                localStorage.getItem("sanadSpecialistRequests") || "[]"
+            );
+
+        }
+
+
+        // تحديث حالة الطلب
+        function updateRequest(requestId, newStatus) {
+
+            const requests = getRequests();
+
+            const request = requests.find(item =>
+                String(item.id) === String(requestId) &&
+                item.specialistId === currentUser.id
+            );
+
+            if (!request) {
+                alert("لم يتم العثور على الطلب.");
+                return;
+            }
+
+            if (request.status !== "pending") {
+                alert("تم التعامل مع هذا الطلب بالفعل.");
+                return;
+            }
+
+            request.status = newStatus;
+
+            localStorage.setItem(
+                "sanadSpecialistRequests",
+                JSON.stringify(requests)
+            );
+
+            alert(
+                newStatus === "accepted"
+                    ? "تم قبول طلب الاستشارة بنجاح 💚"
+                    : "تم رفض طلب الاستشارة."
+            );
+
+            displayRequests();
+
+        }
+
+
+        // إنشاء كارت الطلب
+        function createRequestCard(request) {
+
+            const card = document.createElement("article");
+
+            card.className = "request-card";
+
+            const title = document.createElement("h3");
+
+            title.textContent = "طلب استشارة جديد";
+
+            card.appendChild(title);
+
+
+            const details = [
+
+                ["اسم صاحب الطلب", request.requesterName || "غير محدد"],
+
+                ["نوع الحساب",
+                    request.requesterType === "family"
+                        ? "ولي أمر"
+                        : "مستخدم"],
+
+                ["تاريخ الطلب",
+                    request.createdAt
+                        ? new Date(request.createdAt).toLocaleString("ar-EG")
+                        : "غير محدد"]
+
+            ];
+
+
+            details.forEach(([label, value]) => {
+
+                const p = document.createElement("p");
+
+                const strong = document.createElement("strong");
+
+                strong.textContent = label + ": ";
+
+                p.appendChild(strong);
+
+                p.appendChild(document.createTextNode(value));
+
+                card.appendChild(p);
+
+            });
+
+
+            const status = document.createElement("span");
+
+            status.className = "status " + request.status;
+
+            if (request.status === "pending") {
+                status.textContent = "قيد الانتظار";
+            }
+
+            else if (request.status === "accepted") {
+                status.textContent = "تم قبول الطلب";
+            }
+
+            else {
+                status.textContent = "تم رفض الطلب";
+            }
+
+            card.appendChild(status);
+
+
+            // أزرار القبول والرفض
+            if (request.status === "pending") {
+
+                const actions = document.createElement("div");
+
+                actions.className = "actions";
+
+
+                const acceptButton = document.createElement("button");
+
+                acceptButton.className = "accept-btn";
+
+                acceptButton.textContent = "قبول الطلب";
+
+                acceptButton.addEventListener("click", function () {
+
+                    updateRequest(request.id, "accepted");
+
+                });
+
+
+                const rejectButton = document.createElement("button");
+
+                rejectButton.className = "reject-btn";
+
+                rejectButton.textContent = "رفض الطلب";
+
+                rejectButton.addEventListener("click", function () {
+
+                    updateRequest(request.id, "rejected");
+
+                });
+
+
+                actions.appendChild(acceptButton);
+
+                actions.appendChild(rejectButton);
+
+                card.appendChild(actions);
+
+            }
+
+
+            return card;
+
+        }
+
+
+        // عرض الطلبات
+        function displayRequests() {
+
+            const allRequests = getRequests();
+
+
+            // طلبات الأخصائي الحالي فقط
+            const myRequests = allRequests.filter(request =>
+
+                String(request.specialistId) === String(currentUser.id)
+
+            );
+
+
+            const pending = myRequests.filter(request =>
+                request.status === "pending"
+            );
+
+            const accepted = myRequests.filter(request =>
+                request.status === "accepted"
+            );
+
+            const rejected = myRequests.filter(request =>
+                request.status === "rejected"
+            );
+
+
+            // تحديث الإحصائيات
+            document.getElementById("totalCount").textContent =
+                myRequests.length;
+
+            document.getElementById("pendingCount").textContent =
+                pending.length;
+
+            document.getElementById("acceptedCount").textContent =
+                accepted.length;
+
+
+            // عرض كل مجموعة
+            renderGroup("pendingRequests", pending,
+                "لا توجد طلبات استشارة جديدة حاليًا.");
+
+            renderGroup("acceptedRequests", accepted,
+                "لا توجد طلبات استشارة مقبولة حتى الآن.");
+
+            renderGroup("rejectedRequests", rejected,
+                "لا توجد طلبات استشارة مرفوضة.");
+
+        }
+
+
+        // عرض مجموعة طلبات
+        function renderGroup(elementId, requests, emptyMessage) {
+
+            const container = document.getElementById(elementId);
+
+            container.innerHTML = "";
+
+
+            if (requests.length === 0) {
+
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <span>📭</span>
+                        ${emptyMessage}
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            requests.forEach(request => {
+
+                container.appendChild(
+                    createRequestCard(request)
+                );
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>لوحة تحكم الأخصائي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <a href="index.html" class="logo">
+
+            <svg class="logo-icon" viewBox="0 0 100 100">
+
+                <path d="M50 88 C30 72 8 54 10 32 C12 10 37 7 50 28 C63 7 88 10 90 32 C92 54 70 72 50 88Z"
+                    fill="none" stroke="#17613D" stroke-width="5"/>
+
+                <circle cx="35" cy="34" r="7" fill="#17613D"/>
+                <circle cx="64" cy="38" r="7" fill="#CBA66A"/>
+
+                <path d="M22 75 Q50 91 78 75"
+                    fill="none" stroke="#17613D" stroke-width="5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <div class="logo-text">
+                <span>SANAD</span>
+                <strong>سند</strong>
+            </div>
+
+        </a>
+
+        <nav class="navbar">
+
+            <a href="index.html">الرئيسية</a>
+            <a href="#profile">ملفي الشخصي</a>
+            <a href="#services">الخدمات</a>
+
+        </nav>
+
+        <div class="header-buttons">
+
+            <button class="login-btn" onclick="logout()">
+                تسجيل الخروج
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- Dashboard -->
+
+    <section class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- Welcome -->
+
+            <div class="welcome-section">
+
+                <h1 id="welcomeMessage">
+                    أهلاً بك في منصة سند 💚
+                </h1>
+
+                <p>
+                    معًا نساهم في تقديم الدعم والرعاية المناسبة لكل طفل.
+                </p>
+
+            </div>
+
+
+            <!-- Specialist Profile -->
+
+            <section class="profile-summary" id="profile">
+
+                <h2>ملفي المهني 👩‍⚕️</h2>
+
+                <div id="specialistInformation">
+
+                    <p>جاري تحميل بياناتك...</p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Services -->
+
+            <section id="services">
+
+                <h2 class="section-title">
+                    خدمات الأخصائي
+                </h2>
+
+
+                <div class="dashboard-grid">
+
+
+                    <!-- الحالات -->
+
+                    <a href="specialist-cases.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">👧</div>
+
+                        <h3>الحالات المرتبطة</h3>
+
+                        <p>
+                            استعرض الحالات وتابع البيانات الخاصة بكل حالة.
+                        </p>
+
+                    </a>
+
+
+                    <!-- التقدم -->
+
+                    <a href="specialist-progress.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">📊</div>
+
+                        <h3>متابعة التقدم</h3>
+
+                        <p>
+                            تابع تطور المهارات والإنجازات لكل حالة.
+                        </p>
+
+                    </a>
+
+
+                    <!-- الملاحظات -->
+
+                    <a href="specialist-notes.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">📝</div>
+
+                        <h3>الملاحظات والتوصيات</h3>
+
+                        <p>
+                            أضف ملاحظاتك المهنية والتوصيات المناسبة.
+                        </p>
+
+                    </a>
+
+
+                    <!-- الطلبات -->
+
+                    <a href="specialist-requests.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">📩</div>
+
+                        <h3>طلبات التواصل والاستشارات</h3>
+
+                        <p>
+                            تابع طلبات التواصل والاستشارات من الأسر.
+                        </p>
+
+                    </a>
+
+
+                    <!-- طلبات المتابعة -->
+
+                    <a href="specialist-follow-requests.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">💚</div>
+
+                        <h3>طلبات المتابعة</h3>
+
+                        <p>
+                            اعرض طلبات المتابعة وقم بقبولها أو رفضها.
+                        </p>
+
+                    </a>
+
+
+                    <!-- الرسائل -->
+
+                    <a href="messages.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">💬</div>
+
+                        <h3>الرسائل</h3>
+
+                        <p>
+                            تابع المحادثات والرسائل الخاصة بك.
+                        </p>
+
+                    </a>
+
+
+                    <!-- دليل الأخصائي -->
+
+                    <a href="specialist-guide.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">📚</div>
+
+                        <h3>دليل الأخصائي</h3>
+
+                        <p>
+                            إرشادات وطرق التعامل مع مختلف أنواع الإعاقة
+                            والأنشطة المناسبة لكل حالة.
+                        </p>
+
+                    </a>
+
+
+                    <!-- المواعيد -->
+
+                    <a href="specialist-appointments.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">📅</div>
+
+                        <h3>مواعيدي</h3>
+
+                        <p>
+                            إضافة وتنظيم مواعيد الجلسات ومتابعة المواعيد
+                            القادمة والسابقة.
+                        </p>
+
+                    </a>
+
+
+                    <!-- الإعدادات -->
+
+                    <a href="settings.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">⚙️</div>
+
+                        <h3>الإعدادات والخصوصية</h3>
+
+                        <p>
+                            تحكم في إعدادات حسابك وخصوصيتك
+                            وخيارات سهولة الوصول.
+                        </p>
+
+                    </a>
+
+
+                    <!-- الملف الشخصي -->
+
+                    <a href="my-profile.html" class="dashboard-card">
+
+                        <div class="dashboard-card-icon">👤</div>
+
+                        <h3>ملفي الشخصي</h3>
+
+                        <p>
+                            عرض وتعديل بيانات حسابك ومعلوماتك الشخصية.
+                        </p>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- Message -->
+
+            <section class="progress-section">
+
+                <h2>رسالة من سند 💚</h2>
+
+                <p>
+                    كل طفل يستحق فرصة للتعلم والتطور.
+                    خبرتك ودعمك قد يصنعان فرقًا كبيرًا في حياته.
+                </p>
+
+            </section>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <h3>SANAD | سند</h3>
+
+        <p>
+            معًا نفهم، نتعلم، نتطور.
+        </p>
+
+        <p>
+            Made by Nagat Fergany © 2026
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // التأكد من تسجيل الدخول
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+
+        if (!currentUser || currentUser.accountType !== "specialist") {
+
+            alert("من فضلك سجّل الدخول بحساب الأخصائي أولاً.");
+
+            window.location.href = "login.html";
+
+        } else {
+
+
+            // عرض اسم الأخصائي
+
+            document.getElementById("welcomeMessage").textContent =
+                "أهلاً بك د. " + (currentUser.fullName || "الأخصائي") + " 💚";
+
+
+            // عرض البيانات المهنية
+
+            const specialistInformation =
+                document.getElementById("specialistInformation");
+
+
+            const name = document.createElement("h3");
+            name.textContent = currentUser.fullName || "الأخصائي";
+
+            specialistInformation.appendChild(name);
+
+
+            const fields = [
+
+                ["التخصص", currentUser.specialty],
+
+                ["المؤهل العلمي", currentUser.qualification],
+
+                ["سنوات الخبرة", currentUser.experience],
+
+                ["طريقة تقديم الخدمة", currentUser.serviceType],
+
+                ["البريد الإلكتروني", currentUser.email]
+
+            ];
+
+
+            fields.forEach(function(field) {
+
+                const paragraph = document.createElement("p");
+
+                const strong = document.createElement("strong");
+
+                strong.textContent = field[0] + ": ";
+
+                paragraph.appendChild(strong);
+
+                paragraph.appendChild(
+                    document.createTextNode(field[1] || "غير مسجل")
+                );
+
+                specialistInformation.appendChild(paragraph);
+
+            });
+
+        }
+
+
+        // تسجيل الخروج
+
+        function logout() {
+
+            localStorage.removeItem("sanadCurrentUser");
+
+            window.location.href = "login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

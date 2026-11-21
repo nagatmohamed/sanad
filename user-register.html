@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إنشاء حساب شخصي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ==============================
+           USER REGISTER PAGE
+        ============================== */
+
+        .user-register-page {
+            background: #F7F9F6;
+            padding: 55px 20px 80px;
+        }
+
+        .user-register-page * {
+            box-sizing: border-box;
+        }
+
+        .user-register-page .register-wrapper {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        /* Page Intro */
+
+        .user-register-page .register-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .user-register-page .register-intro h1 {
+            color: #17613D;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .user-register-page .register-intro p {
+            color: #68776D;
+            font-size: 18px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        /* Form Container */
+
+        .user-register-page .registration-card {
+            background: #FFFFFF;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(23, 97, 61, 0.07);
+            border: 1px solid #E7EDE7;
+        }
+
+        /* Form Sections */
+
+        .user-register-page .form-group-section {
+            padding: 30px 0;
+            border-bottom: 1px solid #EAEFEA;
+        }
+
+        .user-register-page .form-group-section:first-child {
+            padding-top: 0;
+        }
+
+        .user-register-page .form-group-section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* Section Titles */
+
+        .user-register-page .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 28px;
+        }
+
+        .user-register-page .section-title .section-icon {
+            width: 55px;
+            height: 55px;
+            flex-shrink: 0;
+            background: #EDF5EF;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .user-register-page .section-title h2 {
+            font-size: 23px;
+            color: #17613D;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .user-register-page .section-title p {
+            color: #8A958D;
+            font-size: 14px;
+            margin: 7px 0 0;
+        }
+
+        /* Grid */
+
+        .user-register-page .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 23px;
+        }
+
+        .user-register-page .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .user-register-page .form-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Labels */
+
+        .user-register-page .form-field label {
+            color: #34483B;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .user-register-page .form-field label span {
+            color: #B58C4E;
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        /* Inputs */
+
+        .user-register-page input:not([type="checkbox"]),
+        .user-register-page select,
+        .user-register-page textarea {
+            width: 100%;
+            min-height: 55px;
+            border: 1px solid #DDE6DE;
+            border-radius: 13px;
+            background: #FAFCFA;
+            padding: 14px 16px;
+            font-size: 16px;
+            font-family: inherit;
+            color: #33463A;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .user-register-page input:focus,
+        .user-register-page select:focus,
+        .user-register-page textarea:focus {
+            border-color: #17613D;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(23, 97, 61, 0.08);
+        }
+
+        .user-register-page input::placeholder,
+        .user-register-page textarea::placeholder {
+            color: #A5AEA7;
+        }
+
+        .user-register-page select {
+            cursor: pointer;
+        }
+
+        .user-register-page textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.8;
+        }
+
+        /* Optional Information */
+
+        .user-register-page .optional-note {
+            color: #8B968D;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-top: -8px;
+            margin-bottom: 20px;
+        }
+
+        /* Password Info */
+
+        .user-register-page .password-note {
+            font-size: 13px;
+            color: #89958C;
+            line-height: 1.8;
+            margin-top: -2px;
+        }
+
+        /* Terms */
+
+        .user-register-page .terms-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #F5F8F5;
+            border: 1px solid #E6ECE6;
+            border-radius: 14px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .user-register-page .terms-box input[type="checkbox"] {
+            width: 21px;
+            height: 21px;
+            margin-top: 3px;
+            flex-shrink: 0;
+            accent-color: #17613D;
+            cursor: pointer;
+        }
+
+        .user-register-page .terms-box label {
+            color: #58665C;
+            font-size: 15px;
+            line-height: 1.9;
+            cursor: pointer;
+        }
+
+        /* Submit */
+
+        .user-register-page .submit-button {
+            width: 100%;
+            min-height: 60px;
+            border: none;
+            border-radius: 15px;
+            background: #17613D;
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .user-register-page .submit-button:hover {
+            background: #124D30;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(23, 97, 61, 0.15);
+        }
+
+        .user-register-page .submit-button:focus-visible {
+            outline: 3px solid #CBA66A;
+            outline-offset: 4px;
+        }
+
+        /* Login */
+
+        .user-register-page .login-reminder {
+            text-align: center;
+            margin-top: 28px;
+            color: #778279;
+            font-size: 16px;
+        }
+
+        .user-register-page .login-reminder a {
+            color: #17613D;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .user-register-page .login-reminder a:hover {
+            text-decoration: underline;
+        }
+
+        /* Accessibility */
+
+        .user-register-page input:focus-visible,
+        .user-register-page select:focus-visible,
+        .user-register-page textarea:focus-visible {
+            outline: 2px solid #17613D;
+            outline-offset: 2px;
+        }
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media (max-width: 768px) {
+
+            .user-register-page {
+                padding: 40px 18px 60px;
+            }
+
+            .user-register-page .registration-card {
+                padding: 30px 24px;
+            }
+
+            .user-register-page .register-intro h1 {
+                font-size: 30px;
+            }
+
+            .user-register-page .register-intro p {
+                font-size: 16px;
+            }
+
+            .user-register-page .form-grid {
+                gap: 20px;
+            }
+
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 550px) {
+
+            .user-register-page .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-register-page .form-field.full-width {
+                grid-column: auto;
+            }
+
+            .user-register-page .registration-card {
+                padding: 25px 18px;
+                border-radius: 20px;
+            }
+
+            .user-register-page .register-intro h1 {
+                font-size: 26px;
+            }
+
+            .user-register-page .section-title {
+                gap: 12px;
+            }
+
+            .user-register-page .section-title .section-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+            }
+
+            .user-register-page .section-title h2 {
+                font-size: 20px;
+            }
+
+            .user-register-page .form-group-section {
+                padding: 25px 0;
+            }
+
+            .user-register-page input:not([type="checkbox"]),
+            .user-register-page select,
+            .user-register-page textarea {
+                font-size: 16px;
+            }
+
+            .user-register-page .terms-box {
+                padding: 15px;
+            }
+
+        }
+
+        /* Reduced Motion */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .user-register-page * {
+                transition: none !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <a href="index.html" class="logo">
+
+            <svg class="logo-icon" viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg">
+
+                <path d="M50 88 C30 72 8 54 10 32 C12 10 37 7 50 28 C63 7 88 10 90 32 C92 54 70 72 50 88Z"
+                    fill="none" stroke="#17613D" stroke-width="5" />
+
+                <circle cx="35" cy="34" r="7" fill="#17613D" />
+                <circle cx="64" cy="38" r="7" fill="#CBA66A" />
+
+                <path d="M35 44 L29 62 L40 62 L45 47"
+                    fill="none" stroke="#17613D" stroke-width="5"
+                    stroke-linecap="round" />
+
+                <path d="M64 48 L58 65 L73 65 L69 49"
+                    fill="none" stroke="#CBA66A" stroke-width="5"
+                    stroke-linecap="round" />
+
+                <path d="M22 75 Q50 91 78 75"
+                    fill="none" stroke="#17613D" stroke-width="5"
+                    stroke-linecap="round" />
+
+            </svg>
+
+            <div class="logo-text">
+                <span>SANAD</span>
+                <strong>سند</strong>
+            </div>
+
+        </a>
+
+
+        <nav class="navbar">
+
+            <a href="index.html">الرئيسية</a>
+
+            <a href="index.html#about">عن سند</a>
+
+            <a href="register.html">رجوع</a>
+
+        </nav>
+
+
+        <div class="header-buttons">
+
+            <a href="login.html" class="login-btn">
+                تسجيل الدخول
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= REGISTRATION ================= -->
+
+    <section class="user-register-page">
+
+        <div class="register-wrapper">
+
+
+            <!-- Intro -->
+
+            <div class="register-intro">
+
+                <h1>أهلاً بك في عائلة سند 💚</h1>
+
+                <p>
+                    ابدأ رحلتك معنا، وخلينا نتعرف عليك أكثر.<br>
+                    املأ البيانات التالية عشان نقدر نقدم لك تجربة تناسب احتياجاتك.
+                </p>
+
+            </div>
+
+
+            <div class="registration-card">
+
+                <form id="registerForm">
+
+
+                    <!-- ================= PERSONAL INFO ================= -->
+
+                    <div class="form-group-section">
+
+                        <div class="section-title">
+
+                            <div class="section-icon" aria-hidden="true">
+                                👤
+                            </div>
+
+                            <div>
+                                <h2>البيانات الشخصية</h2>
+                                <p>معلوماتك الأساسية</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-field full-width">
+
+                                <label for="full-name">
+                                    الاسم بالكامل
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="full-name"
+                                    name="full-name"
+                                    placeholder="اكتب اسمك بالكامل"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="birth-date">
+                                    تاريخ الميلاد
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="birth-date"
+                                    name="birth-date"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="gender">
+                                    النوع
+                                </label>
+
+                                <select id="gender" name="gender" required>
+
+                                    <option value="">اختر النوع</option>
+
+                                    <option value="male">ذكر</option>
+
+                                    <option value="female">أنثى</option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="country">
+                                    الدولة
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="country"
+                                    name="country"
+                                    placeholder="اكتب الدولة"
+                                    autocomplete="country-name"
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="city">
+                                    المحافظة
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    placeholder="اكتب المحافظة"
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="phone">
+                                    رقم الهاتف
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="رقم الهاتف"
+                                    autocomplete="tel"
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="email">
+                                    البريد الإلكتروني
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="example@email.com"
+                                    autocomplete="email"
+                                    required
+                                >
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= DISABILITY ================= -->
+
+                    <div class="form-group-section">
+
+                        <div class="section-title">
+
+                            <div class="section-icon" aria-hidden="true">
+                                🧩
+                            </div>
+
+                            <div>
+                                <h2>معلومات الإعاقة</h2>
+                                <p>عشان نقدر نخصص تجربتك بشكل أفضل</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-field full-width">
+
+                                <label for="disability">
+                                    نوع الإعاقة
+                                </label>
+
+                                <select id="disability" name="disability" required>
+
+                                    <option value="">اختر نوع الإعاقة</option>
+
+                                    <option value="الإعاقة البصرية">الإعاقة البصرية</option>
+
+                                    <option value="الإعاقة السمعية">الإعاقة السمعية</option>
+
+                                    <option value="الإعاقة الحركية">الإعاقة الحركية</option>
+
+                                    <option value="الإعاقة الذهنية">الإعاقة الذهنية</option>
+
+                                    <option value="اضطراب طيف التوحد">اضطراب طيف التوحد</option>
+
+                                    <option value="صعوبات التعلم">صعوبات التعلم</option>
+
+                                    <option value="إعاقات متعددة">إعاقات متعددة</option>
+
+                                    <option value="أخرى">أخرى</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= HEALTH ================= -->
+
+                    <div class="form-group-section">
+
+                        <div class="section-title">
+
+                            <div class="section-icon" aria-hidden="true">
+                                🌿
+                            </div>
+
+                            <div>
+                                <h2>معلومات صحية</h2>
+                                <p>هذه المعلومات اختيارية</p>
+                            </div>
+
+                        </div>
+
+
+                        <p class="optional-note">
+                            يمكنك إضافة معلومات تساعد في فهم احتياجاتك بشكل أفضل،
+                            ويمكنك ترك هذه البيانات فارغة إذا رغبت.
+                        </p>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-field">
+
+                                <label for="height">
+                                    الطول <span>(سم)</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="height"
+                                    name="height"
+                                    placeholder="الطول بالسنتيمتر"
+                                    min="1"
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="weight">
+                                    الوزن <span>(كجم)</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="weight"
+                                    name="weight"
+                                    placeholder="الوزن بالكيلوجرام"
+                                    min="1"
+                                >
+
+                            </div>
+
+
+                            <div class="form-field full-width">
+
+                                <label for="health">
+                                    هل توجد أمراض مصاحبة؟
+                                </label>
+
+                                <textarea
+                                    id="health"
+                                    name="health"
+                                    placeholder="اكتب هنا إن وجد (اختياري)"
+                                ></textarea>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= GUARDIAN ================= -->
+
+                    <div class="form-group-section">
+
+                        <div class="section-title">
+
+                            <div class="section-icon" aria-hidden="true">
+                                👨‍👩‍👧
+                            </div>
+
+                            <div>
+                                <h2>بيانات ولي الأمر</h2>
+                                <p>بيانات الشخص المسؤول عن تقديم الدعم</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-field">
+
+                                <label for="guardian-name">
+                                    اسم ولي الأمر
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="guardian-name"
+                                    name="guardian-name"
+                                    placeholder="اسم ولي الأمر"
+                                >
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="relationship">
+                                    صلة القرابة
+                                </label>
+
+                                <select id="relationship" name="relationship">
+
+                                    <option value="">اختر صلة القرابة</option>
+
+                                    <option value="الأب">الأب</option>
+
+                                    <option value="الأم">الأم</option>
+
+                                    <option value="الأخ">الأخ</option>
+
+                                    <option value="الأخت">الأخت</option>
+
+                                    <option value="أخرى">أخرى</option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-field full-width">
+
+                                <label for="guardian-phone">
+                                    رقم هاتف ولي الأمر
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="guardian-phone"
+                                    name="guardian-phone"
+                                    placeholder="رقم هاتف ولي الأمر"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= LOGIN DATA ================= -->
+
+                    <div class="form-group-section">
+
+                        <div class="section-title">
+
+                            <div class="section-icon" aria-hidden="true">
+                                🔐
+                            </div>
+
+                            <div>
+                                <h2>بيانات تسجيل الدخول</h2>
+                                <p>أنشئ كلمة مرور لحماية حسابك</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-field">
+
+                                <label for="password">
+                                    كلمة المرور
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="أنشئ كلمة مرور"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                                <span class="password-note">
+                                    يجب ألا تقل كلمة المرور عن 6 أحرف.
+                                </span>
+
+                            </div>
+
+
+                            <div class="form-field">
+
+                                <label for="confirm-password">
+                                    تأكيد كلمة المرور
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="confirm-password"
+                                    name="confirm-password"
+                                    placeholder="أعد كتابة كلمة المرور"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= TERMS ================= -->
+
+                    <div class="terms-box">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            name="terms"
+                            required
+                        >
+
+                        <label for="terms">
+                            أوافق على سياسة الخصوصية وشروط الاستخدام،
+                            وأؤكد أن البيانات التي أدخلتها صحيحة.
+                        </label>
+
+                    </div>
+
+
+                    <!-- ================= SUBMIT ================= -->
+
+                    <button type="submit" class="submit-button">
+
+                        إنشاء حسابي في سند 💚
+
+                    </button>
+
+
+                </form>
+
+
+                <p class="login-reminder">
+
+                    لديك حساب بالفعل؟
+
+                    <a href="login.html">
+                        تسجيل الدخول
+                    </a>
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            SANAD | سند
+        </div>
+
+        <p>
+            معًا نفهم، نتعلم، نتطور.
+        </p>
+
+        <p class="copyright">
+            Made by Nagat Fergany © 2026
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+   <script type="module">
+
+import { registerAccount } from "./auth.js";
+
+const registerForm = document.getElementById("registerForm");
+
+registerForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const submitButton = registerForm.querySelector(".submit-button");
+
+    submitButton.disabled = true;
+    submitButton.textContent = "جاري إنشاء حسابك...";
+
+    const fullName = document.getElementById("full-name").value.trim();
+    const birthDate = document.getElementById("birth-date").value;
+    const gender = document.getElementById("gender").value;
+    const country = document.getElementById("country").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+
+    const disability = document.getElementById("disability").value;
+
+    const height = document.getElementById("height").value;
+    const weight = document.getElementById("weight").value;
+    const health = document.getElementById("health").value.trim();
+
+    const guardianName = document.getElementById("guardian-name").value.trim();
+    const relationship = document.getElementById("relationship").value;
+    const guardianPhone = document.getElementById("guardian-phone").value.trim();
+
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+        alert("كلمتا المرور غير متطابقتين.");
+        submitButton.disabled = false;
+        submitButton.textContent = "إنشاء حسابي في سند 💚";
+        return;
+    }
+
+    if (password.length < 6) {
+        alert("كلمة المرور يجب ألا تقل عن 6 أحرف.");
+        submitButton.disabled = false;
+        submitButton.textContent = "إنشاء حسابي في سند 💚";
+        return;
+    }
+
+    const userData = {
+        accountType: "user",
+        fullName,
+        birthDate,
+        gender,
+        country,
+        city,
+        phone,
+        email,
+        disability,
+        height,
+        weight,
+        health,
+        guardianName,
+        relationship,
+        guardianPhone,
+        password
+    };
+
+    const result = await registerAccount(userData);
+
+    if (result.success) {
+
+        alert(
+            "تم إنشاء حسابك بنجاح في سند 💚\n\n" +
+            "كود حسابك:\n" +
+            result.user.childCode +
+            "\n\nاحتفظ بالكود وشاركه مع ولي أمرك."
+        );
+
+        window.location.href = "login.html";
+
+    } else {
+
+        alert(result.message);
+
+        submitButton.disabled = false;
+        submitButton.textContent = "إنشاء حسابي في سند 💚";
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>

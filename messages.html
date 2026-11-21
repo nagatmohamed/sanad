@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>الرسائل | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f6f7f1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .messages-page {
+            padding: 30px 5%;
+        }
+
+        .messages-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .messages-title h1 {
+            color: #285c45;
+            font-size: 30px;
+        }
+
+        .messages-title p {
+            color: #777;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            background: #e5eee7;
+            color: #285c45;
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .voice-tools {
+            max-width: 1150px;
+            margin: 0 auto 20px;
+            padding: 18px;
+            background: #eaf3ed;
+            border: 1px solid #cbded0;
+            border-radius: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .voice-tools p {
+            width: 100%;
+            margin: 0 0 5px;
+            color: #285c45;
+            font-weight: bold;
+        }
+
+        .voice-button {
+            border: none;
+            background: #347354;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .voice-button:hover {
+            background: #285c45;
+        }
+
+        .stop-button {
+            background: #9b4949;
+        }
+
+        .messages-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            max-width: 1150px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            min-height: 570px;
+        }
+
+        .contacts-section {
+            border-left: 1px solid #eee;
+            padding-left: 15px;
+        }
+
+        .contacts-section h2 {
+            color: #285c45;
+            font-size: 21px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            margin-bottom: 10px;
+            background: #fafbf8;
+            width: 100%;
+            text-align: right;
+            font-family: inherit;
+        }
+
+        .contact-card:hover,
+        .contact-card.active {
+            background: #eaf3ed;
+            border-color: #b5d2bf;
+        }
+
+        .contact-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #dcecdf;
+            color: #285c45;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            flex-shrink: 0;
+        }
+
+        .contact-info h3 {
+            font-size: 15px;
+            color: #333;
+            margin: 0 0 5px;
+        }
+
+        .contact-info p {
+            font-size: 12px;
+            color: #888;
+            margin: 0;
+        }
+
+        .chat-section {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 5px 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chat-header h2 {
+            color: #285c45;
+            font-size: 19px;
+            margin: 0 0 5px;
+        }
+
+        .chat-header p {
+            color: #888;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .chat-messages {
+            flex: 1;
+            min-height: 300px;
+            max-height: 390px;
+            overflow-y: auto;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .empty-chat {
+            margin: auto;
+            text-align: center;
+            color: #888;
+            line-height: 2;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            line-height: 1.7;
+            font-size: 15px;
+            overflow-wrap: anywhere;
+        }
+
+        .message.sent {
+            background: #dcecdf;
+            color: #285c45;
+            align-self: flex-start;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.received {
+            background: #f1f1ed;
+            color: #444;
+            align-self: flex-end;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-time {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .read-message-button {
+            margin-top: 8px;
+            padding: 7px 12px;
+            background: #347354;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .message-form {
+            display: flex;
+            gap: 10px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .message-form input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .send-button {
+            background: #347354;
+            color: white;
+            border: none;
+            padding: 12px 23px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .safety-note {
+            max-width: 1150px;
+            margin: 20px auto 0;
+            padding: 14px;
+            background: #fff8e9;
+            border: 1px solid #f0dfb5;
+            border-radius: 12px;
+            color: #765c28;
+            line-height: 1.8;
+            font-size: 13px;
+        }
+
+        .blind-mode .voice-tools {
+            border: 2px solid #347354;
+        }
+
+        .blind-mode .voice-button {
+            padding: 16px 22px;
+            font-size: 17px;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        a:focus-visible {
+            outline: 3px solid #d49a36;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 750px) {
+            .messages-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contacts-section {
+                border-left: none;
+                border-bottom: 1px solid #eee;
+                padding: 0 0 15px;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .messages-page {
+                padding: 20px 4%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="messages-page">
+
+        <a href="#" class="back-button" id="backButton">
+            ← العودة إلى لوحة التحكم
+        </a>
+
+        <div class="messages-title">
+
+            <h1>الرسائل والتواصل 💬</h1>
+
+            <p>مساحة للتواصل وتبادل الدعم داخل مجتمع سند</p>
+
+        </div>
+
+
+        <section class="voice-tools" aria-label="أدوات التحكم الصوتي">
+
+            <p>🎧 أدوات التواصل الصوتي</p>
+
+            <button class="voice-button" id="speakWelcome">
+                🔊 اسمع تعليمات الصفحة
+            </button>
+
+            <button class="voice-button" id="readAllMessages">
+                📢 اقرأ الرسائل
+            </button>
+
+            <button class="voice-button stop-button" id="stopVoice">
+                ⏹️ إيقاف الصوت
+            </button>
+
+        </section>
+
+
+        <div class="messages-container">
+
+            <section class="contacts-section">
+
+                <h2>المحادثات</h2>
+
+                <div id="contactsList">
+                    جاري تحميل المحادثات...
+                </div>
+
+            </section>
+
+
+            <section class="chat-section">
+
+                <div class="chat-header" id="chatHeader">
+
+                    <div class="contact-avatar">💬</div>
+
+                    <div>
+                        <h2>مرحبًا بك في الرسائل</h2>
+                        <p>اختاري محادثة للبدء</p>
+                    </div>
+
+                </div>
+
+
+                <div class="chat-messages"
+                    id="chatMessages"
+                    aria-live="polite"
+                    aria-label="الرسائل">
+
+                    <div class="empty-chat">
+                        💚
+                        <p>اختاري شخصًا من قائمة المحادثات لعرض الرسائل.</p>
+                    </div>
+
+                </div>
+
+
+                <form class="message-form" id="messageForm">
+
+                    <input
+                        type="text"
+                        id="messageInput"
+                        placeholder="اكتبي رسالتك هنا..."
+                        aria-label="اكتبي رسالتك"
+                        disabled
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="voice-button"
+                        id="voiceInput"
+                        disabled
+                        title="التحدث لإملاء الرسالة"
+                    >
+                        🎤 تحدثي
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="send-button"
+                        id="sendButton"
+                        disabled
+                    >
+                        إرسال
+                    </button>
+
+                </form>
+
+                <p id="voiceStatus"
+                    aria-live="polite"
+                    style="color:#347354;font-size:13px;">
+                </p>
+
+            </section>
+
+        </div>
+
+
+        <div class="safety-note">
+
+            🔒 <strong>تنبيه مهم:</strong>
+
+            حافظي على خصوصيتك، ولا تشاركي كلمة المرور أو عنوان المنزل
+            أو بياناتك الشخصية في الرسائل.
+
+            ويجب أن يكون تواصل الأطفال تحت إشراف الأسرة.
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        if (!currentUser) {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            startMessagesPage();
+
+        }
+
+
+        function startMessagesPage() {
+
+            const users = JSON.parse(
+                localStorage.getItem("sanadUsers") || "[]"
+            );
+
+
+            const contactsList = document.getElementById("contactsList");
+            const chatHeader = document.getElementById("chatHeader");
+            const chatMessages = document.getElementById("chatMessages");
+            const messageInput = document.getElementById("messageInput");
+            const messageForm = document.getElementById("messageForm");
+            const sendButton = document.getElementById("sendButton");
+            const voiceInput = document.getElementById("voiceInput");
+            const voiceStatus = document.getElementById("voiceStatus");
+
+
+            let selectedContact = null;
+
+
+            // تحديد نوع الإعاقة
+
+            const disability = String(
+                currentUser.disabilityType ||
+                currentUser.disability ||
+                ""
+            ).toLowerCase();
+
+            const visualDisability = [
+                "visual",
+                "blind",
+                "blindness"
+            ].includes(disability);
+
+
+            if (visualDisability) {
+
+                document.body.classList.add("blind-mode");
+
+            }
+
+
+            // تحديد لوحة التحكم
+
+            const backButton = document.getElementById("backButton");
+
+            if (currentUser.accountType === "user") {
+
+                backButton.href = "user-dashboard.html";
+
+            } else if (currentUser.accountType === "family") {
+
+                backButton.href = "family-dashboard.html";
+
+            } else {
+
+                backButton.href = "specialist-dashboard.html";
+
+            }
+
+
+            // أدوات الصوت
+
+            function speakText(text) {
+
+                if (!("speechSynthesis" in window)) {
+
+                    alert("المتصفح لا يدعم القراءة الصوتية.");
+
+                    return;
+
+                }
+
+                window.speechSynthesis.cancel();
+
+                const speech = new SpeechSynthesisUtterance(text);
+
+                speech.lang = "ar-EG";
+
+                speech.rate = 0.85;
+
+                speech.pitch = 1;
+
+                window.speechSynthesis.speak(speech);
+
+            }
+
+
+            document.getElementById("speakWelcome")
+                .addEventListener("click", function() {
+
+                    speakText(
+                        "مرحبًا بك في صفحة الرسائل في سند. " +
+                        "يمكنك اختيار شخص من قائمة المحادثات. " +
+                        "يمكنك كتابة رسالة أو استخدام زر التحدث لإملاء رسالتك. " +
+                        "ويمكنك الاستماع إلى الرسائل باستخدام زر اقرأ الرسائل."
+                    );
+
+                });
+
+
+            document.getElementById("stopVoice")
+                .addEventListener("click", function() {
+
+                    if ("speechSynthesis" in window) {
+
+                        window.speechSynthesis.cancel();
+
+                    }
+
+                    voiceStatus.textContent = "تم إيقاف الصوت.";
+
+                });
+
+
+            // قراءة طلبات المتابعة والاستشارات
+
+            const followRequests = JSON.parse(
+                localStorage.getItem("sanadFollowRequests") || "[]"
+            );
+
+            const consultationRequests = JSON.parse(
+                localStorage.getItem("sanadSpecialistRequests") || "[]"
+            );
+
+
+            // تحديد جهات الاتصال
+
+            function getContacts() {
+
+                let contactIds = new Set();
+
+
+                if (currentUser.accountType === "user") {
+
+                    users.forEach(user => {
+
+                        if (
+                            user.accountType === "family" &&
+                            String(user.linkedChildId) === String(currentUser.id)
+                        ) {
+
+                            contactIds.add(String(user.id));
+
+                        }
+
+                    });
+
+
+                    followRequests.forEach(request => {
+
+                        if (
+                            String(request.requesterId) === String(currentUser.id)
+                        ) {
+
+                            contactIds.add(String(request.specialistId));
+
+                        }
+
+                    });
+
+
+                    consultationRequests.forEach(request => {
+
+                        if (
+                            String(request.requesterId) === String(currentUser.id)
+                        ) {
+
+                            contactIds.add(String(request.specialistId));
+
+                        }
+
+                    });
+
+                }
+
+
+                if (currentUser.accountType === "family") {
+
+                    if (currentUser.linkedChildId) {
+
+                        contactIds.add(String(currentUser.linkedChildId));
+
+                    }
+
+
+                    followRequests.forEach(request => {
+
+                        if (
+                            String(request.requesterId) === String(currentUser.id)
+                        ) {
+
+                            contactIds.add(String(request.specialistId));
+
+                        }
+
+                    });
+
+
+                    consultationRequests.forEach(request => {
+
+                        if (
+                            String(request.requesterId) === String(currentUser.id)
+                        ) {
+
+                            contactIds.add(String(request.specialistId));
+
+                        }
+
+                    });
+
+                }
+
+
+                if (currentUser.accountType === "specialist") {
+
+                    followRequests.forEach(request => {
+
+                        if (
+                            String(request.specialistId) === String(currentUser.id)
+                        ) {
+
+                            contactIds.add(String(request.requesterId));
+
+                        }
+
+                    });
+
+
+                    consultationRequests.forEach(request => {
+
+                        if (
+                            String(request.specialistId) === String(currentUser.id)
+                        ) {
+
+                            contactIds.add(String(request.requesterId));
+
+                        }
+
+                    });
+
+                }
+
+
+                return users.filter(user =>
+
+                    contactIds.has(String(user.id)) &&
+                    String(user.id) !== String(currentUser.id)
+
+                );
+
+            }
+
+
+            function getAccountType(type) {
+
+                if (type === "user") return "حساب شخصي";
+
+                if (type === "family") return "حساب أسرة";
+
+                if (type === "specialist") return "أخصائي";
+
+                return "عضو في سند";
+
+            }
+
+
+            function escapeHTML(value) {
+
+                return String(value).replace(/[&<>"']/g, character => {
+
+                    return {
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#039;"
+                    }[character];
+
+                });
+
+            }
+
+
+            // عرض جهات الاتصال
+
+            function displayContacts() {
+
+                const contacts = getContacts();
+
+                contactsList.innerHTML = "";
+
+
+                if (contacts.length === 0) {
+
+                    contactsList.innerHTML = `
+                        <p style="color:#888;line-height:1.8;">
+                            لا توجد محادثات متاحة حاليًا.
+                            ستظهر جهات التواصل هنا بعد وجود طلب متابعة
+                            أو استشارة مرتبطة بحسابك.
+                        </p>
+                    `;
+
+                    return;
+
+                }
+
+
+                contacts.forEach(contact => {
+
+                    const card = document.createElement("button");
+
+                    card.type = "button";
+
+                    card.className = "contact-card";
+
+                    card.innerHTML = `
+                        <div class="contact-avatar">👤</div>
+
+                        <div class="contact-info">
+                            <h3>${escapeHTML(contact.fullName || "مستخدم سند")}</h3>
+                            <p>${getAccountType(contact.accountType)}</p>
+                        </div>
+                    `;
+
+
+                    card.addEventListener("click", function() {
+
+                        document.querySelectorAll(".contact-card")
+                            .forEach(item => item.classList.remove("active"));
+
+                        card.classList.add("active");
+
+                        openChat(contact);
+
+                    });
+
+
+                    contactsList.appendChild(card);
+
+                });
+
+            }
+
+
+            // مفتاح المحادثة
+
+            function getConversationKey() {
+
+                const ids = [
+
+                    String(currentUser.id),
+
+                    String(selectedContact.id)
+
+                ].sort();
+
+
+                return "sanadChat_" + ids.join("_");
+
+            }
+
+
+            // قراءة رسالة واحدة
+
+            function readMessage(text) {
+
+                speakText(text);
+
+            }
+
+
+            // عرض الرسائل
+
+            function displayMessages() {
+
+                if (!selectedContact) return;
+
+
+                const messages = JSON.parse(
+
+                    localStorage.getItem(getConversationKey()) || "[]"
+
+                );
+
+
+                chatMessages.innerHTML = "";
+
+
+                if (messages.length === 0) {
+
+                    chatMessages.innerHTML = `
+                        <div class="empty-chat">
+                            💚
+                            <p>لا توجد رسائل حتى الآن.</p>
+                            <p>ابدئي المحادثة برسالة لطيفة.</p>
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                messages.forEach(message => {
+
+                    const messageElement = document.createElement("div");
+
+
+                    const isSent =
+                        String(message.senderId) === String(currentUser.id);
+
+
+                    messageElement.className =
+                        "message " + (isSent ? "sent" : "received");
+
+
+                    const content = document.createElement("span");
+
+                    content.textContent = message.text;
+
+
+                    const time = document.createElement("span");
+
+                    time.className = "message-time";
+
+                    time.textContent = message.time;
+
+
+                    const readButton = document.createElement("button");
+
+                    readButton.type = "button";
+
+                    readButton.className = "read-message-button";
+
+                    readButton.textContent = "🔊 استمع للرسالة";
+
+                    readButton.setAttribute(
+                        "aria-label",
+                        "استمع إلى الرسالة: " + message.text
+                    );
+
+                    readButton.addEventListener("click", function() {
+
+                        readMessage(message.text);
+
+                    });
+
+
+                    messageElement.appendChild(content);
+
+                    messageElement.appendChild(time);
+
+                    messageElement.appendChild(readButton);
+
+
+                    chatMessages.appendChild(messageElement);
+
+                });
+
+
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            }
+
+
+            // فتح المحادثة
+
+            function openChat(contact) {
+
+                selectedContact = contact;
+
+
+                chatHeader.innerHTML = `
+
+                    <div class="contact-avatar">👤</div>
+
+                    <div>
+
+                        <h2>${escapeHTML(contact.fullName || "مستخدم سند")}</h2>
+
+                        <p>${getAccountType(contact.accountType)}</p>
+
+                    </div>
+
+                `;
+
+
+                messageInput.disabled = false;
+
+                sendButton.disabled = false;
+
+                voiceInput.disabled = false;
+
+
+                displayMessages();
+
+
+                if (visualDisability) {
+
+                    speakText(
+                        "تم فتح محادثة مع " +
+                        contact.fullName +
+                        ". يمكنك التحدث لإملاء رسالة أو كتابة رسالة."
+                    );
+
+                } else {
+
+                    messageInput.focus();
+
+                }
+
+            }
+
+
+            // إرسال الرسالة
+
+            messageForm.addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                if (!selectedContact) {
+
+                    alert("اختاري شخصًا من المحادثات أولًا.");
+
+                    return;
+
+                }
+
+
+                const text = messageInput.value.trim();
+
+
+                if (!text) return;
+
+
+                const messages = JSON.parse(
+
+                    localStorage.getItem(getConversationKey()) || "[]"
+
+                );
+
+
+                messages.push({
+
+                    id: Date.now(),
+
+                    senderId: currentUser.id,
+
+                    receiverId: selectedContact.id,
+
+                    text: text,
+
+                    time: new Date().toLocaleString("ar-EG")
+
+                });
+
+
+                localStorage.setItem(
+
+                    getConversationKey(),
+
+                    JSON.stringify(messages)
+
+                );
+
+
+                messageInput.value = "";
+
+                displayMessages();
+
+
+            });
+
+
+            // قراءة جميع الرسائل
+
+            document.getElementById("readAllMessages")
+                .addEventListener("click", function() {
+
+                    if (!selectedContact) {
+
+                        speakText("من فضلك اختاري محادثة أولًا.");
+
+                        return;
+
+                    }
+
+
+                    const messages = JSON.parse(
+
+                        localStorage.getItem(getConversationKey()) || "[]"
+
+                    );
+
+
+                    if (messages.length === 0) {
+
+                        speakText("لا توجد رسائل في هذه المحادثة.");
+
+                        return;
+
+                    }
+
+
+                    const text = messages.map(message => {
+
+                        const sender =
+                            String(message.senderId) === String(currentUser.id)
+                                ? "أنت قلت"
+                                : "الطرف الآخر قال";
+
+                        return sender + ": " + message.text;
+
+                    }).join(". ");
+
+
+                    speakText(text);
+
+                });
+
+
+            // تحويل الكلام إلى نص
+
+            const SpeechRecognition =
+                window.SpeechRecognition ||
+                window.webkitSpeechRecognition;
+
+
+            if (SpeechRecognition) {
+
+                const recognition = new SpeechRecognition();
+
+                recognition.lang = "ar-EG";
+
+                recognition.continuous = false;
+
+                recognition.interimResults = false;
+
+
+                voiceInput.addEventListener("click", function() {
+
+                    if (!selectedContact) {
+
+                        speakText("اختاري محادثة أولًا.");
+
+                        return;
+
+                    }
+
+
+                    voiceStatus.textContent = "🎤 استمع إليك الآن، تحدثي...";
+
+                    recognition.start();
+
+                });
+
+
+                recognition.onresult = function(event) {
+
+                    const spokenText =
+                        event.results[0][0].transcript;
+
+                    messageInput.value = spokenText;
+
+                    voiceStatus.textContent =
+                        "تم تحويل كلامك إلى نص. راجعي الرسالة واضغطي إرسال.";
+
+                    speakText(
+                        "تم كتابة رسالتك. راجعيها قبل الإرسال."
+                    );
+
+                };
+
+
+                recognition.onerror = function() {
+
+                    voiceStatus.textContent =
+                        "لم نتمكن من سماع صوتك. تأكدي من السماح باستخدام الميكروفون.";
+
+                };
+
+
+                recognition.onend = function() {
+
+                    if (voiceStatus.textContent.includes("استمع إليك")) {
+
+                        voiceStatus.textContent = "";
+
+                    }
+
+                };
+
+            } else {
+
+                voiceInput.disabled = true;
+
+                voiceStatus.textContent =
+                    "ميزة تحويل الكلام إلى نص غير مدعومة في هذا المتصفح. جربي Chrome أو Edge.";
+
+            }
+
+
+            // تشغيل الصفحة
+
+            displayContacts();
+
+
+            if (visualDisability) {
+
+                setTimeout(function() {
+
+                    speakText(
+                        "مرحبًا بك في سند. " +
+                        "هذه صفحة الرسائل. " +
+                        "يمكنك الضغط على اسمع تعليمات الصفحة للتعرف على طريقة الاستخدام."
+                    );
+
+                }, 1000);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

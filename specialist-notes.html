@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ملاحظات الأخصائي | SANAD</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .notes-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .welcome-box {
+            background: linear-gradient(135deg, #e5f0e6, #f5eee2);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .welcome-box h1 {
+            color: #315b43;
+            margin-bottom: 12px;
+        }
+
+        .welcome-box p {
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .section-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #00000010;
+        }
+
+        .section-box h2 {
+            color: #315b43;
+            margin-bottom: 20px;
+        }
+
+        .child-select,
+        .search-input,
+        .note-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            margin-bottom: 15px;
+        }
+
+        .note-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .save-button {
+            background: #3d7652;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .save-button:hover {
+            background: #28563a;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .note-card {
+            background: #f8f8f4;
+            padding: 20px;
+            border-radius: 15px;
+            border-right: 5px solid #3d7652;
+            line-height: 1.9;
+        }
+
+        .note-card h3 {
+            color: #315b43;
+            margin-bottom: 10px;
+        }
+
+        .note-card p {
+            color: #555;
+            overflow-wrap: anywhere;
+            margin-bottom: 8px;
+        }
+
+        .note-date {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .delete-button {
+            background: #a94442;
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .empty-message {
+            background: #fff4df;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 2;
+        }
+
+        .child-info {
+            background: #f5f8f2;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 15px;
+            line-height: 2;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #3d7652;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        button:focus,
+        input:focus,
+        textarea:focus,
+        select:focus,
+        a:focus {
+            outline: 3px solid #d9a441;
+            outline-offset: 3px;
+        }
+
+        @media(max-width: 600px) {
+            .notes-container {
+                padding: 12px;
+            }
+
+            .section-box {
+                padding: 17px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <svg width="45" height="45" viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+                <path
+                    d="M50 85 C15 60 5 35 25 20 C38 10 50 25 50 25 C50 25 62 10 75 20 C95 35 85 60 50 85Z"
+                    fill="#3d7652"/>
+
+                <circle cx="38" cy="38" r="7" fill="white"/>
+                <circle cx="62" cy="38" r="7" fill="white"/>
+
+                <path
+                    d="M25 65 Q38 45 50 65 Q62 45 75 65"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="6"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <span class="logo-text">SANAD | سند</span>
+
+        </div>
+
+        <nav class="navbar">
+            <a href="specialist-dashboard.html">لوحة التحكم</a>
+            <a href="specialist-cases.html">الحالات</a>
+            <a href="specialist-progress.html">متابعة التقدم</a>
+        </nav>
+
+    </header>
+
+
+    <main class="notes-container">
+
+        <section class="welcome-box">
+
+            <h1>📝 ملاحظات الأخصائي</h1>
+
+            <p>
+                سجل ملاحظاتك وتوصياتك لكل حالة، واحتفظ بسجل
+                منظم يساعدك على متابعة تطور الأطفال
+                وتنظيم خطوات الدعم القادمة.
+            </p>
+
+            <button class="save-button" onclick="speakPage()">
+                🔊 استمع إلى الصفحة
+            </button>
+
+            <button class="save-button" onclick="stopVoice()">
+                إيقاف الصوت
+            </button>
+
+        </section>
+
+
+        <section class="section-box">
+
+            <h2>👧 اختيار الحالة</h2>
+
+            <select id="childSelect" class="child-select">
+
+                <option value="">اختر الطفل</option>
+
+            </select>
+
+            <div id="childInfo" class="child-info" style="display:none;"></div>
+
+            <div id="noCases" class="empty-message" style="display:none;">
+                لا توجد حالات مقبولة مرتبطة بحسابك حاليًا.
+            </div>
+
+        </section>
+
+
+        <div id="notesContent" style="display:none;">
+
+            <section class="section-box">
+
+                <h2>✍️ إضافة ملاحظة جديدة</h2>
+
+                <label for="noteType">نوع الملاحظة</label>
+
+                <select id="noteType" class="child-select">
+
+                    <option value="ملاحظة عامة">ملاحظة عامة</option>
+                    <option value="نقاط القوة">نقاط القوة</option>
+                    <option value="الاحتياجات">الاحتياجات</option>
+                    <option value="التوصيات">التوصيات</option>
+                    <option value="خطة المتابعة">خطة المتابعة</option>
+
+                </select>
+
+
+                <label for="noteTitle">عنوان الملاحظة</label>
+
+                <input
+                    type="text"
+                    id="noteTitle"
+                    class="note-input"
+                    placeholder="مثال: ملاحظة حول التفاعل والتواصل">
+
+
+                <label for="noteText">تفاصيل الملاحظة</label>
+
+                <textarea
+                    id="noteText"
+                    class="note-input"
+                    placeholder="اكتب الملاحظة هنا..."></textarea>
+
+
+                <button class="save-button" onclick="saveNote()">
+                    💾 حفظ الملاحظة
+                </button>
+
+            </section>
+
+
+            <section class="section-box">
+
+                <h2>📚 سجل الملاحظات</h2>
+
+                <input
+                    type="search"
+                    id="searchNotes"
+                    class="search-input"
+                    placeholder="ابحث في الملاحظات..."
+                    aria-label="البحث في الملاحظات">
+
+                <div id="notesList" class="notes-grid"></div>
+
+            </section>
+
+        </div>
+
+
+        <a href="specialist-dashboard.html" class="back-button">
+            العودة إلى لوحة التحكم
+        </a>
+
+    </main>
+
+
+    <script>
+
+        const currentUser = JSON.parse(
+            localStorage.getItem("sanadCurrentUser")
+        );
+
+        const users = JSON.parse(
+            localStorage.getItem("sanadUsers") || "[]"
+        );
+
+
+        let cases = [];
+
+        let selectedChild = null;
+
+
+        // التحقق من الحساب
+
+        if (!currentUser || currentUser.accountType !== "specialist") {
+
+            alert("يجب تسجيل الدخول بحساب أخصائي.");
+
+            window.location.href = "login.html";
+
+        } else {
+
+            loadCases();
+
+        }
+
+
+        // حماية النصوص
+
+        function escapeHTML(value) {
+
+            return String(value ?? "").replace(/[&<>"']/g, char => {
+
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+
+                return entities[char];
+
+            });
+
+        }
+
+
+        // تحميل الحالات المقبولة
+
+        function loadCases() {
+
+            const followRequests = JSON.parse(
+                localStorage.getItem("sanadFollowRequests") || "[]"
+            );
+
+            const consultationRequests = JSON.parse(
+                localStorage.getItem("sanadSpecialistRequests") || "[]"
+            );
+
+
+            const requests = [
+
+                ...followRequests,
+
+                ...consultationRequests
+
+            ].filter(request =>
+
+                String(request.specialistId) === String(currentUser.id) &&
+                request.status === "accepted"
+
+            );
+
+
+            const select = document.getElementById("childSelect");
+
+
+            requests.forEach(request => {
+
+                const requester = users.find(user =>
+
+                    String(user.id) === String(request.requesterId)
+
+                );
+
+
+                if (!requester) return;
+
+
+                let child = null;
+
+
+                if (requester.accountType === "user") {
+
+                    child = requester;
+
+                }
+
+                else if (
+                    requester.accountType === "family" &&
+                    requester.linkedChildId
+                ) {
+
+                    child = users.find(user =>
+
+                        String(user.id) === String(requester.linkedChildId) &&
+                        user.accountType === "user"
+
+                    );
+
+                }
+
+
+                if (!child) return;
+
+
+                if (cases.some(item =>
+
+                    String(item.id) === String(child.id)
+
+                )) return;
+
+
+                cases.push(child);
+
+
+                const option = document.createElement("option");
+
+                option.value = child.id;
+
+                option.textContent = child.fullName || "طفل";
+
+                select.appendChild(option);
+
+            });
+
+
+            if (cases.length === 0) {
+
+                document.getElementById("noCases").style.display = "block";
+
+            }
+
+
+            select.addEventListener("change", function() {
+
+                selectChild(this.value);
+
+            });
+
+        }
+
+
+        // اختيار الطفل
+
+        function selectChild(id) {
+
+            selectedChild = cases.find(child =>
+
+                String(child.id) === String(id)
+
+            );
+
+
+            const content = document.getElementById("notesContent");
+
+            const info = document.getElementById("childInfo");
+
+
+            if (!selectedChild) {
+
+                content.style.display = "none";
+
+                info.style.display = "none";
+
+                return;
+
+            }
+
+
+            content.style.display = "block";
+
+            info.style.display = "block";
+
+
+            info.innerHTML = `
+
+                <h3>بيانات الحالة</h3>
+
+                <p>
+                    <strong>اسم الطفل:</strong>
+                    ${escapeHTML(selectedChild.fullName)}
+                </p>
+
+                <p>
+                    <strong>كود الطفل:</strong>
+                    ${escapeHTML(selectedChild.childCode || "غير متوفر")}
+                </p>
+
+                <p>
+                    <strong>البريد الإلكتروني:</strong>
+                    ${escapeHTML(selectedChild.email || "غير متوفر")}
+                </p>
+
+            `;
+
+
+            loadNotes();
+
+        }
+
+
+        // مفتاح تخزين الملاحظات
+
+        function getNotesKey() {
+
+            return "sanadSpecialistNotes_" + selectedChild.id;
+
+        }
+
+
+        // حفظ ملاحظة
+
+        function saveNote() {
+
+            if (!selectedChild) {
+
+                alert("اختر الطفل أولًا.");
+
+                return;
+
+            }
+
+
+            const type = document.getElementById("noteType").value;
+
+            const title = document.getElementById("noteTitle").value.trim();
+
+            const text = document.getElementById("noteText").value.trim();
+
+
+            if (!title || !text) {
+
+                alert("من فضلك اكتب عنوان الملاحظة وتفاصيلها.");
+
+                return;
+
+            }
+
+
+            const key = getNotesKey();
+
+
+            const notes = JSON.parse(
+
+                localStorage.getItem(key) || "[]"
+
+            );
+
+
+            notes.unshift({
+
+                id: Date.now(),
+
+                specialistId: currentUser.id,
+
+                specialistName: currentUser.fullName,
+
+                type: type,
+
+                title: title,
+
+                text: text,
+
+                date: new Date().toLocaleString("ar-EG")
+
+            });
+
+
+            localStorage.setItem(key, JSON.stringify(notes));
+
+
+            document.getElementById("noteTitle").value = "";
+
+            document.getElementById("noteText").value = "";
+
+
+            loadNotes();
+
+
+            alert("تم حفظ الملاحظة بنجاح.");
+
+        }
+
+
+        // تحميل الملاحظات
+
+        function loadNotes() {
+
+            if (!selectedChild) return;
+
+
+            const notes = JSON.parse(
+
+                localStorage.getItem(getNotesKey()) || "[]"
+
+            );
+
+
+            displayNotes(notes);
+
+        }
+
+
+        // عرض الملاحظات
+
+        function displayNotes(notes) {
+
+            const container = document.getElementById("notesList");
+
+
+            if (notes.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="empty-message">
+
+                        لا توجد ملاحظات مسجلة لهذه الحالة حتى الآن.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            container.innerHTML = notes.map(note => `
+
+                <article class="note-card">
+
+                    <h3>${escapeHTML(note.title)}</h3>
+
+                    <p>
+                        <strong>نوع الملاحظة:</strong>
+                        ${escapeHTML(note.type)}
+                    </p>
+
+                    <p>${escapeHTML(note.text)}</p>
+
+                    <p>
+                        <strong>الأخصائي:</strong>
+                        ${escapeHTML(note.specialistName)}
+                    </p>
+
+                    <div class="note-date">
+                        ${escapeHTML(note.date)}
+                    </div>
+
+                    <button
+                        class="delete-button"
+                        onclick="deleteNote(${note.id})">
+
+                        حذف الملاحظة
+
+                    </button>
+
+                </article>
+
+            `).join("");
+
+        }
+
+
+        // حذف ملاحظة
+
+        function deleteNote(id) {
+
+            if (!confirm("هل أنت متأكد من حذف هذه الملاحظة؟")) {
+
+                return;
+
+            }
+
+
+            const notes = JSON.parse(
+
+                localStorage.getItem(getNotesKey()) || "[]"
+
+            );
+
+
+            const updatedNotes = notes.filter(note =>
+
+                String(note.id) !== String(id)
+
+            );
+
+
+            localStorage.setItem(
+
+                getNotesKey(),
+
+                JSON.stringify(updatedNotes)
+
+            );
+
+
+            loadNotes();
+
+        }
+
+
+        // البحث في الملاحظات
+
+        document.getElementById("searchNotes").addEventListener(
+            "input",
+            function() {
+
+                if (!selectedChild) return;
+
+
+                const search = this.value.trim().toLowerCase();
+
+
+                const notes = JSON.parse(
+
+                    localStorage.getItem(getNotesKey()) || "[]"
+
+                );
+
+
+                const filtered = notes.filter(note =>
+
+                    String(note.title).toLowerCase().includes(search) ||
+
+                    String(note.text).toLowerCase().includes(search) ||
+
+                    String(note.type).toLowerCase().includes(search)
+
+                );
+
+
+                displayNotes(filtered);
+
+            }
+
+        );
+
+
+        // القراءة الصوتية
+
+        function speak(text) {
+
+            if (!("speechSynthesis" in window)) {
+
+                alert("المتصفح لا يدعم القراءة الصوتية.");
+
+                return;
+
+            }
+
+
+            speechSynthesis.cancel();
+
+
+            const utterance = new SpeechSynthesisUtterance(text);
+
+            utterance.lang = "ar-EG";
+
+            utterance.rate = 0.85;
+
+
+            speechSynthesis.speak(utterance);
+
+        }
+
+
+        function speakPage() {
+
+            speak(
+                "مرحبًا بك في صفحة ملاحظات الأخصائي. يمكنك اختيار حالة وإضافة الملاحظات والتوصيات والرجوع إليها في أي وقت."
+            );
+
+        }
+
+
+        function stopVoice() {
+
+            if ("speechSynthesis" in window) {
+
+                speechSynthesis.cancel();
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
